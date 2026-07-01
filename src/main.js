@@ -7,6 +7,7 @@ import { definePreset } from '@primeuix/themes';
 import { createApp } from 'vue';
 import { createPinia } from 'pinia';
 import { strings } from './strings.js'
+import { fmPrimePassThrough } from './components/shared/primePassThrough.js'
 
 import piniaPluginPersistedState from "pinia-plugin-persistedstate";
 import PrimeVue from 'primevue/config';
@@ -69,6 +70,7 @@ app.use(PrimeVue, {
             darkModeSelector: false
         }
     },
+    pt: fmPrimePassThrough,
     ripple: true,
     inputVariant: "filled",
     locale: strings.locale
@@ -90,7 +92,4 @@ app.component('Select',Select);
 
 app.directive('tooltip', Tooltip);
 app.mount('#app');
-
-
-
 
