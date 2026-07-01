@@ -1,5 +1,4 @@
 import { defineStore } from 'pinia'
-import { EncryptStorage } from 'encrypt-storage'
 
 interface Usuario {
     nombre: string
@@ -24,8 +23,13 @@ interface SetPerfilParams {
     legajo: string
 }
 
-const clave = import.meta.env.VITE_PARAMETER1;
-export const authStore = new EncryptStorage(clave, { storageType: 'sessionStorage' });
+const storageKeyPrefix = 'fm_auth_'
+
+export const authStore = {
+    getItem: (key: string) => sessionStorage.getItem(`${storageKeyPrefix}${key}`),
+    setItem: (key: string, value: string) => sessionStorage.setItem(`${storageKeyPrefix}${key}`, value),
+    removeItem: (key: string) => sessionStorage.removeItem(`${storageKeyPrefix}${key}`)
+}
 
 export const useAuthStore = defineStore('auth', {
     state: (): PerfilState => ({
@@ -51,11 +55,8 @@ export const useAuthStore = defineStore('auth', {
     },
     persist: [
         {
-            key: 'auth',             
-            storage: {
-                getItem: (key) => authStore.getItem(key) ?? null,
-                setItem: (key, value) => authStore.setItem(key, value),
-            },
+            key: 'auth',
+            storage: authStore,
         },
     ],
-}, )
+})
