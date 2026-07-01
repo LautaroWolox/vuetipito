@@ -316,11 +316,7 @@ const routes = [
         path: 'registroOTFallidasReproceso.html',
         name: 'ROTF',
         beforeEnter: allowed,
-        component: () => import('../views/IframeView.vue'),
-        props: {
-          urlParam: '/registroOTFallidasReproceso.html',
-          titleParam: 'Registro OTs Fallidas'
-        }
+        component: () => import('../modules/otFallidasCT/OtFallidasCT.vue')
       },
       {
         path: 'busquedaOtsGcc.html',
@@ -342,4 +338,3 @@ const router = createRouter({
 });
 
 export default router;
-
