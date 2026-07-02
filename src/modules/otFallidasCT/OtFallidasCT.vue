@@ -29,7 +29,8 @@ const store = useFallidasCtStore()
 const active = ref(['0', '1'])
 
 onMounted(async () => {
-  await store.setData()
+  store.rows = []
+  store.selectedRows = []
   await store.setMotivos()
 })
 </script>
