@@ -15,8 +15,9 @@ const baseRows = [
   { id: 12, nroOrdenTrabajo: 'OPEN884512', fechaCierre: '27/09/2022 17:33', tareaCodigo: '9DSCP', direccion: 'LAPRIDA 450', ciudad: 'MORON', provincia: 'BUENOS AIRES', region: 'AMBA', pais: 'PY', contratista: 'BRARTEL S.R.L.', tecnicoCierre: '23SRD211', actividades: 'CONTROL DE CLA', sistemaOrigen: 'OPEN', errorDescripcion: 'No se obtuvo provisión', excluida: 'N', motivoExclusion: '', nota: '', tieneNota: false, incluir: '', incluirExp: '' }
 ]
 
+const blankOption = { name: '', code: '' }
 const toOption = (name) => ({ name, code: name })
-const contratistaOptions = [...new Set(baseRows.map((row) => row.contratista).filter(Boolean))].map(toOption)
+const contratistaOptions = [blankOption, ...new Set(baseRows.map((row) => row.contratista).filter(Boolean))].map((item) => typeof item === 'string' ? toOption(item) : item)
 
 export const useFallidasCtStore = defineStore('fallidasCt', {
   state: () => ({
@@ -26,8 +27,9 @@ export const useFallidasCtStore = defineStore('fallidasCt', {
     rows: [],
     selectedRows: [],
     contratistaOptions,
-    paisOptions: [{ name: 'ARG', code: 'ARG' }, { name: 'UY', code: 'UY' }, { name: 'PY', code: 'PY' }],
+    paisOptions: [blankOption, { name: 'ARG', code: 'ARG' }, { name: 'UY', code: 'UY' }, { name: 'PY', code: 'PY' }],
     motivos: [
+      { name: 'PAGO DUPLICADO', code: 'PAGO_DUPLICADO' },
       { name: 'Falta parametrización', code: 'PARAM' },
       { name: 'Error técnico', code: 'ERROR_TECNICO' },
       { name: 'No corresponde reproceso', code: 'NO_REPROCESO' }
@@ -68,10 +70,10 @@ export const useFallidasCtStore = defineStore('fallidasCt', {
       const text = (value) => String(value || '').toLowerCase()
       this.rows = baseRows.filter((row) => {
         return (!f.nroOt || text(row.nroOrdenTrabajo).includes(text(f.nroOt)))
-          && (!f.contratista || row.contratista === f.contratista?.name || row.contratista === f.contratista)
+          && (!f.contratista?.code || row.contratista === f.contratista.code)
           && (!f.descripcionError || text(row.errorDescripcion).includes(text(f.descripcionError)))
-          && (!f.excluida || row.excluida === f.excluida?.code || row.excluida === f.excluida)
-          && (!f.pais || row.pais === f.pais?.code || row.pais === f.pais)
+          && (!f.excluida?.code || row.excluida === f.excluida.code)
+          && (!f.pais?.code || row.pais === f.pais.code)
       }).map((row) => ({ ...row }))
       this.selectedRows = []
       this.loading = false
