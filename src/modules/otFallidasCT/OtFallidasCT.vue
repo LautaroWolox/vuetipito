@@ -19,7 +19,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useFallidasCtStore } from './store/CtFallidaStore'
 import Table from './components/Table.vue'
 import Filtros from './components/Filtros.vue'
@@ -27,6 +27,11 @@ import FmTypingLoader from '@/components/shared/FmTypingLoader.vue'
 
 const store = useFallidasCtStore()
 const active = ref(['0', '1'])
+
+onMounted(async () => {
+  await store.setData()
+  await store.setMotivos()
+})
 </script>
 
 <style scoped>
