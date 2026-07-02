@@ -49,9 +49,11 @@ export const useFallidasCtStore = defineStore('fallidasCt', {
       return this.motivos
     },
     setSelectedRows(ids) {
-      this.selectedRows = ids
+      const selectableIds = this.rows.filter((row) => row.excluida !== 'S').map((row) => row.id)
+      this.selectedRows = ids.filter((id) => selectableIds.includes(id))
     },
     toggleSelectedRow(row) {
+      if (!row || row.excluida === 'S') return
       const index = this.selectedRows.indexOf(row.id)
       if (index >= 0) this.selectedRows.splice(index, 1)
       else this.selectedRows.push(row.id)
