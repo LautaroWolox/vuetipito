@@ -5,6 +5,7 @@ import './assets/css/fm-design-system.css';
 import './assets/css/fm-global-ui.css';
 import './assets/css/responsive.css';
 import './assets/css/responsive-resolutions.css';
+import './assets/css/fm-foundation.css';
 import Lara from '@primeuix/themes/lara';
 
 import { definePreset } from '@primeuix/themes';
