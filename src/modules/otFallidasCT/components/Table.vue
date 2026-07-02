@@ -1,6 +1,6 @@
 <template>
   <div class="otf-table-wrap">
-    <DataTable id="tabla" ref="dt" class="fm-pass-grid otf-table" :value="store.rows" dataKey="id" tableStyle="table-layout: fixed; width: max-content; min-width: 100%" scrollable scrollHeight="430px" :rowClass="rowClass" :resizableColumns="true" columnResizeMode="expand" removableSort sortMode="multiple" filterDisplay="row" v-model:filters="filters" v-model:selection="selectedRows" selectionMode="multiple" paginator :rows="10" :rowsPerPageOptions="[10, 50, 100, 500]" paginatorTemplate="FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink RowsPerPageDropdown" currentPageReportTemplate="Pagina {currentPage} de {totalPages}" showGridlines @row-click="onRowClick">
+    <DataTable id="tabla" ref="dt" class="fm-pass-grid otf-table" :value="store.rows" dataKey="id" tableStyle="table-layout: fixed; width: max-content; min-width: 100%" scrollable scrollHeight="430px" :rowClass="rowClass" :resizableColumns="true" columnResizeMode="expand" removableSort sortMode="multiple" filterDisplay="row" v-model:filters="filters" v-model:selection="selectedRows" selectionMode="multiple" :isDataSelectable="isRowSelectable" paginator :rows="10" :rowsPerPageOptions="[10, 50, 100, 500]" paginatorTemplate="FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink RowsPerPageDropdown" currentPageReportTemplate="Pagina {currentPage} de {totalPages}" showGridlines @row-click="onRowClick">
       <template #paginatorstart>
         <div class="otf-footer-icons"><button class="fm-icon-btn" type="button" @click="exportarExcel"><span class="material-icons">file_download</span></button><button class="fm-icon-btn" type="button" @click="excluir"><span class="material-icons">delete</span></button><button class="fm-icon-btn" type="button" @click="reprocesar"><span class="material-icons">refresh</span></button></div>
       </template>
@@ -35,6 +35,7 @@ const { exportToExcel, parseDataFromTable } = useExcelExport()
 const filters = ref(Object.fromEntries(columns.filter((col) => !col.hidden).map((col) => [col.field, { value: null, matchMode: FilterMatchMode.CONTAINS }])))
 const selectedRows = computed({ get: () => store.rows.filter((row) => store.selectedRows.includes(row.id)), set: (value) => store.setSelectedRows(value.map((row) => row.id)) })
 const rowClass = (data) => ({ 'otf-disabled-row': data?.excluida === 'S', 'otf-enabled-row': data?.excluida === 'N' })
+const isRowSelectable = (event) => event?.data?.excluida !== 'S'
 const onRowClick = (event) => { if (event?.data) store.toggleSelectedRow(event.data) }
 const verNota = (row) => window.alert(row.nota || 'Sin nota cargada')
 const abrirIncluir = (row) => { includeRow.value = row; showIncluir.value = true }
