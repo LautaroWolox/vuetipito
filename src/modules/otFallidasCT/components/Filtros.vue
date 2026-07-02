@@ -53,10 +53,12 @@ const store = useFallidasCtStore()
 const excluidaOptions = [{ name: 'Si', code: 'S' }, { name: 'No', code: 'N' }]
 
 const limpiar = () => {
+  // Aca se conecta el backend si limpiar tambien debe pedir datos nuevos.
   store.clearFilters()
 }
 
 const buscar = async () => {
+  // Aca se conecta el backend para buscar OTs fallidas CT.
   await store.search()
 }
 </script>
@@ -72,11 +74,12 @@ const buscar = async () => {
 .otf-btn{height:38px;width:158px;display:inline-flex;align-items:center;justify-content:center;gap:10px;border-radius:6px;padding:0 16px;font-size:15px;font-weight:500;letter-spacing:.1px;cursor:pointer;box-shadow:0 4px 11px rgba(0,0,0,.13);transition:background-color .15s ease,color .15s ease,border-color .15s ease,box-shadow .15s ease,transform .15s ease}
 .otf-btn svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2.35;stroke-linecap:round;stroke-linejoin:round;flex:0 0 auto}
 .otf-btn-primary{background:var(--fm-cyan);border:1px solid var(--fm-cyan);color:#fff}
-.otf-btn-primary:hover:not(:disabled){background:var(--fm-cyan-strong);border-color:var(--fm-cyan-strong);box-shadow:0 5px 12px rgba(0,143,161,.26);transform:translateY(-1px)}
+.otf-btn-primary:hover:not(:disabled){background:var(--fm-cyan-strong);border-color:var(--fm-cyan-strong);box-shadow:0 8px 18px rgba(0,143,161,.38);transform:translateY(-1px)}
 .otf-btn-outline{background:#fff;border:1px solid var(--fm-cyan);color:var(--fm-cyan);box-shadow:0 3px 8px rgba(0,169,189,.10)}
-.otf-btn-outline:hover{background:var(--fm-cyan-soft);border-color:var(--fm-cyan-strong);color:var(--fm-cyan-strong);box-shadow:0 5px 12px rgba(0,143,161,.16);transform:translateY(-1px)}
+.otf-btn-outline:hover{background:var(--fm-cyan-soft);border-color:var(--fm-cyan-strong);color:var(--fm-cyan-strong);box-shadow:0 8px 18px rgba(0,143,161,.24);transform:translateY(-1px)}
 .otf-btn:disabled{opacity:.55;cursor:not-allowed;transform:none}
 :global(.ot-fallidas-ct .otf-actions){display:flex!important;justify-content:center!important;align-items:center!important;gap:10px!important;margin-top:18px!important}
 :global(.ot-fallidas-ct .otf-btn){height:38px!important;width:158px!important;min-width:158px!important;border-radius:6px!important;padding:0 16px!important;font-size:15px!important;font-weight:500!important;gap:10px!important;box-shadow:0 4px 11px rgba(0,0,0,.13)!important}
+:global(.ot-fallidas-ct .otf-btn:hover){box-shadow:0 8px 18px rgba(0,143,161,.30)!important;transform:translateY(-1px)!important}
 :global(.ot-fallidas-ct .otf-btn svg){width:17px!important;height:17px!important;min-width:17px!important}
 </style>
