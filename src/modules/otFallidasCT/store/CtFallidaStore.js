@@ -11,8 +11,8 @@ const baseRows = [
   { id: 8, nroOrdenTrabajo: '706020499', fechaCierre: '13/09/2022 15:15', tareaCodigo: '9DSCP', direccion: 'CHILE 1326', ciudad: 'TIGRE', provincia: 'BUENOS AIRES', region: 'AMBA', pais: 'ARG', contratista: 'BRARTEL S.R.L.', tecnicoCierre: '23SRD210', actividades: 'CONTROL DE CLA', sistemaOrigen: 'OPEN', errorDescripcion: 'Falta parametrizacion', excluida: 'N', motivoExclusion: '', nota: '', tieneNota: false, incluir: '', incluirExp: '' },
   { id: 9, nroOrdenTrabajo: '710079515', fechaCierre: '11/10/2022 15:46', tareaCodigo: '9DSCR', direccion: 'BILLOCH JOSE M', ciudad: 'TIGRE', provincia: 'BUENOS AIRES', region: 'AMBA', pais: 'ARG', contratista: 'BRARTEL S.R.L.', tecnicoCierre: '23SRD210', actividades: 'CONTROL DE CLA', sistemaOrigen: 'OPEN', errorDescripcion: 'Falta parametrizacion', excluida: 'S', motivoExclusion: 'Parametrización', nota: '', tieneNota: false, incluir: 'RECUPERAR', incluirExp: 'RECUPERAR' },
   { id: 10, nroOrdenTrabajo: 'ICD11798207', fechaCierre: '13/09/2022 10:06', tareaCodigo: 'RCD13', direccion: 'ISOLA BIS 141', ciudad: 'ROSARIO', provincia: 'SANTA FE', region: 'Litoral', pais: 'ARG', contratista: 'MOVITEL SERVICIOS', tecnicoCierre: '51ROR122', actividades: 'RED - COBRE - PN', sistemaOrigen: 'ICD', errorDescripcion: 'Falta parametrizacion', excluida: 'N', motivoExclusion: '', nota: '', tieneNota: false, incluir: '', incluirExp: '' },
-  { id: 11, nroOrdenTrabajo: 'ICD12001111', fechaCierre: '22/09/2022 08:15', tareaCodigo: 'RCD13', direccion: 'SAN MARTIN 800', ciudad: 'LA PLATA', provincia: 'BUENOS AIRES', region: 'AMBA', pais: 'ARG', contratista: 'MOVITEL SERVICIOS', tecnicoCierre: '51ROR125', actividades: 'RED - COBRE - PN', sistemaOrigen: 'ICD', errorDescripcion: 'Falta parametrizacion', excluida: 'N', motivoExclusion: '', nota: '', tieneNota: false, incluir: '', incluirExp: '' },
-  { id: 12, nroOrdenTrabajo: 'OPEN884512', fechaCierre: '27/09/2022 17:33', tareaCodigo: '9DSCP', direccion: 'LAPRIDA 450', ciudad: 'MORON', provincia: 'BUENOS AIRES', region: 'AMBA', pais: 'ARG', contratista: 'BRARTEL S.R.L.', tecnicoCierre: '23SRD211', actividades: 'CONTROL DE CLA', sistemaOrigen: 'OPEN', errorDescripcion: 'No se obtuvo provisión', excluida: 'N', motivoExclusion: '', nota: '', tieneNota: false, incluir: '', incluirExp: '' }
+  { id: 11, nroOrdenTrabajo: 'ICD12001111', fechaCierre: '22/09/2022 08:15', tareaCodigo: 'RCD13', direccion: 'SAN MARTIN 800', ciudad: 'LA PLATA', provincia: 'BUENOS AIRES', region: 'AMBA', pais: 'UY', contratista: 'MOVITEL SERVICIOS', tecnicoCierre: '51ROR125', actividades: 'RED - COBRE - PN', sistemaOrigen: 'ICD', errorDescripcion: 'Falta parametrizacion', excluida: 'N', motivoExclusion: '', nota: '', tieneNota: false, incluir: '', incluirExp: '' },
+  { id: 12, nroOrdenTrabajo: 'OPEN884512', fechaCierre: '27/09/2022 17:33', tareaCodigo: '9DSCP', direccion: 'LAPRIDA 450', ciudad: 'MORON', provincia: 'BUENOS AIRES', region: 'AMBA', pais: 'PY', contratista: 'BRARTEL S.R.L.', tecnicoCierre: '23SRD211', actividades: 'CONTROL DE CLA', sistemaOrigen: 'OPEN', errorDescripcion: 'No se obtuvo provisión', excluida: 'N', motivoExclusion: '', nota: '', tieneNota: false, incluir: '', incluirExp: '' }
 ]
 
 export const useFallidasCtStore = defineStore('fallidasCt', {
@@ -22,6 +22,7 @@ export const useFallidasCtStore = defineStore('fallidasCt', {
     filters: { nroOt: '', fechaDesde: '', fechaHasta: '', contratista: '', descripcionError: '', excluida: '', pais: '' },
     rows: [],
     selectedRows: [],
+    paisOptions: [{ name: 'ARG', code: 'ARG' }, { name: 'UY', code: 'UY' }, { name: 'PY', code: 'PY' }],
     motivos: [
       { name: 'Falta parametrización', code: 'PARAM' },
       { name: 'Error técnico', code: 'ERROR_TECNICO' },
@@ -30,7 +31,7 @@ export const useFallidasCtStore = defineStore('fallidasCt', {
   }),
   getters: {
     contratistas: (state) => [...new Set(state.rows.map((row) => row.contratista).filter(Boolean))].map((name) => ({ name, code: name })),
-    paises: (state) => [...new Set(state.rows.map((row) => row.pais).filter(Boolean))].map((name) => ({ name, code: name })),
+    paises: (state) => state.paisOptions,
     getNotExcluded: (state) => state.rows.filter((row) => state.selectedRows.includes(row.id) && row.excluida !== 'S')
   },
   actions: {
