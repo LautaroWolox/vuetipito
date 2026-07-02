@@ -51,7 +51,7 @@
         <div class="otf-empty">No hay resultados</div>
       </template>
 
-      <Column selectionMode="multiple" headerStyle="width: 3rem" />
+      <Column selectionMode="multiple" headerStyle="width: 3rem; min-width: 3rem" bodyStyle="width: 3rem; min-width: 3rem" />
 
       <Column
         v-for="col in cols"
@@ -64,15 +64,21 @@
         :showFilterMenu="false"
         :hidden="col.hidden"
         :exportable="col.exportable"
-        :style="{ minWidth: col.width || '120px' }"
+        :style="columnStyle(col)"
+        :headerStyle="columnStyle(col)"
+        :bodyStyle="columnStyle(col)"
       >
         <template #filter="{ filterModel, filterCallback }">
-          <InputText v-if="col.filter !== false" type="text" v-model="filterModel.value" @input="filterCallback()" class="fm-column-filter" />
+          <div v-if="col.filter !== false" class="otf-filter-cell">
+            <span class="otf-filter-prefix">~</span>
+            <InputText type="text" v-model="filterModel.value" @input="filterCallback()" class="fm-column-filter" />
+            <span class="otf-filter-more">...</span>
+          </div>
         </template>
         <template #body="{ data }">
           <button v-if="col.field === 'tieneNota'" class="otf-icon-cell" type="button" @click.stop="abrirNota(data)"><i class="pi pi-file-edit"></i></button>
           <button v-else-if="col.field === 'incluir' && data.excluida === 'S'" class="otf-icon-cell otf-icon-cell--include" type="button" @click.stop="abrirIncluir(data)"><i class="pi pi-replay"></i></button>
-          <span v-else-if="col.field !== 'tieneNota' && col.field !== 'incluir'">{{ data[col.field] ?? '' }}</span>
+          <span v-else-if="col.field !== 'tieneNota' && col.field !== 'incluir'" class="otf-cell-text">{{ data[col.field] ?? '' }}</span>
         </template>
       </Column>
     </DataTable>
@@ -112,6 +118,11 @@ const selectedRows = computed({
   set: (value) => store.setSelectedRows(value.map((row) => row.id))
 })
 
+const columnStyle = (col) => ({
+  width: col.width || '120px',
+  minWidth: col.minWidth || col.width || '80px'
+})
+
 const rowClass = (data) => ({
   'otf-disabled-row': data?.excluida === 'S',
   'otf-enabled-row': data?.excluida === 'N',
@@ -136,5 +147,5 @@ const exportarExcel = () => {
 </script>
 
 <style scoped>
-.otf-table-wrap{border-left:4px solid var(--fm-cyan);background:#fff}.otf-footer-icons{display:flex;align-items:center;gap:10px;padding-left:4px}.otf-counter{font-size:12px;color:#222;padding-right:8px}.otf-empty{padding:48px 32px;font-size:14px;color:#407080;text-align:center}.otf-grid-icon svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}.otf-icon-cell{border:0;background:transparent;color:#006f80;cursor:pointer;padding:0;font-size:15px;display:inline-flex;align-items:center;justify-content:center}.otf-icon-cell .pi{font-size:16px}.otf-icon-cell:hover{color:var(--fm-cyan-strong);transform:translateY(-1px)}.otf-icon-cell--include{color:#006f80}.fm-icon-btn .pi{font-size:16px}:deep(.p-datatable-tbody > tr){cursor:pointer}:deep(.otf-disabled-row td){color:#8b8b8b!important;background:#fff!important}:deep(.otf-enabled-row:hover td),:deep(.otf-disabled-row:hover td){background:#edfafd!important}:deep(.otf-selected-row > td),:deep(.p-datatable-tbody > tr.otf-selected-row > td),:deep(.p-datatable-tbody > tr.p-highlight > td),:deep(.p-datatable-tbody > tr.p-datatable-row-selected > td){background:#9eeff7!important;color:#263238!important}:deep(.otf-selected-row .otf-icon-cell),:deep(.p-datatable-tbody > tr.p-highlight .otf-icon-cell),:deep(.p-datatable-tbody > tr.p-datatable-row-selected .otf-icon-cell){color:#263238!important}:deep(.p-checkbox-checked .p-checkbox-box),:deep(.p-checkbox.p-highlight .p-checkbox-box){background:#00a9bd!important;border-color:#00a9bd!important}:deep(.p-checkbox-checked .p-checkbox-icon),:deep(.p-checkbox.p-highlight .p-checkbox-icon){color:#111!important}:deep(.p-datatable-thead > tr > th){height:36px!important;padding:4px 7px!important}:deep(.p-datatable-tbody > tr > td){height:36px!important;padding:4px 7px!important}:deep(.p-filter-row > th){height:34px!important;background:#fff!important}:deep(.p-column-filter){height:25px!important;font-size:12px!important}:deep(.p-datatable-wrapper){min-height:186px;max-height:470px}:deep(.p-datatable-empty-message td){height:110px!important;background:#eafcff!important;text-align:center!important}:deep(.p-paginator){justify-content:center;position:relative}:deep(.p-paginator-left-content){position:absolute;left:8px}:deep(.p-paginator-right-content){position:absolute;right:8px}
+.otf-table-wrap{border-left:4px solid var(--fm-cyan);background:#fff}.otf-footer-icons{display:flex;align-items:center;gap:10px;padding-left:4px}.otf-counter{font-size:12px;color:#222;padding-right:8px}.otf-empty{padding:48px 32px;font-size:14px;color:#407080;text-align:center}.otf-grid-icon svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}.otf-icon-cell{border:0;background:transparent;color:#006f80;cursor:pointer;padding:0;font-size:15px;display:inline-flex;align-items:center;justify-content:center}.otf-icon-cell .pi{font-size:16px}.otf-icon-cell:hover{color:var(--fm-cyan-strong);transform:translateY(-1px)}.otf-icon-cell--include{color:#006f80}.fm-icon-btn .pi{font-size:16px}.otf-cell-text{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.otf-filter-cell{display:flex;align-items:center;gap:3px;width:100%;min-width:0}.otf-filter-prefix,.otf-filter-more{font-size:11px;color:#000;flex:0 0 auto}:deep(.p-datatable-tbody > tr){cursor:pointer}:deep(.p-datatable-table){border-collapse:collapse!important;table-layout:fixed!important}:deep(.p-datatable-thead > tr > th),:deep(.p-datatable-tbody > tr > td){border-right:1px solid #c9d3da!important;border-bottom:1px solid #dce3e8!important;overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important}:deep(.p-datatable-thead > tr > th){height:35px!important;padding:4px 7px!important;background:#f4f7f9!important;color:#263f50!important;font-size:11px!important;font-weight:700!important;position:relative}:deep(.p-datatable-thead > tr.p-filter-row > th){height:34px!important;padding:3px 5px!important;background:#fff!important}:deep(.p-datatable-tbody > tr > td){height:35px!important;padding:5px 8px!important;color:#263238!important;font-size:12px!important}:deep(.p-column-resizer){width:8px!important;right:-4px!important;cursor:col-resize!important;background:transparent!important}:deep(.p-column-resizer:hover){background:rgba(0,169,189,.35)!important}:deep(.otf-disabled-row td){color:#8b8b8b!important;background:#fff!important}:deep(.otf-enabled-row:hover td),:deep(.otf-disabled-row:hover td){background:#edfafd!important}:deep(.otf-selected-row > td),:deep(.p-datatable-tbody > tr.otf-selected-row > td),:deep(.p-datatable-tbody > tr.p-highlight > td),:deep(.p-datatable-tbody > tr.p-datatable-row-selected > td){background:#9eeff7!important;color:#263238!important}:deep(.otf-selected-row .otf-icon-cell),:deep(.p-datatable-tbody > tr.p-highlight .otf-icon-cell),:deep(.p-datatable-tbody > tr.p-datatable-row-selected .otf-icon-cell){color:#263238!important}:deep(.p-checkbox-checked .p-checkbox-box),:deep(.p-checkbox.p-highlight .p-checkbox-box){background:#00a9bd!important;border-color:#00a9bd!important}:deep(.p-checkbox-checked .p-checkbox-icon),:deep(.p-checkbox.p-highlight .p-checkbox-icon){color:#111!important}:deep(.p-column-filter){height:25px!important;font-size:12px!important;width:100%!important;min-width:0!important}:deep(.p-datatable-wrapper){min-height:186px;max-height:470px}:deep(.p-datatable-empty-message td){height:110px!important;background:#eafcff!important;text-align:center!important}:deep(.p-paginator){justify-content:center;position:relative}:deep(.p-paginator-left-content){position:absolute;left:8px}:deep(.p-paginator-right-content){position:absolute;right:8px}
 </style>
