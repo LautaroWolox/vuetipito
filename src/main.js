@@ -1,6 +1,7 @@
 import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
 import './assets/css/nuestros.css';
+import './assets/css/fm-design-system.css';
 import './assets/css/responsive.css';
 import './assets/css/responsive-resolutions.css';
 import Lara from '@primeuix/themes/lara';
@@ -18,6 +19,10 @@ import ConfirmationService from 'primevue/confirmationservice';
 import Tooltip from 'primevue/tooltip';
 import App from './App.vue';
 import router from './router';
+import FmButton from './components/shared/FmButton.vue';
+import FmPanel from './components/shared/FmPanel.vue';
+import FmGridShell from './components/shared/FmGridShell.vue';
+import FmAlertDialog from './components/shared/FmAlertDialog.vue';
 
 // Componentes globales de primevue
 import Accordion from 'primevue/accordion';
@@ -91,6 +96,13 @@ app.component('ProgressSpinner', ProgressSpinner);
 app.component('MultiSelect', MultiSelect);
 app.component('Dialog', Dialog);
 app.component('Select',Select);
+
+// Componentes globales propios Field Manager.
+// Usar estos en pantallas nuevas para no copiar estilos por pantalla.
+app.component('FmButton', FmButton);
+app.component('FmPanel', FmPanel);
+app.component('FmGridShell', FmGridShell);
+app.component('FmAlertDialog', FmAlertDialog);
 
 app.directive('tooltip', Tooltip);
 app.mount('#app');
