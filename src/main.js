@@ -1,6 +1,7 @@
 import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
 import './assets/css/nuestros.css';
+import './assets/css/responsive.css';
 import Lara from '@primeuix/themes/lara';
 
 import { definePreset } from '@primeuix/themes';
@@ -92,4 +93,3 @@ app.component('Select',Select);
 
 app.directive('tooltip', Tooltip);
 app.mount('#app');
-
