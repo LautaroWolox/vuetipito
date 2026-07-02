@@ -1,6 +1,6 @@
 <template>
-  <section class="fm-grid-shell">
-    <header v-if="title || $slots.title || $slots.actions" class="fm-grid-title">
+  <section class="fm-grid-shell fm-ui-grid-shell">
+    <header v-if="title || $slots.title || $slots.actions" class="fm-grid-title fm-ui-grid-title">
       <slot name="title">
         <span>{{ title }}</span>
       </slot>
