@@ -1,12 +1,12 @@
 <template>
-  <section class="fm-card">
-    <header v-if="title || $slots.header" class="fm-card__header">
+  <section class="fm-ui-section fm-card">
+    <header v-if="title || $slots.header" class="fm-ui-section-header fm-card__header">
       <slot name="header">
         <span>{{ title }}</span>
       </slot>
       <slot name="headerActions" />
     </header>
-    <div class="fm-card__body" :class="{ 'fm-card__body--accent': accent }">
+    <div class="fm-ui-section-body fm-card__body" :class="{ 'fm-ui-section-body--accent fm-card__body--accent': accent }">
       <slot />
     </div>
   </section>
