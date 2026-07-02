@@ -33,11 +33,11 @@
 
     <div class="otf-actions">
       <button class="otf-btn otf-btn-primary" type="button" :disabled="store.loading" @click="buscar">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.5 18a7.5 7.5 0 1 1 5.3-12.8 7.5 7.5 0 0 1-5.3 12.8Zm5.5-2 5 5" /></svg>
+        <svg class="otf-icon-search" viewBox="0 0 24 24" aria-hidden="true"><path d="M10.5 18a7.5 7.5 0 1 1 5.3-12.8 7.5 7.5 0 0 1-5.3 12.8Zm5.5-2 5 5" /></svg>
         <span>{{ store.loading ? 'BUSCANDO...' : 'BUSCAR' }}</span>
       </button>
       <button class="otf-btn otf-btn-outline" type="button" @click="limpiar">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16M7 5l5 6v6l3 2v-8l5-6M4 12h5" /></svg>
+        <svg class="otf-icon-clean" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h13M4 12h8M4 17h5" /></svg>
         <span>LIMPIAR</span>
       </button>
     </div>
@@ -68,6 +68,12 @@ const buscar = async () => {
 .otf-filters :deep(.p-inputtext:focus),.otf-filters :deep(.p-select.p-focus){border-color:var(--fm-cyan)!important;box-shadow:0 0 0 2px rgba(0,188,212,.14)!important}
 .otf-filters :deep(.p-select-label){padding-top:4px;padding-bottom:4px;font-size:13px}
 .otf-filters :deep(.p-select-dropdown){width:30px;color:#42526e}
-.otf-actions{display:flex;justify-content:center;gap:8px;margin-top:18px}
-.otf-btn{height:32px;min-width:107px;display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:4px;padding:0 16px;font-size:12px;font-weight:500;cursor:pointer;box-shadow:0 3px 8px rgba(0,0,0,.12);transition:background-color .15s ease,color .15s ease,border-color .15s ease,box-shadow .15s ease}.otf-btn svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}.otf-btn-primary{background:var(--fm-cyan);border:1px solid var(--fm-cyan);color:#fff}.otf-btn-primary:hover:not(:disabled){background:var(--fm-cyan-strong);border-color:var(--fm-cyan-strong);box-shadow:0 5px 12px rgba(0,143,161,.28)}.otf-btn-outline{background:#fff;border:1px solid var(--fm-cyan);color:var(--fm-cyan)}.otf-btn-outline:hover{background:var(--fm-cyan-soft);border-color:var(--fm-cyan-strong);color:var(--fm-cyan-strong);box-shadow:0 5px 12px rgba(0,143,161,.18)}.otf-btn:disabled{opacity:.55;cursor:not-allowed}
+.otf-actions{display:flex;justify-content:center;align-items:center;gap:10px;margin-top:18px}
+.otf-btn{height:38px;width:158px;display:inline-flex;align-items:center;justify-content:center;gap:10px;border-radius:6px;padding:0 16px;font-size:15px;font-weight:500;letter-spacing:.1px;cursor:pointer;box-shadow:0 4px 11px rgba(0,0,0,.13);transition:background-color .15s ease,color .15s ease,border-color .15s ease,box-shadow .15s ease,transform .15s ease}
+.otf-btn svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2.35;stroke-linecap:round;stroke-linejoin:round;flex:0 0 auto}
+.otf-btn-primary{background:var(--fm-cyan);border:1px solid var(--fm-cyan);color:#fff}
+.otf-btn-primary:hover:not(:disabled){background:var(--fm-cyan-strong);border-color:var(--fm-cyan-strong);box-shadow:0 5px 12px rgba(0,143,161,.26);transform:translateY(-1px)}
+.otf-btn-outline{background:#fff;border:1px solid var(--fm-cyan);color:var(--fm-cyan);box-shadow:0 3px 8px rgba(0,169,189,.10)}
+.otf-btn-outline:hover{background:var(--fm-cyan-soft);border-color:var(--fm-cyan-strong);color:var(--fm-cyan-strong);box-shadow:0 5px 12px rgba(0,143,161,.16);transform:translateY(-1px)}
+.otf-btn:disabled{opacity:.55;cursor:not-allowed;transform:none}
 </style>
