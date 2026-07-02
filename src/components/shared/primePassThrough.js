@@ -4,6 +4,9 @@ export const fmPrimePassThrough = {
     label: { class: 'fm-pt-button-label' },
     icon: { class: 'fm-pt-button-icon' }
   },
+  inputtext: {
+    root: { class: 'fm-pt-inputtext' }
+  },
   select: {
     root: { class: 'fm-pt-select' },
     label: { class: 'fm-pt-select-label' },
@@ -15,10 +18,24 @@ export const fmPrimePassThrough = {
   multiselect: {
     root: { class: 'fm-pt-multiselect' },
     labelContainer: { class: 'fm-pt-multiselect-label' },
+    dropdown: { class: 'fm-pt-multiselect-dropdown' },
     panel: { class: 'fm-pt-multiselect-panel' },
     list: { class: 'fm-pt-multiselect-list' },
     option: { class: 'fm-pt-multiselect-option' },
     header: { class: 'fm-pt-multiselect-header' }
+  },
+  accordion: {
+    root: { class: 'fm-pt-accordion fm-accordion' }
+  },
+  accordionpanel: {
+    root: { class: 'fm-pt-accordion-panel' }
+  },
+  accordionheader: {
+    root: { class: 'fm-pt-accordion-header' },
+    toggleicon: { class: 'fm-pt-accordion-toggle-icon' }
+  },
+  accordioncontent: {
+    content: { class: 'fm-pt-accordion-content' }
   },
   datatable: {
     root: { class: 'fm-pt-datatable fm-pass-grid' },
