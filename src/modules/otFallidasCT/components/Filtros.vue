@@ -50,7 +50,7 @@ import CtDatePicker from './CtDatePicker.vue'
 import { useFallidasCtStore } from '../store/CtFallidaStore'
 
 const store = useFallidasCtStore()
-const excluidaOptions = [{ name: 'Si', code: 'S' }, { name: 'No', code: 'N' }]
+const excluidaOptions = [{ name: '', code: '' }, { name: 'Si', code: 'S' }, { name: 'No', code: 'N' }]
 
 const limpiar = () => {
   // Aca se conecta el backend si limpiar tambien debe pedir datos nuevos.
@@ -82,4 +82,7 @@ const buscar = async () => {
 :global(.ot-fallidas-ct .otf-btn){height:38px!important;width:158px!important;min-width:158px!important;border-radius:6px!important;padding:0 16px!important;font-size:15px!important;font-weight:500!important;gap:10px!important;box-shadow:0 4px 11px rgba(0,0,0,.13)!important}
 :global(.ot-fallidas-ct .otf-btn:hover){box-shadow:0 8px 18px rgba(0,143,161,.30)!important;transform:translateY(-1px)!important}
 :global(.ot-fallidas-ct .otf-btn svg){width:17px!important;height:17px!important;min-width:17px!important}
+:global(.p-select-option.p-select-option-selected){background:#00a9bd!important;color:#fff!important}
+:global(.p-select-option:hover){background:#e0f7fa!important;color:#263238!important}
+:global(.p-select-option:first-child){min-height:32px!important}
 </style>
