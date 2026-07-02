@@ -76,6 +76,13 @@ export const useFallidasCtStore = defineStore('fallidasCt', {
       this.selectedRows = []
       this.loading = false
     },
+    updateNota(row, nota) {
+      const target = this.rows.find((item) => item.id === row?.id)
+      if (target) {
+        target.nota = nota || ''
+        target.tieneNota = Boolean(target.nota)
+      }
+    },
     async sendExcluidas(rows, motivo, comentario) {
       rows.forEach((row) => {
         const target = this.rows.find((item) => item.id === row.id)
