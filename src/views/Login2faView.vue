@@ -24,8 +24,8 @@ import { ref, onMounted, onBeforeUnmount } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '@/store/auth';
 
+
 const urlBase = import.meta.env.VITE_FM_MV_URL;
-const loginOrigin = import.meta.env.VITE_ORIGIN;
 const router = useRouter()
 const authStore = useAuthStore();
 const popupWindow = ref(null)
@@ -36,15 +36,16 @@ const height = screenHeight / 1.5;
 const left = screenWidth / 6;  
 const top = screenHeight / 6; 
 
+
 const handleMessage = (event) => {
-  const origins = new Set([loginOrigin, window.location.origin].filter(Boolean));
+  const origins = new Set([import.meta.env.VITE_ORIGIN]);
   let autenticado = false;
   let usrObj = {};
   if (!origins.has(event.origin)) return
-  let jsonStr = event.data?.usr
+  let jsonStr = event.data.usr
   if(jsonStr !== undefined) {
     console.log("recibido: " + jsonStr)
-    usrObj = typeof jsonStr === 'string' ? JSON.parse(jsonStr) : jsonStr
+    usrObj = JSON.parse(jsonStr)
     autenticado = usrObj.autenticado
   }
   if (usrObj && autenticado) {
@@ -62,11 +63,11 @@ const handleMessage = (event) => {
       popupWindow.value = null
     }
   }
+  
 }
 
 const ingresar = () => {
-  const loginUrl = `${urlBase}/llamado.html`
-  popupWindow.value = window.open(loginUrl,'LoginPopup',`width=${width},height=${height},left=${left},top=${top},resizable=yes,scrollbars=yes`)
+  popupWindow.value = window.open(window.location.origin + '/pc/llamado.html','LoginPopup',`width=${width},height=${height},left=${left},top=${top},resizable=yes,scrollbars=yes`)
 }
 
 onMounted(() => {
