@@ -7,15 +7,15 @@
       </div>
       <div class="col-2">
         <label>Fecha Cierre OT Desde</label>
-        <InputText v-model="store.filters.fechaDesde" class="w-full" placeholder="Seleccionar fecha" />
+        <DatePicker v-model="store.filters.fechaDesde" class="w-full otf-date" placeholder="Seleccionar fecha" showIcon iconDisplay="input" dateFormat="dd/mm/yy" />
       </div>
       <div class="col-2">
         <label>Fecha Cierre OT Hasta</label>
-        <InputText v-model="store.filters.fechaHasta" class="w-full" placeholder="Seleccionar fecha" />
+        <DatePicker v-model="store.filters.fechaHasta" class="w-full otf-date" placeholder="Seleccionar fecha" showIcon iconDisplay="input" dateFormat="dd/mm/yy" />
       </div>
       <div class="col-4">
         <label>Contratista</label>
-        <Select v-model="store.filters.contratista" :options="store.contratistas" optionLabel="name" class="w-full" showClear />
+        <Select v-model="store.filters.contratista" :options="store.contratistas" optionLabel="name" class="w-full otf-select" showClear />
       </div>
       <div class="col-4">
         <label>Descripcion Error</label>
@@ -23,11 +23,11 @@
       </div>
       <div class="col-2">
         <label>Excluida</label>
-        <Select v-model="store.filters.excluida" :options="excluidaOptions" optionLabel="name" class="w-full" showClear />
+        <Select v-model="store.filters.excluida" :options="excluidaOptions" optionLabel="name" class="w-full otf-select" showClear />
       </div>
       <div class="col-2">
         <label>Pais</label>
-        <Select v-model="store.filters.pais" :options="store.paises" optionLabel="name" class="w-full" showClear />
+        <Select v-model="store.filters.pais" :options="store.paises" optionLabel="name" class="w-full otf-select" showClear />
       </div>
     </div>
 
@@ -40,10 +40,11 @@
 
 <script setup>
 import InputText from 'primevue/inputtext'
+import DatePicker from 'primevue/datepicker'
 import { useFallidasCtStore } from '../store/CtFallidaStore'
 
 const store = useFallidasCtStore()
-const excluidaOptions = [{ name: 'S', code: 'S' }, { name: 'N', code: 'N' }]
+const excluidaOptions = [{ name: 'Si', code: 'S' }, { name: 'No', code: 'N' }]
 
 const limpiar = () => {
   store.clearFilters()
@@ -57,6 +58,10 @@ const buscar = async () => {
 <style scoped>
 .otf-filters{padding:14px 22px 12px}
 .otf-filters label{display:block;margin-bottom:6px;font-weight:700;color:#111;font-size:13px}
-.otf-filters :deep(.p-inputtext),.otf-filters :deep(.p-select){height:30px;min-height:30px;font-size:13px}
-.otf-filters :deep(.p-select-label){padding-top:4px;padding-bottom:4px}
+.otf-filters :deep(.p-inputtext),.otf-filters :deep(.p-select),.otf-filters :deep(.p-datepicker-input){height:30px;min-height:30px;font-size:13px;border-color:#c7d1d8;border-radius:3px;background:#fff}
+.otf-filters :deep(.p-inputtext:focus),.otf-filters :deep(.p-select.p-focus),.otf-filters :deep(.p-datepicker-input:focus){border-color:var(--fm-cyan)!important;box-shadow:0 0 0 2px rgba(0,188,212,.14)!important}
+.otf-filters :deep(.p-select-label){padding-top:4px;padding-bottom:4px;font-size:13px}
+.otf-filters :deep(.p-select-dropdown){width:30px;color:#42526e}
+.otf-filters :deep(.p-datepicker){width:100%}
+.otf-filters :deep(.p-datepicker-input-icon-container){color:var(--fm-cyan)}
 </style>
