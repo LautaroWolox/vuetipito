@@ -15,6 +15,9 @@ const baseRows = [
   { id: 12, nroOrdenTrabajo: 'OPEN884512', fechaCierre: '27/09/2022 17:33', tareaCodigo: '9DSCP', direccion: 'LAPRIDA 450', ciudad: 'MORON', provincia: 'BUENOS AIRES', region: 'AMBA', pais: 'PY', contratista: 'BRARTEL S.R.L.', tecnicoCierre: '23SRD211', actividades: 'CONTROL DE CLA', sistemaOrigen: 'OPEN', errorDescripcion: 'No se obtuvo provisión', excluida: 'N', motivoExclusion: '', nota: '', tieneNota: false, incluir: '', incluirExp: '' }
 ]
 
+const toOption = (name) => ({ name, code: name })
+const contratistaOptions = [...new Set(baseRows.map((row) => row.contratista).filter(Boolean))].map(toOption)
+
 export const useFallidasCtStore = defineStore('fallidasCt', {
   state: () => ({
     loading: false,
@@ -22,6 +25,7 @@ export const useFallidasCtStore = defineStore('fallidasCt', {
     filters: { nroOt: '', fechaDesde: '', fechaHasta: '', contratista: '', descripcionError: '', excluida: '', pais: '' },
     rows: [],
     selectedRows: [],
+    contratistaOptions,
     paisOptions: [{ name: 'ARG', code: 'ARG' }, { name: 'UY', code: 'UY' }, { name: 'PY', code: 'PY' }],
     motivos: [
       { name: 'Falta parametrización', code: 'PARAM' },
@@ -30,13 +34,12 @@ export const useFallidasCtStore = defineStore('fallidasCt', {
     ]
   }),
   getters: {
-    contratistas: (state) => [...new Set(state.rows.map((row) => row.contratista).filter(Boolean))].map((name) => ({ name, code: name })),
+    contratistas: (state) => state.contratistaOptions,
     paises: (state) => state.paisOptions,
     getNotExcluded: (state) => state.rows.filter((row) => state.selectedRows.includes(row.id) && row.excluida !== 'S')
   },
   actions: {
     async setData() {
-      if (this.rows.length) return
       this.loading = true
       await new Promise((resolve) => setTimeout(resolve, 250))
       this.rows = baseRows.map((row) => ({ ...row }))
@@ -47,6 +50,11 @@ export const useFallidasCtStore = defineStore('fallidasCt', {
     },
     setSelectedRows(ids) {
       this.selectedRows = ids
+    },
+    toggleSelectedRow(row) {
+      const index = this.selectedRows.indexOf(row.id)
+      if (index >= 0) this.selectedRows.splice(index, 1)
+      else this.selectedRows.push(row.id)
     },
     clearFilters() {
       this.filters = { nroOt: '', fechaDesde: '', fechaHasta: '', contratista: '', descripcionError: '', excluida: '', pais: '' }
