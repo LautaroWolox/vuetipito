@@ -76,4 +76,7 @@ const buscar = async () => {
 .otf-btn-outline{background:#fff;border:1px solid var(--fm-cyan);color:var(--fm-cyan);box-shadow:0 3px 8px rgba(0,169,189,.10)}
 .otf-btn-outline:hover{background:var(--fm-cyan-soft);border-color:var(--fm-cyan-strong);color:var(--fm-cyan-strong);box-shadow:0 5px 12px rgba(0,143,161,.16);transform:translateY(-1px)}
 .otf-btn:disabled{opacity:.55;cursor:not-allowed;transform:none}
+:global(.ot-fallidas-ct .otf-actions){display:flex!important;justify-content:center!important;align-items:center!important;gap:10px!important;margin-top:18px!important}
+:global(.ot-fallidas-ct .otf-btn){height:38px!important;width:158px!important;min-width:158px!important;border-radius:6px!important;padding:0 16px!important;font-size:15px!important;font-weight:500!important;gap:10px!important;box-shadow:0 4px 11px rgba(0,0,0,.13)!important}
+:global(.ot-fallidas-ct .otf-btn svg){width:17px!important;height:17px!important;min-width:17px!important}
 </style>
