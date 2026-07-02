@@ -31,9 +31,15 @@
     >
       <template #paginatorstart>
         <div class="otf-footer-icons">
-          <button class="fm-icon-btn" type="button" @click="exportarExcel"><i class="pi pi-download"></i></button>
-          <button class="fm-icon-btn" type="button" @click="excluir"><i class="pi pi-trash"></i></button>
-          <button class="fm-icon-btn" type="button" @click="reprocesar"><i class="pi pi-refresh"></i></button>
+          <button class="fm-icon-btn otf-grid-icon" type="button" title="Exportar" @click="exportarExcel">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v11m0 0 4-4m-4 4-4-4M5 21h14" /></svg>
+          </button>
+          <button class="fm-icon-btn otf-grid-icon" type="button" title="Excluir seleccionadas" @click="excluir">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 14h10l1-14M9 7V4h6v3" /></svg>
+          </button>
+          <button class="fm-icon-btn otf-grid-icon" type="button" title="Reprocesar" @click="reprocesar">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6v5h-5M4 18v-5h5M19 11a7 7 0 0 0-12-4M5 13a7 7 0 0 0 12 4" /></svg>
+          </button>
         </div>
       </template>
 
@@ -106,7 +112,11 @@ const selectedRows = computed({
   set: (value) => store.setSelectedRows(value.map((row) => row.id))
 })
 
-const rowClass = (data) => ({ 'otf-disabled-row': data?.excluida === 'S', 'otf-enabled-row': data?.excluida === 'N' })
+const rowClass = (data) => ({
+  'otf-disabled-row': data?.excluida === 'S',
+  'otf-enabled-row': data?.excluida === 'N',
+  'otf-selected-row': store.selectedRows.includes(data?.id)
+})
 const isRowSelectable = (event) => event?.data?.excluida !== 'S'
 const onSelectAllChange = () => store.setSelectedRows(allSelectableSelected.value ? [] : selectableRows.value.map((row) => row.id))
 const onRowClick = (event) => { if (event?.data) store.toggleSelectedRow(event.data) }
@@ -126,5 +136,5 @@ const exportarExcel = () => {
 </script>
 
 <style scoped>
-.otf-table-wrap{border-left:4px solid var(--fm-cyan);background:#fff}.otf-footer-icons{display:flex;align-items:center;gap:10px;padding-left:4px}.otf-counter{font-size:12px;color:#222;padding-right:8px}.otf-empty{padding:48px 32px;font-size:14px;color:#407080;text-align:center}.otf-icon-cell{border:0;background:transparent;color:var(--fm-cyan);cursor:pointer;padding:0;font-size:15px;display:inline-flex;align-items:center;justify-content:center}.otf-icon-cell .pi{font-size:16px}.otf-icon-cell:hover{color:var(--fm-cyan-strong);transform:translateY(-1px)}.otf-icon-cell--include{color:var(--fm-cyan)}.fm-icon-btn .pi{font-size:16px}:deep(.p-datatable-tbody > tr){cursor:pointer}:deep(.otf-disabled-row td){color:#8b8b8b!important;background:#fff!important}:deep(.otf-enabled-row:hover td),:deep(.otf-disabled-row:hover td){background:#edfafd!important}:deep(.p-datatable-tbody > tr.p-highlight > td),:deep(.p-datatable-tbody > tr.p-datatable-row-selected > td){background:#00a9bd!important;color:#fff!important}:deep(.p-datatable-tbody > tr.p-highlight .otf-icon-cell),:deep(.p-datatable-tbody > tr.p-datatable-row-selected .otf-icon-cell){color:#fff!important}:deep(.p-datatable-thead > tr > th){height:36px!important;padding:4px 7px!important}:deep(.p-datatable-tbody > tr > td){height:36px!important;padding:4px 7px!important}:deep(.p-filter-row > th){height:34px!important;background:#fff!important}:deep(.p-column-filter){height:25px!important;font-size:12px!important}:deep(.p-datatable-wrapper){min-height:186px;max-height:470px}:deep(.p-datatable-empty-message td){height:110px!important;background:#eafcff!important;text-align:center!important}:deep(.p-paginator){justify-content:center;position:relative}:deep(.p-paginator-left-content){position:absolute;left:8px}:deep(.p-paginator-right-content){position:absolute;right:8px}
+.otf-table-wrap{border-left:4px solid var(--fm-cyan);background:#fff}.otf-footer-icons{display:flex;align-items:center;gap:10px;padding-left:4px}.otf-counter{font-size:12px;color:#222;padding-right:8px}.otf-empty{padding:48px 32px;font-size:14px;color:#407080;text-align:center}.otf-grid-icon svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}.otf-icon-cell{border:0;background:transparent;color:var(--fm-cyan);cursor:pointer;padding:0;font-size:15px;display:inline-flex;align-items:center;justify-content:center}.otf-icon-cell .pi{font-size:16px}.otf-icon-cell:hover{color:var(--fm-cyan-strong);transform:translateY(-1px)}.otf-icon-cell--include{color:var(--fm-cyan)}.fm-icon-btn .pi{font-size:16px}:deep(.p-datatable-tbody > tr){cursor:pointer}:deep(.otf-disabled-row td){color:#8b8b8b!important;background:#fff!important}:deep(.otf-enabled-row:hover td),:deep(.otf-disabled-row:hover td){background:#edfafd!important}:deep(.otf-selected-row > td),:deep(.p-datatable-tbody > tr.otf-selected-row > td),:deep(.p-datatable-tbody > tr.p-highlight > td),:deep(.p-datatable-tbody > tr.p-datatable-row-selected > td){background:#00a9bd!important;color:#fff!important}:deep(.otf-selected-row .otf-icon-cell),:deep(.p-datatable-tbody > tr.p-highlight .otf-icon-cell),:deep(.p-datatable-tbody > tr.p-datatable-row-selected .otf-icon-cell){color:#fff!important}:deep(.p-datatable-thead > tr > th){height:36px!important;padding:4px 7px!important}:deep(.p-datatable-tbody > tr > td){height:36px!important;padding:4px 7px!important}:deep(.p-filter-row > th){height:34px!important;background:#fff!important}:deep(.p-column-filter){height:25px!important;font-size:12px!important}:deep(.p-datatable-wrapper){min-height:186px;max-height:470px}:deep(.p-datatable-empty-message td){height:110px!important;background:#eafcff!important;text-align:center!important}:deep(.p-paginator){justify-content:center;position:relative}:deep(.p-paginator-left-content){position:absolute;left:8px}:deep(.p-paginator-right-content){position:absolute;right:8px}
 </style>
