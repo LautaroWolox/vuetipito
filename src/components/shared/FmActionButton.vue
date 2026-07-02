@@ -1,7 +1,7 @@
 <template>
   <button
     :type="type"
-    class="fm-ui-button"
+    class="fm-action-button fm-ui-button"
     :class="buttonClass"
     :disabled="disabled"
     @click="$emit('click', $event)"
@@ -61,7 +61,7 @@ const props = defineProps({
 defineEmits(['click'])
 
 const buttonClass = computed(() => ({
-  'fm-ui-button--primary': props.variant === 'primary',
-  'fm-ui-button--outline': props.variant === 'outline'
+  'fm-action-button--primary fm-ui-button--primary': props.variant === 'primary',
+  'fm-action-button--outline fm-ui-button--outline': props.variant === 'outline'
 }))
 </script>
