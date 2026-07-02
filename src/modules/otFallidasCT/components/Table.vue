@@ -27,9 +27,9 @@
     >
       <template #paginatorstart>
         <div class="otf-footer-icons">
-          <button class="fm-icon-btn" type="button" @click="exportarExcel">EX</button>
-          <button class="fm-icon-btn" type="button" @click="excluir">DEL</button>
-          <button class="fm-icon-btn" type="button" @click="reprocesar">RP</button>
+          <button class="fm-icon-btn" type="button" v-tooltip.top="'Exportar a Excel'" @click="exportarExcel"><i class="pi pi-download"></i></button>
+          <button class="fm-icon-btn" type="button" v-tooltip.top="'Excluir seleccionadas'" @click="excluir"><i class="pi pi-trash"></i></button>
+          <button class="fm-icon-btn" type="button" v-tooltip.top="'Reprocesar'" @click="reprocesar"><i class="pi pi-refresh"></i></button>
         </div>
       </template>
       <template #paginatorend>
@@ -42,8 +42,8 @@
           <InputText v-if="col.filter !== false" type="text" v-model="filterModel.value" @input="filterCallback()" class="fm-column-filter" />
         </template>
         <template #body="{ data }">
-          <button v-if="col.field === 'tieneNota' && data.nota" class="otf-icon-cell" type="button" @click.stop="verNota(data)">NOTA</button>
-          <button v-else-if="col.field === 'incluir' && data.excluida === 'S'" class="otf-icon-cell otf-icon-cell--include" type="button" @click.stop="incluir(data)">INC</button>
+          <button v-if="col.field === 'tieneNota' && data.nota" class="otf-icon-cell" type="button" @click.stop="verNota(data)"><i class="pi pi-file-edit"></i></button>
+          <button v-else-if="col.field === 'incluir' && data.excluida === 'S'" class="otf-icon-cell otf-icon-cell--include" type="button" @click.stop="incluir(data)"><i class="pi pi-replay"></i></button>
           <span v-else-if="col.field !== 'tieneNota' && col.field !== 'incluir'">{{ data[col.field] ?? '' }}</span>
         </template>
       </Column>
@@ -75,5 +75,5 @@ const exportarExcel = () => { const parsed = parseDataFromTable(dt); const rows 
 onMounted(async () => { await store.setData(); await store.setMotivos() })
 </script>
 <style scoped>
-.otf-table-wrap{border-left:4px solid var(--fm-cyan);background:#fff}.otf-footer-icons{display:flex;align-items:center;gap:8px;padding-left:4px}.otf-counter{font-size:12px;color:#222;padding-right:8px}.otf-empty{padding:18px 32px;font-size:14px;color:#607d8b}.otf-icon-cell{border:0;background:transparent;color:var(--fm-cyan);cursor:pointer;padding:0;font-size:11px;font-weight:700}.otf-icon-cell:hover{text-decoration:underline}:deep(.otf-disabled-row td){color:#8b8b8b!important;background:#fff!important}:deep(.otf-enabled-row:hover td){background:#edfafd!important}:deep(.p-datatable-thead > tr > th){height:36px!important;padding:4px 7px!important}:deep(.p-datatable-tbody > tr > td){height:36px!important;padding:4px 7px!important}:deep(.p-filter-row > th){height:34px!important;background:#fff!important}:deep(.p-column-filter){height:25px!important;font-size:12px!important}:deep(.p-datatable-wrapper){min-height:430px;max-height:470px}:deep(.p-paginator){justify-content:center;position:relative}:deep(.p-paginator-left-content){position:absolute;left:8px}:deep(.p-paginator-right-content){position:absolute;right:8px}
+.otf-table-wrap{border-left:4px solid var(--fm-cyan);background:#fff}.otf-footer-icons{display:flex;align-items:center;gap:8px;padding-left:4px}.otf-counter{font-size:12px;color:#222;padding-right:8px}.otf-empty{padding:18px 32px;font-size:14px;color:#607d8b}.otf-icon-cell{border:0;background:transparent;color:var(--fm-cyan);cursor:pointer;padding:0;font-size:15px;display:inline-flex;align-items:center;justify-content:center}.otf-icon-cell:hover{color:var(--fm-cyan-strong);transform:translateY(-1px)}.otf-icon-cell--include{color:var(--fm-cyan)}:deep(.otf-disabled-row td){color:#8b8b8b!important;background:#fff!important}:deep(.otf-enabled-row:hover td){background:#edfafd!important}:deep(.p-datatable-thead > tr > th){height:36px!important;padding:4px 7px!important}:deep(.p-datatable-tbody > tr > td){height:36px!important;padding:4px 7px!important}:deep(.p-filter-row > th){height:34px!important;background:#fff!important}:deep(.p-column-filter){height:25px!important;font-size:12px!important}:deep(.p-datatable-wrapper){min-height:430px;max-height:470px}:deep(.p-paginator){justify-content:center;position:relative}:deep(.p-paginator-left-content){position:absolute;left:8px}:deep(.p-paginator-right-content){position:absolute;right:8px}
 </style>
