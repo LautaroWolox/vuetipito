@@ -37,6 +37,16 @@
       <Button label="ACEPTAR" class="fm-btn fm-btn--primary" @click="aceptar" />
     </template>
   </Dialog>
+
+  <Dialog v-model:visible="showValidationAlert" modal header="Alerta" :style="{ width: '42rem' }" class="otf-validation-alert">
+    <div class="otf-alert-body">
+      <div class="otf-alert-triangle"><span>!</span></div>
+      <span>{{ validationMessage }}</span>
+    </div>
+    <template #footer>
+      <Button label="CERRAR" outlined class="fm-btn fm-btn--outline" @click="showValidationAlert = false" />
+    </template>
+  </Dialog>
 </template>
 
 <script setup>
@@ -58,6 +68,8 @@ const motivos = store.motivos
 const motivoSelected = ref(null)
 const nota = ref('')
 const step = ref('form')
+const showValidationAlert = ref(false)
+const validationMessage = ref('')
 
 watch(() => props.visible, (value) => {
   if (value) reset()
@@ -67,6 +79,8 @@ const reset = () => {
   motivoSelected.value = null
   nota.value = ''
   step.value = 'form'
+  showValidationAlert.value = false
+  validationMessage.value = ''
 }
 
 const cerrar = () => {
@@ -78,14 +92,19 @@ const onVisibleChange = (value) => {
   if (!value) cerrar()
 }
 
+const showAlert = (message) => {
+  validationMessage.value = message
+  showValidationAlert.value = true
+}
+
 const aceptar = async () => {
   if (!props.selectedRows.length) {
-    window.alert('Debe seleccionar al menos una OT para excluir.')
+    showAlert('Debe seleccionar al menos una OT para excluir.')
     return
   }
 
   if (!motivoSelected.value) {
-    window.alert('Debe seleccionar un motivo.')
+    showAlert('Debe seleccionar un motivo.')
     return
   }
 
@@ -100,5 +119,5 @@ const aceptar = async () => {
 </script>
 
 <style scoped>
-.otf-dialog-body{padding:8px 0;color:#222;font-size:16px}.otf-dialog-body p{margin:0 0 18px;font-size:18px}.otf-dialog-body label{display:block;margin:16px 0 8px;font-weight:500}.otf-dialog-select{max-width:420px}.otf-dialog-body :deep(textarea){resize:vertical;font-size:15px}.otf-excluir-dialog :deep(.p-dialog-header){font-size:24px;font-weight:400}.otf-excluir-dialog :deep(.p-dialog-footer){padding-top:18px}.otf-confirm-summary{border:1px solid #dce8ec;border-radius:6px;background:#f7fcfd;overflow:hidden}.otf-confirm-row{display:grid;grid-template-columns:190px 1fr;gap:12px;padding:14px 18px;border-bottom:1px solid #e4eef2}.otf-confirm-row:last-child{border-bottom:0}.otf-confirm-label{font-size:14px;color:#6d8798;font-weight:500}.otf-confirm-value{font-size:15px;color:#263238;font-weight:700;white-space:pre-wrap}
+.otf-dialog-body{padding:8px 0;color:#222;font-size:16px}.otf-dialog-body p{margin:0 0 18px;font-size:18px}.otf-dialog-body label{display:block;margin:16px 0 8px;font-weight:500}.otf-dialog-select{max-width:420px}.otf-dialog-body :deep(textarea){resize:vertical;font-size:15px}.otf-excluir-dialog :deep(.p-dialog-header),.otf-validation-alert :deep(.p-dialog-header){font-size:24px;font-weight:400}.otf-excluir-dialog :deep(.p-dialog-footer),.otf-validation-alert :deep(.p-dialog-footer){padding-top:18px}.otf-confirm-summary{border:1px solid #dce8ec;border-radius:6px;background:#f7fcfd;overflow:hidden}.otf-confirm-row{display:grid;grid-template-columns:190px 1fr;gap:12px;padding:14px 18px;border-bottom:1px solid #e4eef2}.otf-confirm-row:last-child{border-bottom:0}.otf-confirm-label{font-size:14px;color:#6d8798;font-weight:500}.otf-confirm-value{font-size:15px;color:#263238;font-weight:700;white-space:pre-wrap}.otf-alert-body{display:flex;align-items:center;gap:34px;min-height:112px;padding:18px 8px;font-size:17px;color:#263238}.otf-alert-triangle{width:64px;height:56px;position:relative;display:flex;align-items:center;justify-content:center}.otf-alert-triangle:before{content:"";position:absolute;width:0;height:0;border-left:32px solid transparent;border-right:32px solid transparent;border-bottom:56px solid #d73333;filter:drop-shadow(0 4px 8px rgba(215,51,51,.28))}.otf-alert-triangle:after{content:"";position:absolute;top:8px;width:0;height:0;border-left:23px solid transparent;border-right:23px solid transparent;border-bottom:40px solid #fff}.otf-alert-triangle span{position:relative;z-index:2;margin-top:15px;color:#d73333;font-size:34px;font-weight:800;line-height:1}
 </style>
