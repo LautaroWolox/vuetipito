@@ -32,9 +32,11 @@
       </div>
     </div>
 
+    <FmTypingLoader v-if="saving" overlay variant="dialog" title="Procesando" message="Guardando cambios" />
+
     <template #footer>
-      <Button label="CANCELAR" outlined class="fm-btn fm-btn--outline" @click="cerrar" />
-      <Button label="ACEPTAR" class="fm-btn fm-btn--primary" @click="aceptar" />
+      <Button label="CANCELAR" outlined class="fm-btn fm-btn--outline" :disabled="saving" @click="cerrar" />
+      <Button label="ACEPTAR" class="fm-btn fm-btn--primary" :disabled="saving" @click="aceptar" />
     </template>
   </Dialog>
 
@@ -70,6 +72,7 @@ const nota = ref('')
 const step = ref('form')
 const showValidationAlert = ref(false)
 const validationMessage = ref('')
+const saving = ref(false)
 
 watch(() => props.visible, (value) => {
   if (value) reset()
@@ -81,9 +84,11 @@ const reset = () => {
   step.value = 'form'
   showValidationAlert.value = false
   validationMessage.value = ''
+  saving.value = false
 }
 
 const cerrar = () => {
+  if (saving.value) return
   reset()
   emit('update:visible', false)
 }
@@ -113,7 +118,12 @@ const aceptar = async () => {
     return
   }
 
-  await store.sendExcluidas(store.getNotExcluded, motivoSelected.value, nota.value)
-  cerrar()
+  saving.value = true
+  try {
+    await store.sendExcluidas(store.getNotExcluded, motivoSelected.value, nota.value)
+    cerrar()
+  } finally {
+    saving.value = false
+  }
 }
 </script>
