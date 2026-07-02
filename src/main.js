@@ -2,6 +2,7 @@ import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
 import './assets/css/nuestros.css';
 import './assets/css/fm-design-system.css';
+import './assets/css/fm-global-ui.css';
 import './assets/css/responsive.css';
 import './assets/css/responsive-resolutions.css';
 import Lara from '@primeuix/themes/lara';
@@ -23,6 +24,8 @@ import FmButton from './components/shared/FmButton.vue';
 import FmPanel from './components/shared/FmPanel.vue';
 import FmGridShell from './components/shared/FmGridShell.vue';
 import FmAlertDialog from './components/shared/FmAlertDialog.vue';
+import FmActionButton from './components/shared/FmActionButton.vue';
+import FmGridActions from './components/shared/FmGridActions.vue';
 
 // Componentes globales de primevue
 import Accordion from 'primevue/accordion';
@@ -103,6 +106,8 @@ app.component('FmButton', FmButton);
 app.component('FmPanel', FmPanel);
 app.component('FmGridShell', FmGridShell);
 app.component('FmAlertDialog', FmAlertDialog);
+app.component('FmActionButton', FmActionButton);
+app.component('FmGridActions', FmGridActions);
 
 app.directive('tooltip', Tooltip);
 app.mount('#app');
