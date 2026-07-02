@@ -2,6 +2,7 @@ import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
 import './assets/css/nuestros.css';
 import './assets/css/responsive.css';
+import './assets/css/responsive-resolutions.css';
 import Lara from '@primeuix/themes/lara';
 
 import { definePreset } from '@primeuix/themes';
