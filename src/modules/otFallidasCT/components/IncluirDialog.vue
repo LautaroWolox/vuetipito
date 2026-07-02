@@ -7,9 +7,12 @@
       <label>Nota</label>
       <Textarea v-model="nota" rows="4" class="w-full" placeholder="Opcional" />
     </div>
+
+    <FmTypingLoader v-if="saving" overlay variant="dialog" title="Procesando" message="Guardando cambios" />
+
     <template #footer>
-      <Button label="CANCELAR" outlined class="fm-btn fm-btn--outline" @click="cerrar" />
-      <Button label="ACEPTAR" class="fm-btn fm-btn--primary" @click="confirmar" />
+      <Button label="CANCELAR" outlined class="fm-btn fm-btn--outline" :disabled="saving" @click="cerrar" />
+      <Button label="ACEPTAR" class="fm-btn fm-btn--primary" :disabled="saving" @click="confirmar" />
     </template>
   </Dialog>
 
@@ -35,16 +38,19 @@ const store = useFallidasCtStore()
 const motivo = ref(null)
 const nota = ref('')
 const showAlert = ref(false)
+const saving = ref(false)
 
 watch(() => props.visible, (value) => {
   if (value) {
     motivo.value = null
     nota.value = props.row?.nota || ''
     showAlert.value = false
+    saving.value = false
   }
 })
 
 const cerrar = () => {
+  if (saving.value) return
   emit('update:visible', false)
 }
 
@@ -53,7 +59,13 @@ const confirmar = async () => {
     showAlert.value = true
     return
   }
-  await store.incluir(props.row, motivo.value, nota.value)
-  cerrar()
+
+  saving.value = true
+  try {
+    await store.incluir(props.row, motivo.value, nota.value)
+    cerrar()
+  } finally {
+    saving.value = false
+  }
 }
 </script>
