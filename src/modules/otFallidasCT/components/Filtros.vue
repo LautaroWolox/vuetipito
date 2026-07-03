@@ -6,7 +6,7 @@
       <FechaHasta v-model="store.filters.fechaHasta" />
       <Contratista v-model="store.filters.contratista" :options="store.contratistas" />
       <DescripcionError v-model="store.filters.descripcionError" />
-      <Excluida v-model="store.filters.excluida" :options="excluidaOptions" />
+      <Excluida v-model="store.filters.excluida" :options="store.excluidas" />
       <Pais v-model="store.filters.pais" :options="store.paises" />
     </div>
 
@@ -28,8 +28,6 @@ import Excluida from './elementos/Excluida.vue'
 import Pais from './elementos/Pais.vue'
 
 const store = useFallidasCtStore()
-const excluidaOptions = [{ name: '', code: '' }, { name: 'Si', code: 'S' }, { name: 'No', code: 'N' }]
-
 const limpiar = () => store.clearFilters()
 const buscar = async () => store.search()
 </script>
