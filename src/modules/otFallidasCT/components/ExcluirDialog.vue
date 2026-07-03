@@ -18,7 +18,7 @@
     </div>
 
     <div v-else class="fm-dialog-body">
-      <p>¿Está seguro que desea confirmar?</p>
+      <p>¿Está seguro que desea excluir?</p>
 
       <div class="fm-confirm-summary">
         <div class="fm-confirm-row">
@@ -32,11 +32,11 @@
       </div>
     </div>
 
-    <FmTypingLoader v-if="saving" overlay variant="dialog" title="Procesando" message="Guardando cambios" />
+    <FmTypingLoader v-if="saving" overlay variant="dialog" title="Procesando" message="Excluyendo OT" />
 
     <template #footer>
       <Button label="CANCELAR" outlined class="fm-btn fm-btn--outline" :disabled="saving" @click="cerrar" />
-      <Button label="ACEPTAR" class="fm-btn fm-btn--primary" :disabled="saving" @click="aceptar" />
+      <Button :label="step === 'confirm' ? 'EXCLUIR' : 'ACEPTAR'" class="fm-btn fm-btn--primary" :disabled="saving" @click="aceptar" />
     </template>
   </Dialog>
 
@@ -93,6 +93,12 @@ const cerrar = () => {
   emit('update:visible', false)
 }
 
+const closeAfterSave = () => {
+  saving.value = false
+  reset()
+  emit('update:visible', false)
+}
+
 const onVisibleChange = (value) => {
   if (!value) cerrar()
 }
@@ -121,7 +127,7 @@ const aceptar = async () => {
   saving.value = true
   try {
     await store.sendExcluidas(store.getNotExcluded, motivoSelected.value, nota.value)
-    cerrar()
+    closeAfterSave()
   } finally {
     saving.value = false
   }
