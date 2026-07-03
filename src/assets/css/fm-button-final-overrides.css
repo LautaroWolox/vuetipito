@@ -4,7 +4,8 @@
    Ajuste final para que los botones de filtros queden iguales.
    - BUSCAR y LIMPIAR mismo ancho y alto.
    - Sin linea divisoria entre filtros y botones.
-   - Botones compactos como la referencia.
+   - Con espacio limpio entre campos y botones.
+   - Boton LIMPIAR con icono de linitas.
    ======================================================================== */
 
 /* Quitar linea que separa filtros de botones */
@@ -31,7 +32,7 @@
 .fm-panel-content--accent .fm-actions {
   gap: 8px !important;
   margin: 0 !important;
-  padding: 10px 0 0 !important;
+  padding: 20px 0 0 !important;
   border-top: 0 !important;
   border-bottom: 0 !important;
   box-shadow: none !important;
@@ -130,6 +131,34 @@
   height: 15px !important;
   font-size: 15px !important;
   line-height: 15px !important;
+}
+
+/* LIMPIAR: reemplaza visualmente el icono por linitas */
+.fm-filter-actions .fm-filter-action-button.fm-action-button--outline .pi,
+.fm-filter-actions .fm-filter-action-button.fm-ui-button--outline .pi,
+.fm-filters .fm-actions .fm-action-button--outline .pi,
+.fm-filters .fm-actions .fm-ui-button--outline .pi {
+  font-size: 0 !important;
+  position: relative !important;
+}
+
+.fm-filter-actions .fm-filter-action-button.fm-action-button--outline .pi::before,
+.fm-filter-actions .fm-filter-action-button.fm-ui-button--outline .pi::before,
+.fm-filters .fm-actions .fm-action-button--outline .pi::before,
+.fm-filters .fm-actions .fm-ui-button--outline .pi::before {
+  content: "" !important;
+  display: block !important;
+  width: 15px !important;
+  height: 15px !important;
+  background: currentColor !important;
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath fill='black' d='M3 5h12v2H3V5Zm0 4h8v2H3V9Zm0 4h5v2H3v-2Zm13-5 3 3-3 3v-2h-5v-2h5V8Z'/%3E%3C/svg%3E") !important;
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath fill='black' d='M3 5h12v2H3V5Zm0 4h8v2H3V9Zm0 4h5v2H3v-2Zm13-5 3 3-3 3v-2h-5v-2h5V8Z'/%3E%3C/svg%3E") !important;
+  -webkit-mask-repeat: no-repeat !important;
+  mask-repeat: no-repeat !important;
+  -webkit-mask-position: center !important;
+  mask-position: center !important;
+  -webkit-mask-size: 15px 15px !important;
+  mask-size: 15px 15px !important;
 }
 
 @media (max-width: 700px) {
