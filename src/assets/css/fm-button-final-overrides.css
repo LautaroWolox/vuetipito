@@ -13,9 +13,20 @@
 .fm-panel-content--accent.fm-filters,
 .fm-panel-content--accent .fm-filters {
   border-bottom: 0 !important;
+  box-shadow: none !important;
+}
+
+.fm-filters .fm-filter-grid,
+.fm-panel-content.fm-filters .fm-filter-grid,
+.fm-panel-content--accent.fm-filters .fm-filter-grid {
+  border-bottom: 0 !important;
+  box-shadow: none !important;
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
 }
 
 .fm-filters .fm-actions,
+.fm-filters .fm-filter-actions,
 .fm-panel-content .fm-actions,
 .fm-panel-content--accent .fm-actions {
   gap: 8px !important;
@@ -24,6 +35,7 @@
   border-top: 0 !important;
   border-bottom: 0 !important;
   box-shadow: none !important;
+  background-image: none !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -31,6 +43,8 @@
 
 .fm-filters .fm-actions::before,
 .fm-filters .fm-actions::after,
+.fm-filters .fm-filter-actions::before,
+.fm-filters .fm-filter-actions::after,
 .fm-panel-content .fm-actions::before,
 .fm-panel-content .fm-actions::after,
 .fm-panel-content--accent .fm-actions::before,
@@ -39,7 +53,11 @@
   content: none !important;
 }
 
-/* BUSCAR / LIMPIAR iguales */
+/* BUSCAR / LIMPIAR iguales: selector especifico para la pantalla de filtros */
+.fm-filter-actions .fm-filter-action-button,
+.fm-filter-actions .fm-action-button,
+.fm-filter-actions .fm-ui-button,
+.fm-filters .fm-actions .fm-filter-action-button,
 .fm-filters .fm-actions .fm-action-button,
 .fm-filters .fm-actions .fm-ui-button,
 .fm-panel-content .fm-actions .fm-action-button,
@@ -60,8 +78,14 @@
   letter-spacing: .1px !important;
   box-shadow: 0 5px 12px rgba(0, 0, 0, .13) !important;
   transform: none !important;
+  box-sizing: border-box !important;
+  white-space: nowrap !important;
 }
 
+.fm-filter-actions .fm-filter-action-button.fm-action-button--primary,
+.fm-filter-actions .fm-filter-action-button.fm-action-button--outline,
+.fm-filter-actions .fm-action-button--primary,
+.fm-filter-actions .fm-action-button--outline,
 .fm-filters .fm-actions .fm-action-button--primary,
 .fm-filters .fm-actions .fm-action-button--outline,
 .fm-panel-content .fm-actions .fm-action-button--primary,
@@ -73,6 +97,9 @@
   max-width: 118px !important;
 }
 
+.fm-filter-actions .fm-filter-action-button:hover:not(:disabled),
+.fm-filter-actions .fm-action-button:hover:not(:disabled),
+.fm-filter-actions .fm-ui-button:hover:not(:disabled),
 .fm-filters .fm-actions .fm-action-button:hover:not(:disabled),
 .fm-filters .fm-actions .fm-ui-button:hover:not(:disabled),
 .fm-panel-content .fm-actions .fm-action-button:hover:not(:disabled),
@@ -83,6 +110,9 @@
   box-shadow: 0 7px 14px rgba(0, 143, 161, .22) !important;
 }
 
+.fm-filter-actions .fm-filter-action-button i,
+.fm-filter-actions .fm-filter-action-button .pi,
+.fm-filter-actions .fm-filter-action-button svg,
 .fm-filters .fm-actions .fm-action-button__icon,
 .fm-filters .fm-actions .fm-ui-button__icon,
 .fm-filters .fm-actions .fm-action-button svg,
@@ -99,15 +129,19 @@
   min-width: 15px !important;
   height: 15px !important;
   font-size: 15px !important;
+  line-height: 15px !important;
 }
 
 @media (max-width: 700px) {
   .fm-filters .fm-actions,
+  .fm-filters .fm-filter-actions,
   .fm-panel-content .fm-actions,
   .fm-panel-content--accent .fm-actions {
     flex-wrap: wrap !important;
   }
 
+  .fm-filter-actions .fm-filter-action-button,
+  .fm-filter-actions .fm-action-button,
   .fm-filters .fm-actions .fm-action-button,
   .fm-panel-content .fm-actions .fm-action-button,
   .fm-panel-content--accent .fm-actions .fm-action-button {
