@@ -1,29 +1,84 @@
 /* ========================================================================
    FIELD MANAGER LEGACY BRIDGE
    ------------------------------------------------------------------------
-   Puente minimo para reemplazar el import historico de nuestros.css.
+   Puente minimo para compatibilidad vieja.
 
-   Objetivo:
-   - Mantener compatibilidad con layout base, estados disabled y menu legacy.
-   - Dejar botones, grillas, dialogs, checkbox, popups y calendarios en las
-     capas nuevas fm-*.
-   - No agregar estilos nuevos de pantalla aca.
+   Reemplaza los CSS historicos nuestros.css y theme.css sin volver a traer
+   estilos visuales viejos que pisan el diseno nuevo.
 
-   Cuando todas las pantallas legacy migren a componentes/clases fm-*, este
-   archivo se puede eliminar tambien.
+   La semilla visual nueva vive en:
+   - primePassThrough.js
+   - fm-foundation.css
+   - fm-registro-ui.css
+   - fm-loader.css
+   - fm-dialog-fixes.css
+   - fm-popup-final-overrides.css
+   - fm-button-final-overrides.css
    ======================================================================== */
 
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
 :root {
+  color-scheme: light;
   font-size: 13px;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+  --primary-color: #00a9bd;
+  --primary-color-text: #ffffff;
+  --highlight-bg: #00a9bd;
+  --highlight-text-color: #ffffff;
+  --focus-ring: 0 0 0 0.2rem rgba(0, 169, 189, .22);
+  --maskbg: rgba(0, 0, 0, .4);
+
   --p-primary-color: #00b4b5;
   --p-button-border-radius: 2px;
   --p-button-background: #00b4b5;
   --p-button-info-background: #00b4b5;
   --p-button-primary-background: #00b4b5;
   --p-button-outlined-primary-color: #00b4b5;
+
+  --surface-a: #ffffff;
+  --surface-b: #efefef;
+  --surface-c: #e9ecef;
+  --surface-d: #dee2e6;
+  --surface-e: #ffffff;
+  --surface-f: #ffffff;
+  --surface-0: #ffffff;
+  --surface-50: #f9fafb;
+  --surface-100: #f8f9fa;
+  --surface-200: #e9ecef;
+  --surface-300: #dee2e6;
+  --surface-400: #ced4da;
+  --surface-500: #adb5bd;
+  --surface-600: #6c757d;
+  --surface-700: #495057;
+  --surface-800: #343a40;
+  --surface-900: #212529;
+  --surface-ground: #efefef;
+  --surface-section: #ffffff;
+  --surface-card: #ffffff;
+  --surface-overlay: #ffffff;
+  --surface-border: #dee2e6;
+  --surface-hover: #e9ecef;
+
+  --gray-50: #f9fafb;
+  --gray-100: #f8f9fa;
+  --gray-200: #e9ecef;
+  --gray-300: #dee2e6;
+  --gray-400: #ced4da;
+  --gray-500: #adb5bd;
+  --gray-600: #6c757d;
+  --gray-700: #495057;
+  --gray-800: #343a40;
+  --gray-900: #212529;
+
+  --text-color: #212529;
+  --text-color-secondary: #6c757d;
+  --content-padding: 1.25rem;
+  --inline-spacing: .5rem;
+  --border-radius: 4px;
+
   --fm-cyan: #00a9bd;
   --fm-cyan-strong: #008fa1;
   --fm-cyan-soft: #e0f7fa;
@@ -31,6 +86,16 @@
   --fm-border: #d8d8d8;
   --fm-grid-border: #c9d3da;
   --fm-text: #263238;
+
+  --blue-500: #00a9bd;
+  --blue-600: #008fa1;
+  --blue-700: #007f8f;
+  --cyan-500: #00a9bd;
+  --cyan-600: #008fa1;
+  --cyan-700: #007f8f;
+  --green-500: #198754;
+  --yellow-500: #ffc107;
+  --red-500: #dc3545;
 }
 
 html,
@@ -39,7 +104,17 @@ body {
   margin: 0;
 }
 
-.p-disabled {
+* {
+  box-sizing: border-box;
+}
+
+.p-component {
+  font-family: var(--font-family);
+}
+
+.p-disabled,
+.p-component:disabled {
+  opacity: .65;
   background-color: var(--gray-100) !important;
   color: var(--gray-500) !important;
 }
@@ -61,10 +136,28 @@ body {
   width: 100% !important;
 }
 
-/* ------------------------------------------------------------------------
-   Menu legacy PrimeVue.
-   Mantener aca hasta que el menu migre a una capa fm-menu global.
-   ------------------------------------------------------------------------ */
+.p-editor-container .p-editor-toolbar {
+  background: var(--surface-b);
+  border-top-right-radius: var(--border-radius);
+  border-top-left-radius: var(--border-radius);
+}
+
+.p-editor-container .p-editor-toolbar.ql-snow,
+.p-editor-container .p-editor-content.ql-snow {
+  border: 1px solid var(--surface-border);
+}
+
+.p-editor-container .p-editor-content .ql-editor {
+  background: var(--surface-card);
+  color: var(--surface-700);
+}
+
+.p-editor-container .ql-snow.ql-toolbar button.ql-active,
+.p-editor-container .ql-snow.ql-toolbar .ql-picker-label.ql-active,
+.p-editor-container .ql-snow.ql-toolbar .ql-picker-item.ql-selected {
+  color: var(--primary-color);
+}
+
 .p-menubar {
   padding-top: 0 !important;
   padding-bottom: 0 !important;
