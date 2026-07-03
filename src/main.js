@@ -10,6 +10,7 @@ import './assets/css/fm-registro-ui.css';
 import './assets/css/fm-loader.css';
 import './assets/css/fm-dialog-fixes.css';
 import './assets/css/fm-dialog-responsive.css';
+import './assets/css/fm-last-overrides.css';
 import Lara from '@primeuix/themes/lara';
 
 import { definePreset } from '@primeuix/themes';
