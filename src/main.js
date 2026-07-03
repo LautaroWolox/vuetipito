@@ -11,6 +11,7 @@ import './assets/css/fm-loader.css';
 import './assets/css/fm-dialog-fixes.css';
 import './assets/css/fm-dialog-responsive.css';
 import './assets/css/fm-last-overrides.css';
+import './assets/css/fm-popup-final-overrides.css';
 import Lara from '@primeuix/themes/lara';
 
 import { definePreset } from '@primeuix/themes';
