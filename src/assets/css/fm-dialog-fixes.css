@@ -1,10 +1,12 @@
 /* ========================================================================
-   FIELD MANAGER DIALOG / LOADER FIXES
+   FIELD MANAGER DIALOG / LOADER / GRID FIXES
    ------------------------------------------------------------------------
    Ajustes puntuales sobre la capa global:
    - La X de cierre del Dialog NO debe tomar el estilo grande de botones.
    - El textarea de nota en popups debe tener altura usable.
    - El loader del tipito debe poder centrarse como overlay.
+   - La grilla debe verse como la referencia: textos mas firmes e iconos
+     de NOTA / INCLUIR iguales al diseno aprobado.
    ======================================================================== */
 
 /* ------------------------------------------------------------------------
@@ -104,4 +106,103 @@
 .fm-typing-loader--overlay {
   align-items: center !important;
   justify-content: center !important;
+}
+
+/* ------------------------------------------------------------------------
+   Grilla: tipografia mas firme como referencia
+   ------------------------------------------------------------------------ */
+.fm-pass-grid .p-datatable-thead > tr > th,
+.fm-ui-grid .p-datatable-thead > tr > th,
+.fm-pt-datatable .p-datatable-thead > tr > th {
+  color: #132b3d !important;
+  font-weight: 800 !important;
+  letter-spacing: .15px !important;
+}
+
+.fm-pass-grid .p-datatable-tbody > tr > td,
+.fm-ui-grid .p-datatable-tbody > tr > td,
+.fm-pt-datatable .p-datatable-tbody > tr > td,
+.fm-cell-text,
+.fm-ui-cell-text {
+  color: #263746 !important;
+  font-weight: 500 !important;
+}
+
+.fm-pass-grid .p-datatable-thead > tr.p-filter-row > th,
+.fm-ui-grid .p-datatable-thead > tr.p-filter-row > th,
+.fm-pt-datatable .p-datatable-thead > tr.p-filter-row > th {
+  font-weight: 700 !important;
+}
+
+/* ------------------------------------------------------------------------
+   Grilla: iconos NOTA / INCLUIR como captura de referencia
+   ------------------------------------------------------------------------
+   No se cambia la logica ni el template: se reemplaza visualmente el icono
+   de PrimeIcons con SVG por CSS para igualar el diseno aprobado.
+   ------------------------------------------------------------------------ */
+.fm-pass-grid .fm-icon-btn,
+.fm-ui-grid .fm-icon-btn,
+.fm-pt-datatable .fm-icon-btn {
+  color: #132b3d !important;
+}
+
+.fm-pass-grid .fm-icon-btn .pi,
+.fm-ui-grid .fm-icon-btn .pi,
+.fm-pt-datatable .fm-icon-btn .pi {
+  width: 24px !important;
+  height: 24px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 0 !important;
+  line-height: 1 !important;
+}
+
+.fm-pass-grid .fm-icon-btn .pi::before,
+.fm-ui-grid .fm-icon-btn .pi::before,
+.fm-pt-datatable .fm-icon-btn .pi::before {
+  content: "" !important;
+  display: block !important;
+  width: 23px !important;
+  height: 23px !important;
+  background-color: currentColor !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: 23px 23px !important;
+}
+
+/* NOTA: lista con lapiz, como la captura 3 */
+.fm-pass-grid .fm-icon-btn .pi-file-edit,
+.fm-ui-grid .fm-icon-btn .pi-file-edit,
+.fm-pt-datatable .fm-icon-btn .pi-file-edit {
+  color: #132b3d !important;
+}
+
+.fm-pass-grid .fm-icon-btn .pi-file-edit::before,
+.fm-ui-grid .fm-icon-btn .pi-file-edit::before,
+.fm-pt-datatable .fm-icon-btn .pi-file-edit::before {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M4 5h11v2H4V5Zm0 5h11v2H4v-2Zm0 5h8v2H4v-2Zm13.76-2.58 1.82 1.82-5.77 5.76H12v-1.81l5.76-5.77Zm2.66-1.24.4.4a1 1 0 0 1 0 1.42l-.68.68-1.82-1.82.68-.68a1 1 0 0 1 1.42 0Z'/%3E%3C/svg%3E") !important;
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M4 5h11v2H4V5Zm0 5h11v2H4v-2Zm0 5h8v2H4v-2Zm13.76-2.58 1.82 1.82-5.77 5.76H12v-1.81l5.76-5.77Zm2.66-1.24.4.4a1 1 0 0 1 0 1.42l-.68.68-1.82-1.82.68-.68a1 1 0 0 1 1.42 0Z'/%3E%3C/svg%3E") !important;
+}
+
+/* INCLUIR: flecha circular cyan si esta habilitada */
+.fm-pass-grid .fm-icon-btn .pi-replay,
+.fm-ui-grid .fm-icon-btn .pi-replay,
+.fm-pt-datatable .fm-icon-btn .pi-replay {
+  color: var(--fm-registro-cyan, #00a9bd) !important;
+}
+
+.fm-pass-grid .fm-icon-btn .pi-replay::before,
+.fm-ui-grid .fm-icon-btn .pi-replay::before,
+.fm-pt-datatable .fm-icon-btn .pi-replay::before {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M12 4a8 8 0 1 1-7.45 5.07l1.86.74A6 6 0 1 0 12 6h-.15l1.98 1.98-1.42 1.42L8 5l4.41-4.4 1.42 1.41L11.85 4H12Z'/%3E%3C/svg%3E") !important;
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M12 4a8 8 0 1 1-7.45 5.07l1.86.74A6 6 0 1 0 12 6h-.15l1.98 1.98-1.42 1.42L8 5l4.41-4.4 1.42 1.41L11.85 4H12Z'/%3E%3C/svg%3E") !important;
+}
+
+/* INCLUIR deshabilitado / fila seleccionada-no aplicable: gris como referencia */
+.fm-pass-grid .fm-disabled-row .fm-icon-btn .pi-replay,
+.fm-ui-grid .fm-disabled-row .fm-icon-btn .pi-replay,
+.fm-pt-datatable .fm-disabled-row .fm-icon-btn .pi-replay,
+.fm-pass-grid .p-datatable-tbody > tr.fm-disabled-row .fm-icon-btn .pi-replay {
+  color: #b6c0c7 !important;
 }
