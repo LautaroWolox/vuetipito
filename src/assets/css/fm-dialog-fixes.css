@@ -10,6 +10,12 @@
    - Los avisos de reproceso deben verse como los popups de referencia.
    ======================================================================== */
 
+:root {
+  --fm-grid-action-cyan-dark: #008fa1;
+  --fm-grid-action-cyan-mid: #00a9bd;
+  --fm-grid-action-disabled: #aebbc2;
+}
+
 /* ------------------------------------------------------------------------
    PrimeVue Dialog close button
    ------------------------------------------------------------------------
@@ -129,6 +135,34 @@
   font-weight: 500 !important;
 }
 
+/* OTs que se pueden marcar: mas negrita */
+.fm-pass-grid .p-datatable-tbody > tr.fm-enabled-row > td,
+.fm-ui-grid .p-datatable-tbody > tr.fm-enabled-row > td,
+.fm-pt-datatable .p-datatable-tbody > tr.fm-enabled-row > td,
+.fm-pass-grid .p-datatable-tbody > tr.fm-enabled-row .fm-cell-text {
+  color: #142d3f !important;
+  font-weight: 700 !important;
+}
+
+/* OTs no marcables: texto mas liviano */
+.fm-pass-grid .p-datatable-tbody > tr.fm-disabled-row > td,
+.fm-ui-grid .p-datatable-tbody > tr.fm-disabled-row > td,
+.fm-pt-datatable .p-datatable-tbody > tr.fm-disabled-row > td,
+.fm-pass-grid .p-datatable-tbody > tr.fm-disabled-row .fm-cell-text {
+  color: #516674 !important;
+  font-weight: 500 !important;
+}
+
+/* Filas seleccionadas: conservar negrita y contraste */
+.fm-pass-grid .p-datatable-tbody > tr.fm-selected-row > td,
+.fm-ui-grid .p-datatable-tbody > tr.fm-selected-row > td,
+.fm-pt-datatable .p-datatable-tbody > tr.fm-selected-row > td,
+.fm-pass-grid .p-datatable-tbody > tr.p-highlight > td,
+.fm-pass-grid .p-datatable-tbody > tr.p-datatable-row-selected > td {
+  color: #10283a !important;
+  font-weight: 700 !important;
+}
+
 .fm-pass-grid .p-datatable-thead > tr.p-filter-row > th,
 .fm-ui-grid .p-datatable-thead > tr.p-filter-row > th,
 .fm-pt-datatable .p-datatable-thead > tr.p-filter-row > th {
@@ -144,14 +178,21 @@
 .fm-pass-grid .fm-icon-btn,
 .fm-ui-grid .fm-icon-btn,
 .fm-pt-datatable .fm-icon-btn {
-  color: #132b3d !important;
+  color: var(--fm-grid-action-cyan-dark) !important;
+}
+
+.fm-pass-grid .fm-icon-btn:hover,
+.fm-ui-grid .fm-icon-btn:hover,
+.fm-pt-datatable .fm-icon-btn:hover {
+  color: #006f7d !important;
+  background: rgba(0, 169, 189, .12) !important;
 }
 
 .fm-pass-grid .fm-icon-btn .pi,
 .fm-ui-grid .fm-icon-btn .pi,
 .fm-pt-datatable .fm-icon-btn .pi {
-  width: 24px !important;
-  height: 24px !important;
+  width: 25px !important;
+  height: 25px !important;
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -164,48 +205,56 @@
 .fm-pt-datatable .fm-icon-btn .pi::before {
   content: "" !important;
   display: block !important;
-  width: 23px !important;
-  height: 23px !important;
+  width: 24px !important;
+  height: 24px !important;
   background-color: currentColor !important;
   background-repeat: no-repeat !important;
   background-position: center !important;
-  background-size: 23px 23px !important;
+  background-size: 24px 24px !important;
 }
 
-/* NOTA: lista con lapiz, como la captura 3 */
+/* NOTA: lista con lapiz, turquesa medio oscuro */
 .fm-pass-grid .fm-icon-btn .pi-file-edit,
 .fm-ui-grid .fm-icon-btn .pi-file-edit,
 .fm-pt-datatable .fm-icon-btn .pi-file-edit {
-  color: #132b3d !important;
+  color: var(--fm-grid-action-cyan-dark) !important;
 }
 
 .fm-pass-grid .fm-icon-btn .pi-file-edit::before,
 .fm-ui-grid .fm-icon-btn .pi-file-edit::before,
 .fm-pt-datatable .fm-icon-btn .pi-file-edit::before {
-  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M4 5h11v2H4V5Zm0 5h11v2H4v-2Zm0 5h8v2H4v-2Zm13.76-2.58 1.82 1.82-5.77 5.76H12v-1.81l5.76-5.77Zm2.66-1.24.4.4a1 1 0 0 1 0 1.42l-.68.68-1.82-1.82.68-.68a1 1 0 0 1 1.42 0Z'/%3E%3C/svg%3E") !important;
-  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M4 5h11v2H4V5Zm0 5h11v2H4v-2Zm0 5h8v2H4v-2Zm13.76-2.58 1.82 1.82-5.77 5.76H12v-1.81l5.76-5.77Zm2.66-1.24.4.4a1 1 0 0 1 0 1.42l-.68.68-1.82-1.82.68-.68a1 1 0 0 1 1.42 0Z'/%3E%3C/svg%3E") !important;
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M4 5h12v2H4V5Zm0 5h12v2H4v-2Zm0 5h8v2H4v-2Zm14.1-2.15 3.05 3.05-5.9 5.9H12.2v-3.05l5.9-5.9Zm3.48-1.02.59.59a1.05 1.05 0 0 1 0 1.48l-.47.47-3.05-3.05.47-.47a1.05 1.05 0 0 1 1.48 0Z'/%3E%3C/svg%3E") !important;
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M4 5h12v2H4V5Zm0 5h12v2H4v-2Zm0 5h8v2H4v-2Zm14.1-2.15 3.05 3.05-5.9 5.9H12.2v-3.05l5.9-5.9Zm3.48-1.02.59.59a1.05 1.05 0 0 1 0 1.48l-.47.47-3.05-3.05.47-.47a1.05 1.05 0 0 1 1.48 0Z'/%3E%3C/svg%3E") !important;
 }
 
-/* INCLUIR: flecha circular cyan si esta habilitada */
+/* INCLUIR: flecha circular turquesa medio oscuro si esta habilitada */
 .fm-pass-grid .fm-icon-btn .pi-replay,
 .fm-ui-grid .fm-icon-btn .pi-replay,
 .fm-pt-datatable .fm-icon-btn .pi-replay {
-  color: var(--fm-registro-cyan, #00a9bd) !important;
+  color: var(--fm-grid-action-cyan-dark) !important;
 }
 
 .fm-pass-grid .fm-icon-btn .pi-replay::before,
 .fm-ui-grid .fm-icon-btn .pi-replay::before,
 .fm-pt-datatable .fm-icon-btn .pi-replay::before {
-  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M12 4a8 8 0 1 1-7.45 5.07l1.86.74A6 6 0 1 0 12 6h-.15l1.98 1.98-1.42 1.42L8 5l4.41-4.4 1.42 1.41L11.85 4H12Z'/%3E%3C/svg%3E") !important;
-  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M12 4a8 8 0 1 1-7.45 5.07l1.86.74A6 6 0 1 0 12 6h-.15l1.98 1.98-1.42 1.42L8 5l4.41-4.4 1.42 1.41L11.85 4H12Z'/%3E%3C/svg%3E") !important;
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M12 4a8 8 0 1 1-7.43 5.04l2.05.82A5.8 5.8 0 1 0 12 6.2h-.6l2.16 2.16L12 9.92 7.16 5.08 12 0.25l1.56 1.56L11.37 4H12Zm-1 7h3.5a1.5 1.5 0 0 1 0 3H11v2.15L7.85 13 11 9.85V11Z'/%3E%3C/svg%3E") !important;
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M12 4a8 8 0 1 1-7.43 5.04l2.05.82A5.8 5.8 0 1 0 12 6.2h-.6l2.16 2.16L12 9.92 7.16 5.08 12 0.25l1.56 1.56L11.37 4H12Zm-1 7h3.5a1.5 1.5 0 0 1 0 3H11v2.15L7.85 13 11 9.85V11Z'/%3E%3C/svg%3E") !important;
 }
 
-/* INCLUIR deshabilitado / fila seleccionada-no aplicable: gris como referencia */
+/* INCLUIR deshabilitado / fila no aplicable: gris */
 .fm-pass-grid .fm-disabled-row .fm-icon-btn .pi-replay,
 .fm-ui-grid .fm-disabled-row .fm-icon-btn .pi-replay,
 .fm-pt-datatable .fm-disabled-row .fm-icon-btn .pi-replay,
 .fm-pass-grid .p-datatable-tbody > tr.fm-disabled-row .fm-icon-btn .pi-replay {
-  color: #b6c0c7 !important;
+  color: var(--fm-grid-action-disabled) !important;
+}
+
+/* NOTA en filas seleccionadas: mantener turquesa oscuro */
+.fm-pass-grid .p-datatable-tbody > tr.fm-selected-row .fm-icon-btn .pi-file-edit,
+.fm-pass-grid .p-datatable-tbody > tr.fm-selected-row .fm-icon-btn .pi-replay,
+.fm-ui-grid .p-datatable-tbody > tr.fm-selected-row .fm-icon-btn .pi-file-edit,
+.fm-ui-grid .p-datatable-tbody > tr.fm-selected-row .fm-icon-btn .pi-replay {
+  color: #007f8f !important;
 }
 
 /* ------------------------------------------------------------------------
