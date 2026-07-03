@@ -118,6 +118,19 @@
   animation: fmTypingLoaderDots 1s steps(4, end) infinite;
 }
 
+.fm-typing-loader__box::after {
+  content: "";
+  width: 260px;
+  max-width: calc(100vw - 80px);
+  height: 6px;
+  margin-top: 14px;
+  border-radius: 999px;
+  background:
+    linear-gradient(var(--fm-registro-cyan, #00a9bd), var(--fm-registro-cyan, #00a9bd)) left center / 36% 100% no-repeat,
+    rgba(0, 169, 189, .16);
+  animation: fmTypingLoaderProgress 1.25s ease-in-out infinite;
+}
+
 .fm-grid-shell,
 .fm-ui-grid-shell,
 .fm-dialog .p-dialog-content,
@@ -170,6 +183,12 @@
   75%, 100% { content: "..."; }
 }
 
+@keyframes fmTypingLoaderProgress {
+  0% { background-size: 28% 100%, 100% 100%; }
+  50% { background-size: 68% 100%, 100% 100%; }
+  100% { background-size: 36% 100%, 100% 100%; }
+}
+
 @media (max-width: 520px) {
   .fm-typing-loader__box {
     min-width: 144px;
@@ -178,5 +197,9 @@
 
   .fm-typing-loader__image {
     width: 92px;
+  }
+
+  .fm-typing-loader__box::after {
+    width: 210px;
   }
 }
