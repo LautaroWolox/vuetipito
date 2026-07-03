@@ -3,7 +3,7 @@
     :visible="visible"
     modal
     :header="title"
-    :style="{ width: '54rem' }"
+    :style="dialogStyle"
     :class="['fm-dialog', 'fm-reproceso-dialog', `fm-reproceso-dialog--${type}`]"
     @update:visible="onVisibleChange"
   >
@@ -25,15 +25,17 @@
 </template>
 
 <script setup>
+import { computed } from 'vue'
+
 /**
- * Popup de resultado para el boton Reprocesar.
+ * Popup de resultado para el boton Reprocesar / Excluir sin seleccion.
  *
  * COMO USAR:
  * <ReprocesoDialog
  *   v-model:visible="visible"
- *   type="success"
- *   title="Reproceso finalizado"
- *   message="Las OTs seleccionadas fueron reprocesadas correctamente."
+ *   type="warning"
+ *   title="Alerta"
+ *   message="Debe seleccionar al menos una OT para excluir."
  * />
  */
 const props = defineProps({
@@ -48,6 +50,10 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['update:visible'])
+
+const dialogStyle = computed(() => ({
+  width: props.type === 'success' ? '500px' : '430px'
+}))
 
 const cerrar = () => {
   emit('update:visible', false)
