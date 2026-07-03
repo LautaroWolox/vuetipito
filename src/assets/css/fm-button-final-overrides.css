@@ -1,12 +1,31 @@
 /* FIELD MANAGER FILTER/BUTTON FINAL OVERRIDES */
 
+.ot-fallidas-ct .fm-accordion,
+.ot-fallidas-ct .p-accordion {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 10px !important;
+}
+
 .ot-fallidas-ct .fm-accordion .p-accordionpanel,
 .ot-fallidas-ct .p-accordion .p-accordionpanel {
-  margin-bottom: 7px !important;
+  margin-bottom: 0 !important;
   border: 1px solid #d6dde2 !important;
   border-radius: 0 !important;
   background: #fff !important;
-  overflow: hidden !important;
+  overflow: visible !important;
+}
+
+.ot-fallidas-ct .fm-accordion .p-accordionpanel:first-child,
+.ot-fallidas-ct .p-accordion .p-accordionpanel:first-child {
+  position: relative !important;
+  z-index: 20 !important;
+}
+
+.ot-fallidas-ct .fm-accordion .p-accordionpanel:last-child,
+.ot-fallidas-ct .p-accordion .p-accordionpanel:last-child {
+  position: relative !important;
+  z-index: 10 !important;
 }
 
 .ot-fallidas-ct .fm-accordion .p-accordionheader,
@@ -34,6 +53,7 @@
   padding: 0 !important;
   border: 0 !important;
   background: #fff !important;
+  overflow: visible !important;
 }
 
 .ot-fallidas-ct .fm-panel-content.fm-filters,
@@ -45,6 +65,7 @@
   border-bottom: 0 !important;
   background: #fff !important;
   box-shadow: none !important;
+  overflow: visible !important;
 }
 
 .ot-fallidas-ct .fm-filters .fm-filter-grid,
@@ -151,6 +172,75 @@
   background: currentColor !important;
   border-radius: 2px !important;
   box-shadow: 0 4px 0 currentColor, 0 8px 0 currentColor !important;
+}
+
+/* Calendar y Select overlays: por encima de grilla, compactos y legibles */
+.ot-fallidas-ct .fm-calendar,
+.ot-fallidas-ct .ct-calendar {
+  z-index: 13000 !important;
+  top: 31px !important;
+  width: 244px !important;
+  padding: 8px !important;
+  border-color: #00a9bd !important;
+  box-shadow: 0 10px 24px rgba(0,0,0,.18) !important;
+}
+
+.ot-fallidas-ct .ct-calendar-head,
+.ot-fallidas-ct .fm-calendar-head {
+  margin-bottom: 6px !important;
+}
+
+.ot-fallidas-ct .ct-days button,
+.ot-fallidas-ct .fm-days button {
+  height: 25px !important;
+  font-size: 11px !important;
+}
+
+.p-select-overlay,
+.p-multiselect-overlay,
+.p-dropdown-panel {
+  z-index: 13050 !important;
+  border: 1px solid #00a9bd !important;
+  border-radius: 0 0 8px 8px !important;
+  box-shadow: 0 12px 28px rgba(0,0,0,.16) !important;
+  overflow: hidden !important;
+}
+
+.p-select-overlay .p-select-list-container,
+.p-select-overlay .p-select-list,
+.p-multiselect-overlay .p-multiselect-list-container,
+.p-multiselect-overlay .p-multiselect-list,
+.p-dropdown-panel .p-dropdown-items-wrapper {
+  max-height: 188px !important;
+  overflow-y: auto !important;
+}
+
+.p-select-overlay .p-select-option,
+.p-multiselect-overlay .p-multiselect-option,
+.p-dropdown-panel .p-dropdown-item {
+  min-height: 30px !important;
+  padding: 7px 12px !important;
+  font-size: 12px !important;
+  line-height: 16px !important;
+  color: #34465b !important;
+  font-weight: 500 !important;
+}
+
+.p-select-overlay .p-select-option:hover,
+.p-select-overlay .p-select-option.p-focus,
+.p-multiselect-overlay .p-multiselect-option:hover,
+.p-multiselect-overlay .p-multiselect-option.p-focus,
+.p-dropdown-panel .p-dropdown-item:hover,
+.p-dropdown-panel .p-dropdown-item.p-focus {
+  background: #e0f7fa !important;
+  color: #008fa1 !important;
+}
+
+.p-select-overlay .p-select-option.p-select-option-selected,
+.p-multiselect-overlay .p-multiselect-option.p-multiselect-option-selected,
+.p-dropdown-panel .p-dropdown-item.p-highlight {
+  background: #00a9bd !important;
+  color: #fff !important;
 }
 
 @media (max-width: 700px) {
