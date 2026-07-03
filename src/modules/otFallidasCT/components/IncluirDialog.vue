@@ -1,5 +1,5 @@
 <template>
-  <Dialog :visible="visible" modal header="Alerta" :style="{ width: '44rem' }" class="fm-dialog fm-dialog-incluir" @update:visible="$emit('update:visible', $event)">
+  <Dialog :visible="visible" modal header="Alerta" :style="{ width: '44rem' }" class="fm-dialog fm-dialog-incluir" @update:visible="onVisibleChange">
     <div class="fm-dialog-body">
       <p>¿Confirma que desea recuperar la OT seleccionada?</p>
       <label>Motivo</label>
@@ -8,7 +8,7 @@
       <Textarea v-model="nota" rows="4" class="w-full" placeholder="Opcional" />
     </div>
 
-    <FmTypingLoader v-if="saving" overlay variant="dialog" title="Procesando" message="Guardando cambios" />
+    <FmTypingLoader v-if="saving" overlay variant="dialog" title="Procesando" message="Recuperando OT" />
 
     <template #footer>
       <Button label="CANCELAR" outlined class="fm-btn fm-btn--outline" :disabled="saving" @click="cerrar" />
@@ -54,6 +54,15 @@ const cerrar = () => {
   emit('update:visible', false)
 }
 
+const closeAfterSave = () => {
+  saving.value = false
+  emit('update:visible', false)
+}
+
+const onVisibleChange = (value) => {
+  if (!value) cerrar()
+}
+
 const confirmar = async () => {
   if (!motivo.value) {
     showAlert.value = true
@@ -63,7 +72,7 @@ const confirmar = async () => {
   saving.value = true
   try {
     await store.incluir(props.row, motivo.value, nota.value)
-    cerrar()
+    closeAfterSave()
   } finally {
     saving.value = false
   }
