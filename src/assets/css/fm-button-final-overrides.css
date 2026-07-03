@@ -1,0 +1,161 @@
+/* FIELD MANAGER FILTER/BUTTON FINAL OVERRIDES */
+
+.ot-fallidas-ct .fm-accordion .p-accordionpanel,
+.ot-fallidas-ct .p-accordion .p-accordionpanel {
+  margin-bottom: 7px !important;
+  border: 1px solid #d6dde2 !important;
+  border-radius: 0 !important;
+  background: #fff !important;
+  overflow: hidden !important;
+}
+
+.ot-fallidas-ct .fm-accordion .p-accordionheader,
+.ot-fallidas-ct .p-accordion .p-accordionheader,
+.ot-fallidas-ct .fm-accordion .p-accordion-header-link,
+.ot-fallidas-ct .p-accordion .p-accordion-header-link {
+  min-height: 28px !important;
+  height: 28px !important;
+  padding: 5px 10px !important;
+  border: 0 !important;
+  border-bottom: 1px solid #dfe4e8 !important;
+  border-radius: 0 !important;
+  background: #f7f7f7 !important;
+  color: #000 !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  line-height: 18px !important;
+  box-shadow: none !important;
+}
+
+.ot-fallidas-ct .fm-accordion .p-accordioncontent,
+.ot-fallidas-ct .p-accordion .p-accordioncontent,
+.ot-fallidas-ct .fm-accordion .p-accordion-content,
+.ot-fallidas-ct .p-accordion .p-accordion-content {
+  padding: 0 !important;
+  border: 0 !important;
+  background: #fff !important;
+}
+
+.ot-fallidas-ct .fm-panel-content.fm-filters,
+.ot-fallidas-ct .fm-panel-content--accent.fm-filters,
+.ot-fallidas-ct .fm-filters {
+  padding: 0 0 12px !important;
+  margin: 0 !important;
+  border-left: 4px solid #00a9bd !important;
+  border-bottom: 0 !important;
+  background: #fff !important;
+  box-shadow: none !important;
+}
+
+.ot-fallidas-ct .fm-filters .fm-filter-grid,
+.ot-fallidas-ct .fm-panel-content.fm-filters .fm-filter-grid,
+.ot-fallidas-ct .fm-panel-content--accent.fm-filters .fm-filter-grid {
+  padding: 18px 20px 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  column-gap: 14px !important;
+  row-gap: 10px !important;
+}
+
+.ot-fallidas-ct .fm-filters .fm-field label,
+.ot-fallidas-ct .fm-panel-content.fm-filters .fm-field label,
+.ot-fallidas-ct .fm-panel-content--accent.fm-filters .fm-field label {
+  margin: 0 0 5px !important;
+  color: #000 !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  line-height: 14px !important;
+}
+
+.ot-fallidas-ct .fm-filters .fm-field .p-inputtext,
+.ot-fallidas-ct .fm-filters .fm-field .p-select,
+.ot-fallidas-ct .fm-filters .fm-field input {
+  height: 26px !important;
+  min-height: 26px !important;
+  font-size: 12px !important;
+  border-color: #cbd4db !important;
+  border-radius: 2px !important;
+  box-shadow: none !important;
+}
+
+.ot-fallidas-ct .fm-filters .fm-actions,
+.ot-fallidas-ct .fm-filters .fm-filter-actions,
+.ot-fallidas-ct .fm-panel-content .fm-actions,
+.ot-fallidas-ct .fm-panel-content--accent .fm-actions {
+  gap: 8px !important;
+  margin: 11px 0 0 !important;
+  padding: 14px 0 0 !important;
+  border-top: 1px solid #e4e8eb !important;
+  border-bottom: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.ot-fallidas-ct .fm-filter-actions .fm-filter-action-button,
+.ot-fallidas-ct .fm-filter-actions .fm-action-button,
+.ot-fallidas-ct .fm-filter-actions .fm-ui-button,
+.ot-fallidas-ct .fm-filters .fm-actions .fm-filter-action-button,
+.ot-fallidas-ct .fm-filters .fm-actions .fm-action-button,
+.ot-fallidas-ct .fm-filters .fm-actions .fm-ui-button {
+  width: 104px !important;
+  min-width: 104px !important;
+  max-width: 104px !important;
+  height: 28px !important;
+  min-height: 28px !important;
+  padding: 0 10px !important;
+  gap: 7px !important;
+  border-radius: 4px !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  line-height: 1 !important;
+  letter-spacing: 0 !important;
+  box-shadow: 0 5px 12px rgba(0,0,0,.14) !important;
+  transform: none !important;
+  box-sizing: border-box !important;
+  white-space: nowrap !important;
+}
+
+.ot-fallidas-ct .fm-filter-actions .fm-filter-action-button i,
+.ot-fallidas-ct .fm-filter-actions .fm-filter-action-button .pi,
+.ot-fallidas-ct .fm-filters .fm-actions .fm-action-button i,
+.ot-fallidas-ct .fm-filters .fm-actions .fm-action-button .pi {
+  width: 14px !important;
+  min-width: 14px !important;
+  height: 14px !important;
+  font-size: 14px !important;
+  line-height: 14px !important;
+}
+
+.ot-fallidas-ct .fm-filter-actions .fm-filter-action-button.fm-action-button--outline .pi,
+.ot-fallidas-ct .fm-filter-actions .fm-filter-action-button.fm-ui-button--outline .pi,
+.ot-fallidas-ct .fm-filters .fm-actions .fm-action-button--outline .pi,
+.ot-fallidas-ct .fm-filters .fm-actions .fm-ui-button--outline .pi {
+  position: relative !important;
+  font-size: 0 !important;
+}
+
+.ot-fallidas-ct .fm-filter-actions .fm-filter-action-button.fm-action-button--outline .pi::before,
+.ot-fallidas-ct .fm-filter-actions .fm-filter-action-button.fm-ui-button--outline .pi::before,
+.ot-fallidas-ct .fm-filters .fm-actions .fm-action-button--outline .pi::before,
+.ot-fallidas-ct .fm-filters .fm-actions .fm-ui-button--outline .pi::before {
+  content: "" !important;
+  position: absolute !important;
+  left: 1px !important;
+  top: 3px !important;
+  width: 11px !important;
+  height: 2px !important;
+  background: currentColor !important;
+  border-radius: 2px !important;
+  box-shadow: 0 4px 0 currentColor, 0 8px 0 currentColor !important;
+}
+
+@media (max-width: 700px) {
+  .ot-fallidas-ct .fm-filters .fm-actions,
+  .ot-fallidas-ct .fm-filters .fm-filter-actions {
+    flex-wrap: wrap !important;
+  }
+}

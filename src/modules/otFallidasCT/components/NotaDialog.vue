@@ -1,6 +1,6 @@
 <template>
-  <Dialog :visible="visible" modal header="Nota" :style="{ width: '42rem' }" class="otf-note-dialog" @update:visible="$emit('update:visible', $event)">
-    <div class="otf-note-body">
+  <Dialog :visible="visible" modal header="Nota" :style="{ width: '42rem' }" class="fm-dialog fm-dialog-nota" @update:visible="$emit('update:visible', $event)">
+    <div class="fm-note-body">
       <label>Nota</label>
       <Textarea v-model="nota" rows="5" class="w-full" placeholder="Ingrese una nota" />
     </div>
@@ -34,7 +34,3 @@ const confirmar = () => {
   cerrar()
 }
 </script>
-
-<style scoped>
-.otf-note-body{padding:8px 0;color:#222;font-size:16px}.otf-note-body label{display:block;margin:0 0 8px;font-weight:500}.otf-note-body :deep(textarea){resize:vertical;font-size:15px}.otf-note-dialog :deep(.p-dialog-header){font-size:24px;font-weight:400}.otf-note-dialog :deep(.p-dialog-footer){padding-top:18px}
-</style>

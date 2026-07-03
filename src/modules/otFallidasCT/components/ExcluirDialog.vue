@@ -3,44 +3,46 @@
     :visible="visible"
     modal
     header="Alerta"
-    :style="{ width: '58rem' }"
-    class="otf-excluir-dialog"
+    :style="{ width: '520px' }"
+    class="fm-dialog fm-dialog-excluir"
     @update:visible="onVisibleChange"
   >
-    <div v-if="step === 'form'" class="otf-dialog-body">
+    <div v-if="step === 'form'" class="fm-dialog-body">
       <p>¿Confirma que desea excluir la OT seleccionada?</p>
 
       <label>Motivo</label>
-      <Select v-model="motivoSelected" :options="motivos" optionLabel="name" class="w-full otf-dialog-select" />
+      <Select v-model="motivoSelected" :options="motivos" optionLabel="name" class="fm-dialog-select" />
 
       <label>Nota</label>
-      <Textarea v-model="nota" rows="4" class="w-full" placeholder="Opcional" />
+      <Textarea v-model="nota" rows="4" class="w-full fm-dialog-textarea" placeholder="Opcional" />
     </div>
 
-    <div v-else class="otf-dialog-body">
-      <p>¿Está seguro que desea confirmar?</p>
+    <div v-else class="fm-dialog-body">
+      <p>¿Está seguro que desea excluir?</p>
 
-      <div class="otf-confirm-summary">
-        <div class="otf-confirm-row">
-          <div class="otf-confirm-label">MOTIVO</div>
-          <div class="otf-confirm-value">{{ motivoSelected?.name }}</div>
+      <div class="fm-confirm-summary">
+        <div class="fm-confirm-row">
+          <div class="fm-confirm-label">MOTIVO</div>
+          <div class="fm-confirm-value">{{ motivoSelected?.name }}</div>
         </div>
-        <div class="otf-confirm-row">
-          <div class="otf-confirm-label">NOTA</div>
-          <div class="otf-confirm-value">{{ nota || 'Sin nota cargada' }}</div>
+        <div class="fm-confirm-row">
+          <div class="fm-confirm-label">NOTA</div>
+          <div class="fm-confirm-value">{{ nota || 'Sin nota cargada' }}</div>
         </div>
       </div>
     </div>
 
+    <FmTypingLoader v-if="saving" overlay variant="dialog" title="Procesando" message="Excluyendo OT" />
+
     <template #footer>
-      <Button label="CANCELAR" outlined class="fm-btn fm-btn--outline" @click="cerrar" />
-      <Button label="ACEPTAR" class="fm-btn fm-btn--primary" @click="aceptar" />
+      <Button label="CANCELAR" outlined class="fm-btn fm-btn--outline" :disabled="saving" @click="cerrar" />
+      <Button :label="step === 'confirm' ? 'EXCLUIR' : 'ACEPTAR'" class="fm-btn fm-btn--primary" :disabled="saving" @click="aceptar" />
     </template>
   </Dialog>
 
-  <Dialog v-model:visible="showValidationAlert" modal header="Alerta" :style="{ width: '42rem' }" class="otf-validation-alert">
-    <div class="otf-alert-body">
-      <div class="otf-alert-triangle"><span>!</span></div>
+  <Dialog v-model:visible="showValidationAlert" modal header="Alerta" :style="{ width: '430px' }" class="fm-dialog-alert">
+    <div class="fm-alert-body">
+      <div class="fm-alert-triangle"><span>!</span></div>
       <span>{{ validationMessage }}</span>
     </div>
     <template #footer>
@@ -70,6 +72,7 @@ const nota = ref('')
 const step = ref('form')
 const showValidationAlert = ref(false)
 const validationMessage = ref('')
+const saving = ref(false)
 
 watch(() => props.visible, (value) => {
   if (value) reset()
@@ -81,9 +84,17 @@ const reset = () => {
   step.value = 'form'
   showValidationAlert.value = false
   validationMessage.value = ''
+  saving.value = false
 }
 
 const cerrar = () => {
+  if (saving.value) return
+  reset()
+  emit('update:visible', false)
+}
+
+const closeAfterSave = () => {
+  saving.value = false
   reset()
   emit('update:visible', false)
 }
@@ -113,11 +124,12 @@ const aceptar = async () => {
     return
   }
 
-  await store.sendExcluidas(store.getNotExcluded, motivoSelected.value, nota.value)
-  cerrar()
+  saving.value = true
+  try {
+    await store.sendExcluidas(store.getNotExcluded, motivoSelected.value, nota.value)
+    closeAfterSave()
+  } finally {
+    saving.value = false
+  }
 }
 </script>
-
-<style scoped>
-.otf-dialog-body{padding:8px 0;color:#222;font-size:16px}.otf-dialog-body p{margin:0 0 18px;font-size:18px}.otf-dialog-body label{display:block;margin:16px 0 8px;font-weight:500}.otf-dialog-select{max-width:420px}.otf-dialog-body :deep(textarea){resize:vertical;font-size:15px}.otf-excluir-dialog :deep(.p-dialog-header),.otf-validation-alert :deep(.p-dialog-header){font-size:24px;font-weight:400}.otf-excluir-dialog :deep(.p-dialog-footer),.otf-validation-alert :deep(.p-dialog-footer){padding-top:18px}.otf-confirm-summary{border:1px solid #dce8ec;border-radius:6px;background:#f7fcfd;overflow:hidden}.otf-confirm-row{display:grid;grid-template-columns:190px 1fr;gap:12px;padding:14px 18px;border-bottom:1px solid #e4eef2}.otf-confirm-row:last-child{border-bottom:0}.otf-confirm-label{font-size:14px;color:#6d8798;font-weight:500}.otf-confirm-value{font-size:15px;color:#263238;font-weight:700;white-space:pre-wrap}.otf-alert-body{display:flex;align-items:center;gap:34px;min-height:112px;padding:18px 8px;font-size:17px;color:#263238}.otf-alert-triangle{width:64px;height:56px;position:relative;display:flex;align-items:center;justify-content:center}.otf-alert-triangle:before{content:"";position:absolute;width:0;height:0;border-left:32px solid transparent;border-right:32px solid transparent;border-bottom:56px solid #d73333;filter:drop-shadow(0 4px 8px rgba(215,51,51,.28))}.otf-alert-triangle:after{content:"";position:absolute;top:8px;width:0;height:0;border-left:23px solid transparent;border-right:23px solid transparent;border-bottom:40px solid #fff}.otf-alert-triangle span{position:relative;z-index:2;margin-top:15px;color:#d73333;font-size:34px;font-weight:800;line-height:1}
-</style>

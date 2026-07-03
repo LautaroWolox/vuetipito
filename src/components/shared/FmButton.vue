@@ -2,7 +2,7 @@
   <button
     :type="type"
     :disabled="disabled || loading"
-    class="fm-action-button"
+    class="fm-action-button fm-ui-button"
     :class="variantClass"
     @click="$emit('click', $event)"
   >
@@ -20,7 +20,11 @@ const props = defineProps({
   label: { type: String, default: '' },
   loadingLabel: { type: String, default: 'PROCESANDO...' },
   icon: { type: String, default: '' },
-  variant: { type: String, default: 'primary' },
+  variant: {
+    type: String,
+    default: 'primary',
+    validator: (value) => ['primary', 'outline'].includes(value)
+  },
   type: { type: String, default: 'button' },
   disabled: { type: Boolean, default: false },
   loading: { type: Boolean, default: false }
@@ -28,7 +32,8 @@ const props = defineProps({
 
 defineEmits(['click'])
 
-const variantClass = computed(() => {
-  return props.variant === 'outline' ? 'fm-action-button--outline' : 'fm-action-button--primary'
-})
+const variantClass = computed(() => ({
+  'fm-action-button--primary fm-ui-button--primary': props.variant === 'primary',
+  'fm-action-button--outline fm-ui-button--outline': props.variant === 'outline'
+}))
 </script>

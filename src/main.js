@@ -5,6 +5,14 @@ import './assets/css/fm-design-system.css';
 import './assets/css/fm-global-ui.css';
 import './assets/css/responsive.css';
 import './assets/css/responsive-resolutions.css';
+import './assets/css/fm-foundation.css';
+import './assets/css/fm-registro-ui.css';
+import './assets/css/fm-loader.css';
+import './assets/css/fm-dialog-fixes.css';
+import './assets/css/fm-dialog-responsive.css';
+import './assets/css/fm-last-overrides.css';
+import './assets/css/fm-popup-final-overrides.css';
+import './assets/css/fm-button-final-overrides.css';
 import Lara from '@primeuix/themes/lara';
 
 import { definePreset } from '@primeuix/themes';
@@ -26,6 +34,7 @@ import FmGridShell from './components/shared/FmGridShell.vue';
 import FmAlertDialog from './components/shared/FmAlertDialog.vue';
 import FmActionButton from './components/shared/FmActionButton.vue';
 import FmGridActions from './components/shared/FmGridActions.vue';
+import FmTypingLoader from './components/shared/FmTypingLoader.vue';
 
 // Componentes globales de primevue
 import Accordion from 'primevue/accordion';
@@ -108,6 +117,7 @@ app.component('FmGridShell', FmGridShell);
 app.component('FmAlertDialog', FmAlertDialog);
 app.component('FmActionButton', FmActionButton);
 app.component('FmGridActions', FmGridActions);
+app.component('FmTypingLoader', FmTypingLoader);
 
 app.directive('tooltip', Tooltip);
 app.mount('#app');

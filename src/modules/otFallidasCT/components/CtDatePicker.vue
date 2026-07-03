@@ -1,25 +1,25 @@
 <template>
-  <div ref="root" class="ct-date-picker">
-    <button type="button" class="ct-date-button" :class="{ active: open }" @click="open = !open">
+  <div ref="root" class="fm-date-picker ct-date-picker">
+    <button type="button" class="fm-date-button ct-date-button" :class="{ active: open }" @click="open = !open">
       <span>{{ displayValue }}</span>
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2v3M17 2v3M4 8h16M6 4h12a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z" /></svg>
     </button>
-    <div v-if="open" class="ct-calendar">
-      <div class="ct-calendar-head">
-        <button type="button" class="ct-nav" @click="previousMonth">‹</button>
-        <div class="ct-calendar-title">
+    <div v-if="open" class="fm-calendar ct-calendar">
+      <div class="fm-calendar-head ct-calendar-head">
+        <button type="button" class="fm-calendar-nav ct-nav" @click="previousMonth">‹</button>
+        <div class="fm-calendar-title ct-calendar-title">
           <strong>{{ monthNames[viewMonth] }}</strong>
           <select v-model.number="viewYear">
             <option v-for="year in years" :key="year" :value="year">{{ year }}</option>
           </select>
         </div>
-        <button type="button" class="ct-nav" @click="nextMonth">›</button>
+        <button type="button" class="fm-calendar-nav ct-nav" @click="nextMonth">›</button>
       </div>
-      <div class="ct-weekdays"><span v-for="day in weekdays" :key="day">{{ day }}</span></div>
-      <div class="ct-days">
+      <div class="fm-weekdays ct-weekdays"><span v-for="day in weekdays" :key="day">{{ day }}</span></div>
+      <div class="fm-days ct-days">
         <button v-for="day in calendarDays" :key="day.key" type="button" :class="{ outside: !day.current, selected: isSelected(day.date), today: isToday(day.date) }" @click="selectDay(day.date)">{{ day.date.getDate() }}</button>
       </div>
-      <div class="ct-calendar-actions">
+      <div class="fm-calendar-actions ct-calendar-actions">
         <button type="button" @click="clear">Borrar</button>
         <button type="button" @click="selectToday">Hoy</button>
       </div>
@@ -64,6 +64,3 @@ watch(selectedDate, value => { if (value) { viewMonth.value = value.getMonth(); 
 onMounted(() => document.addEventListener('mousedown', close))
 onBeforeUnmount(() => document.removeEventListener('mousedown', close))
 </script>
-<style scoped>
-.ct-date-picker{position:relative;width:100%}.ct-date-button{width:100%;height:30px;border:1px solid #c7d1d8;border-radius:3px;background:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 8px;color:#34465b;font-size:13px;cursor:pointer;text-align:left}.ct-date-button svg{width:16px;height:16px;fill:none;stroke:var(--fm-cyan);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}.ct-date-button:hover,.ct-date-button.active{border-color:var(--fm-cyan);box-shadow:0 0 0 2px rgba(0,188,212,.14)}.ct-calendar{position:absolute;z-index:9900;top:35px;left:0;width:268px;background:#fff;border:1px solid var(--fm-cyan);border-radius:6px;box-shadow:0 12px 30px rgba(0,0,0,.2);padding:10px}.ct-calendar-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}.ct-nav{width:26px;height:26px;border:1px solid #d4e3e8;background:#fff;border-radius:50%;cursor:pointer;color:var(--fm-cyan);font-size:22px;line-height:20px}.ct-nav:hover{background:var(--fm-cyan-soft)}.ct-calendar-title{display:flex;align-items:center;justify-content:center;gap:7px;min-width:168px}.ct-calendar-title strong{font-size:13px;color:#263238}.ct-calendar-title select{height:26px;border:1px solid #c7d1d8;border-radius:3px;background:#fff;color:#263238;font-size:12px;padding:2px 5px}.ct-weekdays,.ct-days{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}.ct-weekdays span{font-size:10px;font-weight:700;text-align:center;color:#607d8b;padding:3px 0}.ct-days button{height:28px;border:0;background:#fff;border-radius:50%;cursor:pointer;font-size:12px;color:#263238}.ct-days button:hover{background:var(--fm-cyan-soft)}.ct-days button.outside{color:#b0bec5}.ct-days button.today{box-shadow:inset 0 0 0 1px var(--fm-cyan)}.ct-days button.selected{background:var(--fm-cyan)!important;color:#fff!important;font-weight:700}.ct-calendar-actions{display:flex;justify-content:space-between;margin-top:8px;border-top:1px solid #edf2f5;padding-top:8px}.ct-calendar-actions button{border:0;background:transparent;color:var(--fm-cyan);cursor:pointer;font-size:12px}.ct-calendar-actions button:hover{color:var(--fm-cyan-strong);text-decoration:underline}
-</style>
