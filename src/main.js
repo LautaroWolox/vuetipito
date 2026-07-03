@@ -84,7 +84,7 @@ app.use(PrimeVue, {
             prefix: '',
             cssLayer: {
                 name: 'primevue',
-                order: 'primevue, nuestros'
+                order: 'primevue, fieldmanager'
             },
             darkModeSelector: false
         }
