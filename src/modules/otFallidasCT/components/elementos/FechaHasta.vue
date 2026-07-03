@@ -1,27 +1,32 @@
 <template>
-    <div class="flex flex-column px-2">
-        <label for="date">Fecha Hasta</label>
-        <DatePicker id="date" dateFormat="dd/mm/yy" :manualInput="false" class="w-auto"
-        v-model="fechaSelected" @date-select="capturarFecha($event)" variant="filled"
-        @clear-click="borrarFecha($event)" showIcon selectOtherMonths showButtonBar />
-    </div>
+  <div class="fm-field fm-field--span-2 otf-filter-element otf-filter-element--fecha-hasta">
+    <label for="otf-fecha-hasta">Fecha Cierre OT Hasta</label>
+    <CtDatePicker
+      inputId="otf-fecha-hasta"
+      :modelValue="modelValue"
+      placeholder="Hasta"
+      @update:modelValue="$emit('update:modelValue', $event)"
+    />
+  </div>
 </template>
 
 <script setup>
+import CtDatePicker from '../CtDatePicker.vue'
 
-import DatePicker from 'primevue/datepicker';
-import { ref, watch } from "vue";
-import dayjs from 'dayjs';
+defineProps({
+  modelValue: { type: [Date, String, null], default: null }
+})
 
-const fechaSelected = ref(null);
-const capturarFecha = (event) => {
-    alert("fecha")
-}
-const borrarFecha = (event) => {
-    alert("borrar")
-}
-
+defineEmits(['update:modelValue'])
 </script>
 
 <style scoped>
+.otf-filter-element label {
+  white-space: nowrap;
+}
+
+.otf-filter-element :deep(.p-datepicker),
+.otf-filter-element :deep(.ct-date-picker) {
+  width: 100%;
+}
 </style>
