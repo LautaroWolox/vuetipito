@@ -1,20 +1,24 @@
 <template>
-  <button
+  <Button
     :type="type"
     :disabled="disabled || loading"
+    :loading="loading"
+    :label="loading ? loadingLabel : label"
+    :icon="primeIcon"
+    :outlined="variant === 'outline'"
     class="fm-action-button fm-ui-button"
     :class="variantClass"
     @click="$emit('click', $event)"
   >
-    <slot name="icon">
-      <i v-if="icon" :class="['pi', icon]"></i>
-    </slot>
-    <span>{{ loading ? loadingLabel : label }}</span>
-  </button>
+    <template v-if="$slots.icon" #icon>
+      <slot name="icon" />
+    </template>
+  </Button>
 </template>
 
 <script setup>
 import { computed } from 'vue'
+import Button from 'primevue/button'
 
 const props = defineProps({
   label: { type: String, default: '' },
@@ -31,6 +35,11 @@ const props = defineProps({
 })
 
 defineEmits(['click'])
+
+const primeIcon = computed(() => {
+  if (!props.icon) return undefined
+  return props.icon.startsWith('pi ') ? props.icon : `pi ${props.icon}`
+})
 
 const variantClass = computed(() => ({
   'fm-action-button--primary fm-ui-button--primary': props.variant === 'primary',
