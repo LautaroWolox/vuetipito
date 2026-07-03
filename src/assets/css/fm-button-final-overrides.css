@@ -1,20 +1,45 @@
 /* ========================================================================
    FIELD MANAGER BUTTON FINAL OVERRIDES
    ------------------------------------------------------------------------
-   Ajuste final para que los botones de filtros no queden grandes.
-   Deben verse compactos como la referencia: BUSCAR / LIMPIAR.
+   Ajuste final para que los botones de filtros queden iguales.
+   - BUSCAR y LIMPIAR mismo ancho y alto.
+   - Sin linea divisoria entre filtros y botones.
+   - Botones compactos como la referencia.
    ======================================================================== */
+
+/* Quitar linea que separa filtros de botones */
+.fm-filters,
+.fm-panel-content.fm-filters,
+.fm-panel-content--accent.fm-filters,
+.fm-panel-content--accent .fm-filters {
+  border-bottom: 0 !important;
+}
 
 .fm-filters .fm-actions,
 .fm-panel-content .fm-actions,
 .fm-panel-content--accent .fm-actions {
   gap: 8px !important;
-  padding: 12px 0 0 !important;
+  margin: 0 !important;
+  padding: 10px 0 0 !important;
+  border-top: 0 !important;
+  border-bottom: 0 !important;
+  box-shadow: none !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
 }
 
+.fm-filters .fm-actions::before,
+.fm-filters .fm-actions::after,
+.fm-panel-content .fm-actions::before,
+.fm-panel-content .fm-actions::after,
+.fm-panel-content--accent .fm-actions::before,
+.fm-panel-content--accent .fm-actions::after {
+  display: none !important;
+  content: none !important;
+}
+
+/* BUSCAR / LIMPIAR iguales */
 .fm-filters .fm-actions .fm-action-button,
 .fm-filters .fm-actions .fm-ui-button,
 .fm-panel-content .fm-actions .fm-action-button,
@@ -23,9 +48,10 @@
 .fm-panel-content--accent .fm-actions .fm-ui-button {
   height: 32px !important;
   min-height: 32px !important;
+  width: 118px !important;
   min-width: 118px !important;
-  width: auto !important;
-  padding: 0 15px !important;
+  max-width: 118px !important;
+  padding: 0 12px !important;
   gap: 8px !important;
   border-radius: 5px !important;
   font-size: 12px !important;
@@ -37,15 +63,14 @@
 }
 
 .fm-filters .fm-actions .fm-action-button--primary,
-.fm-panel-content .fm-actions .fm-action-button--primary,
-.fm-panel-content--accent .fm-actions .fm-action-button--primary {
-  min-width: 118px !important;
-}
-
 .fm-filters .fm-actions .fm-action-button--outline,
+.fm-panel-content .fm-actions .fm-action-button--primary,
 .fm-panel-content .fm-actions .fm-action-button--outline,
+.fm-panel-content--accent .fm-actions .fm-action-button--primary,
 .fm-panel-content--accent .fm-actions .fm-action-button--outline {
-  min-width: 112px !important;
+  width: 118px !important;
+  min-width: 118px !important;
+  max-width: 118px !important;
 }
 
 .fm-filters .fm-actions .fm-action-button:hover:not(:disabled),
@@ -86,6 +111,8 @@
   .fm-filters .fm-actions .fm-action-button,
   .fm-panel-content .fm-actions .fm-action-button,
   .fm-panel-content--accent .fm-actions .fm-action-button {
-    min-width: 112px !important;
+    width: 118px !important;
+    min-width: 118px !important;
+    max-width: 118px !important;
   }
 }
