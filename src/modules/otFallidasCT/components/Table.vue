@@ -1,5 +1,9 @@
 <template>
-  <FmGridShell>
+  <FmGridShell
+    :loading="store.loading"
+    loading-title="Procesando OTs"
+    loading-message="Consultando datos y preparando la grilla"
+  >
     <DataTable
       id="tabla"
       ref="dt"
