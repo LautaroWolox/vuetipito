@@ -1,6 +1,6 @@
 import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
-import './assets/css/nuestros.css';
+import './assets/css/fm-legacy-bridge.css';
 import './assets/css/fm-design-system.css';
 import './assets/css/fm-global-ui.css';
 import './assets/css/responsive.css';
