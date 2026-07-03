@@ -1,14 +1,9 @@
 <template>
   <div class="fm-panel-content fm-panel-content--accent fm-filters emulacion-filters">
-    <Toast position="top-center" />
-
     <div class="fm-filter-grid emulacion-filter-grid">
       <div class="fm-field emulacion-legajo-field">
         <label for="legajo-emulacion">LEGAJO</label>
         <div class="emulacion-legajo-control">
-          <span class="emulacion-legajo-icon" aria-hidden="true">
-            <i class="pi pi-id-card"></i>
-          </span>
           <InputText
             id="legajo-emulacion"
             v-model="legajo"
@@ -16,12 +11,13 @@
             type="text"
             maxlength="13"
             autocomplete="off"
-            placeholder="Hasta 13 caracteres"
             @input="onLegajoInput"
             @keyup.enter="onSearch"
           />
+          <span class="emulacion-legajo-icon" aria-hidden="true">
+            <i class="pi pi-id-card"></i>
+          </span>
         </div>
-        <small class="emulacion-legajo-help">Ejemplo: AB123456789</small>
       </div>
     </div>
 
@@ -35,21 +31,14 @@
 <script setup>
 import { ref, watch } from 'vue'
 import InputText from 'primevue/inputtext'
-import Toast from 'primevue/toast'
-import { useToast } from 'primevue/usetoast'
 import emulacionStore from '../../store/emulacionStore.js'
 
-const toast = useToast()
 const storeEmulacion = emulacionStore()
 const legajo = ref(storeEmulacion.legajoSelected)
 
 watch(() => storeEmulacion.legajoSelected, (newVal) => {
   legajo.value = newVal
 })
-
-const clearToasts = () => {
-  toast.removeAllGroups()
-}
 
 const onLegajoInput = () => {
   const normalized = String(legajo.value || '').toUpperCase().slice(0, 13)
@@ -59,24 +48,15 @@ const onLegajoInput = () => {
 
 const onClear = () => {
   storeEmulacion.$clearAll()
-  clearToasts()
 }
 
 const onSearch = async () => {
   onLegajoInput()
-  clearToasts()
   await storeEmulacion.$fetchData()
 
   if (storeEmulacion.data.length) {
     storeEmulacion.$setActiveTab(1)
-    return
   }
-
-  toast.add({
-    severity: 'info',
-    summary: 'Sin resultados',
-    detail: 'No se encontraron operadores para el legajo ingresado.'
-  })
 }
 </script>
 
@@ -87,7 +67,7 @@ const onSearch = async () => {
 
 .emulacion-legajo-field {
   grid-column: span 3;
-  max-width: 265px;
+  max-width: 245px;
 }
 
 .emulacion-legajo-control {
@@ -95,6 +75,14 @@ const onSearch = async () => {
   align-items: center;
   gap: 7px;
   width: 100%;
+}
+
+.emulacion-legajo-input {
+  width: 158px !important;
+  min-width: 158px !important;
+  max-width: 158px !important;
+  text-transform: uppercase;
+  letter-spacing: .4px;
 }
 
 .emulacion-legajo-icon {
@@ -109,21 +97,6 @@ const onSearch = async () => {
   background: #e0f7fa;
   color: #008fa1;
   font-size: 14px;
-}
-
-.emulacion-legajo-input {
-  width: 158px !important;
-  min-width: 158px !important;
-  max-width: 158px !important;
-  text-transform: uppercase;
-  letter-spacing: .4px;
-}
-
-.emulacion-legajo-help {
-  display: block;
-  margin-top: 4px;
-  color: #607d8b;
-  font-size: 11px;
 }
 
 .emulacion-actions {
