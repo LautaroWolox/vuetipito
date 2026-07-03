@@ -31,9 +31,9 @@
       </div>
     </div>
 
-    <div class="fm-actions">
-      <FmButton :label="store.loading ? 'BUSCANDO...' : 'BUSCAR'" icon="pi-search" :disabled="store.loading" @click="buscar" />
-      <FmButton label="LIMPIAR" icon="pi-filter-slash" variant="outline" @click="limpiar" />
+    <div class="fm-actions fm-filter-actions">
+      <FmButton class="fm-filter-action-button" :label="store.loading ? 'BUSCANDO...' : 'BUSCAR'" icon="pi-search" :disabled="store.loading" @click="buscar" />
+      <FmButton class="fm-filter-action-button" label="LIMPIAR" icon="pi-filter-slash" variant="outline" @click="limpiar" />
     </div>
   </div>
 </template>
