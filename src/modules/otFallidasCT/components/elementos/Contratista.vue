@@ -1,25 +1,35 @@
 <template>
-    <div class="flex flex-column px-2">
-        <label for="contratista">Contratista</label>
-        <Select id="contratista" v-model="selectedContratista" :options="contratistas" optionLabel="nombre" class="w-full md:w-56" />
-    </div>
+  <div class="fm-field fm-field--span-4 otf-filter-element otf-filter-element--contratista">
+    <label for="otf-contratista">Contratista</label>
+    <Select
+      inputId="otf-contratista"
+      :modelValue="modelValue"
+      :options="options"
+      optionLabel="name"
+      class="w-full"
+      showClear
+      @update:modelValue="$emit('update:modelValue', $event)"
+    />
+  </div>
 </template>
 
 <script setup>
-import { ref } from "vue";
+import Select from 'primevue/select'
 
-const selectedContratista = ref();
+defineProps({
+  modelValue: { type: [Object, String, null], default: null },
+  options: { type: Array, default: () => [] }
+})
 
-const contratistas = ref([
-    {'id': 1, 'nombre': 'cont1'},
-    {'id': 2, 'nombre': 'cont2'},
-    {'id': 3, 'nombre': 'cont3'},
-    {'id': 4, 'nombre': 'cont4'},
-]);
-
-
+defineEmits(['update:modelValue'])
 </script>
 
 <style scoped>
-</style>
+.otf-filter-element label {
+  white-space: nowrap;
+}
 
+.otf-filter-element :deep(.p-select) {
+  width: 100%;
+}
+</style>
