@@ -1,0 +1,31 @@
+/* ========================================================================
+   FIELD MANAGER LAST OVERRIDES
+   ------------------------------------------------------------------------
+   Ajustes finales que deben ganar prioridad sobre cualquier capa anterior.
+
+   - INCLUIR: todos los iconos de recuperar/incluir deben verse en turquesa
+     oscuro, igual que NOTA, aunque la fila este marcada como disabled.
+   ======================================================================== */
+
+:root {
+  --fm-last-icon-turquoise: #008fa1;
+}
+
+.fm-pass-grid .fm-icon-btn .pi-replay,
+.fm-ui-grid .fm-icon-btn .pi-replay,
+.fm-pt-datatable .fm-icon-btn .pi-replay,
+.fm-pass-grid .fm-disabled-row .fm-icon-btn .pi-replay,
+.fm-ui-grid .fm-disabled-row .fm-icon-btn .pi-replay,
+.fm-pt-datatable .fm-disabled-row .fm-icon-btn .pi-replay,
+.fm-pass-grid .p-datatable-tbody > tr.fm-disabled-row .fm-icon-btn .pi-replay,
+.fm-pass-grid .p-datatable-tbody > tr.fm-selected-row .fm-icon-btn .pi-replay,
+.fm-ui-grid .p-datatable-tbody > tr.fm-selected-row .fm-icon-btn .pi-replay,
+.fm-pt-datatable .p-datatable-tbody > tr.fm-selected-row .fm-icon-btn .pi-replay {
+  color: var(--fm-last-icon-turquoise) !important;
+}
+
+.fm-pass-grid .fm-icon-btn:hover .pi-replay,
+.fm-ui-grid .fm-icon-btn:hover .pi-replay,
+.fm-pt-datatable .fm-icon-btn:hover .pi-replay {
+  color: #006f7d !important;
+}
