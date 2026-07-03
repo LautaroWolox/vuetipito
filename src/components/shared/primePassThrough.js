@@ -1,21 +1,27 @@
 /**
  * FIELD MANAGER - PrimeVue PassThrough global
  * --------------------------------------------------------------------------
- * Este archivo es la entrada global para que PrimeVue pinte todos los
- * componentes nuevos con el mismo estilo de Field Manager / Registro OTs.
+ * Esta es la entrada global para que PrimeVue pinte todos los componentes
+ * nuevos con el mismo estilo de Field Manager / Registro OTs.
+ *
+ * NOMBRE CORRECTO:
+ * - La funcionalidad se llama PrimeVue PassThrough.
+ * - Aca registramos clases globales fm-pt-* en las partes internas de
+ *   Button, Select, MultiSelect, Accordion, DataTable, Checkbox, Dialog
+ *   y DatePicker.
+ *
+ * SEMILLA GLOBAL PARA PANTALLAS NUEVAS:
+ * - Este archivo: src/components/shared/primePassThrough.js
+ * - Guia de uso: src/components/shared/FIELD_MANAGER_UI_SEED.md
+ * - CSS base: src/assets/css/fm-foundation.css
+ * - CSS Registro/grillas: src/assets/css/fm-registro-ui.css
+ * - CSS bridge legacy minimo: src/assets/css/fm-legacy-bridge.css
  *
  * IMPORTANTE:
  * - No poner CSS scoped para botones, grillas, checkbox, dialogs, selects,
  *   acordeones o inputs si el estilo es comun a toda la aplicacion.
- * - El CSS visual vive en:
- *     src/assets/css/fm-foundation.css
- *     src/assets/css/fm-registro-ui.css
- * - Esta configuracion se conecta una sola vez desde main.js:
- *
- *     app.use(PrimeVue, {
- *       pt: fmPrimePassThrough,
- *       ...
- *     })
+ * - Las pantallas nuevas deben usar componentes Fm* y clases fm-*.
+ * - Si algo comun no existe todavia, agregarlo a una capa global fm-*.
  *
  * COMO USAR EN UNA PANTALLA NUEVA:
  * --------------------------------------------------------------------------
@@ -37,9 +43,9 @@
  *               </div>
  *             </div>
  *
- *             <div class="fm-actions">
+ *             <div class="fm-actions fm-filter-actions">
  *               <FmButton label="BUSCAR" icon="pi-search" @click="buscar" />
- *               <FmButton label="LIMPIAR" icon="pi-filter-slash" variant="outline" @click="limpiar" />
+ *               <FmButton label="LIMPIAR" icon="pi-align-left" variant="outline" @click="limpiar" />
  *             </div>
  *           </div>
  *         </AccordionContent>
@@ -51,7 +57,7 @@
  *           <FmGridShell>
  *             <DataTable :value="rows" dataKey="id" paginator :rows="10" filterDisplay="row">
  *               <template #paginatorstart>
- *                 <FmGridActions @export="exportar" @delete="eliminar" @refresh="reprocesar" />
+ *                 <FmGridActions @export="exportar" @delete="excluir" @refresh="reprocesar" />
  *               </template>
  *               <Column selectionMode="multiple" headerStyle="width: 3rem" />
  *               <Column field="nroOt" header="Nro. OT" sortable />
@@ -72,13 +78,6 @@
  *     </Dialog>
  *   </div>
  * </template>
- *
- * QUE HACE PassThrough:
- * --------------------------------------------------------------------------
- * - Agrega clases fm-pt-* automaticamente a las partes internas de PrimeVue.
- * - Ejemplo: DataTable crea wrappers, tbody, paginator, checkbox, etc.
- *   Nosotros los enganchamos aca para que los CSS globales los puedan pintar.
- * - Las pantallas nuevas NO tienen que copiar estilos de Registro OTs.
  */
 
 export const fmPrimePassThrough = {
@@ -124,11 +123,7 @@ export const fmPrimePassThrough = {
     header: { class: 'fm-pt-multiselect-header' }
   },
 
-  /**
-   * Acordeones PrimeVue.
-   * En pantallas nuevas se puede usar solamente <Accordion> y ya toma
-   * la clase fm-accordion desde PassThrough.
-   */
+  /** Acordeones PrimeVue. */
   accordion: {
     root: { class: 'fm-pt-accordion fm-accordion' }
   },
@@ -143,12 +138,7 @@ export const fmPrimePassThrough = {
     content: { class: 'fm-pt-accordion-content' }
   },
 
-  /**
-   * DataTable / Grilla PrimeVue.
-   * Esto garantiza que las grillas nuevas salgan con el mismo diseño:
-   * borde cyan, headers, filtros, filas seleccionadas, hover, scroll,
-   * paginator y checkbox como Registro OTs Fallidas.
-   */
+  /** DataTable / Grilla PrimeVue. */
   datatable: {
     root: { class: 'fm-pt-datatable fm-pass-grid' },
     table: { class: 'fm-pt-datatable-table' },
@@ -178,11 +168,7 @@ export const fmPrimePassThrough = {
     footer: { class: 'fm-pt-dialog-footer' }
   },
 
-  /**
-   * DatePicker PrimeVue si en algun momento se usa.
-   * Hoy Registro OTs usa CtDatePicker custom con clases fm-date-* y fm-calendar-*,
-   * pero dejamos este bloque preparado para mantener la misma estetica.
-   */
+  /** DatePicker PrimeVue preparado para futuras pantallas. */
   datepicker: {
     root: { class: 'fm-pt-datepicker fm-date-picker' },
     input: { class: 'fm-pt-datepicker-input fm-date-button' },
