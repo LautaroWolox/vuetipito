@@ -41,3 +41,15 @@ onMounted(async () => {
   await store.setMotivos()
 })
 </script>
+
+<style scoped>
+.ot-fallidas-ct :deep(.fm-accordion) {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 14px !important;
+}
+
+.ot-fallidas-ct :deep(.p-accordionpanel + .p-accordionpanel) {
+  margin-top: 4px !important;
+}
+</style>
