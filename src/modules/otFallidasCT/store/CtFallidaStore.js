@@ -86,6 +86,28 @@ export const useFallidasCtStore = defineStore('fallidasCt', {
       }
     },
     async sendExcluidas(rows, motivo, comentario) {
+      /*
+       * ================================================================
+       * ACA TIENE QUE CONECTAR EL BACKEND - EXCLUIR OTS
+       * ================================================================
+       * Este es el punto donde se debe reemplazar la logica local/mock por
+       * la llamada real al servicio de backend que excluye las OTs.
+       *
+       * Datos disponibles para enviar:
+       * - rows: OTs seleccionadas para excluir.
+       * - motivo: motivo seleccionado en el popup.
+       * - comentario: nota/comentario ingresado por el usuario.
+       *
+       * Ejemplo futuro:
+       * await api.excluirOts({
+       *   ots: rows.map((row) => row.nroOrdenTrabajo),
+       *   motivo: motivo?.code,
+       *   comentario
+       * })
+       *
+       * Mantener la actualizacion local de abajo solamente como fallback
+       * visual hasta conectar el backend real.
+       */
       rows.forEach((row) => {
         const target = this.rows.find((item) => item.id === row.id)
         if (target) {
@@ -113,8 +135,28 @@ export const useFallidasCtStore = defineStore('fallidasCt', {
       return { status: true }
     },
     async reprocesar() {
+      /*
+       * ================================================================
+       * ACA TIENE QUE CONECTAR EL BACKEND - REPROCESAR OTS
+       * ================================================================
+       * Este es el punto donde se debe reemplazar la logica local/mock por
+       * la llamada real al servicio de backend que reprocesa las OTs.
+       *
+       * Datos disponibles para enviar:
+       * - this.selectedRows: ids internos seleccionados en la grilla.
+       * - selectedOts: objetos completos de las OTs seleccionadas.
+       *
+       * Ejemplo futuro:
+       * await api.reprocesarOts({
+       *   ots: selectedOts.map((row) => row.nroOrdenTrabajo)
+       * })
+       *
+       * Mantener el clear de seleccion como comportamiento visual luego de
+       * una respuesta exitosa del backend.
+       */
+      const selectedOts = this.rows.filter((row) => this.selectedRows.includes(row.id))
       this.selectedRows = []
-      return { status: true }
+      return { status: true, rows: selectedOts }
     }
   }
 })
