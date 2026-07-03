@@ -2,9 +2,6 @@
   <div class="fm-field emulacion-legajo-field">
     <label class="emulacion-legajo-label" for="legajo-emulacion-legacy">LEGAJO</label>
     <div class="emulacion-legajo-control">
-      <span class="emulacion-legajo-icon" aria-hidden="true">
-        <i class="pi pi-id-card"></i>
-      </span>
       <InputText
         id="legajo-emulacion-legacy"
         v-model="legajo"
@@ -12,11 +9,13 @@
         type="text"
         maxlength="13"
         autocomplete="off"
-        placeholder="Hasta 13 caracteres"
         :disabled="disable"
         @input="capturarlegajo"
         @blur="capturarlegajo"
       />
+      <span class="emulacion-legajo-icon" aria-hidden="true">
+        <i class="pi pi-id-card"></i>
+      </span>
     </div>
   </div>
 </template>
@@ -47,7 +46,7 @@ const capturarlegajo = () => {
 
 <style scoped>
 .emulacion-legajo-field {
-  max-width: 265px;
+  max-width: 245px;
 }
 
 .emulacion-legajo-label {
@@ -65,6 +64,15 @@ const capturarlegajo = () => {
   width: 100%;
 }
 
+.emulacion-legajo-input {
+  width: 158px !important;
+  min-width: 158px !important;
+  max-width: 158px !important;
+  height: 30px !important;
+  text-transform: uppercase;
+  letter-spacing: .4px;
+}
+
 .emulacion-legajo-icon {
   width: 28px;
   height: 26px;
@@ -77,14 +85,5 @@ const capturarlegajo = () => {
   background: #e0f7fa;
   color: #008fa1;
   font-size: 14px;
-}
-
-.emulacion-legajo-input {
-  width: 158px !important;
-  min-width: 158px !important;
-  max-width: 158px !important;
-  height: 30px !important;
-  text-transform: uppercase;
-  letter-spacing: .4px;
 }
 </style>
