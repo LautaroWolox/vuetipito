@@ -16,18 +16,52 @@ const baseRows = [
 ]
 
 const blankOption = { name: '', code: '' }
+const emptyFilters = () => ({ nroOt: '', fechaDesde: null, fechaHasta: null, contratista: null, descripcionError: '', excluida: null, pais: null })
 const toOption = (name) => ({ name, code: name })
-const contratistaOptions = [blankOption, ...new Set(baseRows.map((row) => row.contratista).filter(Boolean))].map((item) => typeof item === 'string' ? toOption(item) : item)
+const uniqueOptions = (field) => [blankOption, ...new Set(baseRows.map((row) => row[field]).filter(Boolean))].map((item) => typeof item === 'string' ? toOption(item) : item)
+const contratistaOptions = uniqueOptions('contratista')
+const paisOptions = [blankOption, { name: 'ARG', code: 'ARG' }, { name: 'UY', code: 'UY' }, { name: 'PY', code: 'PY' }]
+const excluidaOptions = [blankOption, { name: 'Si', code: 'S' }, { name: 'No', code: 'N' }]
+
+const normalizeText = (value) => String(value || '').toLowerCase()
+const normalizeRow = (row) => {
+  const isExcluded = row.excluida === 'S'
+  return {
+    ...row,
+    tieneNota: Boolean(row.nota),
+    incluir: isExcluded ? 'RECUPERAR' : '',
+    incluirExp: isExcluded ? 'RECUPERAR' : ''
+  }
+}
+
+const parseDate = (value) => {
+  if (!value) return null
+  if (value instanceof Date) return new Date(value.getFullYear(), value.getMonth(), value.getDate())
+  const match = String(value).match(/^(\d{2})\/(\d{2})\/(\d{4})/)
+  if (!match) return null
+  return new Date(Number(match[3]), Number(match[2]) - 1, Number(match[1]))
+}
+
+const isDateInRange = (rowDateValue, fromValue, toValue) => {
+  const rowDate = parseDate(rowDateValue)
+  const fromDate = parseDate(fromValue)
+  const toDate = parseDate(toValue)
+  if (!rowDate) return true
+  if (fromDate && rowDate < fromDate) return false
+  if (toDate && rowDate > toDate) return false
+  return true
+}
 
 export const useFallidasCtStore = defineStore('fallidasCt', {
   state: () => ({
     loading: false,
     activeTab: ['0', '1'],
-    filters: { nroOt: '', fechaDesde: '', fechaHasta: '', contratista: '', descripcionError: '', excluida: '', pais: '' },
+    filters: emptyFilters(),
     rows: [],
     selectedRows: [],
     contratistaOptions,
-    paisOptions: [blankOption, { name: 'ARG', code: 'ARG' }, { name: 'UY', code: 'UY' }, { name: 'PY', code: 'PY' }],
+    paisOptions,
+    excluidaOptions,
     motivos: [
       { name: 'PAGO DUPLICADO', code: 'PAGO_DUPLICADO' },
       { name: 'Falta parametrización', code: 'PARAM' },
@@ -38,76 +72,73 @@ export const useFallidasCtStore = defineStore('fallidasCt', {
   getters: {
     contratistas: (state) => state.contratistaOptions,
     paises: (state) => state.paisOptions,
+    excluidas: (state) => state.excluidaOptions,
     getNotExcluded: (state) => state.rows.filter((row) => state.selectedRows.includes(row.id) && row.excluida !== 'S')
   },
   actions: {
     async setData() {
       this.loading = true
-      await new Promise((resolve) => setTimeout(resolve, 250))
-      this.rows = baseRows.map((row) => ({ ...row }))
-      this.loading = false
+      try {
+        this.rows = baseRows.map((row) => normalizeRow(row))
+      } finally {
+        this.loading = false
+      }
     },
+
     async setMotivos() {
       return this.motivos
     },
+
     setSelectedRows(ids) {
       const selectableIds = this.rows.filter((row) => row.excluida !== 'S').map((row) => row.id)
       this.selectedRows = ids.filter((id) => selectableIds.includes(id))
     },
+
     toggleSelectedRow(row) {
       if (!row || row.excluida === 'S') return
       const index = this.selectedRows.indexOf(row.id)
       if (index >= 0) this.selectedRows.splice(index, 1)
       else this.selectedRows.push(row.id)
     },
+
     clearFilters() {
-      this.filters = { nroOt: '', fechaDesde: '', fechaHasta: '', contratista: '', descripcionError: '', excluida: '', pais: '' }
+      this.filters = emptyFilters()
+      this.selectedRows = []
     },
+
     async search() {
       this.loading = true
-      await new Promise((resolve) => setTimeout(resolve, 250))
-      const f = this.filters
-      const text = (value) => String(value || '').toLowerCase()
-      this.rows = baseRows.filter((row) => {
-        return (!f.nroOt || text(row.nroOrdenTrabajo).includes(text(f.nroOt)))
-          && (!f.contratista?.code || row.contratista === f.contratista.code)
-          && (!f.descripcionError || text(row.errorDescripcion).includes(text(f.descripcionError)))
-          && (!f.excluida?.code || row.excluida === f.excluida.code)
-          && (!f.pais?.code || row.pais === f.pais.code)
-      }).map((row) => ({ ...row }))
-      this.selectedRows = []
-      this.loading = false
+      try {
+        // ACA TIENE QUE CONECTAR EL BACKEND - BUSCAR OTS FALLIDAS CT
+        // Reemplazar el filtro local por la llamada real y mapear la respuesta
+        // a la misma estructura de rows usada por columns.js.
+        const f = this.filters
+        this.rows = baseRows.filter((row) => {
+          return (!f.nroOt || normalizeText(row.nroOrdenTrabajo).includes(normalizeText(f.nroOt)))
+            && isDateInRange(row.fechaCierre, f.fechaDesde, f.fechaHasta)
+            && (!f.contratista?.code || row.contratista === f.contratista.code)
+            && (!f.descripcionError || normalizeText(row.errorDescripcion).includes(normalizeText(f.descripcionError)))
+            && (!f.excluida?.code || row.excluida === f.excluida.code)
+            && (!f.pais?.code || row.pais === f.pais.code)
+        }).map((row) => normalizeRow(row))
+        this.selectedRows = []
+      } finally {
+        this.loading = false
+      }
     },
-    updateNota(row, nota) {
+
+    async updateNota(row, nota) {
+      // ACA TIENE QUE CONECTAR EL BACKEND - GUARDAR NOTA DE OT
       const target = this.rows.find((item) => item.id === row?.id)
       if (target) {
         target.nota = nota || ''
         target.tieneNota = Boolean(target.nota)
       }
+      return { status: true }
     },
+
     async sendExcluidas(rows, motivo, comentario) {
-      /*
-       * ================================================================
-       * ACA TIENE QUE CONECTAR EL BACKEND - EXCLUIR OTS
-       * ================================================================
-       * Este es el punto donde se debe reemplazar la logica local/mock por
-       * la llamada real al servicio de backend que excluye las OTs.
-       *
-       * Datos disponibles para enviar:
-       * - rows: OTs seleccionadas para excluir.
-       * - motivo: motivo seleccionado en el popup.
-       * - comentario: nota/comentario ingresado por el usuario.
-       *
-       * Ejemplo futuro:
-       * await api.excluirOts({
-       *   ots: rows.map((row) => row.nroOrdenTrabajo),
-       *   motivo: motivo?.code,
-       *   comentario
-       * })
-       *
-       * Mantener la actualizacion local de abajo solamente como fallback
-       * visual hasta conectar el backend real.
-       */
+      // ACA TIENE QUE CONECTAR EL BACKEND - EXCLUIR OTS
       rows.forEach((row) => {
         const target = this.rows.find((item) => item.id === row.id)
         if (target) {
@@ -122,8 +153,10 @@ export const useFallidasCtStore = defineStore('fallidasCt', {
       this.selectedRows = []
       return { status: true }
     },
+
     async incluir(row, motivo, comentario) {
-      const target = this.rows.find((item) => item.id === row.id)
+      // ACA TIENE QUE CONECTAR EL BACKEND - INCLUIR / RECUPERAR OT
+      const target = this.rows.find((item) => item.id === row?.id)
       if (target) {
         target.excluida = 'N'
         target.motivoExclusion = ''
@@ -134,26 +167,9 @@ export const useFallidasCtStore = defineStore('fallidasCt', {
       }
       return { status: true }
     },
+
     async reprocesar() {
-      /*
-       * ================================================================
-       * ACA TIENE QUE CONECTAR EL BACKEND - REPROCESAR OTS
-       * ================================================================
-       * Este es el punto donde se debe reemplazar la logica local/mock por
-       * la llamada real al servicio de backend que reprocesa las OTs.
-       *
-       * Datos disponibles para enviar:
-       * - this.selectedRows: ids internos seleccionados en la grilla.
-       * - selectedOts: objetos completos de las OTs seleccionadas.
-       *
-       * Ejemplo futuro:
-       * await api.reprocesarOts({
-       *   ots: selectedOts.map((row) => row.nroOrdenTrabajo)
-       * })
-       *
-       * Mantener el clear de seleccion como comportamiento visual luego de
-       * una respuesta exitosa del backend.
-       */
+      // ACA TIENE QUE CONECTAR EL BACKEND - REPROCESAR OTS
       const selectedOts = this.rows.filter((row) => this.selectedRows.includes(row.id))
       this.selectedRows = []
       return { status: true, rows: selectedOts }
