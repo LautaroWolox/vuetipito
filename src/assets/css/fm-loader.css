@@ -56,7 +56,8 @@
 }
 
 .fm-typing-loader--grid {
-  min-height: 186px;
+  min-height: 240px;
+  padding: 34px 18px 28px;
   border-left: 4px solid var(--fm-registro-cyan, #00a9bd);
   background: rgba(234, 252, 255, .72);
 }
@@ -72,10 +73,10 @@
   align-items: center;
   justify-content: center;
   gap: 5px;
-  padding: 14px 18px 12px;
+  padding: 18px 22px 14px;
   border: 1px solid rgba(0, 169, 189, .18);
   border-radius: 12px;
-  background: rgba(255, 255, 255, .92);
+  background: rgba(255, 255, 255, .94);
   box-shadow: 0 12px 32px rgba(0, 0, 0, .12);
 }
 
@@ -85,10 +86,11 @@
 }
 
 .fm-typing-loader__image {
-  width: 112px;
+  width: 104px;
   max-width: 100%;
   height: auto;
   display: block;
+  margin-bottom: 2px;
   animation: fmTypingLoaderPulse .78s ease-in-out infinite alternate;
   transform-origin: center bottom;
 }
@@ -141,7 +143,7 @@
 
 .fm-grid-shell--loading,
 .fm-ui-grid-shell--loading {
-  min-height: 186px;
+  min-height: 260px;
 }
 
 .fm-grid-shell--loading .p-datatable,
