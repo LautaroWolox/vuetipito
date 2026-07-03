@@ -3,7 +3,7 @@
     :visible="visible"
     modal
     header="Alerta"
-    :style="{ width: '58rem' }"
+    :style="{ width: '520px' }"
     class="fm-dialog fm-dialog-excluir"
     @update:visible="onVisibleChange"
   >
@@ -11,10 +11,10 @@
       <p>¿Confirma que desea excluir la OT seleccionada?</p>
 
       <label>Motivo</label>
-      <Select v-model="motivoSelected" :options="motivos" optionLabel="name" class="w-full fm-dialog-select" />
+      <Select v-model="motivoSelected" :options="motivos" optionLabel="name" class="fm-dialog-select" />
 
       <label>Nota</label>
-      <Textarea v-model="nota" rows="4" class="w-full" placeholder="Opcional" />
+      <Textarea v-model="nota" rows="4" class="w-full fm-dialog-textarea" placeholder="Opcional" />
     </div>
 
     <div v-else class="fm-dialog-body">
@@ -40,7 +40,7 @@
     </template>
   </Dialog>
 
-  <Dialog v-model:visible="showValidationAlert" modal header="Alerta" :style="{ width: '42rem' }" class="fm-dialog-alert">
+  <Dialog v-model:visible="showValidationAlert" modal header="Alerta" :style="{ width: '430px' }" class="fm-dialog-alert">
     <div class="fm-alert-body">
       <div class="fm-alert-triangle"><span>!</span></div>
       <span>{{ validationMessage }}</span>
