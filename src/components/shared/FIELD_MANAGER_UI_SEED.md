@@ -162,6 +162,27 @@ Registrados en `main.js`:
 7. Si una pantalla necesita un ajuste comun, agregarlo a una capa global `fm-*`.
 8. Si una pantalla vieja necesita compatibilidad, agregar solo lo minimo a `fm-legacy-bridge.css`.
 
+## Migracion de theme.css
+
+`theme.css` era un theme viejo generado para PrimeVue anterior. No debe volver a usarse como base porque contiene reglas internas viejas y primary azul.
+
+Se elimino el archivo y se migro al bridge solo lo que puede servir como compatibilidad:
+
+- `--surface-*`
+- `--gray-*`
+- `--text-color`
+- `--text-color-secondary`
+- `--content-padding`
+- `--inline-spacing`
+- `--border-radius`
+- `--focus-ring`
+- `--maskbg`
+- paletas `blue`, `cyan`, `primary`, `green`, `yellow`, `red`, `pink`, `indigo`, `teal`, `orange`, `bluegray`, `purple`
+- estados minimos `.p-error`, `.p-text-secondary`, `.p-component-overlay`, `.p-link`
+- compatibilidad minima de `.p-editor-container`
+
+No se migraron reglas viejas masivas de componentes PrimeVue como `p-datepicker`, `p-autocomplete`, `p-dropdown`, etc. porque la base nueva ya viene de PrimeVue 4 + Lara + `definePreset` + PassThrough + CSS `fm-*`.
+
 ## Archivos legacy eliminados
 
 Los estilos viejos ya no deben usarse como base:
