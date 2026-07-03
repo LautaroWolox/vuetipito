@@ -1,0 +1,323 @@
+/* ========================================================================
+   FIELD MANAGER RESPONSIVE DIALOGS
+   ------------------------------------------------------------------------
+   Capa final para que los popups no queden enormes en monitores, notebooks,
+   tablets o pantallas de baja altura.
+
+   IMPORTANTE:
+   - Los Dialog de PrimeVue pueden venir con width inline desde el componente.
+   - Por eso estas reglas usan width/max-width !important y se importan al final.
+   - No modificar popups pantalla por pantalla para cambiar tamanos.
+   - Usar clases globales:
+       fm-dialog
+       fm-dialog-alert
+       fm-dialog-excluir
+       fm-dialog-incluir
+       fm-dialog-nota
+       fm-reproceso-dialog
+   ======================================================================== */
+
+:root {
+  --fm-dialog-margin-x: 48px;
+  --fm-dialog-generic-width: 720px;
+  --fm-dialog-alert-width: 660px;
+  --fm-dialog-excluir-width: 760px;
+  --fm-dialog-incluir-width: 640px;
+  --fm-dialog-nota-width: 620px;
+  --fm-dialog-reproceso-width: 760px;
+  --fm-dialog-max-content-height: calc(100vh - 190px);
+}
+
+/* ------------------------------------------------------------------------
+   Base: escritorio comun / notebook / monitor FHD
+   ------------------------------------------------------------------------ */
+.p-dialog.fm-dialog,
+.p-dialog.fm-dialog-alert,
+.p-dialog.fm-reproceso-dialog,
+.p-dialog.fm-pt-dialog {
+  width: min(var(--fm-dialog-generic-width), calc(100vw - var(--fm-dialog-margin-x))) !important;
+  max-width: calc(100vw - var(--fm-dialog-margin-x)) !important;
+  max-height: calc(100vh - 48px) !important;
+}
+
+.p-dialog.fm-dialog-alert {
+  width: min(var(--fm-dialog-alert-width), calc(100vw - var(--fm-dialog-margin-x))) !important;
+}
+
+.p-dialog.fm-dialog-excluir {
+  width: min(var(--fm-dialog-excluir-width), calc(100vw - var(--fm-dialog-margin-x))) !important;
+}
+
+.p-dialog.fm-dialog-incluir {
+  width: min(var(--fm-dialog-incluir-width), calc(100vw - var(--fm-dialog-margin-x))) !important;
+}
+
+.p-dialog.fm-dialog-nota {
+  width: min(var(--fm-dialog-nota-width), calc(100vw - var(--fm-dialog-margin-x))) !important;
+}
+
+.p-dialog.fm-reproceso-dialog {
+  width: min(var(--fm-dialog-reproceso-width), calc(100vw - var(--fm-dialog-margin-x))) !important;
+}
+
+.p-dialog.fm-dialog .p-dialog-content,
+.p-dialog.fm-dialog-alert .p-dialog-content,
+.p-dialog.fm-reproceso-dialog .p-dialog-content,
+.p-dialog.fm-pt-dialog .p-dialog-content {
+  max-height: var(--fm-dialog-max-content-height) !important;
+  overflow-y: auto !important;
+}
+
+.p-dialog.fm-dialog .p-dialog-header,
+.p-dialog.fm-dialog-alert .p-dialog-header,
+.p-dialog.fm-reproceso-dialog .p-dialog-header,
+.p-dialog.fm-pt-dialog .p-dialog-header {
+  padding: 18px 24px !important;
+}
+
+.p-dialog.fm-dialog .p-dialog-title,
+.p-dialog.fm-dialog-alert .p-dialog-title,
+.p-dialog.fm-reproceso-dialog .p-dialog-title,
+.p-dialog.fm-pt-dialog .p-dialog-title {
+  font-size: clamp(22px, 1.45vw, 28px) !important;
+  line-height: 1.2 !important;
+}
+
+.p-dialog.fm-dialog .p-dialog-footer,
+.p-dialog.fm-dialog-alert .p-dialog-footer,
+.p-dialog.fm-reproceso-dialog .p-dialog-footer,
+.p-dialog.fm-pt-dialog .p-dialog-footer {
+  padding: 16px 24px 20px !important;
+}
+
+/* ------------------------------------------------------------------------
+   Super ultrawide / 4K / pantallas muy grandes
+   Mantiene el popup legible pero no gigante.
+   ------------------------------------------------------------------------ */
+@media (min-width: 3000px) {
+  :root {
+    --fm-dialog-margin-x: 96px;
+    --fm-dialog-generic-width: 760px;
+    --fm-dialog-alert-width: 700px;
+    --fm-dialog-excluir-width: 820px;
+    --fm-dialog-incluir-width: 680px;
+    --fm-dialog-nota-width: 660px;
+    --fm-dialog-reproceso-width: 820px;
+    --fm-dialog-max-content-height: calc(100vh - 260px);
+  }
+}
+
+/* ------------------------------------------------------------------------
+   QHD / MacBook retina / tablets grandes en landscape logico
+   ------------------------------------------------------------------------ */
+@media (min-width: 2200px) and (max-width: 2999px) {
+  :root {
+    --fm-dialog-margin-x: 72px;
+    --fm-dialog-generic-width: 740px;
+    --fm-dialog-alert-width: 680px;
+    --fm-dialog-excluir-width: 790px;
+    --fm-dialog-incluir-width: 660px;
+    --fm-dialog-nota-width: 640px;
+    --fm-dialog-reproceso-width: 790px;
+    --fm-dialog-max-content-height: calc(100vh - 230px);
+  }
+}
+
+/* ------------------------------------------------------------------------
+   FHD / WUXGA / notebooks 1920x1080 - 1920x1200
+   ------------------------------------------------------------------------ */
+@media (min-width: 1600px) and (max-width: 2199px) {
+  :root {
+    --fm-dialog-margin-x: 56px;
+    --fm-dialog-generic-width: 700px;
+    --fm-dialog-alert-width: 640px;
+    --fm-dialog-excluir-width: 740px;
+    --fm-dialog-incluir-width: 620px;
+    --fm-dialog-nota-width: 600px;
+    --fm-dialog-reproceso-width: 740px;
+    --fm-dialog-max-content-height: calc(100vh - 180px);
+  }
+}
+
+/* ------------------------------------------------------------------------
+   1366x768 / 1280x720 / notebooks chicas
+   ------------------------------------------------------------------------ */
+@media (min-width: 1100px) and (max-width: 1599px) {
+  :root {
+    --fm-dialog-margin-x: 40px;
+    --fm-dialog-generic-width: 620px;
+    --fm-dialog-alert-width: 580px;
+    --fm-dialog-excluir-width: 680px;
+    --fm-dialog-incluir-width: 580px;
+    --fm-dialog-nota-width: 560px;
+    --fm-dialog-reproceso-width: 680px;
+    --fm-dialog-max-content-height: calc(100vh - 155px);
+  }
+
+  .p-dialog.fm-dialog .p-dialog-header,
+  .p-dialog.fm-dialog-alert .p-dialog-header,
+  .p-dialog.fm-reproceso-dialog .p-dialog-header,
+  .p-dialog.fm-pt-dialog .p-dialog-header {
+    padding: 14px 20px !important;
+  }
+
+  .p-dialog.fm-dialog .p-dialog-footer,
+  .p-dialog.fm-dialog-alert .p-dialog-footer,
+  .p-dialog.fm-reproceso-dialog .p-dialog-footer,
+  .p-dialog.fm-pt-dialog .p-dialog-footer {
+    padding: 14px 20px 16px !important;
+  }
+
+  .fm-reproceso-dialog__body {
+    min-height: 124px !important;
+    padding: 26px 30px !important;
+    gap: 32px !important;
+  }
+
+  .fm-reproceso-dialog__message {
+    font-size: 19px !important;
+  }
+}
+
+/* ------------------------------------------------------------------------
+   Tablets / viewports medianos
+   ------------------------------------------------------------------------ */
+@media (min-width: 700px) and (max-width: 1099px) {
+  :root {
+    --fm-dialog-margin-x: 28px;
+    --fm-dialog-generic-width: 620px;
+    --fm-dialog-alert-width: 600px;
+    --fm-dialog-excluir-width: 660px;
+    --fm-dialog-incluir-width: 600px;
+    --fm-dialog-nota-width: 580px;
+    --fm-dialog-reproceso-width: 660px;
+    --fm-dialog-max-content-height: calc(100vh - 135px);
+  }
+
+  .p-dialog.fm-dialog,
+  .p-dialog.fm-dialog-alert,
+  .p-dialog.fm-reproceso-dialog,
+  .p-dialog.fm-pt-dialog {
+    width: calc(100vw - var(--fm-dialog-margin-x)) !important;
+  }
+
+  .fm-reproceso-dialog__body {
+    min-height: 116px !important;
+    padding: 24px 26px !important;
+    gap: 26px !important;
+  }
+}
+
+/* ------------------------------------------------------------------------
+   Moviles / ventanas angostas
+   ------------------------------------------------------------------------ */
+@media (max-width: 699px) {
+  :root {
+    --fm-dialog-margin-x: 18px;
+    --fm-dialog-max-content-height: calc(100vh - 110px);
+  }
+
+  .p-dialog.fm-dialog,
+  .p-dialog.fm-dialog-alert,
+  .p-dialog.fm-reproceso-dialog,
+  .p-dialog.fm-pt-dialog {
+    width: calc(100vw - var(--fm-dialog-margin-x)) !important;
+    max-width: calc(100vw - var(--fm-dialog-margin-x)) !important;
+    max-height: calc(100vh - 18px) !important;
+  }
+
+  .p-dialog.fm-dialog .p-dialog-header,
+  .p-dialog.fm-dialog-alert .p-dialog-header,
+  .p-dialog.fm-reproceso-dialog .p-dialog-header,
+  .p-dialog.fm-pt-dialog .p-dialog-header {
+    padding: 12px 16px !important;
+  }
+
+  .p-dialog.fm-dialog .p-dialog-title,
+  .p-dialog.fm-dialog-alert .p-dialog-title,
+  .p-dialog.fm-reproceso-dialog .p-dialog-title,
+  .p-dialog.fm-pt-dialog .p-dialog-title {
+    font-size: 22px !important;
+  }
+
+  .p-dialog.fm-dialog .p-dialog-footer,
+  .p-dialog.fm-dialog-alert .p-dialog-footer,
+  .p-dialog.fm-reproceso-dialog .p-dialog-footer,
+  .p-dialog.fm-pt-dialog .p-dialog-footer {
+    padding: 12px 16px 16px !important;
+  }
+
+  .p-dialog.fm-dialog .p-dialog-footer .p-button,
+  .p-dialog.fm-dialog-alert .p-dialog-footer .p-button,
+  .p-dialog.fm-reproceso-dialog .p-dialog-footer .p-button {
+    width: 100% !important;
+    min-width: 100% !important;
+  }
+
+  .fm-reproceso-dialog__body {
+    min-height: 112px !important;
+    padding: 22px 18px !important;
+    gap: 18px !important;
+  }
+
+  .fm-reproceso-dialog__message {
+    font-size: 17px !important;
+  }
+
+  .fm-reproceso-dialog__success,
+  .fm-reproceso-dialog .fm-alert-triangle {
+    transform: scale(.82) !important;
+    transform-origin: center !important;
+  }
+}
+
+/* ------------------------------------------------------------------------
+   Alturas bajas: 720/768/800/828
+   Evita que el popup tape toda la pantalla verticalmente.
+   ------------------------------------------------------------------------ */
+@media (max-height: 850px) {
+  :root {
+    --fm-dialog-max-content-height: calc(100vh - 140px);
+  }
+
+  .p-dialog.fm-dialog,
+  .p-dialog.fm-dialog-alert,
+  .p-dialog.fm-reproceso-dialog,
+  .p-dialog.fm-pt-dialog {
+    max-height: calc(100vh - 24px) !important;
+  }
+
+  .p-dialog.fm-dialog .p-dialog-header,
+  .p-dialog.fm-dialog-alert .p-dialog-header,
+  .p-dialog.fm-reproceso-dialog .p-dialog-header,
+  .p-dialog.fm-pt-dialog .p-dialog-header {
+    padding-top: 12px !important;
+    padding-bottom: 12px !important;
+  }
+
+  .p-dialog.fm-dialog .p-dialog-footer,
+  .p-dialog.fm-dialog-alert .p-dialog-footer,
+  .p-dialog.fm-reproceso-dialog .p-dialog-footer,
+  .p-dialog.fm-pt-dialog .p-dialog-footer {
+    padding-top: 12px !important;
+    padding-bottom: 14px !important;
+  }
+
+  .fm-reproceso-dialog__body {
+    min-height: 110px !important;
+    padding-top: 22px !important;
+    padding-bottom: 22px !important;
+  }
+}
+
+@media (max-height: 650px) {
+  :root {
+    --fm-dialog-max-content-height: calc(100vh - 105px);
+  }
+
+  .fm-reproceso-dialog__body {
+    min-height: 96px !important;
+    padding-top: 16px !important;
+    padding-bottom: 16px !important;
+  }
+}
