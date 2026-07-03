@@ -143,11 +143,25 @@ const onSelectAllChange = () => store.setSelectedRows(allSelectableSelected.valu
 const onRowClick = (event) => { if (event?.data) store.toggleSelectedRow(event.data) }
 const abrirNota = (row) => { noteRow.value = row; showNota.value = true }
 const abrirIncluir = (row) => { includeRow.value = row; showIncluir.value = true }
-const excluir = () => { if (store.selectedRows.length > 0) showExcluir.value = true }
 
 const abrirReprocesoDialog = (data) => {
   reprocesoDialog.value = data
   showReprocesoDialog.value = true
+}
+
+const excluir = () => {
+  showReprocesoDialog.value = false
+
+  if (store.selectedRows.length > 0) {
+    showExcluir.value = true
+    return
+  }
+
+  abrirReprocesoDialog({
+    type: 'warning',
+    title: 'Alerta',
+    message: 'Debe seleccionar al menos una OT para excluir.'
+  })
 }
 
 const reprocesar = async () => {
