@@ -73,9 +73,23 @@
       </Column>
     </DataTable>
 
+    <FmTypingLoader
+      v-if="showReprocesoLoader"
+      overlay
+      variant="grid"
+      title="Cargando aviso"
+      message="Preparando el mensaje"
+    />
+
     <ExcluirDialog v-model:visible="showExcluir" :selected-rows="selectedRows" />
     <IncluirDialog v-model:visible="showIncluir" :row="includeRow" />
     <NotaDialog v-model:visible="showNota" :row="noteRow" />
+    <ReprocesoDialog
+      v-model:visible="showReprocesoDialog"
+      :type="reprocesoDialog.type"
+      :title="reprocesoDialog.title"
+      :message="reprocesoDialog.message"
+    />
   </FmGridShell>
 </template>
 
@@ -88,6 +102,7 @@ import { useFallidasCtStore } from '../store/CtFallidaStore'
 import ExcluirDialog from './ExcluirDialog.vue'
 import IncluirDialog from './IncluirDialog.vue'
 import NotaDialog from './NotaDialog.vue'
+import ReprocesoDialog from './ReprocesoDialog.vue'
 import { useExcelExport } from '@/composables/useExportExcel'
 
 const store = useFallidasCtStore()
@@ -96,8 +111,11 @@ const dt = ref()
 const showExcluir = ref(false)
 const showIncluir = ref(false)
 const showNota = ref(false)
+const showReprocesoLoader = ref(false)
+const showReprocesoDialog = ref(false)
 const includeRow = ref(null)
 const noteRow = ref(null)
+const reprocesoDialog = ref({ type: 'warning', title: 'Alerta', message: '' })
 const { exportToExcel, parseDataFromTable } = useExcelExport()
 
 const filters = ref(Object.fromEntries(columns.filter((col) => !col.hidden).map((col) => [col.field, { value: null, matchMode: FilterMatchMode.CONTAINS }])))
@@ -107,6 +125,8 @@ const selectedRows = computed({
   get: () => store.rows.filter((row) => store.selectedRows.includes(row.id)),
   set: (value) => store.setSelectedRows(value.map((row) => row.id))
 })
+
+const wait = (time = 850) => new Promise((resolve) => setTimeout(resolve, time))
 
 const columnStyle = (col) => ({
   width: col.width || '120px',
@@ -123,8 +143,37 @@ const onSelectAllChange = () => store.setSelectedRows(allSelectableSelected.valu
 const onRowClick = (event) => { if (event?.data) store.toggleSelectedRow(event.data) }
 const abrirNota = (row) => { noteRow.value = row; showNota.value = true }
 const abrirIncluir = (row) => { includeRow.value = row; showIncluir.value = true }
-const excluir = () => { if (store.selectedRows.length > 0) showExcluir.value = true; else window.alert('Debe seleccionar al menos una OT para excluir.') }
-const reprocesar = async () => { if (store.selectedRows.length === 0) return window.alert('Debe seleccionar al menos una OT para reprocesar.'); await store.reprocesar() }
+const excluir = () => { if (store.selectedRows.length > 0) showExcluir.value = true }
+
+const abrirReprocesoDialog = (data) => {
+  reprocesoDialog.value = data
+  showReprocesoDialog.value = true
+}
+
+const reprocesar = async () => {
+  showReprocesoDialog.value = false
+  showReprocesoLoader.value = true
+  await wait()
+
+  if (store.selectedRows.length === 0) {
+    showReprocesoLoader.value = false
+    abrirReprocesoDialog({
+      type: 'warning',
+      title: 'Alerta',
+      message: 'No hay datos para la consulta efectuada'
+    })
+    return
+  }
+
+  await store.reprocesar()
+  showReprocesoLoader.value = false
+  abrirReprocesoDialog({
+    type: 'success',
+    title: 'Reproceso finalizado',
+    message: 'Las OTs seleccionadas fueron reprocesadas correctamente.'
+  })
+}
+
 const exportarExcel = () => {
   const parsed = parseDataFromTable(dt)
   const rows = parsed.rows
