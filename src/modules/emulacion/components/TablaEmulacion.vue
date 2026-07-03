@@ -17,22 +17,17 @@
       sortMode="multiple"
       filterDisplay="row"
       v-model:filters="filters"
-      v-model:selection="operario"
-      selectionMode="single"
       paginator
       :rows="10"
       :rowsPerPageOptions="[10, 20, 30, 50]"
       paginatorTemplate="FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink RowsPerPageDropdown"
       currentPageReportTemplate="Página {currentPage} de {totalPages}"
       showGridlines
-      @row-select="onRowSelect"
       @row-click="onRowClick"
     >
       <template #empty>
         <div class="fm-grid-empty">No se encontraron operadores.</div>
       </template>
-
-      <Column selectionMode="single" headerStyle="width: 2.6rem; min-width: 2.6rem" bodyStyle="width: 2.6rem; min-width: 2.6rem" />
 
       <Column field="legajo" sortable :showFilterMenu="false" :style="columnStyle('155px')" :headerStyle="columnStyle('155px')" :bodyStyle="columnStyle('155px')">
         <template #header>
@@ -131,6 +126,7 @@
 <script setup>
 import { ref, watch } from 'vue'
 import InputText from 'primevue/inputtext'
+import Toast from 'primevue/toast'
 import { FilterMatchMode } from '@primevue/core/api'
 import router from '@/router'
 import emulacionStore from '../store/emulacionStore.js'
@@ -163,10 +159,6 @@ const openEmulacionDialog = (row) => {
   showPopup.value = true
 }
 
-const onRowSelect = (event) => {
-  if (event?.data) openEmulacionDialog(event.data)
-}
-
 const onRowClick = (event) => {
   if (event?.data) openEmulacionDialog(event.data)
 }
@@ -190,19 +182,8 @@ const emular = async () => {
 </script>
 
 <style scoped>
-.emulacion-grid :deep(.p-selection-column),
-.emulacion-grid :deep(.p-datatable-thead > tr > th:first-child),
-.emulacion-grid :deep(.p-datatable-tbody > tr > td:first-child) {
-  width: 2.6rem !important;
-  min-width: 2.6rem !important;
-  max-width: 2.6rem !important;
-  text-align: center !important;
-}
-
-.emulacion-grid :deep(.p-radiobutton-box),
-.emulacion-grid :deep(.p-checkbox-box) {
-  width: 14px !important;
-  height: 14px !important;
+.emulacion-grid :deep(.p-datatable-tbody > tr) {
+  cursor: pointer;
 }
 
 .emulacion-header-icon {
