@@ -1,11 +1,11 @@
 <template>
-  <Dialog :visible="visible" modal header="Alerta" :style="{ width: '44rem' }" class="fm-dialog fm-dialog-incluir" @update:visible="onVisibleChange">
+  <Dialog :visible="visible" modal header="Alerta" :style="{ width: '500px' }" class="fm-dialog fm-dialog-incluir" @update:visible="onVisibleChange">
     <div class="fm-dialog-body">
       <p>¿Confirma que desea recuperar la OT seleccionada?</p>
       <label>Motivo</label>
-      <Select v-model="motivo" :options="store.motivos" optionLabel="name" class="w-full fm-dialog-select" />
+      <Select v-model="motivo" :options="store.motivos" optionLabel="name" class="fm-dialog-select" />
       <label>Nota</label>
-      <Textarea v-model="nota" rows="4" class="w-full" placeholder="Opcional" />
+      <Textarea v-model="nota" rows="4" class="w-full fm-dialog-textarea" placeholder="Opcional" />
     </div>
 
     <FmTypingLoader v-if="saving" overlay variant="dialog" title="Procesando" message="Recuperando OT" />
@@ -16,7 +16,7 @@
     </template>
   </Dialog>
 
-  <Dialog v-model:visible="showAlert" modal header="Alerta" :style="{ width: '42rem' }" class="fm-dialog-alert">
+  <Dialog v-model:visible="showAlert" modal header="Alerta" :style="{ width: '430px' }" class="fm-dialog-alert">
     <div class="fm-alert-body">
       <div class="fm-alert-triangle"><span>!</span></div>
       <span>Debe seleccionar un motivo.</span>
