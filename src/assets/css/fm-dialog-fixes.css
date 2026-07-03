@@ -7,6 +7,7 @@
    - El loader del tipito debe poder centrarse como overlay.
    - La grilla debe verse como la referencia: textos mas firmes e iconos
      de NOTA / INCLUIR iguales al diseno aprobado.
+   - Los avisos de reproceso deben verse como los popups de referencia.
    ======================================================================== */
 
 /* ------------------------------------------------------------------------
@@ -205,4 +206,70 @@
 .fm-pt-datatable .fm-disabled-row .fm-icon-btn .pi-replay,
 .fm-pass-grid .p-datatable-tbody > tr.fm-disabled-row .fm-icon-btn .pi-replay {
   color: #b6c0c7 !important;
+}
+
+/* ------------------------------------------------------------------------
+   Popup resultado reproceso
+   ------------------------------------------------------------------------ */
+.fm-reproceso-dialog .p-dialog-header {
+  min-height: 68px !important;
+  padding: 14px 24px !important;
+  border-bottom: 1px solid #e8edf0 !important;
+}
+
+.fm-reproceso-dialog .p-dialog-title {
+  color: #263746 !important;
+  font-size: 28px !important;
+  font-weight: 400 !important;
+}
+
+.fm-reproceso-dialog .p-dialog-content {
+  padding: 0 !important;
+}
+
+.fm-reproceso-dialog .p-dialog-footer {
+  min-height: 84px !important;
+  padding: 18px 28px !important;
+  border-top: 1px solid #e8edf0 !important;
+}
+
+.fm-reproceso-dialog__body {
+  min-height: 148px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 42px !important;
+  padding: 34px 36px !important;
+  color: #263746 !important;
+}
+
+.fm-reproceso-dialog__message {
+  color: #263746 !important;
+  font-size: 22px !important;
+  font-weight: 400 !important;
+  line-height: 1.35 !important;
+}
+
+.fm-reproceso-dialog__success {
+  width: 58px !important;
+  height: 58px !important;
+  border: 5px solid #2e7d32 !important;
+  border-radius: 50% !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex: 0 0 auto !important;
+  box-shadow: 0 7px 16px rgba(46, 125, 50, .18) !important;
+}
+
+.fm-reproceso-dialog__success span {
+  width: 24px !important;
+  height: 14px !important;
+  border-left: 5px solid #2e7d32 !important;
+  border-bottom: 5px solid #2e7d32 !important;
+  transform: rotate(-45deg) translate(1px, -1px) !important;
+}
+
+.fm-reproceso-dialog .fm-alert-triangle {
+  width: 68px !important;
+  height: 60px !important;
 }
