@@ -1,0 +1,107 @@
+/* ========================================================================
+   FIELD MANAGER DIALOG / LOADER FIXES
+   ------------------------------------------------------------------------
+   Ajustes puntuales sobre la capa global:
+   - La X de cierre del Dialog NO debe tomar el estilo grande de botones.
+   - El textarea de nota en popups debe tener altura usable.
+   - El loader del tipito debe poder centrarse como overlay.
+   ======================================================================== */
+
+/* ------------------------------------------------------------------------
+   PrimeVue Dialog close button
+   ------------------------------------------------------------------------
+   El boton de cerrar del header lo genera PrimeVue internamente. Como los
+   botones globales usan .fm-pt-button/.fm-action-button, esta regla lo
+   devuelve a un icon button chico, sin fondo cyan ni sombra grande.
+   ------------------------------------------------------------------------ */
+.p-dialog .p-dialog-header .p-dialog-close-button,
+.p-dialog .p-dialog-header .p-dialog-header-icon,
+.fm-dialog .p-dialog-header .p-dialog-close-button,
+.fm-dialog-alert .p-dialog-header .p-dialog-close-button,
+.fm-pt-dialog .p-dialog-header .p-dialog-close-button {
+  width: 32px !important;
+  min-width: 32px !important;
+  height: 32px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 50% !important;
+  background: transparent !important;
+  color: #34465b !important;
+  box-shadow: none !important;
+  transform: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.p-dialog .p-dialog-header .p-dialog-close-button:hover,
+.p-dialog .p-dialog-header .p-dialog-header-icon:hover,
+.fm-dialog .p-dialog-header .p-dialog-close-button:hover,
+.fm-dialog-alert .p-dialog-header .p-dialog-close-button:hover,
+.fm-pt-dialog .p-dialog-header .p-dialog-close-button:hover {
+  width: 32px !important;
+  min-width: 32px !important;
+  height: 32px !important;
+  background: var(--fm-registro-cyan-soft, #e0f7fa) !important;
+  color: var(--fm-registro-cyan-strong, #008fa1) !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+.p-dialog .p-dialog-header .p-dialog-close-button svg,
+.p-dialog .p-dialog-header .p-dialog-close-button .p-button-icon,
+.p-dialog .p-dialog-header .p-dialog-header-icon svg,
+.fm-dialog .p-dialog-header .p-dialog-close-button svg,
+.fm-dialog-alert .p-dialog-header .p-dialog-close-button svg,
+.fm-pt-dialog .p-dialog-header .p-dialog-close-button svg {
+  width: 16px !important;
+  min-width: 16px !important;
+  height: 16px !important;
+  color: currentColor !important;
+  stroke: currentColor !important;
+  fill: currentColor !important;
+}
+
+/* ------------------------------------------------------------------------
+   Dialog body controls
+   ------------------------------------------------------------------------ */
+.fm-dialog-body textarea,
+.fm-popup-body textarea,
+.fm-note-body textarea,
+.p-dialog textarea,
+.p-dialog .p-textarea {
+  width: 100% !important;
+  min-height: 96px !important;
+  height: auto !important;
+  padding: 8px 10px !important;
+  font-size: 15px !important;
+  line-height: 1.35 !important;
+  resize: vertical !important;
+  box-sizing: border-box !important;
+}
+
+.fm-dialog-body .p-select,
+.fm-dialog-body .p-inputtext,
+.fm-note-body .p-textarea {
+  max-width: 100% !important;
+}
+
+/* ------------------------------------------------------------------------
+   Loader centrado en pantallas Field Manager
+   ------------------------------------------------------------------------ */
+.fm-screen {
+  position: relative;
+}
+
+.fm-screen > .fm-typing-loader--overlay,
+.ot-fallidas-ct > .fm-typing-loader--overlay {
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 100% !important;
+}
+
+.fm-typing-loader--fullscreen,
+.fm-typing-loader--overlay {
+  align-items: center !important;
+  justify-content: center !important;
+}
