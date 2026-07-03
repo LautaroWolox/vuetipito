@@ -1,13 +1,5 @@
 <template>
   <div class="fm-screen fm-screen--pad ot-fallidas-ct">
-    <FmTypingLoader
-      v-if="store.loading"
-      overlay
-      variant="grid"
-      title="Procesando OTs"
-      message="Consultando datos y preparando la grilla"
-    />
-
     <Accordion v-model:value="active" multiple class="fm-accordion">
       <AccordionPanel value="0">
         <AccordionHeader>FILTROS DE BUSQUEDA</AccordionHeader>
@@ -30,7 +22,6 @@ import { onMounted, ref } from 'vue'
 import { useFallidasCtStore } from './store/CtFallidaStore'
 import Table from './components/Table.vue'
 import Filtros from './components/Filtros.vue'
-import FmTypingLoader from '@/components/shared/FmTypingLoader.vue'
 
 const store = useFallidasCtStore()
 const active = ref(['0', '1'])
