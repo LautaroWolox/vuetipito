@@ -5,8 +5,11 @@
         <div class="login-brand-panel">
           <div class="login-logo" aria-hidden="true"></div>
           <div class="login-brand-copy">
-            <span class="login-eyebrow">Telecom Argentina</span>
-            <h1>Field Manager</h1>
+            <span class="login-eyebrow">Personal Argentina</span>
+            <h1>
+              <span class="login-fm-breath">FM</span>
+              <span class="login-product-name">Field Manager</span>
+            </h1>
             <p>Gestión operativa centralizada para equipos, órdenes de trabajo y procesos de campo.</p>
           </div>
         </div>
@@ -36,7 +39,7 @@
     <footer class="footer-fm">
       <div class="footer-copyright">
         © Copyright
-        | <a href="#" class="footer-link">Telecom Argentina S.A Derechos Reservados. | v. 1.0.0</a>
+        | <a href="#" class="footer-link">Personal Argentina | v. 1.0.0</a>
       </div>
     </footer>
   </div>
@@ -152,9 +155,7 @@ onBeforeUnmount(() => window.removeEventListener('message', handleMessage))
   flex-direction: column;
   justify-content: flex-end;
   overflow: hidden;
-  background:
-    linear-gradient(135deg, rgba(0, 169, 189, .95), rgba(0, 139, 140, .94)),
-    #00a9bd;
+  background: linear-gradient(135deg, rgba(0, 169, 189, .95), rgba(0, 139, 140, .94)), #00a9bd;
 }
 
 .login-brand-panel::before {
@@ -216,10 +217,43 @@ onBeforeUnmount(() => window.removeEventListener('message', handleMessage))
 
 .login-brand-copy h1 {
   margin: 14px 0 10px;
-  font-size: clamp(32px, 4.8vw, 50px);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
   line-height: .98;
   font-weight: 800;
   letter-spacing: -.04em;
+}
+
+.login-fm-breath {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  min-width: 112px;
+  min-height: 72px;
+  padding: 0 18px;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, .13);
+  border: 1px solid rgba(255, 255, 255, .24);
+  color: #ffffff;
+  font-size: clamp(44px, 6vw, 70px);
+  line-height: .9;
+  text-shadow: 0 10px 24px rgba(0, 0, 0, .16);
+  box-shadow: 0 16px 38px rgba(0, 0, 0, .10), inset 0 1px 0 rgba(255, 255, 255, .20);
+  transform-origin: center;
+  animation: fmBreath 3.2s ease-in-out infinite;
+}
+
+.login-product-name {
+  display: block;
+  font-size: clamp(28px, 4.1vw, 44px);
+  line-height: 1;
+}
+
+@keyframes fmBreath {
+  0%, 100% { transform: scale(1); opacity: .92; }
+  50% { transform: scale(1.045); opacity: 1; }
 }
 
 .login-brand-copy p {
@@ -344,7 +378,7 @@ onBeforeUnmount(() => window.removeEventListener('message', handleMessage))
   }
 
   .login-brand-panel {
-    min-height: 260px;
+    min-height: 300px;
   }
 
   .login-card {
