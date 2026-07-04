@@ -126,48 +126,50 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside));
 :deep(.user-profile.p-button) {
   display: flex !important;
   align-items: center !important;
-  gap: 8px !important;
-  min-height: 38px !important;
-  padding: 0.35rem 0.55rem 0.35rem 0.42rem !important;
+  gap: 9px !important;
+  min-height: 44px !important;
+  padding: 0 13px 0 5px !important;
   border-radius: 999px !important;
   cursor: pointer !important;
   transition: all 0.25s ease !important;
-  background: rgba(255, 255, 255, 0.14) !important;
+  background: rgba(0, 123, 137, 0.28) !important;
   backdrop-filter: blur(7px);
   border: 1px solid rgba(255, 255, 255, 0.24) !important;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .22), 0 6px 18px rgba(0, 0, 0, .08) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .18), 0 6px 18px rgba(0, 0, 0, .10) !important;
   color: #ffffff !important;
 }
 
 .user-profile:hover,
 :deep(.user-profile.p-button:hover) {
-  background: rgba(255, 255, 255, 0.22) !important;
+  background: rgba(0, 123, 137, 0.36) !important;
   transform: translateY(-1px);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .25), 0 8px 22px rgba(0, 0, 0, .14) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .22), 0 8px 22px rgba(0, 0, 0, .14) !important;
   color: #ffffff !important;
 }
 
 .user-avatar {
-  width: 28px;
-  height: 28px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   color: #ffffff;
   background: rgba(255, 255, 255, .18);
-  border: 1px solid rgba(255, 255, 255, .28);
+  border: 1px solid rgba(255, 255, 255, .30);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .22);
+  flex: 0 0 34px;
 }
 
 .user-avatar i {
-  font-size: 13px;
+  font-size: 16px;
 }
 
 .username {
   color: white;
   font-weight: 700;
   font-size: 0.92rem;
-  max-width: 180px;
+  max-width: 160px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -185,12 +187,12 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside));
 
 .dropdown-content {
   position: absolute;
-  top: calc(100% + 13px);
+  top: calc(100% + 11px);
   right: 0;
-  width: 318px;
+  width: 292px;
   background: #ffffff;
-  border-radius: 18px;
-  box-shadow: 0 18px 45px rgba(18, 34, 50, 0.18);
+  border-radius: 16px;
+  box-shadow: 0 16px 38px rgba(18, 34, 50, 0.16);
   z-index: 1000;
   overflow: visible;
   animation: dropdownFadeIn 0.2s ease-out;
@@ -201,7 +203,7 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside));
   content: '';
   position: absolute;
   inset: 0;
-  border-radius: 18px;
+  border-radius: 16px;
   pointer-events: none;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, .95);
 }
@@ -209,7 +211,7 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside));
 .dropdown-arrow {
   position: absolute;
   top: -7px;
-  right: 28px;
+  right: 26px;
   width: 14px;
   height: 14px;
   background: #ffffff;
@@ -232,36 +234,37 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside));
 .dropdown-header {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 18px 18px 10px;
+  gap: 10px;
+  padding: 14px 14px 8px;
 }
 
 .dropdown-avatar {
-  width: 44px;
-  height: 44px;
-  border-radius: 16px;
+  width: 38px;
+  height: 38px;
+  border-radius: 14px;
   background: linear-gradient(135deg, #00a9bd, #42cbd6);
   color: #ffffff;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 8px 18px rgba(0, 169, 189, .25);
+  box-shadow: 0 8px 16px rgba(0, 169, 189, .20);
+  flex: 0 0 38px;
 }
 
 .dropdown-avatar i {
-  font-size: 18px;
+  font-size: 17px;
 }
 
 .dropdown-title-block {
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 2px;
 }
 
 .dropdown-eyebrow {
   color: #7a8994;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 700;
   letter-spacing: .06em;
   text-transform: uppercase;
@@ -269,23 +272,23 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside));
 
 .dropdown-title {
   color: #1d3444;
-  font-size: 16px;
+  font-size: 15px;
   line-height: 1.15;
-  max-width: 205px;
+  max-width: 190px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .user-info {
-  padding: 6px 18px 14px;
+  padding: 5px 14px 12px;
 }
 
 .info-item {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 12px 13px;
+  gap: 9px;
+  padding: 10px 11px;
   border-radius: 12px;
   background: #f7fbfc;
   border: 1px solid #e2edf1;
@@ -298,22 +301,23 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside));
 }
 
 .info-icon {
-  width: 30px;
-  height: 30px;
+  width: 28px;
+  height: 28px;
   border-radius: 10px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   color: #008fa1;
   background: rgba(0, 169, 189, .10);
+  flex: 0 0 28px;
 }
 
 .info-icon i {
-  font-size: 15px;
+  font-size: 14px;
 }
 
 .info-text {
-  font-size: 14px;
+  font-size: 13px;
   color: #40515e;
   font-weight: 600;
 }
@@ -321,40 +325,40 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside));
 .divider {
   height: 1px;
   background: #e8eef2;
-  margin: 0 18px;
+  margin: 0 14px;
 }
 
 .logout-btn,
 :deep(.logout-btn.p-button) {
-  width: calc(100% - 24px) !important;
-  margin: 12px !important;
-  min-height: 44px !important;
-  padding: 0 14px !important;
-  border-radius: 13px !important;
-  background: #fff5f6 !important;
-  border: 1px solid rgba(233, 49, 69, .14) !important;
-  color: #e93145 !important;
+  width: calc(100% - 20px) !important;
+  margin: 10px !important;
+  min-height: 38px !important;
+  padding: 0 12px !important;
+  border-radius: 12px !important;
+  background: #f2fcfd !important;
+  border: 1px solid rgba(0, 169, 189, .16) !important;
+  color: #008fa1 !important;
   display: flex !important;
   align-items: center !important;
   justify-content: flex-start !important;
-  gap: 10px !important;
-  font-weight: 800 !important;
+  gap: 9px !important;
+  font-weight: 500 !important;
   box-shadow: none !important;
 }
 
 .logout-btn:hover,
 :deep(.logout-btn.p-button:hover) {
-  background: #ffecef !important;
-  border-color: rgba(233, 49, 69, .24) !important;
-  color: #d9273a !important;
+  background: #e9fbfd !important;
+  border-color: rgba(0, 169, 189, .28) !important;
+  color: #007d8d !important;
 }
 
 .logout-btn i {
-  font-size: 17px;
+  font-size: 15px;
 }
 
 .logout-btn span {
-  font-size: 15px;
+  font-size: 13px;
 }
 
 .color-gradient {
