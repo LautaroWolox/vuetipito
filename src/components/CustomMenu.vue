@@ -126,9 +126,9 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside));
 :deep(.user-profile.p-button) {
   display: flex !important;
   align-items: center !important;
-  gap: 9px !important;
+  gap: 7px !important;
   min-height: 44px !important;
-  padding: 0 13px 0 5px !important;
+  padding: 0 11px 0 3px !important;
   border-radius: 999px !important;
   cursor: pointer !important;
   transition: all 0.25s ease !important;
@@ -159,6 +159,7 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside));
   border: 1px solid rgba(255, 255, 255, .30);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, .22);
   flex: 0 0 34px;
+  margin-left: -1px;
 }
 
 .user-avatar i {
@@ -178,6 +179,7 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside));
 .dropdown-icon {
   color: white;
   font-size: 0.78rem;
+  margin-left: 3px;
   transition: transform 0.25s ease;
 }
 
@@ -400,7 +402,7 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside));
   background: rgba(255, 255, 255, 0.15) !important;
 }
 
-:deep(.p-menubar .p-menubar-root-list > .p-menuitem > .p-menuitem-content .p-menuitem-link .p-menuitem-text) {
+:deep(.p-menubar .p-menuitem-content .p-menuitem-link .p-menuitem-text) {
   font-size: 0.95rem;
 }
 
