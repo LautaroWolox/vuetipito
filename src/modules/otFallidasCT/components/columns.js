@@ -16,7 +16,7 @@ export const columns = [
   { field: 'excluida', header: 'EXCLUIDA', hidden: false, exportable: true, filter: true, sort: true, width: '104px', minWidth: '72px', type: 'text' },
   { field: 'motivoExclusion', header: 'MOTIVO_EXCLUSION', hidden: false, exportable: true, filter: true, sort: true, width: '174px', minWidth: '115px', type: 'text' },
   { field: 'nota', header: 'NOTA', hidden: true, exportable: true, filter: false, sort: false, type: 'exportText' },
-  { field: 'tieneNota', header: 'NOTA', hidden: false, exportable: false, filter: false, sort: false, width: '82px', minWidth: '62px', type: 'action', action: 'nota', icon: 'pi pi-file-edit', buttonClass: 'fm-icon-btn', title: 'Editar nota', ariaLabel: 'Editar nota' },
+  { field: 'tieneNota', header: 'NOTA', hidden: false, exportable: false, filter: false, sort: false, width: '82px', minWidth: '62px', type: 'action', action: 'nota', icon: 'pi pi-file-edit', buttonClass: 'fm-icon-btn', title: 'Nota', ariaLabel: 'Nota' },
   { field: 'incluirExp', header: 'INCLUIR', hidden: true, exportable: true, filter: false, sort: false, type: 'exportText' },
   { field: 'incluir', header: 'INCLUIR', hidden: false, exportable: false, filter: false, sort: false, width: '84px', minWidth: '62px', type: 'action', action: 'incluir', icon: 'pi pi-replay', buttonClass: 'fm-icon-btn', title: 'Recuperar OT', ariaLabel: 'Recuperar OT', showWhenField: 'excluida', showWhenValue: 'S' }
 ]
