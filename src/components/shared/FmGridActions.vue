@@ -51,18 +51,18 @@ defineEmits(['export', 'delete', 'refresh'])
 .fm-grid-actions {
   display: inline-flex !important;
   align-items: center !important;
-  gap: 8px !important;
+  gap: 6px !important;
   overflow: visible !important;
 }
 
 .fm-grid-actions :deep(.p-button.fm-grid-action-button),
 .fm-grid-actions :deep(.p-button.fm-ui-icon-button) {
-  width: 22px !important;
-  min-width: 22px !important;
-  max-width: 22px !important;
-  height: 22px !important;
-  min-height: 22px !important;
-  max-height: 22px !important;
+  width: 18px !important;
+  min-width: 18px !important;
+  max-width: 18px !important;
+  height: 18px !important;
+  min-height: 18px !important;
+  max-height: 18px !important;
   padding: 0 !important;
   margin: 0 !important;
   border: 0 !important;
@@ -99,12 +99,12 @@ defineEmits(['export', 'delete', 'refresh'])
 
 .fm-grid-actions :deep(.p-button-icon),
 .fm-grid-actions :deep(.pi) {
-  width: 16px !important;
-  min-width: 16px !important;
-  height: 16px !important;
-  min-height: 16px !important;
-  font-size: 16px !important;
-  line-height: 16px !important;
+  width: 13px !important;
+  min-width: 13px !important;
+  height: 13px !important;
+  min-height: 13px !important;
+  font-size: 13px !important;
+  line-height: 13px !important;
   margin: 0 !important;
   overflow: visible !important;
   display: inline-flex !important;
