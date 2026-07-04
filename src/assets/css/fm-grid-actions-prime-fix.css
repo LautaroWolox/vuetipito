@@ -11,7 +11,7 @@
 .fm-pt-datatable .fm-ui-grid-actions {
   display: inline-flex !important;
   align-items: center !important;
-  gap: 10px !important;
+  gap: 8px !important;
 }
 
 .fm-pass-grid .fm-grid-actions .p-button.fm-icon-btn,
@@ -20,12 +20,12 @@
 .fm-pt-datatable .fm-grid-actions .p-button.fm-icon-btn,
 .fm-pt-datatable .fm-grid-actions .p-button.fm-grid-action-button,
 .fm-pt-datatable .fm-ui-grid-actions .p-button.fm-ui-icon-button {
-  width: 34px !important;
-  min-width: 34px !important;
-  max-width: 34px !important;
-  height: 34px !important;
-  min-height: 34px !important;
-  max-height: 34px !important;
+  width: 28px !important;
+  min-width: 28px !important;
+  max-width: 28px !important;
+  height: 28px !important;
+  min-height: 28px !important;
+  max-height: 28px !important;
   padding: 0 !important;
   border: 1px solid transparent !important;
   border-radius: 4px !important;
@@ -45,9 +45,9 @@
 .fm-pt-datatable .fm-grid-actions .p-button.fm-grid-action-button:hover,
 .fm-pt-datatable .fm-ui-grid-actions .p-button.fm-ui-icon-button:hover {
   border-color: #00a9bd !important;
-  background: rgba(0, 169, 189, .08) !important;
+  background: rgba(0, 169, 189, .07) !important;
   color: #008fa1 !important;
-  box-shadow: 0 0 0 1px rgba(0, 169, 189, .18) !important;
+  box-shadow: 0 0 0 1px rgba(0, 169, 189, .14) !important;
   transform: none !important;
 }
 
@@ -59,7 +59,7 @@
 .fm-pt-datatable .fm-ui-grid-actions .p-button.fm-ui-icon-button:focus-visible {
   outline: none !important;
   border-color: #00a9bd !important;
-  box-shadow: 0 0 0 2px rgba(0, 169, 189, .22) !important;
+  box-shadow: 0 0 0 2px rgba(0, 169, 189, .18) !important;
 }
 
 .fm-pass-grid .fm-grid-actions .p-button .p-button-label,
@@ -77,10 +77,10 @@
 .fm-pt-datatable .fm-grid-actions .p-button .pi,
 .fm-pt-datatable .fm-ui-grid-actions .p-button .p-button-icon,
 .fm-pt-datatable .fm-ui-grid-actions .p-button .pi {
-  width: 22px !important;
-  height: 22px !important;
-  font-size: 22px !important;
-  line-height: 22px !important;
+  width: 17px !important;
+  height: 17px !important;
+  font-size: 17px !important;
+  line-height: 17px !important;
   margin: 0 !important;
   display: inline-flex !important;
   align-items: center !important;
