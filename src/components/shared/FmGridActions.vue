@@ -1,11 +1,12 @@
 <template>
-  <div class="fm-grid-actions fm-ui-grid-actions">
+  <div class="fm-grid-actions-final">
     <Button
       v-if="showExport"
       icon="pi pi-download"
       text
       rounded
-      class="fm-ui-icon-button fm-grid-action-button"
+      class="fm-grid-action-final"
+      :pt="actionButtonPt"
       title="Exportar"
       aria-label="Exportar"
       @click="$emit('export')"
@@ -16,7 +17,8 @@
       icon="pi pi-trash"
       text
       rounded
-      class="fm-ui-icon-button fm-grid-action-button"
+      class="fm-grid-action-final"
+      :pt="actionButtonPt"
       title="Excluir seleccionados"
       aria-label="Excluir seleccionados"
       @click="$emit('delete')"
@@ -27,7 +29,8 @@
       icon="pi pi-refresh"
       text
       rounded
-      class="fm-ui-icon-button fm-grid-action-button"
+      class="fm-grid-action-final"
+      :pt="actionButtonPt"
       title="Reprocesar"
       aria-label="Reprocesar"
       @click="$emit('refresh')"
@@ -37,6 +40,17 @@
 
 <script setup>
 import Button from 'primevue/button'
+
+const actionButtonPt = {
+  root: {
+    class: 'fm-grid-action-final-root',
+    style: 'width:16px !important;min-width:16px !important;max-width:16px !important;height:16px !important;min-height:16px !important;max-height:16px !important;padding:0 !important;margin:0 !important;border:0 !important;background:transparent !important;background-color:transparent !important;box-shadow:none !important;outline:none !important;overflow:visible !important;'
+  },
+  icon: {
+    class: 'fm-grid-action-final-icon',
+    style: 'width:12px !important;min-width:12px !important;height:12px !important;min-height:12px !important;font-size:12px !important;line-height:12px !important;margin:0 !important;overflow:visible !important;'
+  }
+}
 
 defineProps({
   showExport: { type: Boolean, default: true },
@@ -48,21 +62,23 @@ defineEmits(['export', 'delete', 'refresh'])
 </script>
 
 <style scoped>
-.fm-grid-actions {
+.fm-grid-actions-final {
   display: inline-flex !important;
   align-items: center !important;
-  gap: 6px !important;
+  justify-content: flex-start !important;
+  gap: 12px !important;
   overflow: visible !important;
+  line-height: 1 !important;
 }
 
-.fm-grid-actions :deep(.p-button.fm-grid-action-button),
-.fm-grid-actions :deep(.p-button.fm-ui-icon-button) {
-  width: 18px !important;
-  min-width: 18px !important;
-  max-width: 18px !important;
-  height: 18px !important;
-  min-height: 18px !important;
-  max-height: 18px !important;
+.fm-grid-actions-final :deep(.p-button.fm-grid-action-final),
+.fm-grid-actions-final :deep(.fm-grid-action-final-root) {
+  width: 16px !important;
+  min-width: 16px !important;
+  max-width: 16px !important;
+  height: 16px !important;
+  min-height: 16px !important;
+  max-height: 16px !important;
   padding: 0 !important;
   margin: 0 !important;
   border: 0 !important;
@@ -76,12 +92,12 @@ defineEmits(['export', 'delete', 'refresh'])
   transform: none !important;
 }
 
-.fm-grid-actions :deep(.p-button.fm-grid-action-button:hover),
-.fm-grid-actions :deep(.p-button.fm-ui-icon-button:hover),
-.fm-grid-actions :deep(.p-button.fm-grid-action-button:focus),
-.fm-grid-actions :deep(.p-button.fm-ui-icon-button:focus),
-.fm-grid-actions :deep(.p-button.fm-grid-action-button:focus-visible),
-.fm-grid-actions :deep(.p-button.fm-ui-icon-button:focus-visible) {
+.fm-grid-actions-final :deep(.p-button.fm-grid-action-final:hover),
+.fm-grid-actions-final :deep(.p-button.fm-grid-action-final:focus),
+.fm-grid-actions-final :deep(.p-button.fm-grid-action-final:focus-visible),
+.fm-grid-actions-final :deep(.fm-grid-action-final-root:hover),
+.fm-grid-actions-final :deep(.fm-grid-action-final-root:focus),
+.fm-grid-actions-final :deep(.fm-grid-action-final-root:focus-visible) {
   border: 0 !important;
   border-radius: 0 !important;
   background: transparent !important;
@@ -93,22 +109,30 @@ defineEmits(['export', 'delete', 'refresh'])
   transform: none !important;
 }
 
-.fm-grid-actions :deep(.p-button-label) {
+.fm-grid-actions-final :deep(.p-button-label) {
   display: none !important;
 }
 
-.fm-grid-actions :deep(.p-button-icon),
-.fm-grid-actions :deep(.pi) {
-  width: 13px !important;
-  min-width: 13px !important;
-  height: 13px !important;
-  min-height: 13px !important;
-  font-size: 13px !important;
-  line-height: 13px !important;
+.fm-grid-actions-final :deep(.p-button-icon),
+.fm-grid-actions-final :deep(.pi),
+.fm-grid-actions-final :deep(.fm-grid-action-final-icon) {
+  width: 12px !important;
+  min-width: 12px !important;
+  height: 12px !important;
+  min-height: 12px !important;
+  font-size: 12px !important;
+  line-height: 12px !important;
   margin: 0 !important;
   overflow: visible !important;
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
+}
+
+.fm-grid-actions-final :deep(.p-button-icon::before),
+.fm-grid-actions-final :deep(.pi::before),
+.fm-grid-actions-final :deep(.fm-grid-action-final-icon::before) {
+  font-size: 12px !important;
+  line-height: 12px !important;
 }
 </style>
