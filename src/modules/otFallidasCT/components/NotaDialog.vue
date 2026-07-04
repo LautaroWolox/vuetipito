@@ -14,8 +14,6 @@
 import { computed } from 'vue'
 
 const props = defineProps({ visible: Boolean, row: { type: Object, default: null } })
-defineEmits(['update:visible'])
-
 const emit = defineEmits(['update:visible'])
 const nota = computed(() => props.row?.nota || '')
 
