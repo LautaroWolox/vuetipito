@@ -10,12 +10,7 @@
           </Button>
 
           <div v-if="showDropdown" class="dropdown-content">
-            <Button class="logout-btn" text type="button" @click="logout">
-              <template #icon>
-                <i class="pi pi-sign-out"></i>
-              </template>
-              <span>Cerrar Sesión</span>
-            </Button>
+            <Button class="logout-btn" text type="button" icon="pi pi-sign-out" label="Cerrar Sesión" @click="logout" />
           </div>
         </div>
       </template>
@@ -109,14 +104,14 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside));
 :deep(.user-profile.p-button) {
   display: flex !important;
   align-items: center !important;
-  gap: 12px !important;
-  min-height: 53px !important;
-  height: 53px !important;
-  padding: 0 14px 0 12px !important;
+  gap: 7px !important;
+  min-height: 34px !important;
+  height: 34px !important;
+  padding: 0 9px 0 8px !important;
   border-radius: 0 !important;
   cursor: pointer !important;
   transition: all 0.2s ease !important;
-  background: #0096a4 !important;
+  background: transparent !important;
   border: 0 !important;
   color: #ffffff !important;
   box-shadow: none !important;
@@ -124,32 +119,32 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside));
 
 .user-profile:hover,
 :deep(.user-profile.p-button:hover) {
-  background: #008d9a !important;
+  background: rgba(255, 255, 255, 0.12) !important;
   color: #ffffff !important;
   box-shadow: none !important;
   transform: none !important;
 }
 
 .user-avatar {
-  width: 38px;
-  height: 38px;
+  width: 27px;
+  height: 27px;
   border-radius: 50%;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   color: #0096a4;
   background: #ffffff;
-  font-size: 15px;
+  font-size: 11px;
   font-weight: 500;
   line-height: 1;
-  flex: 0 0 38px;
+  flex: 0 0 27px;
 }
 
 .username {
   color: #ffffff;
-  font-weight: 700;
-  font-size: 15px;
-  max-width: 190px;
+  font-weight: 600;
+  font-size: 11px;
+  max-width: 120px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -157,8 +152,8 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside));
 
 .dropdown-icon {
   color: #ffffff;
-  font-size: 11px;
-  margin-left: 2px;
+  font-size: 9px;
+  margin-left: 1px;
   transition: transform 0.2s ease;
 }
 
@@ -168,12 +163,12 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside));
 
 .dropdown-content {
   position: absolute;
-  top: 100%;
+  top: calc(100% + 0px);
   right: 0;
-  min-width: 245px;
+  min-width: 178px;
   background: #ffffff;
   border-radius: 0;
-  box-shadow: 0 8px 20px rgba(18, 34, 50, 0.12);
+  box-shadow: 0 8px 18px rgba(18, 34, 50, 0.12);
   z-index: 1000;
   overflow: hidden;
   animation: dropdownFadeIn 0.18s ease-out;
@@ -195,8 +190,8 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside));
 .logout-btn,
 :deep(.logout-btn.p-button) {
   width: 100% !important;
-  min-height: 58px !important;
-  padding: 0 24px !important;
+  min-height: 41px !important;
+  padding: 0 16px !important;
   border-radius: 0 !important;
   background: #ffffff !important;
   border: 0 !important;
@@ -204,7 +199,7 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside));
   display: flex !important;
   align-items: center !important;
   justify-content: flex-start !important;
-  gap: 14px !important;
+  gap: 9px !important;
   font-weight: 500 !important;
   box-shadow: none !important;
 }
@@ -215,12 +210,14 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside));
   color: #d51f1f !important;
 }
 
-.logout-btn i {
-  font-size: 18px;
+.logout-btn :deep(.p-button-icon),
+.logout-btn :deep(.pi) {
+  font-size: 14px !important;
 }
 
-.logout-btn span {
-  font-size: 16px;
+.logout-btn :deep(.p-button-label) {
+  font-size: 12px !important;
+  font-weight: 500 !important;
 }
 
 .color-gradient {
