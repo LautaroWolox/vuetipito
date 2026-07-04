@@ -3,27 +3,44 @@
     <Menubar :model="items" class="main-menu">
       <template #end>
         <div class="user-section">
-          <div class="user-profile" @click="toggleDropdown">
-            <span class="username">{{ nombre }}</span>
-            <i class="pi pi-chevron-down dropdown-icon" :class="{ 'rotated': showDropdown }"></i>
-          </div>
-          
+          <button class="user-profile" type="button" @click="toggleDropdown">
+            <span class="user-avatar" aria-hidden="true">
+              <i class="pi pi-user"></i>
+            </span>
+            <span class="username">{{ userLabel }}</span>
+            <i class="pi pi-chevron-down dropdown-icon" :class="{ rotated: showDropdown }"></i>
+          </button>
+
           <div v-if="showDropdown" class="dropdown-content">
-            <div class="user-info">
-              <div class="info-item">
-                <i class="pi pi-envelope"></i>
-                <span>{{ email }}</span>
+            <div class="dropdown-arrow"></div>
+
+            <div class="dropdown-header">
+              <div class="dropdown-avatar" aria-hidden="true">
+                <i class="pi pi-user"></i>
               </div>
-              <div class="info-item">
-                <i class="pi pi-id-card"></i>
-                <span>Legajo: {{ legajo }}</span>
+              <div class="dropdown-title-block">
+                <span class="dropdown-eyebrow">Usuario activo</span>
+                <strong class="dropdown-title">{{ userLabel }}</strong>
               </div>
             </div>
+
+            <div class="user-info">
+              <div class="info-item">
+                <span class="info-icon" aria-hidden="true">
+                  <i class="pi pi-id-card"></i>
+                </span>
+                <span class="info-text">Legajo: {{ legajo }}</span>
+              </div>
+            </div>
+
             <div class="divider"></div>
-            <button class="logout-btn" @click="logout">
-              <i class="pi pi-sign-out"></i>
+
+            <Button class="logout-btn" text type="button" @click="logout">
+              <template #icon>
+                <i class="pi pi-sign-out"></i>
+              </template>
               <span>Cerrar Sesión</span>
-            </button>
+            </Button>
           </div>
         </div>
       </template>
@@ -35,8 +52,9 @@
 
 <script setup lang="ts">
 import Menubar from 'primevue/menubar';
+import Button from 'primevue/button';
 import router from '@/router';
-import { ref, onMounted, onUnmounted } from 'vue';
+import { computed, ref, onMounted, onUnmounted } from 'vue';
 import { useAuthStore } from '@/store/auth';
 import 'primeicons/primeicons.css';
 import { getRutas } from './rutas';
@@ -44,11 +62,11 @@ import { getRutas } from './rutas';
 const authStore = useAuthStore()
 
 const nombre = authStore.usuario?.nombre ?? ''
-const email = authStore.usuario?.email ?? ''
 const legajo = authStore.usuario?.legajo ?? ''
 const rutas = authStore.rutas;
 const showDropdown = ref(false);
-const items = ref( getRutas(rutas ) );
+const items = ref(getRutas(rutas));
+const userLabel = computed(() => nombre || legajo || 'Usuario')
 
 const logout = () => {
   authStore.logout()
@@ -67,15 +85,14 @@ const closeDropdown = () => {
 const handleClickOutside = (event: any) => {
   const userSection = document.querySelector('.user-section');
   const dropdown = document.querySelector('.dropdown-content');
-  
-  if (!userSection!.contains(event.target) && (!dropdown || !dropdown.contains(event.target))) {
+
+  if (!userSection?.contains(event.target) && (!dropdown || !dropdown.contains(event.target))) {
     closeDropdown();
   }
 };
 
-onMounted(() =>  document.addEventListener('click', handleClickOutside) );
-
-onUnmounted(() =>  document.removeEventListener('click', handleClickOutside) );
+onMounted(() => document.addEventListener('click', handleClickOutside));
+onUnmounted(() => document.removeEventListener('click', handleClickOutside));
 </script>
 
 <style scoped>
@@ -108,26 +125,44 @@ onUnmounted(() =>  document.removeEventListener('click', handleClickOutside) );
 .user-profile {
   display: flex;
   align-items: center;
-  padding: 0.5rem 1rem;
-  border-radius: 30px;
+  gap: 8px;
+  min-height: 38px;
+  padding: 0.35rem 0.55rem 0.35rem 0.42rem;
+  border-radius: 999px;
   cursor: pointer;
-  transition: all 0.3s ease;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(5px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.25s ease;
+  background: rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(7px);
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .22), 0 6px 18px rgba(0, 0, 0, .08);
 }
 
 .user-profile:hover {
-  background: rgba(255, 255, 255, 0.2);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.22);
+  transform: translateY(-1px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .25), 0 8px 22px rgba(0, 0, 0, .14);
+}
+
+.user-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  background: rgba(255, 255, 255, .18);
+  border: 1px solid rgba(255, 255, 255, .28);
+}
+
+.user-avatar i {
+  font-size: 13px;
 }
 
 .username {
   color: white;
-  font-weight: 600;
-  font-size: 0.95rem;
-  margin-right: 0.5rem;
+  font-weight: 700;
+  font-size: 0.92rem;
   max-width: 180px;
   white-space: nowrap;
   overflow: hidden;
@@ -136,8 +171,8 @@ onUnmounted(() =>  document.removeEventListener('click', handleClickOutside) );
 
 .dropdown-icon {
   color: white;
-  font-size: 0.8rem;
-  transition: transform 0.3s ease;
+  font-size: 0.78rem;
+  transition: transform 0.25s ease;
 }
 
 .dropdown-icon.rotated {
@@ -146,85 +181,176 @@ onUnmounted(() =>  document.removeEventListener('click', handleClickOutside) );
 
 .dropdown-content {
   position: absolute;
-  top: calc(100% + 10px);
+  top: calc(100% + 13px);
   right: 0;
-  width: 280px;
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  width: 318px;
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 18px 45px rgba(18, 34, 50, 0.18);
   z-index: 1000;
-  overflow: hidden;
+  overflow: visible;
   animation: dropdownFadeIn 0.2s ease-out;
+  border: 1px solid rgba(226, 236, 241, .92);
+}
+
+.dropdown-content::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+  pointer-events: none;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .95);
+}
+
+.dropdown-arrow {
+  position: absolute;
+  top: -7px;
+  right: 28px;
+  width: 14px;
+  height: 14px;
+  background: #ffffff;
+  border-left: 1px solid rgba(226, 236, 241, .92);
+  border-top: 1px solid rgba(226, 236, 241, .92);
+  transform: rotate(45deg);
 }
 
 @keyframes dropdownFadeIn {
   from {
     opacity: 0;
-    transform: translateY(-10px);
+    transform: translateY(-8px) scale(.98);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
   }
 }
 
+.dropdown-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 18px 10px;
+}
+
+.dropdown-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #00a9bd, #42cbd6);
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 18px rgba(0, 169, 189, .25);
+}
+
+.dropdown-avatar i {
+  font-size: 18px;
+}
+
+.dropdown-title-block {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.dropdown-eyebrow {
+  color: #7a8994;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.dropdown-title {
+  color: #1d3444;
+  font-size: 16px;
+  line-height: 1.15;
+  max-width: 205px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .user-info {
-  padding: 0.75rem;
+  padding: 6px 18px 14px;
 }
 
 .info-item {
   display: flex;
   align-items: center;
-  padding: 0.75rem;
-  border-radius: 8px;
-  transition: all 0.3s ease;
-  margin-bottom: 0.5rem;
+  gap: 10px;
+  padding: 12px 13px;
+  border-radius: 12px;
+  background: #f7fbfc;
+  border: 1px solid #e2edf1;
+  transition: all 0.2s ease;
 }
 
 .info-item:hover {
-  background: #f8f9fa;
+  background: #eefcff;
+  border-color: rgba(0, 169, 189, .28);
 }
 
-.info-item:hover span {
-  color: #28a745 !important;
+.info-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #008fa1;
+  background: rgba(0, 169, 189, .10);
 }
 
-.info-item i {
-  margin-right: 0.75rem;
-  color: #6c757d;
+.info-icon i {
+  font-size: 15px;
 }
 
-.info-item span {
-  font-size: 0.9rem;
-  color: #495057;
-  transition: color 0.3s ease;
+.info-text {
+  font-size: 14px;
+  color: #40515e;
+  font-weight: 600;
 }
 
 .divider {
   height: 1px;
-  background: #e9ecef;
-  margin: 0 1.25rem;
+  background: #e8eef2;
+  margin: 0 18px;
 }
 
-.logout-btn {
-  width: 100%;
-  padding: 0.75rem 1.25rem;
-  background: none;
-  border: none;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  color: #dc3545;
-  font-weight: 600;
+.logout-btn,
+:deep(.logout-btn.p-button) {
+  width: calc(100% - 24px) !important;
+  margin: 12px !important;
+  min-height: 44px !important;
+  padding: 0 14px !important;
+  border-radius: 13px !important;
+  background: #fff5f6 !important;
+  border: 1px solid rgba(233, 49, 69, .14) !important;
+  color: #e93145 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 10px !important;
+  font-weight: 800 !important;
+  box-shadow: none !important;
 }
 
-.logout-btn:hover {
-  background: #f8f9fa;
+.logout-btn:hover,
+:deep(.logout-btn.p-button:hover) {
+  background: #ffecef !important;
+  border-color: rgba(233, 49, 69, .24) !important;
+  color: #d9273a !important;
 }
 
 .logout-btn i {
-  margin-right: 0.75rem;
+  font-size: 17px;
+}
+
+.logout-btn span {
+  font-size: 15px;
 }
 
 .color-gradient {
