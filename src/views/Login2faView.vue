@@ -150,11 +150,6 @@ onBeforeUnmount(() => window.removeEventListener('message', handleMessage))
   position: relative;
   min-height: 430px;
   padding: 34px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 22px;
   overflow: hidden;
   background: linear-gradient(135deg, rgba(0, 169, 189, .95), rgba(0, 139, 140, .94)), #00a9bd;
 }
@@ -191,7 +186,9 @@ onBeforeUnmount(() => window.removeEventListener('message', handleMessage))
   background: transparent;
   box-shadow: none;
   margin: 0;
-  position: relative;
+  position: absolute;
+  top: 34px;
+  left: 34px;
   z-index: 1;
   display: flex;
   align-items: center;
@@ -230,27 +227,29 @@ onBeforeUnmount(() => window.removeEventListener('message', handleMessage))
 }
 
 .login-brand-copy {
-  position: relative;
+  position: absolute;
+  left: 34px;
+  right: 34px;
+  bottom: 58px;
   z-index: 1;
   color: #ffffff;
-  max-width: 390px;
-  text-align: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   gap: 14px;
-  transform: translateY(-2px);
 }
 
 .login-brand-copy h1 {
   margin: 0;
-  font-size: clamp(26px, 3.65vw, 38px);
+  font-size: clamp(27px, 3.45vw, 39px);
   line-height: 1;
   font-weight: 800;
   letter-spacing: -.04em;
+  text-align: left;
 }
 
 .login-eyebrow {
+  align-self: flex-end;
   display: inline-flex;
   align-items: center;
   justify-content: center;
