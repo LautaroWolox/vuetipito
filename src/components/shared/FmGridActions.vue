@@ -5,7 +5,7 @@
       icon="pi pi-download"
       text
       rounded
-      class="fm-icon-btn fm-ui-icon-button fm-grid-action-button"
+      class="fm-ui-icon-button fm-grid-action-button"
       title="Exportar"
       aria-label="Exportar"
       @click="$emit('export')"
@@ -16,7 +16,7 @@
       icon="pi pi-trash"
       text
       rounded
-      class="fm-icon-btn fm-ui-icon-button fm-grid-action-button"
+      class="fm-ui-icon-button fm-grid-action-button"
       title="Excluir seleccionados"
       aria-label="Excluir seleccionados"
       @click="$emit('delete')"
@@ -27,7 +27,7 @@
       icon="pi pi-refresh"
       text
       rounded
-      class="fm-icon-btn fm-ui-icon-button fm-grid-action-button"
+      class="fm-ui-icon-button fm-grid-action-button"
       title="Reprocesar"
       aria-label="Reprocesar"
       @click="$emit('refresh')"
