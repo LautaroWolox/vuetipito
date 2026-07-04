@@ -187,7 +187,7 @@ onBeforeUnmount(() => window.removeEventListener('message', handleMessage))
   box-shadow: none;
   margin: 0;
   position: absolute;
-  top: 34px;
+  top: 24px;
   left: 34px;
   z-index: 1;
   display: flex;
@@ -230,13 +230,13 @@ onBeforeUnmount(() => window.removeEventListener('message', handleMessage))
   position: absolute;
   left: 34px;
   right: 34px;
-  bottom: 58px;
+  top: 205px;
   z-index: 1;
   color: #ffffff;
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  gap: 14px;
+  gap: 20px;
 }
 
 .login-brand-copy h1 {
@@ -245,7 +245,7 @@ onBeforeUnmount(() => window.removeEventListener('message', handleMessage))
   line-height: 1;
   font-weight: 800;
   letter-spacing: -.04em;
-  text-align: left;
+  text-align: center;
 }
 
 .login-eyebrow {
