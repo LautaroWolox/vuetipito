@@ -163,12 +163,12 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside));
 
 .dropdown-content {
   position: absolute;
-  top: calc(100% + 0px);
+  top: 100%;
   right: 0;
-  min-width: 178px;
+  min-width: 152px;
   background: #ffffff;
   border-radius: 0;
-  box-shadow: 0 8px 18px rgba(18, 34, 50, 0.12);
+  box-shadow: 0 6px 14px rgba(18, 34, 50, 0.11);
   z-index: 1000;
   overflow: hidden;
   animation: dropdownFadeIn 0.18s ease-out;
@@ -190,8 +190,8 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside));
 .logout-btn,
 :deep(.logout-btn.p-button) {
   width: 100% !important;
-  min-height: 41px !important;
-  padding: 0 16px !important;
+  min-height: 32px !important;
+  padding: 0 11px !important;
   border-radius: 0 !important;
   background: #ffffff !important;
   border: 0 !important;
@@ -199,7 +199,7 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside));
   display: flex !important;
   align-items: center !important;
   justify-content: flex-start !important;
-  gap: 9px !important;
+  gap: 7px !important;
   font-weight: 500 !important;
   box-shadow: none !important;
 }
@@ -212,11 +212,11 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside));
 
 .logout-btn :deep(.p-button-icon),
 .logout-btn :deep(.pi) {
-  font-size: 14px !important;
+  font-size: 12px !important;
 }
 
 .logout-btn :deep(.p-button-label) {
-  font-size: 12px !important;
+  font-size: 11px !important;
   font-weight: 500 !important;
 }
 
