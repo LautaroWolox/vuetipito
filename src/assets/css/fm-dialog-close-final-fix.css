@@ -1,0 +1,68 @@
+/* ========================================================================
+   FIELD MANAGER DIALOG CLOSE FINAL FIX
+   ------------------------------------------------------------------------
+   Evita que el boton X de PrimeVue tome hover/focus circular turquesa/violeta.
+   Mantiene el cierre compacto y neutro en todos los popups Field Manager.
+   ======================================================================== */
+
+.p-dialog.fm-dialog .p-dialog-close-button,
+.p-dialog.fm-dialog-alert .p-dialog-close-button,
+.p-dialog.fm-reproceso-dialog .p-dialog-close-button,
+.p-dialog.fm-dialog .p-dialog-header-icon,
+.p-dialog.fm-dialog-alert .p-dialog-header-icon,
+.p-dialog.fm-reproceso-dialog .p-dialog-header-icon {
+  width: 24px !important;
+  min-width: 24px !important;
+  height: 24px !important;
+  min-height: 24px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
+  border-radius: 4px !important;
+  background: transparent !important;
+  color: #9dafb9 !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.p-dialog.fm-dialog .p-dialog-close-button:hover,
+.p-dialog.fm-dialog-alert .p-dialog-close-button:hover,
+.p-dialog.fm-reproceso-dialog .p-dialog-close-button:hover,
+.p-dialog.fm-dialog .p-dialog-header-icon:hover,
+.p-dialog.fm-dialog-alert .p-dialog-header-icon:hover,
+.p-dialog.fm-reproceso-dialog .p-dialog-header-icon:hover,
+.p-dialog.fm-dialog .p-dialog-close-button:focus,
+.p-dialog.fm-dialog-alert .p-dialog-close-button:focus,
+.p-dialog.fm-reproceso-dialog .p-dialog-close-button:focus,
+.p-dialog.fm-dialog .p-dialog-header-icon:focus,
+.p-dialog.fm-dialog-alert .p-dialog-header-icon:focus,
+.p-dialog.fm-reproceso-dialog .p-dialog-header-icon:focus,
+.p-dialog.fm-dialog .p-dialog-close-button:focus-visible,
+.p-dialog.fm-dialog-alert .p-dialog-close-button:focus-visible,
+.p-dialog.fm-reproceso-dialog .p-dialog-close-button:focus-visible,
+.p-dialog.fm-dialog .p-dialog-header-icon:focus-visible,
+.p-dialog.fm-dialog-alert .p-dialog-header-icon:focus-visible,
+.p-dialog.fm-reproceso-dialog .p-dialog-header-icon:focus-visible {
+  border: 0 !important;
+  border-radius: 4px !important;
+  background: transparent !important;
+  color: #607581 !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.p-dialog.fm-dialog .p-dialog-close-button .p-button-icon,
+.p-dialog.fm-dialog-alert .p-dialog-close-button .p-button-icon,
+.p-dialog.fm-reproceso-dialog .p-dialog-close-button .p-button-icon,
+.p-dialog.fm-dialog .p-dialog-header-icon .p-button-icon,
+.p-dialog.fm-dialog-alert .p-dialog-header-icon .p-button-icon,
+.p-dialog.fm-reproceso-dialog .p-dialog-header-icon .p-button-icon,
+.p-dialog.fm-dialog .p-dialog-close-button .pi,
+.p-dialog.fm-dialog-alert .p-dialog-close-button .pi,
+.p-dialog.fm-reproceso-dialog .p-dialog-close-button .pi,
+.p-dialog.fm-dialog .p-dialog-header-icon .pi,
+.p-dialog.fm-dialog-alert .p-dialog-header-icon .pi,
+.p-dialog.fm-reproceso-dialog .p-dialog-header-icon .pi {
+  color: currentColor !important;
+  font-size: 16px !important;
+}
