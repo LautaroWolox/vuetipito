@@ -65,7 +65,7 @@
                 :bodyStyle="columnStyle(col)"
               >
                 <template #filter="{ filterModel, filterCallback }">
-                  <div v-if="col.filter !== false" class="fm-filter-cell">
+                  <div v-if="col.filter !== false" class="fm-filter-cell reporte-sas-filter-cell">
                     <span class="fm-filter-prefix">~</span>
                     <InputText type="text" v-model="filterModel.value" @input="filterCallback()" class="fm-column-filter" />
                     <span class="fm-filter-more">...</span>
@@ -93,7 +93,7 @@
                     </div>
                   </div>
 
-                  <span v-else class="fm-cell-text">{{ data[col.field] ?? '' }}</span>
+                  <span v-else class="fm-cell-text reporte-sas-cell-text" :title="String(data[col.field] ?? '')">{{ data[col.field] ?? '' }}</span>
                 </template>
               </Column>
             </DataTable>
@@ -157,8 +157,9 @@ const processedData = computed<IDataReportSass[]>(() => {
 })
 
 const columnStyle = (col: ReporteColumn) => ({
-  width: col.width || '130px',
-  minWidth: col.minWidth || col.width || '100px'
+  width: col.width || '120px',
+  minWidth: col.minWidth || '58px',
+  maxWidth: 'none'
 })
 
 const normalizeLegajos = (value: unknown): string => {
@@ -215,8 +216,32 @@ const exportarExcel = () => {
   gap: 14px !important;
 }
 
+.reporte-sas-grid :deep(.p-datatable-table) {
+  table-layout: fixed !important;
+}
+
+.reporte-sas-grid :deep(.p-datatable-thead > tr > th),
 .reporte-sas-grid :deep(.p-datatable-tbody > tr > td) {
+  overflow: hidden !important;
   vertical-align: middle !important;
+}
+
+.reporte-sas-grid :deep(.p-column-header-content),
+.reporte-sas-cell-text {
+  display: block !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+.reporte-sas-filter-cell,
+.reporte-sas-filter-cell :deep(.p-inputtext),
+.reporte-sas-grid :deep(.fm-filter-cell),
+.reporte-sas-grid :deep(.fm-column-filter) {
+  min-width: 0 !important;
+  width: 100% !important;
 }
 
 .reporte-sas-export-button,
@@ -249,10 +274,12 @@ const exportarExcel = () => {
 
 .reporte-sas-legajo-cell {
   width: 100%;
+  min-width: 0;
 }
 
 .reporte-sas-legajo-box {
   width: 100%;
+  min-width: 0;
   border: 1px solid #d9e3e8;
   border-radius: 4px;
   background: #ffffff;
@@ -266,18 +293,26 @@ const exportarExcel = () => {
 
 .reporte-sas-legajo-toggle {
   width: 100%;
+  min-width: 0;
   min-height: 32px;
-  padding: 0 10px;
+  padding: 0 8px;
   border: 0;
   background: #ffffff;
   color: #263746;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 8px;
+  gap: 6px;
   cursor: pointer;
   text-align: left;
   font-size: 12px;
+}
+
+.reporte-sas-legajo-toggle span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .reporte-sas-legajo-toggle:hover {
@@ -301,5 +336,8 @@ const exportarExcel = () => {
   background: #eefcff;
   color: #263746;
   font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 </style>
