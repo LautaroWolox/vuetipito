@@ -36,13 +36,10 @@
               showGridlines
             >
               <template #paginatorstart>
-                <Button
-                  type="button"
-                  icon="pi pi-download"
-                  class="reporte-sas-export-button"
-                  title="Exportar"
-                  aria-label="Exportar"
-                  @click="exportarExcel"
+                <FmGridActions
+                  :show-delete="false"
+                  :show-refresh="false"
+                  @export="exportarExcel"
                 />
               </template>
 
@@ -54,10 +51,11 @@
                 v-for="col in visibleColumns"
                 :key="col.field"
                 :field="col.field"
+                :sortField="col.field"
+                :filterField="col.field"
                 :header="col.header"
                 :sortable="col.sort !== false"
                 :filter="col.filter !== false"
-                :filterField="col.field"
                 :showFilterMenu="false"
                 :exportable="col.exportable"
                 :style="columnStyle(col)"
@@ -75,15 +73,16 @@
                 <template #body="{ data, index }">
                   <div v-if="col.type === 'legajoList'" class="reporte-sas-legajo-cell">
                     <div class="reporte-sas-legajo-box" :class="{ 'reporte-sas-legajo-box--open': isExpanded(index, col.field) }">
-                      <button
+                      <Button
                         type="button"
+                        text
                         class="reporte-sas-legajo-toggle"
                         @click.stop="toggleExpand(index, col.field)"
                         @keydown.enter.stop="toggleExpand(index, col.field)"
                       >
-                        <span>{{ getPreview(data[col.field]) }}</span>
+                        <span class="reporte-sas-legajo-label">{{ getPreview(data[col.field]) }}</span>
                         <i v-if="isExpandable(data[col.field])" :class="isExpanded(index, col.field) ? 'pi pi-chevron-up' : 'pi pi-chevron-down'"></i>
-                      </button>
+                      </Button>
 
                       <div v-if="isExpanded(index, col.field)" class="reporte-sas-legajo-list">
                         <span v-for="(legajo, idx) in getLegajosArray(data[col.field])" :key="idx" class="reporte-sas-legajo-item">
@@ -226,7 +225,34 @@ const exportarExcel = () => {
   vertical-align: middle !important;
 }
 
-.reporte-sas-grid :deep(.p-column-header-content),
+.reporte-sas-grid :deep(.p-sortable-column) {
+  cursor: pointer !important;
+}
+
+.reporte-sas-grid :deep(.p-column-header-content) {
+  display: flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  overflow: visible !important;
+}
+
+.reporte-sas-grid :deep(.p-column-title) {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+.reporte-sas-grid :deep(.p-sortable-column-icon),
+.reporte-sas-grid :deep(.p-column-resizer) {
+  flex: 0 0 auto !important;
+  min-width: 12px !important;
+  overflow: visible !important;
+}
+
 .reporte-sas-cell-text {
   display: block !important;
   width: 100% !important;
@@ -242,34 +268,6 @@ const exportarExcel = () => {
 .reporte-sas-grid :deep(.fm-column-filter) {
   min-width: 0 !important;
   width: 100% !important;
-}
-
-.reporte-sas-export-button,
-:deep(.reporte-sas-export-button.p-button) {
-  width: 170px !important;
-  min-width: 170px !important;
-  height: 32px !important;
-  padding: 0 !important;
-  border: 0 !important;
-  border-radius: 4px !important;
-  background: #00a9bd !important;
-  color: #ffffff !important;
-  box-shadow: 0 3px 8px rgba(0, 169, 189, .24) !important;
-}
-
-.reporte-sas-export-button:hover,
-:deep(.reporte-sas-export-button.p-button:hover) {
-  background: #008fa1 !important;
-  color: #ffffff !important;
-}
-
-.reporte-sas-export-button :deep(.p-button-label) {
-  display: none !important;
-}
-
-.reporte-sas-export-button :deep(.p-button-icon),
-.reporte-sas-export-button :deep(.pi) {
-  font-size: 15px !important;
 }
 
 .reporte-sas-legajo-cell {
@@ -291,32 +289,41 @@ const exportarExcel = () => {
   box-shadow: 0 0 0 2px rgba(0, 169, 189, .12);
 }
 
-.reporte-sas-legajo-toggle {
-  width: 100%;
-  min-width: 0;
-  min-height: 32px;
-  padding: 0 8px;
-  border: 0;
-  background: #ffffff;
-  color: #263746;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 6px;
-  cursor: pointer;
-  text-align: left;
-  font-size: 12px;
+.reporte-sas-legajo-toggle,
+:deep(.reporte-sas-legajo-toggle.p-button) {
+  width: 100% !important;
+  min-width: 0 !important;
+  min-height: 32px !important;
+  padding: 0 8px !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: #ffffff !important;
+  color: #263746 !important;
+  box-shadow: none !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 6px !important;
+  cursor: pointer !important;
+  text-align: left !important;
+  font-size: 12px !important;
 }
 
-.reporte-sas-legajo-toggle span {
+.reporte-sas-legajo-toggle:hover,
+:deep(.reporte-sas-legajo-toggle.p-button:hover) {
+  background: #eefcff !important;
+  color: #263746 !important;
+}
+
+.reporte-sas-legajo-label {
   min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.reporte-sas-legajo-toggle:hover {
-  background: #eefcff;
+.reporte-sas-legajo-toggle :deep(.p-button-label) {
+  display: none !important;
 }
 
 .reporte-sas-legajo-list {
