@@ -1,20 +1,44 @@
 <template>
-  <div>
-  <main>
-    <div id="app">
-      <Button icon="pi" label="CONECTAR" style="width: 60%;" class="login-submit-button mt-4 h-2rem" @click="ingresar"/>
-    </div>
-  </main> 
-  <footer>
-    <div class="navbar navbar-fixed-bottom text-right footer-fm">
-      <!-- Copyright -->
-      <div class="footer-copyright py-3">
+  <div class="login-page">
+    <main class="login-main">
+      <section class="login-shell" aria-label="Acceso Field Manager">
+        <div class="login-brand-panel">
+          <div class="login-logo" aria-hidden="true"></div>
+          <div class="login-brand-copy">
+            <span class="login-eyebrow">Telecom Argentina</span>
+            <h1>Field Manager</h1>
+            <p>Gestión operativa centralizada para equipos, órdenes de trabajo y procesos de campo.</p>
+          </div>
+        </div>
+
+        <div class="login-card">
+          <span class="login-chip">
+            <i class="pi pi-shield"></i>
+            Acceso seguro
+          </span>
+
+          <div class="login-card-title">
+            <h2>Bienvenido</h2>
+            <p>Conectate con tu usuario corporativo para ingresar al sistema.</p>
+          </div>
+
+          <Button
+            icon="pi pi-sign-in"
+            label="CONECTAR"
+            class="login-submit-button"
+            type="button"
+            @click="ingresar"
+          />
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer-fm">
+      <div class="footer-copyright">
         © Copyright
-        | <a href="#"  class="footer-link" > Telecom Argentina S.A Derechos Reservados. | v. 1.0.0</a>
+        | <a href="#" class="footer-link">Telecom Argentina S.A Derechos Reservados. | v. 1.0.0</a>
       </div>
-      <!-- Copyright -->
- 	  </div>
-  </footer>
+    </footer>
   </div>
 </template>
 
@@ -24,8 +48,6 @@ import { ref, onMounted, onBeforeUnmount } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '@/store/auth';
 
-
-const urlBase = import.meta.env.VITE_FM_MV_URL;
 const router = useRouter()
 const authStore = useAuthStore();
 const popupWindow = ref(null)
@@ -33,9 +55,8 @@ const screenWidth = window.screen.width;
 const screenHeight = window.screen.height;
 const width = screenWidth / 1.5;
 const height = screenHeight / 1.5;
-const left = screenWidth / 6;  
-const top = screenHeight / 6; 
-
+const left = screenWidth / 6;
+const top = screenHeight / 6;
 
 const handleMessage = (event) => {
   const origins = new Set([import.meta.env.VITE_ORIGIN]);
@@ -63,7 +84,6 @@ const handleMessage = (event) => {
       popupWindow.value = null
     }
   }
-  
 }
 
 const ingresar = () => {
@@ -78,56 +98,257 @@ onBeforeUnmount(() => window.removeEventListener('message', handleMessage))
 </script>
 
 <style scoped>
-#app {
-  background-image: url(@/assets/images/FM_login.png);
-  background-size: 350px; 
+.login-page {
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 18% 18%, rgba(0, 180, 181, .16), transparent 28%),
+    radial-gradient(circle at 82% 24%, rgba(2, 77, 161, .10), transparent 30%),
+    linear-gradient(135deg, #f5f8fa 0%, #eef3f6 100%);
+  color: #1d3444;
+}
+
+.login-page::before {
+  content: '';
   position: absolute;
-  margin: auto;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  width: 350px;
-  height: 350px;
+  inset: auto -12% -34% auto;
+  width: 560px;
+  height: 560px;
+  border-radius: 50%;
+  background: rgba(0, 169, 189, .10);
+  filter: blur(2px);
 }
-.login-container {
-	position: fixed;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 16%;
+
+.login-main {
+  min-height: calc(100vh - 42px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 44px 22px 58px;
 }
-.login-submit-button {
-  position: fixed;
-  left: 20%;
-  top: 40%;
-	border-radius: 2px;
-  padding: auto;
-  background-color: #00b4b5;
+
+.login-shell {
+  width: min(920px, 100%);
+  min-height: 430px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(320px, .95fr);
+  border-radius: 28px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, .86);
+  border: 1px solid rgba(224, 234, 239, .92);
+  box-shadow: 0 24px 70px rgba(26, 48, 66, .16);
+  backdrop-filter: blur(10px);
+  position: relative;
+  z-index: 1;
 }
-.login-submit-button:disabled {
-  color: black;
+
+.login-brand-panel {
+  position: relative;
+  min-height: 430px;
+  padding: 34px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+  background:
+    linear-gradient(135deg, rgba(0, 169, 189, .95), rgba(0, 139, 140, .94)),
+    #00a9bd;
 }
-img {
-  padding-top: 7px;
-  padding-bottom: 2px;
+
+.login-brand-panel::before {
+  content: '';
+  position: absolute;
+  inset: -84px auto auto -30px;
+  width: 430px;
+  height: 430px;
+  background-image: url('@/assets/images/FM_login.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  opacity: .20;
+  filter: brightness(0) invert(1);
+}
+
+.login-brand-panel::after {
+  content: '';
+  position: absolute;
+  right: -90px;
+  bottom: -110px;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  border: 42px solid rgba(255, 255, 255, .13);
+}
+
+.login-logo {
+  width: 94px;
+  height: 94px;
+  border-radius: 26px;
+  background: rgba(255, 255, 255, .96) url('@/assets/images/FM_login.png') center / 76px auto no-repeat;
+  box-shadow: 0 18px 42px rgba(0, 0, 0, .16);
+  margin-bottom: auto;
+  position: relative;
+  z-index: 1;
+}
+
+.login-brand-copy {
+  position: relative;
+  z-index: 1;
+  color: #ffffff;
+  max-width: 390px;
+}
+
+.login-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  padding: 0 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .16);
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.login-brand-copy h1 {
+  margin: 14px 0 10px;
+  font-size: clamp(32px, 4.8vw, 50px);
+  line-height: .98;
+  font-weight: 800;
+  letter-spacing: -.04em;
+}
+
+.login-brand-copy p {
   margin: 0;
+  color: rgba(255, 255, 255, .84);
+  font-size: 14px;
+  line-height: 1.55;
 }
-#error {
-	position: fixed;
-  left: 49%;
-  top: 35%;
-  transform: translate(-50%, -50%);
+
+.login-card {
+  padding: 46px 42px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: rgba(255, 255, 255, .94);
+}
+
+.login-chip {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 28px;
+  padding: 0 11px;
+  border-radius: 999px;
+  background: #e9fbfd;
+  color: #008fa1;
+  border: 1px solid rgba(0, 169, 189, .16);
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+
+.login-chip i {
+  font-size: 13px;
+}
+
+.login-card-title {
+  margin: 28px 0 28px;
+}
+
+.login-card-title h2 {
+  margin: 0 0 8px;
+  color: #1d3444;
+  font-size: 30px;
+  line-height: 1.1;
+  font-weight: 800;
+  letter-spacing: -.03em;
+}
+
+.login-card-title p {
+  margin: 0;
+  color: #61727f;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.login-submit-button,
+:deep(.login-submit-button.p-button) {
+  width: 100% !important;
+  height: 42px !important;
+  border: 0 !important;
+  border-radius: 8px !important;
+  background: linear-gradient(135deg, #00a9bd, #008fa1) !important;
+  color: #ffffff !important;
+  box-shadow: 0 10px 24px rgba(0, 169, 189, .26) !important;
+  font-size: 13px !important;
+  font-weight: 800 !important;
+  letter-spacing: .02em !important;
+  transition: transform .18s ease, box-shadow .18s ease, background .18s ease !important;
+}
+
+.login-submit-button:hover,
+:deep(.login-submit-button.p-button:hover) {
+  background: linear-gradient(135deg, #00b7ca, #008c9d) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 14px 28px rgba(0, 169, 189, .30) !important;
+}
+
+.login-submit-button:active,
+:deep(.login-submit-button.p-button:active) {
+  transform: translateY(0);
+}
+
+.login-submit-button :deep(.p-button-icon),
+.login-submit-button :deep(.pi) {
+  font-size: 15px !important;
 }
 
 .footer-fm {
   position: fixed;
+  right: 0;
   bottom: 0;
   width: 100%;
-  font-size: 0.9em; 
-  padding-right: 15px;
+  z-index: 2;
+  padding: 0 16px 10px;
+  text-align: right;
+  color: #7a8994;
+  font-size: 11px;
 }
+
 .footer-link {
-  color:  #00b4b5;
+  color: #008fa1;
+  text-decoration: none;
+}
+
+.footer-link:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 820px) {
+  .login-main {
+    align-items: flex-start;
+    padding-top: 28px;
+  }
+
+  .login-shell {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    border-radius: 22px;
+  }
+
+  .login-brand-panel {
+    min-height: 260px;
+  }
+
+  .login-card {
+    padding: 34px 24px;
+  }
 }
 </style>
