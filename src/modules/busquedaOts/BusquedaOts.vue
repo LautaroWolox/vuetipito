@@ -15,6 +15,7 @@
 
             <div class="fm-actions busqueda-ots-actions">
               <FmButton
+                class="busqueda-ots-action-button busqueda-ots-action-button--buscar"
                 label="BUSCAR"
                 icon="pi-search"
                 :loading="store.loading"
@@ -22,8 +23,9 @@
                 @click="buscar"
               />
               <FmButton
+                class="busqueda-ots-action-button busqueda-ots-action-button--limpiar"
                 label="LIMPIAR"
-                icon="pi-filter-slash"
+                icon="pi-bars"
                 variant="outline"
                 :disabled="store.loading"
                 @click="limpiar"
@@ -37,9 +39,9 @@
         <AccordionHeader>DATOS DE LAS ORDENES DE TRABAJO</AccordionHeader>
         <AccordionContent>
           <FmGridShell
-            :loading="store.loading"
-            loading-title="Buscando OTs"
-            loading-message="Consultando datos de las órdenes de trabajo"
+            :loading="gridLoading"
+            :loading-title="gridLoadingTitle"
+            :loading-message="gridLoadingMessage"
           >
             <DataTable
               id="tabla-busqueda-ots"
@@ -117,7 +119,7 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import Textarea from 'primevue/textarea'
 import InputText from 'primevue/inputtext'
 import { FilterMatchMode } from '@primevue/core/api'
@@ -129,15 +131,25 @@ const store = useBusquedaOtsStore()
 const dt = ref()
 const activePanels = ref(['0', '1'])
 const columns = ref(busquedaOtsColumns)
+const initialLoading = ref(true)
 const { exportToExcel, parseDataFromTable } = useExcelExport()
 
 const visibleColumns = computed(() => columns.value.filter((col) => !col.hidden))
 const filters = ref(Object.fromEntries(visibleColumns.value.map((col) => [col.field, { value: null, matchMode: FilterMatchMode.CONTAINS }])))
+const gridLoading = computed(() => initialLoading.value || store.loading)
+const gridLoadingTitle = computed(() => store.loading ? 'Buscando OTs' : 'Cargando búsqueda de OTs')
+const gridLoadingMessage = computed(() => store.loading ? 'Consultando datos de las órdenes de trabajo' : 'Preparando la grilla')
 
 const columnStyle = (col) => ({
   width: col.width || '120px',
   minWidth: col.minWidth || '58px',
   maxWidth: 'none'
+})
+
+onMounted(() => {
+  window.setTimeout(() => {
+    initialLoading.value = false
+  }, 850)
 })
 
 const buscar = async () => {
@@ -196,6 +208,29 @@ const exportarExcel = () => {
 .busqueda-ots-actions {
   justify-content: center !important;
   margin-top: 16px !important;
+  gap: 10px !important;
+}
+
+.busqueda-ots-actions :deep(.p-button.busqueda-ots-action-button),
+.busqueda-ots-actions :deep(.fm-action-button.busqueda-ots-action-button) {
+  min-width: 104px !important;
+  height: 30px !important;
+  min-height: 30px !important;
+  padding: 0 14px !important;
+  border-radius: 6px !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  gap: 8px !important;
+}
+
+.busqueda-ots-actions :deep(.p-button.busqueda-ots-action-button .p-button-icon),
+.busqueda-ots-actions :deep(.p-button.busqueda-ots-action-button .pi) {
+  font-size: 17px !important;
+  line-height: 17px !important;
+}
+
+.busqueda-ots-actions :deep(.p-button.busqueda-ots-action-button--limpiar) {
+  min-width: 116px !important;
 }
 
 .busqueda-ots-grid :deep(.p-datatable-table) {
