@@ -8,8 +8,8 @@
           </div>
 
           <div class="login-brand-copy">
-            <span class="login-eyebrow">Personal Argentina</span>
             <h1>Field Manager</h1>
+            <span class="login-eyebrow">Personal Argentina</span>
           </div>
         </div>
 
@@ -152,7 +152,9 @@ onBeforeUnmount(() => window.removeEventListener('message', handleMessage))
   padding: 34px;
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: center;
+  gap: 22px;
   overflow: hidden;
   background: linear-gradient(135deg, rgba(0, 169, 189, .95), rgba(0, 139, 140, .94)), #00a9bd;
 }
@@ -188,7 +190,7 @@ onBeforeUnmount(() => window.removeEventListener('message', handleMessage))
   border-radius: 50%;
   background: transparent;
   box-shadow: none;
-  margin: 0 0 36px 0;
+  margin: 0;
   position: relative;
   z-index: 1;
   display: flex;
@@ -232,14 +234,28 @@ onBeforeUnmount(() => window.removeEventListener('message', handleMessage))
   z-index: 1;
   color: #ffffff;
   max-width: 390px;
-  transform: translateY(-8px);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  transform: translateY(-2px);
+}
+
+.login-brand-copy h1 {
+  margin: 0;
+  font-size: clamp(26px, 3.65vw, 38px);
+  line-height: 1;
+  font-weight: 800;
+  letter-spacing: -.04em;
 }
 
 .login-eyebrow {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   min-height: 24px;
-  padding: 0 10px;
+  padding: 0 12px;
   border-radius: 999px;
   background: rgba(255, 255, 255, .16);
   color: #ffffff;
@@ -247,14 +263,6 @@ onBeforeUnmount(() => window.removeEventListener('message', handleMessage))
   font-weight: 800;
   letter-spacing: .08em;
   text-transform: uppercase;
-}
-
-.login-brand-copy h1 {
-  margin: 14px 0 0;
-  font-size: clamp(28px, 4vw, 42px);
-  line-height: 1;
-  font-weight: 800;
-  letter-spacing: -.04em;
 }
 
 .login-card {
