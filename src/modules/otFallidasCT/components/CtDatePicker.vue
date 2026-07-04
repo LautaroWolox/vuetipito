@@ -28,7 +28,7 @@
 </template>
 <script setup>
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
-const props = defineProps({ modelValue: { type: [Date, String, null], default: null }, placeholder: { type: String, default: 'Seleccionar fecha' } })
+const props = defineProps({ modelValue: { type: [Date, String, null], default: null }, placeholder: { type: String, default: 'Seleccionar fecha' }, inputId: { type: String, default: undefined } })
 const emit = defineEmits(['update:modelValue'])
 const root = ref(null)
 const open = ref(false)

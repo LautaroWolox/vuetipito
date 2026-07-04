@@ -13,6 +13,8 @@ import './assets/css/fm-dialog-responsive.css';
 import './assets/css/fm-last-overrides.css';
 import './assets/css/fm-popup-final-overrides.css';
 import './assets/css/fm-button-final-overrides.css';
+import './assets/css/fm-grid-actions-prime-fix.css';
+import './assets/css/fm-dialog-close-final-fix.css';
 import Lara from '@primeuix/themes/lara';
 
 import { definePreset } from '@primeuix/themes';

@@ -1,20 +1,35 @@
 <template>
-    <div class="flex flex-column px-2">
-        <label for="excl">Excluida</label>
-        <Select id="excl" v-model="selectedExcluida" :options="excluida" optionLabel="valor"class="w-full md:w-56" />
-    </div>
+  <div class="fm-field fm-field--span-2 otf-filter-element otf-filter-element--excluida">
+    <label for="otf-excluida">Excluida</label>
+    <Select
+      inputId="otf-excluida"
+      :modelValue="modelValue"
+      :options="options"
+      optionLabel="name"
+      class="w-full"
+      showClear
+      @update:modelValue="$emit('update:modelValue', $event)"
+    />
+  </div>
 </template>
 
 <script setup>
-import { ref } from "vue";
+import Select from 'primevue/select'
 
-const selectedExcluida = ref();
-const excluida = ref ([
-    {'id': 1, 'valor': 'SI'},
-    {'id': 2, 'valor': 'NO'},
-])
+defineProps({
+  modelValue: { type: [Object, String, null], default: null },
+  options: { type: Array, default: () => [] }
+})
 
+defineEmits(['update:modelValue'])
 </script>
 
 <style scoped>
+.otf-filter-element label {
+  white-space: nowrap;
+}
+
+.otf-filter-element :deep(.p-select) {
+  width: 100%;
+}
 </style>

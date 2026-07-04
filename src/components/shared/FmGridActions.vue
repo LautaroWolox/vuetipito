@@ -1,40 +1,138 @@
 <template>
-  <div class="fm-grid-actions fm-ui-grid-actions">
-    <button v-if="showExport" class="fm-icon-btn fm-ui-icon-button" type="button" title="Exportar" aria-label="Exportar" @click="$emit('export')">
-      <svg class="fm-grid-icon fm-ui-grid-icon" viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M12 3v11m0 0 4-4m-4 4-4-4M5 21h14" />
-      </svg>
-    </button>
+  <div class="fm-grid-actions-final">
+    <Button
+      v-if="showExport"
+      icon="pi pi-download"
+      text
+      rounded
+      class="fm-grid-action-final"
+      :pt="actionButtonPt"
+      title="Exportar"
+      aria-label="Exportar"
+      @click="$emit('export')"
+    />
 
-    <button v-if="showDelete" class="fm-icon-btn fm-ui-icon-button" type="button" title="Excluir seleccionados" aria-label="Excluir seleccionados" @click="$emit('delete')">
-      <svg class="fm-grid-icon fm-ui-grid-icon" viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M4 7h16M10 11v6M14 11v6M6 7l1 14h10l1-14M9 7V4h6v3" />
-      </svg>
-    </button>
+    <Button
+      v-if="showDelete"
+      icon="pi pi-trash"
+      text
+      rounded
+      class="fm-grid-action-final"
+      :pt="actionButtonPt"
+      title="Excluir seleccionados"
+      aria-label="Excluir seleccionados"
+      @click="$emit('delete')"
+    />
 
-    <button v-if="showRefresh" class="fm-icon-btn fm-ui-icon-button" type="button" title="Reprocesar" aria-label="Reprocesar" @click="$emit('refresh')">
-      <svg class="fm-grid-icon fm-ui-grid-icon" viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M20 6v5h-5M4 18v-5h5M19 11a7 7 0 0 0-12-4M5 13a7 7 0 0 0 12 4" />
-      </svg>
-    </button>
+    <Button
+      v-if="showRefresh"
+      icon="pi pi-refresh"
+      text
+      rounded
+      class="fm-grid-action-final"
+      :pt="actionButtonPt"
+      title="Reprocesar"
+      aria-label="Reprocesar"
+      @click="$emit('refresh')"
+    />
   </div>
 </template>
 
 <script setup>
-defineProps({
-  showExport: {
-    type: Boolean,
-    default: true
+import Button from 'primevue/button'
+
+const actionButtonPt = {
+  root: {
+    class: 'fm-grid-action-final-root',
+    style: 'width:16px !important;min-width:16px !important;max-width:16px !important;height:16px !important;min-height:16px !important;max-height:16px !important;padding:0 !important;margin:0 !important;border:0 !important;background:transparent !important;background-color:transparent !important;box-shadow:none !important;outline:none !important;overflow:visible !important;'
   },
-  showDelete: {
-    type: Boolean,
-    default: true
-  },
-  showRefresh: {
-    type: Boolean,
-    default: true
+  icon: {
+    class: 'fm-grid-action-final-icon',
+    style: 'width:12px !important;min-width:12px !important;height:12px !important;min-height:12px !important;font-size:12px !important;line-height:12px !important;margin:0 !important;overflow:visible !important;'
   }
+}
+
+defineProps({
+  showExport: { type: Boolean, default: true },
+  showDelete: { type: Boolean, default: true },
+  showRefresh: { type: Boolean, default: true }
 })
 
 defineEmits(['export', 'delete', 'refresh'])
 </script>
+
+<style scoped>
+.fm-grid-actions-final {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 12px !important;
+  overflow: visible !important;
+  line-height: 1 !important;
+}
+
+.fm-grid-actions-final :deep(.p-button.fm-grid-action-final),
+.fm-grid-actions-final :deep(.fm-grid-action-final-root) {
+  width: 16px !important;
+  min-width: 16px !important;
+  max-width: 16px !important;
+  height: 16px !important;
+  min-height: 16px !important;
+  max-height: 16px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  color: #4f6673 !important;
+  box-shadow: none !important;
+  outline: none !important;
+  overflow: visible !important;
+  transform: none !important;
+}
+
+.fm-grid-actions-final :deep(.p-button.fm-grid-action-final:hover),
+.fm-grid-actions-final :deep(.p-button.fm-grid-action-final:focus),
+.fm-grid-actions-final :deep(.p-button.fm-grid-action-final:focus-visible),
+.fm-grid-actions-final :deep(.fm-grid-action-final-root:hover),
+.fm-grid-actions-final :deep(.fm-grid-action-final-root:focus),
+.fm-grid-actions-final :deep(.fm-grid-action-final-root:focus-visible) {
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  color: #008fa1 !important;
+  box-shadow: none !important;
+  outline: none !important;
+  overflow: visible !important;
+  transform: none !important;
+}
+
+.fm-grid-actions-final :deep(.p-button-label) {
+  display: none !important;
+}
+
+.fm-grid-actions-final :deep(.p-button-icon),
+.fm-grid-actions-final :deep(.pi),
+.fm-grid-actions-final :deep(.fm-grid-action-final-icon) {
+  width: 12px !important;
+  min-width: 12px !important;
+  height: 12px !important;
+  min-height: 12px !important;
+  font-size: 12px !important;
+  line-height: 12px !important;
+  margin: 0 !important;
+  overflow: visible !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.fm-grid-actions-final :deep(.p-button-icon::before),
+.fm-grid-actions-final :deep(.pi::before),
+.fm-grid-actions-final :deep(.fm-grid-action-final-icon::before) {
+  font-size: 12px !important;
+  line-height: 12px !important;
+}
+</style>

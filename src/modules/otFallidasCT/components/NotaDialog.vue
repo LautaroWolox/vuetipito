@@ -1,36 +1,38 @@
 <template>
-  <Dialog :visible="visible" modal header="Nota" :style="{ width: '42rem' }" class="fm-dialog fm-dialog-nota" @update:visible="$emit('update:visible', $event)">
+  <Dialog :visible="visible" modal header="Nota" :style="{ width: '34rem' }" class="fm-dialog fm-dialog-nota" @update:visible="$emit('update:visible', $event)">
     <div class="fm-note-body">
       <label>Nota</label>
-      <Textarea v-model="nota" rows="5" class="w-full" placeholder="Ingrese una nota" />
+      <div class="fm-note-readonly">{{ nota }}</div>
     </div>
     <template #footer>
-      <Button label="CANCELAR" outlined class="fm-btn fm-btn--outline" @click="cerrar" />
-      <Button label="ACEPTAR" class="fm-btn fm-btn--primary" @click="confirmar" />
+      <Button label="CERRAR" class="fm-btn fm-btn--primary" @click="cerrar" />
     </template>
   </Dialog>
 </template>
 
 <script setup>
-import { ref, watch } from 'vue'
-import Textarea from 'primevue/textarea'
-import { useFallidasCtStore } from '../store/CtFallidaStore'
+import { computed } from 'vue'
 
 const props = defineProps({ visible: Boolean, row: { type: Object, default: null } })
 const emit = defineEmits(['update:visible'])
-const store = useFallidasCtStore()
-const nota = ref('')
-
-watch(() => props.visible, (value) => {
-  if (value) nota.value = props.row?.nota || ''
-})
+const nota = computed(() => props.row?.nota || '')
 
 const cerrar = () => {
   emit('update:visible', false)
 }
-
-const confirmar = () => {
-  store.updateNota(props.row, nota.value)
-  cerrar()
-}
 </script>
+
+<style scoped>
+.fm-note-readonly {
+  width: 100%;
+  min-height: 74px;
+  padding: 12px 14px;
+  border: 1px solid #c8d3dc;
+  border-radius: 4px;
+  background: #ffffff;
+  color: #263746;
+  font-size: 16px;
+  line-height: 1.4;
+  white-space: pre-wrap;
+}
+</style>

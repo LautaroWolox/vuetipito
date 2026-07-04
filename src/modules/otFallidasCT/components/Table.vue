@@ -70,9 +70,8 @@
           </div>
         </template>
         <template #body="{ data }">
-          <button v-if="col.field === 'tieneNota'" class="fm-icon-btn" type="button" @click.stop="abrirNota(data)"><i class="pi pi-file-edit"></i></button>
-          <button v-else-if="col.field === 'incluir' && data.excluida === 'S'" class="fm-icon-btn" type="button" @click.stop="abrirIncluir(data)"><i class="pi pi-replay"></i></button>
-          <span v-else-if="col.field !== 'tieneNota' && col.field !== 'incluir'" class="fm-cell-text">{{ data[col.field] ?? '' }}</span>
+          <button v-if="isActionColumnVisible(col, data)" :class="col.buttonClass" type="button" :title="col.title" :aria-label="col.ariaLabel" @click.stop="runColumnAction(col, data)"><i :class="col.icon"></i></button>
+          <span v-else-if="col.type !== 'action'" class="fm-cell-text">{{ data[col.field] ?? '' }}</span>
         </template>
       </Column>
     </DataTable>
@@ -142,11 +141,23 @@ const rowClass = (data) => ({
   'fm-enabled-row': data?.excluida === 'N',
   'fm-selected-row': store.selectedRows.includes(data?.id)
 })
+
 const isRowSelectable = (event) => event?.data?.excluida !== 'S'
 const onSelectAllChange = () => store.setSelectedRows(allSelectableSelected.value ? [] : selectableRows.value.map((row) => row.id))
 const onRowClick = (event) => { if (event?.data) store.toggleSelectedRow(event.data) }
 const abrirNota = (row) => { noteRow.value = row; showNota.value = true }
 const abrirIncluir = (row) => { includeRow.value = row; showIncluir.value = true }
+
+const isActionColumnVisible = (col, row) => {
+  if (col.type !== 'action') return false
+  if (!col.showWhenField) return true
+  return row?.[col.showWhenField] === col.showWhenValue
+}
+
+const runColumnAction = (col, row) => {
+  if (col.action === 'nota') abrirNota(row)
+  if (col.action === 'incluir') abrirIncluir(row)
+}
 
 const abrirReprocesoDialog = (data) => {
   reprocesoDialog.value = data
