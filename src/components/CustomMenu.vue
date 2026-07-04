@@ -3,27 +3,14 @@
     <Menubar :model="items" class="main-menu">
       <template #end>
         <div class="user-section">
-          <div class="user-profile" @click="toggleDropdown">
-            <span class="username">{{ nombre }}</span>
-            <i class="pi pi-chevron-down dropdown-icon" :class="{ 'rotated': showDropdown }"></i>
-          </div>
-          
+          <Button class="user-profile" text rounded type="button" @click="toggleDropdown">
+            <span class="user-avatar" aria-hidden="true">{{ userInitials }}</span>
+            <span class="username">{{ userLabel }}</span>
+            <i class="pi pi-chevron-down dropdown-icon" :class="{ rotated: showDropdown }"></i>
+          </Button>
+
           <div v-if="showDropdown" class="dropdown-content">
-            <div class="user-info">
-              <div class="info-item">
-                <i class="pi pi-envelope"></i>
-                <span>{{ email }}</span>
-              </div>
-              <div class="info-item">
-                <i class="pi pi-id-card"></i>
-                <span>Legajo: {{ legajo }}</span>
-              </div>
-            </div>
-            <div class="divider"></div>
-            <button class="logout-btn" @click="logout">
-              <i class="pi pi-sign-out"></i>
-              <span>Cerrar Sesión</span>
-            </button>
+            <Button class="logout-btn" text type="button" icon="pi pi-sign-out" label="Cerrar Sesión" @click="logout" />
           </div>
         </div>
       </template>
@@ -35,8 +22,9 @@
 
 <script setup lang="ts">
 import Menubar from 'primevue/menubar';
+import Button from 'primevue/button';
 import router from '@/router';
-import { ref, onMounted, onUnmounted } from 'vue';
+import { computed, ref, onMounted, onUnmounted } from 'vue';
 import { useAuthStore } from '@/store/auth';
 import 'primeicons/primeicons.css';
 import { getRutas } from './rutas';
@@ -44,11 +32,19 @@ import { getRutas } from './rutas';
 const authStore = useAuthStore()
 
 const nombre = authStore.usuario?.nombre ?? ''
-const email = authStore.usuario?.email ?? ''
 const legajo = authStore.usuario?.legajo ?? ''
 const rutas = authStore.rutas;
 const showDropdown = ref(false);
-const items = ref( getRutas(rutas ) );
+const items = ref(getRutas(rutas));
+
+const userLabel = computed(() => nombre || legajo || 'Usuario')
+const userInitials = computed(() => {
+  const value = userLabel.value.trim()
+  if (!value) return 'US'
+  const parts = value.split(/\s+/).filter(Boolean)
+  if (parts.length >= 2) return `${parts[0][0]}${parts[1][0]}`.toUpperCase()
+  return value.slice(0, 2).toUpperCase()
+})
 
 const logout = () => {
   authStore.logout()
@@ -67,15 +63,14 @@ const closeDropdown = () => {
 const handleClickOutside = (event: any) => {
   const userSection = document.querySelector('.user-section');
   const dropdown = document.querySelector('.dropdown-content');
-  
-  if (!userSection!.contains(event.target) && (!dropdown || !dropdown.contains(event.target))) {
+
+  if (!userSection?.contains(event.target) && (!dropdown || !dropdown.contains(event.target))) {
     closeDropdown();
   }
 };
 
-onMounted(() =>  document.addEventListener('click', handleClickOutside) );
-
-onUnmounted(() =>  document.removeEventListener('click', handleClickOutside) );
+onMounted(() => document.addEventListener('click', handleClickOutside));
+onUnmounted(() => document.removeEventListener('click', handleClickOutside));
 </script>
 
 <style scoped>
@@ -105,39 +100,61 @@ onUnmounted(() =>  document.removeEventListener('click', handleClickOutside) );
   margin-left: auto;
 }
 
-.user-profile {
-  display: flex;
-  align-items: center;
-  padding: 0.5rem 1rem;
-  border-radius: 30px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(5px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+.user-profile,
+:deep(.user-profile.p-button) {
+  display: flex !important;
+  align-items: center !important;
+  gap: 7px !important;
+  min-height: 34px !important;
+  height: 34px !important;
+  padding: 0 9px 0 8px !important;
+  border-radius: 0 !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  background: transparent !important;
+  border: 0 !important;
+  color: #ffffff !important;
+  box-shadow: none !important;
 }
 
-.user-profile:hover {
-  background: rgba(255, 255, 255, 0.2);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+.user-profile:hover,
+:deep(.user-profile.p-button:hover) {
+  background: rgba(255, 255, 255, 0.12) !important;
+  color: #ffffff !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+.user-avatar {
+  width: 27px;
+  height: 27px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #0096a4;
+  background: #ffffff;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1;
+  flex: 0 0 27px;
 }
 
 .username {
-  color: white;
+  color: #ffffff;
   font-weight: 600;
-  font-size: 0.95rem;
-  margin-right: 0.5rem;
-  max-width: 180px;
+  font-size: 11px;
+  max-width: 120px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .dropdown-icon {
-  color: white;
-  font-size: 0.8rem;
-  transition: transform 0.3s ease;
+  color: #ffffff;
+  font-size: 9px;
+  margin-left: 1px;
+  transition: transform 0.2s ease;
 }
 
 .dropdown-icon.rotated {
@@ -146,21 +163,23 @@ onUnmounted(() =>  document.removeEventListener('click', handleClickOutside) );
 
 .dropdown-content {
   position: absolute;
-  top: calc(100% + 10px);
+  top: 100%;
   right: 0;
-  width: 280px;
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  min-width: 152px;
+  background: #ffffff;
+  border-radius: 0;
+  box-shadow: 0 6px 14px rgba(18, 34, 50, 0.11);
   z-index: 1000;
   overflow: hidden;
-  animation: dropdownFadeIn 0.2s ease-out;
+  animation: dropdownFadeIn 0.18s ease-out;
+  border: 1px solid #e5edf2;
+  border-top: 0;
 }
 
 @keyframes dropdownFadeIn {
   from {
     opacity: 0;
-    transform: translateY(-10px);
+    transform: translateY(-4px);
   }
   to {
     opacity: 1;
@@ -168,63 +187,37 @@ onUnmounted(() =>  document.removeEventListener('click', handleClickOutside) );
   }
 }
 
-.user-info {
-  padding: 0.75rem;
+.logout-btn,
+:deep(.logout-btn.p-button) {
+  width: 100% !important;
+  min-height: 32px !important;
+  padding: 0 11px !important;
+  border-radius: 0 !important;
+  background: #ffffff !important;
+  border: 0 !important;
+  color: #e52424 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 7px !important;
+  font-weight: 500 !important;
+  box-shadow: none !important;
 }
 
-.info-item {
-  display: flex;
-  align-items: center;
-  padding: 0.75rem;
-  border-radius: 8px;
-  transition: all 0.3s ease;
-  margin-bottom: 0.5rem;
+.logout-btn:hover,
+:deep(.logout-btn.p-button:hover) {
+  background: #fff5f5 !important;
+  color: #d51f1f !important;
 }
 
-.info-item:hover {
-  background: #f8f9fa;
+.logout-btn :deep(.p-button-icon),
+.logout-btn :deep(.pi) {
+  font-size: 12px !important;
 }
 
-.info-item:hover span {
-  color: #28a745 !important;
-}
-
-.info-item i {
-  margin-right: 0.75rem;
-  color: #6c757d;
-}
-
-.info-item span {
-  font-size: 0.9rem;
-  color: #495057;
-  transition: color 0.3s ease;
-}
-
-.divider {
-  height: 1px;
-  background: #e9ecef;
-  margin: 0 1.25rem;
-}
-
-.logout-btn {
-  width: 100%;
-  padding: 0.75rem 1.25rem;
-  background: none;
-  border: none;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  color: #dc3545;
-  font-weight: 600;
-}
-
-.logout-btn:hover {
-  background: #f8f9fa;
-}
-
-.logout-btn i {
-  margin-right: 0.75rem;
+.logout-btn :deep(.p-button-label) {
+  font-size: 11px !important;
+  font-weight: 500 !important;
 }
 
 .color-gradient {
@@ -266,7 +259,7 @@ onUnmounted(() =>  document.removeEventListener('click', handleClickOutside) );
   background: rgba(255, 255, 255, 0.15) !important;
 }
 
-:deep(.p-menubar .p-menubar-root-list > .p-menuitem > .p-menuitem-content .p-menuitem-link .p-menuitem-text) {
+:deep(.p-menubar .p-menuitem-content .p-menuitem-link .p-menuitem-text) {
   font-size: 0.95rem;
 }
 
