@@ -20,18 +20,20 @@
 .fm-pt-datatable .fm-grid-actions .p-button.fm-icon-btn,
 .fm-pt-datatable .fm-grid-actions .p-button.fm-grid-action-button,
 .fm-pt-datatable .fm-ui-grid-actions .p-button.fm-ui-icon-button {
-  width: 28px !important;
-  min-width: 28px !important;
-  max-width: 28px !important;
-  height: 28px !important;
-  min-height: 28px !important;
-  max-height: 28px !important;
+  width: 24px !important;
+  min-width: 24px !important;
+  max-width: 24px !important;
+  height: 24px !important;
+  min-height: 24px !important;
+  max-height: 24px !important;
   padding: 0 !important;
-  border: 1px solid transparent !important;
-  border-radius: 4px !important;
+  border: 0 !important;
+  border-radius: 0 !important;
   background: transparent !important;
+  background-color: transparent !important;
   color: #4f6673 !important;
   box-shadow: none !important;
+  outline: none !important;
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -43,23 +45,27 @@
 .fm-pass-grid .fm-ui-grid-actions .p-button.fm-ui-icon-button:hover,
 .fm-pt-datatable .fm-grid-actions .p-button.fm-icon-btn:hover,
 .fm-pt-datatable .fm-grid-actions .p-button.fm-grid-action-button:hover,
-.fm-pt-datatable .fm-ui-grid-actions .p-button.fm-ui-icon-button:hover {
-  border-color: #00a9bd !important;
-  background: rgba(0, 169, 189, .07) !important;
-  color: #008fa1 !important;
-  box-shadow: 0 0 0 1px rgba(0, 169, 189, .14) !important;
-  transform: none !important;
-}
-
+.fm-pt-datatable .fm-ui-grid-actions .p-button.fm-ui-icon-button:hover,
+.fm-pass-grid .fm-grid-actions .p-button.fm-icon-btn:focus,
+.fm-pass-grid .fm-grid-actions .p-button.fm-grid-action-button:focus,
+.fm-pass-grid .fm-ui-grid-actions .p-button.fm-ui-icon-button:focus,
+.fm-pt-datatable .fm-grid-actions .p-button.fm-icon-btn:focus,
+.fm-pt-datatable .fm-grid-actions .p-button.fm-grid-action-button:focus,
+.fm-pt-datatable .fm-ui-grid-actions .p-button.fm-ui-icon-button:focus,
 .fm-pass-grid .fm-grid-actions .p-button.fm-icon-btn:focus-visible,
 .fm-pass-grid .fm-grid-actions .p-button.fm-grid-action-button:focus-visible,
 .fm-pass-grid .fm-ui-grid-actions .p-button.fm-ui-icon-button:focus-visible,
 .fm-pt-datatable .fm-grid-actions .p-button.fm-icon-btn:focus-visible,
 .fm-pt-datatable .fm-grid-actions .p-button.fm-grid-action-button:focus-visible,
 .fm-pt-datatable .fm-ui-grid-actions .p-button.fm-ui-icon-button:focus-visible {
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  color: #008fa1 !important;
+  box-shadow: none !important;
   outline: none !important;
-  border-color: #00a9bd !important;
-  box-shadow: 0 0 0 2px rgba(0, 169, 189, .18) !important;
+  transform: none !important;
 }
 
 .fm-pass-grid .fm-grid-actions .p-button .p-button-label,
@@ -77,10 +83,10 @@
 .fm-pt-datatable .fm-grid-actions .p-button .pi,
 .fm-pt-datatable .fm-ui-grid-actions .p-button .p-button-icon,
 .fm-pt-datatable .fm-ui-grid-actions .p-button .pi {
-  width: 17px !important;
-  height: 17px !important;
-  font-size: 17px !important;
-  line-height: 17px !important;
+  width: 18px !important;
+  height: 18px !important;
+  font-size: 18px !important;
+  line-height: 18px !important;
   margin: 0 !important;
   display: inline-flex !important;
   align-items: center !important;
