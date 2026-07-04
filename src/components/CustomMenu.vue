@@ -4,37 +4,12 @@
       <template #end>
         <div class="user-section">
           <Button class="user-profile" text rounded type="button" @click="toggleDropdown">
-            <span class="user-avatar" aria-hidden="true">
-              <i class="pi pi-user"></i>
-            </span>
+            <span class="user-avatar" aria-hidden="true">{{ userInitials }}</span>
             <span class="username">{{ userLabel }}</span>
             <i class="pi pi-chevron-down dropdown-icon" :class="{ rotated: showDropdown }"></i>
           </Button>
 
           <div v-if="showDropdown" class="dropdown-content">
-            <div class="dropdown-arrow"></div>
-
-            <div class="dropdown-header">
-              <div class="dropdown-avatar" aria-hidden="true">
-                <i class="pi pi-user"></i>
-              </div>
-              <div class="dropdown-title-block">
-                <span class="dropdown-eyebrow">Usuario activo</span>
-                <strong class="dropdown-title">{{ userLabel }}</strong>
-              </div>
-            </div>
-
-            <div class="user-info">
-              <div class="info-item">
-                <span class="info-icon" aria-hidden="true">
-                  <i class="pi pi-id-card"></i>
-                </span>
-                <span class="info-text">Legajo: {{ legajo }}</span>
-              </div>
-            </div>
-
-            <div class="divider"></div>
-
             <Button class="logout-btn" text type="button" @click="logout">
               <template #icon>
                 <i class="pi pi-sign-out"></i>
@@ -66,7 +41,15 @@ const legajo = authStore.usuario?.legajo ?? ''
 const rutas = authStore.rutas;
 const showDropdown = ref(false);
 const items = ref(getRutas(rutas));
+
 const userLabel = computed(() => nombre || legajo || 'Usuario')
+const userInitials = computed(() => {
+  const value = userLabel.value.trim()
+  if (!value) return 'US'
+  const parts = value.split(/\s+/).filter(Boolean)
+  if (parts.length >= 2) return `${parts[0][0]}${parts[1][0]}`.toUpperCase()
+  return value.slice(0, 2).toUpperCase()
+})
 
 const logout = () => {
   authStore.logout()
@@ -126,61 +109,57 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside));
 :deep(.user-profile.p-button) {
   display: flex !important;
   align-items: center !important;
-  gap: 7px !important;
-  min-height: 44px !important;
-  padding: 0 11px 0 3px !important;
-  border-radius: 999px !important;
+  gap: 12px !important;
+  min-height: 53px !important;
+  height: 53px !important;
+  padding: 0 14px 0 12px !important;
+  border-radius: 0 !important;
   cursor: pointer !important;
-  transition: all 0.25s ease !important;
-  background: rgba(0, 123, 137, 0.28) !important;
-  backdrop-filter: blur(7px);
-  border: 1px solid rgba(255, 255, 255, 0.24) !important;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .18), 0 6px 18px rgba(0, 0, 0, .10) !important;
+  transition: all 0.2s ease !important;
+  background: #0096a4 !important;
+  border: 0 !important;
   color: #ffffff !important;
+  box-shadow: none !important;
 }
 
 .user-profile:hover,
 :deep(.user-profile.p-button:hover) {
-  background: rgba(0, 123, 137, 0.36) !important;
-  transform: translateY(-1px);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .22), 0 8px 22px rgba(0, 0, 0, .14) !important;
+  background: #008d9a !important;
   color: #ffffff !important;
+  box-shadow: none !important;
+  transform: none !important;
 }
 
 .user-avatar {
-  width: 34px;
-  height: 34px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: #ffffff;
-  background: rgba(255, 255, 255, .18);
-  border: 1px solid rgba(255, 255, 255, .30);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .22);
-  flex: 0 0 34px;
-  margin-left: -1px;
-}
-
-.user-avatar i {
-  font-size: 16px;
+  color: #0096a4;
+  background: #ffffff;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1;
+  flex: 0 0 38px;
 }
 
 .username {
-  color: white;
+  color: #ffffff;
   font-weight: 700;
-  font-size: 0.92rem;
-  max-width: 160px;
+  font-size: 15px;
+  max-width: 190px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .dropdown-icon {
-  color: white;
-  font-size: 0.78rem;
-  margin-left: 3px;
-  transition: transform 0.25s ease;
+  color: #ffffff;
+  font-size: 11px;
+  margin-left: 2px;
+  transition: transform 0.2s ease;
 }
 
 .dropdown-icon.rotated {
@@ -189,178 +168,59 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside));
 
 .dropdown-content {
   position: absolute;
-  top: calc(100% + 11px);
+  top: 100%;
   right: 0;
-  width: 292px;
+  min-width: 245px;
   background: #ffffff;
-  border-radius: 16px;
-  box-shadow: 0 16px 38px rgba(18, 34, 50, 0.16);
+  border-radius: 0;
+  box-shadow: 0 8px 20px rgba(18, 34, 50, 0.12);
   z-index: 1000;
-  overflow: visible;
-  animation: dropdownFadeIn 0.2s ease-out;
-  border: 1px solid rgba(226, 236, 241, .92);
-}
-
-.dropdown-content::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: 16px;
-  pointer-events: none;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .95);
-}
-
-.dropdown-arrow {
-  position: absolute;
-  top: -7px;
-  right: 26px;
-  width: 14px;
-  height: 14px;
-  background: #ffffff;
-  border-left: 1px solid rgba(226, 236, 241, .92);
-  border-top: 1px solid rgba(226, 236, 241, .92);
-  transform: rotate(45deg);
+  overflow: hidden;
+  animation: dropdownFadeIn 0.18s ease-out;
+  border: 1px solid #e5edf2;
+  border-top: 0;
 }
 
 @keyframes dropdownFadeIn {
   from {
     opacity: 0;
-    transform: translateY(-8px) scale(.98);
+    transform: translateY(-4px);
   }
   to {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translateY(0);
   }
-}
-
-.dropdown-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 14px 14px 8px;
-}
-
-.dropdown-avatar {
-  width: 38px;
-  height: 38px;
-  border-radius: 14px;
-  background: linear-gradient(135deg, #00a9bd, #42cbd6);
-  color: #ffffff;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 8px 16px rgba(0, 169, 189, .20);
-  flex: 0 0 38px;
-}
-
-.dropdown-avatar i {
-  font-size: 17px;
-}
-
-.dropdown-title-block {
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.dropdown-eyebrow {
-  color: #7a8994;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: .06em;
-  text-transform: uppercase;
-}
-
-.dropdown-title {
-  color: #1d3444;
-  font-size: 15px;
-  line-height: 1.15;
-  max-width: 190px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.user-info {
-  padding: 5px 14px 12px;
-}
-
-.info-item {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  padding: 10px 11px;
-  border-radius: 12px;
-  background: #f7fbfc;
-  border: 1px solid #e2edf1;
-  transition: all 0.2s ease;
-}
-
-.info-item:hover {
-  background: #eefcff;
-  border-color: rgba(0, 169, 189, .28);
-}
-
-.info-icon {
-  width: 28px;
-  height: 28px;
-  border-radius: 10px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  color: #008fa1;
-  background: rgba(0, 169, 189, .10);
-  flex: 0 0 28px;
-}
-
-.info-icon i {
-  font-size: 14px;
-}
-
-.info-text {
-  font-size: 13px;
-  color: #40515e;
-  font-weight: 600;
-}
-
-.divider {
-  height: 1px;
-  background: #e8eef2;
-  margin: 0 14px;
 }
 
 .logout-btn,
 :deep(.logout-btn.p-button) {
-  width: calc(100% - 20px) !important;
-  margin: 10px !important;
-  min-height: 38px !important;
-  padding: 0 12px !important;
-  border-radius: 12px !important;
-  background: #f2fcfd !important;
-  border: 1px solid rgba(0, 169, 189, .16) !important;
-  color: #008fa1 !important;
+  width: 100% !important;
+  min-height: 58px !important;
+  padding: 0 24px !important;
+  border-radius: 0 !important;
+  background: #ffffff !important;
+  border: 0 !important;
+  color: #e52424 !important;
   display: flex !important;
   align-items: center !important;
   justify-content: flex-start !important;
-  gap: 9px !important;
+  gap: 14px !important;
   font-weight: 500 !important;
   box-shadow: none !important;
 }
 
 .logout-btn:hover,
 :deep(.logout-btn.p-button:hover) {
-  background: #e9fbfd !important;
-  border-color: rgba(0, 169, 189, .28) !important;
-  color: #007d8d !important;
+  background: #fff5f5 !important;
+  color: #d51f1f !important;
 }
 
 .logout-btn i {
-  font-size: 15px;
+  font-size: 18px;
 }
 
 .logout-btn span {
-  font-size: 13px;
+  font-size: 16px;
 }
 
 .color-gradient {
