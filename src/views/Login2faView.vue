@@ -7,10 +7,8 @@
             <span class="login-logo-fm">FM</span>
           </div>
 
-          <div class="login-brand-copy">
-            <h1>Field Manager</h1>
-            <span class="login-eyebrow">Personal Argentina</span>
-          </div>
+          <h1 class="login-brand-title">Field Manager</h1>
+          <span class="login-eyebrow">Personal Argentina</span>
         </div>
 
         <div class="login-card">
@@ -187,7 +185,7 @@ onBeforeUnmount(() => window.removeEventListener('message', handleMessage))
   box-shadow: none;
   margin: 0;
   position: absolute;
-  top: 24px;
+  top: 16px;
   left: 34px;
   z-index: 1;
   display: flex;
@@ -226,22 +224,15 @@ onBeforeUnmount(() => window.removeEventListener('message', handleMessage))
   }
 }
 
-.login-brand-copy {
+.login-brand-title {
   position: absolute;
   left: 34px;
   right: 34px;
-  top: 205px;
+  top: 202px;
   z-index: 1;
-  color: #ffffff;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  gap: 20px;
-}
-
-.login-brand-copy h1 {
   margin: 0;
-  font-size: clamp(27px, 3.45vw, 39px);
+  color: #ffffff;
+  font-size: clamp(31px, 4.05vw, 45px);
   line-height: 1;
   font-weight: 800;
   letter-spacing: -.04em;
@@ -249,7 +240,10 @@ onBeforeUnmount(() => window.removeEventListener('message', handleMessage))
 }
 
 .login-eyebrow {
-  align-self: flex-end;
+  position: absolute;
+  right: 34px;
+  bottom: 48px;
+  z-index: 1;
   display: inline-flex;
   align-items: center;
   justify-content: center;
