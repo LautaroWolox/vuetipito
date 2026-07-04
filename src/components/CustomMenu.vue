@@ -3,13 +3,13 @@
     <Menubar :model="items" class="main-menu">
       <template #end>
         <div class="user-section">
-          <button class="user-profile" type="button" @click="toggleDropdown">
+          <Button class="user-profile" text rounded type="button" @click="toggleDropdown">
             <span class="user-avatar" aria-hidden="true">
               <i class="pi pi-user"></i>
             </span>
             <span class="username">{{ userLabel }}</span>
             <i class="pi pi-chevron-down dropdown-icon" :class="{ rotated: showDropdown }"></i>
-          </button>
+          </Button>
 
           <div v-if="showDropdown" class="dropdown-content">
             <div class="dropdown-arrow"></div>
@@ -122,25 +122,29 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside));
   margin-left: auto;
 }
 
-.user-profile {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  min-height: 38px;
-  padding: 0.35rem 0.55rem 0.35rem 0.42rem;
-  border-radius: 999px;
-  cursor: pointer;
-  transition: all 0.25s ease;
-  background: rgba(255, 255, 255, 0.14);
+.user-profile,
+:deep(.user-profile.p-button) {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  min-height: 38px !important;
+  padding: 0.35rem 0.55rem 0.35rem 0.42rem !important;
+  border-radius: 999px !important;
+  cursor: pointer !important;
+  transition: all 0.25s ease !important;
+  background: rgba(255, 255, 255, 0.14) !important;
   backdrop-filter: blur(7px);
-  border: 1px solid rgba(255, 255, 255, 0.24);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .22), 0 6px 18px rgba(0, 0, 0, .08);
+  border: 1px solid rgba(255, 255, 255, 0.24) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .22), 0 6px 18px rgba(0, 0, 0, .08) !important;
+  color: #ffffff !important;
 }
 
-.user-profile:hover {
-  background: rgba(255, 255, 255, 0.22);
+.user-profile:hover,
+:deep(.user-profile.p-button:hover) {
+  background: rgba(255, 255, 255, 0.22) !important;
   transform: translateY(-1px);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .25), 0 8px 22px rgba(0, 0, 0, .14);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .25), 0 8px 22px rgba(0, 0, 0, .14) !important;
+  color: #ffffff !important;
 }
 
 .user-avatar {
