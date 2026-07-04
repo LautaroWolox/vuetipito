@@ -1,25 +1,36 @@
 /* ========================================================================
    FIELD MANAGER GRID ACTIONS PRIME FIX
    ------------------------------------------------------------------------
-   PrimeVue Button mantiene la base tecnica, pero visualmente vuelve al
-   comportamiento compacto de los iconos de grilla Field Manager.
+   Los iconos de accion de grilla usan PrimeVue Button como base tecnica,
+   pero visualmente mantienen el estilo compacto Field Manager.
    ======================================================================== */
 
+.fm-pass-grid .fm-grid-actions,
+.fm-pass-grid .fm-ui-grid-actions,
+.fm-pt-datatable .fm-grid-actions,
+.fm-pt-datatable .fm-ui-grid-actions {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+}
+
 .fm-pass-grid .fm-grid-actions .p-button.fm-icon-btn,
+.fm-pass-grid .fm-grid-actions .p-button.fm-grid-action-button,
 .fm-pass-grid .fm-ui-grid-actions .p-button.fm-ui-icon-button,
 .fm-pt-datatable .fm-grid-actions .p-button.fm-icon-btn,
+.fm-pt-datatable .fm-grid-actions .p-button.fm-grid-action-button,
 .fm-pt-datatable .fm-ui-grid-actions .p-button.fm-ui-icon-button {
-  width: 30px !important;
-  min-width: 30px !important;
-  max-width: 30px !important;
-  height: 30px !important;
-  min-height: 30px !important;
-  max-height: 30px !important;
+  width: 34px !important;
+  min-width: 34px !important;
+  max-width: 34px !important;
+  height: 34px !important;
+  min-height: 34px !important;
+  max-height: 34px !important;
   padding: 0 !important;
-  border: 0 !important;
-  border-radius: 50% !important;
+  border: 1px solid transparent !important;
+  border-radius: 4px !important;
   background: transparent !important;
-  color: #008fa1 !important;
+  color: #4f6673 !important;
   box-shadow: none !important;
   display: inline-flex !important;
   align-items: center !important;
@@ -28,13 +39,27 @@
 }
 
 .fm-pass-grid .fm-grid-actions .p-button.fm-icon-btn:hover,
+.fm-pass-grid .fm-grid-actions .p-button.fm-grid-action-button:hover,
 .fm-pass-grid .fm-ui-grid-actions .p-button.fm-ui-icon-button:hover,
 .fm-pt-datatable .fm-grid-actions .p-button.fm-icon-btn:hover,
+.fm-pt-datatable .fm-grid-actions .p-button.fm-grid-action-button:hover,
 .fm-pt-datatable .fm-ui-grid-actions .p-button.fm-ui-icon-button:hover {
-  background: rgba(0, 169, 189, .12) !important;
-  color: #006f7d !important;
-  box-shadow: none !important;
+  border-color: #00a9bd !important;
+  background: rgba(0, 169, 189, .08) !important;
+  color: #008fa1 !important;
+  box-shadow: 0 0 0 1px rgba(0, 169, 189, .18) !important;
   transform: none !important;
+}
+
+.fm-pass-grid .fm-grid-actions .p-button.fm-icon-btn:focus-visible,
+.fm-pass-grid .fm-grid-actions .p-button.fm-grid-action-button:focus-visible,
+.fm-pass-grid .fm-ui-grid-actions .p-button.fm-ui-icon-button:focus-visible,
+.fm-pt-datatable .fm-grid-actions .p-button.fm-icon-btn:focus-visible,
+.fm-pt-datatable .fm-grid-actions .p-button.fm-grid-action-button:focus-visible,
+.fm-pt-datatable .fm-ui-grid-actions .p-button.fm-ui-icon-button:focus-visible {
+  outline: none !important;
+  border-color: #00a9bd !important;
+  box-shadow: 0 0 0 2px rgba(0, 169, 189, .22) !important;
 }
 
 .fm-pass-grid .fm-grid-actions .p-button .p-button-label,
@@ -52,48 +77,12 @@
 .fm-pt-datatable .fm-grid-actions .p-button .pi,
 .fm-pt-datatable .fm-ui-grid-actions .p-button .p-button-icon,
 .fm-pt-datatable .fm-ui-grid-actions .p-button .pi {
-  width: 20px !important;
-  height: 20px !important;
-  font-size: 18px !important;
-  line-height: 20px !important;
+  width: 22px !important;
+  height: 22px !important;
+  font-size: 22px !important;
+  line-height: 22px !important;
   margin: 0 !important;
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
-}
-
-.fm-pass-grid .fm-grid-actions .p-button .pi-file-export::before,
-.fm-pass-grid .fm-ui-grid-actions .p-button .pi-file-export::before,
-.fm-pt-datatable .fm-grid-actions .p-button .pi-file-export::before,
-.fm-pt-datatable .fm-ui-grid-actions .p-button .pi-file-export::before {
-  content: "⇩" !important;
-  width: auto !important;
-  height: auto !important;
-  background: none !important;
-  mask-image: none !important;
-  -webkit-mask-image: none !important;
-}
-
-.fm-pass-grid .fm-grid-actions .p-button .pi-trash::before,
-.fm-pass-grid .fm-ui-grid-actions .p-button .pi-trash::before,
-.fm-pt-datatable .fm-grid-actions .p-button .pi-trash::before,
-.fm-pt-datatable .fm-ui-grid-actions .p-button .pi-trash::before {
-  content: "×" !important;
-  width: auto !important;
-  height: auto !important;
-  background: none !important;
-  mask-image: none !important;
-  -webkit-mask-image: none !important;
-}
-
-.fm-pass-grid .fm-grid-actions .p-button .pi-refresh::before,
-.fm-pass-grid .fm-ui-grid-actions .p-button .pi-refresh::before,
-.fm-pt-datatable .fm-grid-actions .p-button .pi-refresh::before,
-.fm-pt-datatable .fm-ui-grid-actions .p-button .pi-refresh::before {
-  content: "↻" !important;
-  width: auto !important;
-  height: auto !important;
-  background: none !important;
-  mask-image: none !important;
-  -webkit-mask-image: none !important;
 }
