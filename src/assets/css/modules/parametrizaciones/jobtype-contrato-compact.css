@@ -18,7 +18,6 @@
 }
 
 .jobtype-popup .p-dialog-content {
-  max-height: none !important;
   padding: 24px 22px 12px !important;
   overflow: hidden !important;
 }
@@ -32,10 +31,6 @@
   grid-template-columns: 138px 1fr 1fr 130px !important;
   gap: 18px !important;
   margin-bottom: 22px !important;
-}
-
-.jobtype-popup .jobtype-field {
-  gap: 7px !important;
 }
 
 .jobtype-popup .jobtype-field label {
@@ -62,51 +57,39 @@
   font-size: 16px !important;
 }
 
-.jobtype-popup .jobtype-popup-grid.p-datatable {
-  min-height: 230px !important;
-  max-height: none !important;
-  overflow: hidden !important;
+.jobtype-empty-grid {
+  border: 1px solid #d7e1e7;
+  background: #ffffff;
 }
 
-.jobtype-popup .jobtype-popup-grid .p-datatable-wrapper,
-.jobtype-popup .jobtype-popup-grid .p-datatable-table-container {
-  max-height: none !important;
-  overflow-x: hidden !important;
-  overflow-y: hidden !important;
+.jobtype-empty-grid__header {
+  display: flex;
+  height: 44px;
+  border-bottom: 1px solid #d7e1e7;
+  background: #f8fafb;
 }
 
-.jobtype-popup .jobtype-popup-grid .p-datatable-table,
-.jobtype-popup .jobtype-popup-grid table {
-  width: 100% !important;
-  min-width: 100% !important;
-  max-width: 100% !important;
-  table-layout: fixed !important;
+.jobtype-empty-grid__header div {
+  flex: 1 1 25%;
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  border-right: 1px solid #d7e1e7;
+  color: #456273;
+  font-size: 14px;
+  font-weight: 700;
 }
 
-.jobtype-popup .jobtype-popup-grid th {
-  height: 44px !important;
-  padding: 0 14px !important;
-  font-size: 14px !important;
+.jobtype-empty-grid__body {
+  height: 164px;
+  background: #ffffff;
 }
 
-.jobtype-popup .jobtype-popup-grid tbody {
-  min-height: 164px !important;
-  background: #ffffff !important;
-}
-
-.jobtype-popup .jobtype-popup-grid td {
-  height: 34px !important;
-  padding: 0 14px !important;
-  background: #ffffff !important;
-}
-
-.jobtype-popup .jobtype-popup-grid .p-paginator {
-  height: 1px !important;
-  min-height: 1px !important;
-  max-height: 1px !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  border: 0 !important;
-  overflow: hidden !important;
-  opacity: 0 !important;
+.jobtype-empty-grid__footer {
+  height: 42px;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  border-top: 1px solid #edf2f5;
+  background: #ffffff;
 }
