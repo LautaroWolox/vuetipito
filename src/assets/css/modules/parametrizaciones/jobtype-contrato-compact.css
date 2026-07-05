@@ -80,6 +80,10 @@
   font-weight: 700;
 }
 
+.jobtype-empty-grid__header div:last-child {
+  border-right: 0;
+}
+
 .jobtype-empty-grid__body {
   height: 164px;
   background: #ffffff;
