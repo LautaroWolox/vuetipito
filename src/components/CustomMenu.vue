@@ -37,7 +37,7 @@ const rutas = authStore.rutas;
 const showDropdown = ref(false);
 const items = ref(getRutas(rutas));
 
-const userLabel = computed(() => nombre || legajo || 'Usuario')
+const userLabel = computed(() => legajo || nombre || 'Usuario')
 const userInitials = computed(() => {
   const value = userLabel.value.trim()
   if (!value) return 'US'
@@ -224,11 +224,33 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside));
   height: 5px;
   width: 100%;
   background: linear-gradient(
-    to right,
-    #3fc1cb 0%, #3bb9c2 2%, #009a97 16%,
-    #97a96b 24%, #ebbb1d 32%, #f28cb9 48%,
-    #e30f72 66%, #91268f 82%, #024da1 100%
+    90deg,
+    #00b4b5 0%,
+    #00d4ff 8%,
+    #024da1 16%,
+    #6f35d4 24%,
+    #91268f 32%,
+    #e30f72 40%,
+    #ff2d55 48%,
+    #ff7a00 56%,
+    #ebbb1d 64%,
+    #97c93d 72%,
+    #00a65a 80%,
+    #00c2a8 88%,
+    #00b4b5 100%
   );
+  background-size: 360% 100%;
+  animation: fmColorBarFlow 2.8s linear infinite;
+}
+
+@keyframes fmColorBarFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  100% {
+    background-position: 360% 50%;
+  }
 }
 
 .spacer {
