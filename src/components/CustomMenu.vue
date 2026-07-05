@@ -37,7 +37,7 @@ const rutas = authStore.rutas;
 const showDropdown = ref(false);
 const items = ref(getRutas(rutas));
 
-const userLabel = computed(() => nombre || legajo || 'Usuario')
+const userLabel = computed(() => legajo || nombre || 'Usuario')
 const userInitials = computed(() => {
   const value = userLabel.value.trim()
   if (!value) return 'US'
@@ -98,6 +98,7 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside));
   display: flex;
   align-items: center;
   margin-left: auto;
+  transform: translateX(8px);
 }
 
 .user-profile,
@@ -143,8 +144,8 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside));
 .username {
   color: #ffffff;
   font-weight: 600;
-  font-size: 11px;
-  max-width: 120px;
+  font-size: 12px;
+  max-width: 128px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -163,17 +164,16 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside));
 
 .dropdown-content {
   position: absolute;
-  top: 100%;
+  top: calc(100% + 5px);
   right: 0;
   min-width: 152px;
-  background: #ffffff;
+  background: #ffffff !important;
   border-radius: 0;
   box-shadow: 0 6px 14px rgba(18, 34, 50, 0.11);
   z-index: 1000;
   overflow: hidden;
   animation: dropdownFadeIn 0.18s ease-out;
   border: 1px solid #e5edf2;
-  border-top: 0;
 }
 
 @keyframes dropdownFadeIn {
@@ -187,48 +187,97 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside));
   }
 }
 
+.dropdown-content .logout-btn,
 .logout-btn,
-:deep(.logout-btn.p-button) {
+:deep(.dropdown-content .logout-btn.p-button),
+:deep(.logout-btn.p-button),
+:deep(.logout-btn.p-button.p-button-text) {
   width: 100% !important;
-  min-height: 32px !important;
-  padding: 0 11px !important;
+  min-height: 34px !important;
+  height: 34px !important;
+  padding: 0 12px !important;
   border-radius: 0 !important;
   background: #ffffff !important;
+  background-color: #ffffff !important;
   border: 0 !important;
   color: #e52424 !important;
   display: flex !important;
   align-items: center !important;
   justify-content: flex-start !important;
-  gap: 7px !important;
+  gap: 8px !important;
   font-weight: 500 !important;
   box-shadow: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
+.dropdown-content .logout-btn:hover,
 .logout-btn:hover,
-:deep(.logout-btn.p-button:hover) {
-  background: #fff5f5 !important;
-  color: #d51f1f !important;
+:deep(.dropdown-content .logout-btn.p-button:hover),
+:deep(.logout-btn.p-button:hover),
+:deep(.logout-btn.p-button:enabled:hover),
+:deep(.logout-btn.p-button.p-button-text:hover),
+:deep(.logout-btn.p-button.p-button-text:enabled:hover) {
+  background: rgba(0, 180, 181, .055) !important;
+  background-color: rgba(0, 180, 181, .055) !important;
+  color: #008fa1 !important;
+  box-shadow: none !important;
+  border: 0 !important;
 }
 
 .logout-btn :deep(.p-button-icon),
 .logout-btn :deep(.pi) {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
   font-size: 12px !important;
+  color: currentColor !important;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 .logout-btn :deep(.p-button-label) {
+  display: inline-flex !important;
+  align-items: center !important;
+  color: currentColor !important;
+  opacity: 1 !important;
+  visibility: visible !important;
   font-size: 11px !important;
   font-weight: 500 !important;
+  line-height: 1 !important;
 }
 
 .color-gradient {
   height: 5px;
   width: 100%;
   background: linear-gradient(
-    to right,
-    #3fc1cb 0%, #3bb9c2 2%, #009a97 16%,
-    #97a96b 24%, #ebbb1d 32%, #f28cb9 48%,
-    #e30f72 66%, #91268f 82%, #024da1 100%
+    90deg,
+    #00b4b5 0%,
+    #00d4ff 8%,
+    #024da1 16%,
+    #6f35d4 24%,
+    #91268f 32%,
+    #e30f72 40%,
+    #ff2d55 48%,
+    #ff7a00 56%,
+    #ebbb1d 64%,
+    #97c93d 72%,
+    #00a65a 80%,
+    #00c2a8 88%,
+    #00b4b5 100%
   );
+  background-size: 360% 100%;
+  animation: fmColorBarFlow 22s linear infinite;
+}
+
+@keyframes fmColorBarFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  100% {
+    background-position: 100% 50%;
+  }
 }
 
 .spacer {
