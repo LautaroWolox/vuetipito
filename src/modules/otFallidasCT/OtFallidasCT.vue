@@ -30,6 +30,7 @@ onMounted(async () => {
   store.rows = []
   store.selectedRows = []
   await store.setMotivos()
+  await store.setData()
 })
 </script>
 
