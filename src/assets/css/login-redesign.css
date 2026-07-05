@@ -1,3 +1,9 @@
+/* ========================================================================
+   FIELD MANAGER LOGIN REDESIGN
+   ------------------------------------------------------------------------
+   Ajustes visuales especificos de la pantalla de login.
+   ======================================================================== */
+
 .login-page .login-logo {
   animation: none !important;
   transform: none !important;

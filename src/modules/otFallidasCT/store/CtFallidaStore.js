@@ -22,6 +22,7 @@ const uniqueOptions = (field) => [blankOption, ...new Set(baseRows.map((row) => 
 const contratistaOptions = uniqueOptions('contratista')
 const paisOptions = [blankOption, { name: 'ARG', code: 'ARG' }, { name: 'UY', code: 'UY' }, { name: 'PY', code: 'PY' }]
 const excluidaOptions = [blankOption, { name: 'Si', code: 'S' }, { name: 'No', code: 'N' }]
+const waitForLoader = (ms = 650) => new Promise((resolve) => window.setTimeout(resolve, ms))
 
 const normalizeText = (value) => String(value || '').toLowerCase()
 const normalizeRow = (row) => {
@@ -79,6 +80,7 @@ export const useFallidasCtStore = defineStore('fallidasCt', {
     async setData() {
       this.loading = true
       try {
+        await waitForLoader()
         this.rows = baseRows.map((row) => normalizeRow(row))
       } finally {
         this.loading = false
@@ -112,6 +114,7 @@ export const useFallidasCtStore = defineStore('fallidasCt', {
         // ACA TIENE QUE CONECTAR EL BACKEND - BUSCAR OTS FALLIDAS CT
         // Reemplazar el filtro local por la llamada real y mapear la respuesta
         // a la misma estructura de rows usada por columns.js.
+        await waitForLoader()
         const f = this.filters
         this.rows = baseRows.filter((row) => {
           return (!f.nroOt || normalizeText(row.nroOrdenTrabajo).includes(normalizeText(f.nroOt)))

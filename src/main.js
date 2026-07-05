@@ -13,9 +13,9 @@ import './assets/css/fm-dialog-responsive.css';
 import './assets/css/fm-last-overrides.css';
 import './assets/css/fm-popup-final-overrides.css';
 import './assets/css/fm-button-final-overrides.css';
-import './assets/css/fm-grid-actions-prime-fix.css';
+import './assets/css/fm-grid-actions.css';
 import './assets/css/fm-dialog-close-final-fix.css';
-import './assets/css/login-redesign-tweaks.css';
+import './assets/css/login-redesign.css';
 import Lara from '@primeuix/themes/lara';
 
 import { definePreset } from '@primeuix/themes';
@@ -39,7 +39,6 @@ import FmActionButton from './components/shared/FmActionButton.vue';
 import FmGridActions from './components/shared/FmGridActions.vue';
 import FmTypingLoader from './components/shared/FmTypingLoader.vue';
 
-// Componentes globales de primevue
 import Accordion from 'primevue/accordion';
 import AccordionPanel from 'primevue/accordionpanel';
 import AccordionHeader from 'primevue/accordionheader';
@@ -65,7 +64,7 @@ const MyPreset = definePreset(Lara, {
             200: '#80e7e8',
             300: '#4ddddd',
             400: '#26d4d4',
-            500: '#00b4b5', // color base
+            500: '#00b4b5',
             600: '#009fa0',
             700: '#008b8c',
             800: '#007678',
@@ -98,7 +97,6 @@ app.use(PrimeVue, {
     locale: strings.locale
 });
 
-// Componentes globales
 app.component('Accordion', Accordion);
 app.component('AccordionPanel', AccordionPanel);
 app.component('AccordionHeader', AccordionHeader);
@@ -112,8 +110,6 @@ app.component('MultiSelect', MultiSelect);
 app.component('Dialog', Dialog);
 app.component('Select',Select);
 
-// Componentes globales propios Field Manager.
-// Usar estos en pantallas nuevas para no copiar estilos por pantalla.
 app.component('FmButton', FmButton);
 app.component('FmPanel', FmPanel);
 app.component('FmGridShell', FmGridShell);
