@@ -11,9 +11,10 @@ import './assets/css/fm-loader.css';
 import './assets/css/fm-dialog-fixes.css';
 import './assets/css/fm-dialog-responsive.css';
 import './assets/css/fm-last-overrides.css';
-import './assets/css/fm-popup-overrides.css';
-import './assets/css/fm-ot-fallidas-ct.css';
+import './assets/css/fm-popup-final-overrides.css';
+import './assets/css/fm-button-final-overrides.css';
 import './assets/css/fm-grid-actions.css';
+import './assets/css/fm-dialog-close-final-fix.css';
 import './assets/css/login-redesign.css';
 import Lara from '@primeuix/themes/lara';
 
