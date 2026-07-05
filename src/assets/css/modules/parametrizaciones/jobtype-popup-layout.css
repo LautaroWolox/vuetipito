@@ -10,5 +10,5 @@
 .jobtype-popup .jobtype-popup-button{min-width:112px!important;height:34px!important;min-height:34px!important;font-size:13px!important;border-radius:18px!important}
 .jobtype-empty-grid__header{grid-template-columns:180px 1fr 220px 90px!important;height:40px!important}
 .jobtype-empty-grid__header div{font-size:12px!important;padding:0 12px!important}
-.jobtype-empty-grid__body{height:132px!important}
+.jobtype-empty-grid__body{height:132px!important;background-image:linear-gradient(#edf2f5 1px,transparent 1px)!important;background-size:100% 33px!important;background-color:#fff!important}
 .jobtype-empty-grid__footer{height:36px!important}
