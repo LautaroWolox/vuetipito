@@ -30,3 +30,13 @@
   padding: 0 6px !important;
   overflow: hidden !important;
 }
+
+.jobtype-popup .jobtype-popup-grid th {
+  height: 30px !important;
+  padding: 0 8px !important;
+}
+
+.jobtype-popup .jobtype-popup-grid td {
+  height: 22px !important;
+  padding: 0 8px !important;
+}
