@@ -186,7 +186,7 @@ onBeforeUnmount(() => window.removeEventListener('message', handleMessage))
   margin: 0;
   position: absolute;
   top: 8px;
-  left: 28px;
+  left: 20px;
   z-index: 1;
   display: flex;
   align-items: center;
@@ -210,16 +210,17 @@ onBeforeUnmount(() => window.removeEventListener('message', handleMessage))
   font-weight: 900;
   letter-spacing: -.03em;
   line-height: 1;
-  animation: fmLogoBreath 3.2s ease-in-out infinite;
+  transform-origin: center;
+  animation: fmLogoBreath 2.15s ease-in-out infinite;
 }
 
 @keyframes fmLogoBreath {
   0%, 100% {
-    transform: scale(1);
+    transform: scale(1) rotate(0deg);
     opacity: .88;
   }
   50% {
-    transform: scale(1.12);
+    transform: scale(1.14) rotate(8deg);
     opacity: 1;
   }
 }
@@ -232,12 +233,12 @@ onBeforeUnmount(() => window.removeEventListener('message', handleMessage))
   z-index: 1;
   margin: 0;
   color: #ffffff;
-  font-size: clamp(34px, 4.3vw, 48px);
+  font-size: clamp(31px, 4vw, 44px);
   line-height: 1;
   font-weight: 800;
   letter-spacing: -.02em;
   text-align: center;
-  transform: scaleX(1.04);
+  transform: scaleX(1.035);
   transform-origin: center;
 }
 
