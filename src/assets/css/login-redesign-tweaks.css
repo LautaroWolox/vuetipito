@@ -1,0 +1,25 @@
+.login-page .login-logo-fm {
+  animation: fmLogoFullSpin 2s linear infinite !important;
+}
+
+@keyframes fmLogoFullSpin {
+  0% {
+    transform: scale(1) rotate(0deg);
+    opacity: .88;
+  }
+
+  50% {
+    transform: scale(1.12) rotate(180deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1) rotate(360deg);
+    opacity: .88;
+  }
+}
+
+.login-page .login-eyebrow {
+  right: 6px !important;
+  bottom: 2px !important;
+}
