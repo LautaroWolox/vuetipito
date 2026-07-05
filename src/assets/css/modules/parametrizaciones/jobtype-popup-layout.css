@@ -4,3 +4,6 @@
 .jobtype-popup .p-dialog-content{padding:18px 24px 10px;overflow:hidden}
 .jobtype-popup .p-dialog-footer{min-height:64px;padding:14px 24px 20px}
 .jobtype-popup .jobtype-alta-form{grid-template-columns:140px 1fr 1fr 132px;gap:18px;margin-bottom:18px}
+.jobtype-popup .jobtype-field label{font-size:12px}
+.jobtype-popup .jobtype-input,.jobtype-popup .jobtype-select{height:32px;min-height:32px;font-size:13px}
+.jobtype-popup .jobtype-popup-button{min-width:120px;height:36px;min-height:36px;border-radius:20px;font-size:14px}
