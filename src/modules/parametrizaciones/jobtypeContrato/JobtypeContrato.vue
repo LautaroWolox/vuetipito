@@ -59,6 +59,7 @@
                     class="fm-grid-action-final jobtype-grid-action"
                     title="Exportar"
                     aria-label="Exportar"
+                    v-tooltip.top="'Exportar'"
                     @click="exportarExcel"
                   />
                   <Button
@@ -69,6 +70,7 @@
                     :disabled="!store.hasSelection"
                     title="Eliminar"
                     aria-label="Eliminar"
+                    v-tooltip.top="'Eliminar'"
                     @click="eliminar"
                   />
                   <Button
@@ -79,16 +81,18 @@
                     :disabled="!store.hasSelection"
                     title="Editar"
                     aria-label="Editar"
-                    @click="editar"
+                    v-tooltip.top="'Editar'"
+                    @click="abrirEdicion"
                   />
                   <Button
                     icon="pi pi-plus"
                     text
                     rounded
                     class="fm-grid-action-final jobtype-grid-action"
-                    title="Agregar"
-                    aria-label="Agregar"
-                    @click="agregar"
+                    title="Nueva Relación"
+                    aria-label="Nueva Relación"
+                    v-tooltip.top="'Nueva Relación'"
+                    @click="abrirAlta"
                   />
                 </div>
               </template>
@@ -137,13 +141,134 @@
         </AccordionContent>
       </AccordionPanel>
     </Accordion>
+
+    <Dialog
+      v-model:visible="showAlta"
+      header="Alta Jobtype - Contrato"
+      class="fm-dialog jobtype-popup jobtype-popup--alta"
+      appendTo="body"
+      :modal="false"
+      :draggable="true"
+      :resizable="false"
+      :style="{ width: '868px' }"
+    >
+      <div class="jobtype-alta-form">
+        <div class="jobtype-field jobtype-field--pais">
+          <label for="alta-pais">Pais</label>
+          <Select
+            id="alta-pais"
+            v-model="altaForm.pais"
+            :options="paisOptions"
+            optionLabel="label"
+            optionValue="value"
+            class="jobtype-select"
+          />
+        </div>
+
+        <div class="jobtype-field jobtype-field--wide">
+          <label for="alta-jobtype">Jobtype</label>
+          <InputText id="alta-jobtype" v-model="altaForm.jobtype" class="jobtype-input" />
+        </div>
+
+        <div class="jobtype-field jobtype-field--wide">
+          <label for="alta-contrato">Contrato</label>
+          <InputText id="alta-contrato" v-model="altaForm.contrato" class="jobtype-input" />
+        </div>
+
+        <Button
+          label="AGREGAR"
+          class="jobtype-popup-button jobtype-popup-button--add"
+          :disabled="!canAgregarRelacion"
+          @click="agregarRelacionPreview"
+        />
+      </div>
+
+      <DataTable
+        class="fm-pass-grid jobtype-popup-grid"
+        :value="altaRows"
+        dataKey="id"
+        tableStyle="table-layout: fixed; width: max-content; min-width: 100%"
+        scrollable
+        scrollHeight="166px"
+        paginator
+        :rows="5"
+        paginatorTemplate="FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
+        currentPageReportTemplate="Página {currentPage} de {totalPages}"
+        showGridlines
+      >
+        <Column field="codigoTarea" header="CODIGO_TAREA" :style="popupColumnStyle('190px')" />
+        <Column field="tarea" header="TAREA" :style="popupColumnStyle('230px')" />
+        <Column field="nombreContrato" header="NOMBRE_CONTRATO" :style="popupColumnStyle('210px')" />
+        <Column field="pais" header="PAIS" :style="popupColumnStyle('190px')" />
+
+        <template #paginatorstart>
+          <Button
+            icon="pi pi-trash"
+            text
+            rounded
+            class="fm-grid-action-final jobtype-grid-action"
+            :disabled="!altaSelectedRow"
+            title="Eliminar"
+            aria-label="Eliminar"
+            v-tooltip.top="'Eliminar'"
+            @click="eliminarAltaPreview"
+          />
+        </template>
+      </DataTable>
+
+      <template #footer>
+        <Button
+          label="RELACIONAR"
+          class="jobtype-popup-button jobtype-popup-button--relacionar"
+          :disabled="altaRows.length === 0"
+          @click="relacionar"
+        />
+      </template>
+    </Dialog>
+
+    <Dialog
+      v-model:visible="showEdicion"
+      header="Edición Jobtype-Contrato"
+      class="fm-dialog jobtype-popup jobtype-popup--edicion"
+      appendTo="body"
+      :modal="false"
+      :draggable="true"
+      :resizable="false"
+      :style="{ width: '524px' }"
+    >
+      <div class="jobtype-edit-form">
+        <div class="jobtype-field">
+          <label for="edit-jobtype">JobType</label>
+          <InputText id="edit-jobtype" v-model="editForm.jobtype" class="jobtype-input" disabled />
+        </div>
+
+        <div class="jobtype-field">
+          <label for="edit-contrato-actual">Contrato</label>
+          <InputText id="edit-contrato-actual" v-model="editForm.contratoActual" class="jobtype-input" disabled />
+        </div>
+
+        <div class="jobtype-field jobtype-field--offset">
+          <InputText id="edit-contrato-nuevo" v-model="editForm.contratoNuevo" class="jobtype-input jobtype-input--active" />
+        </div>
+      </div>
+
+      <template #footer>
+        <Button
+          label="ACTUALIZAR"
+          class="jobtype-popup-button jobtype-popup-button--update"
+          @click="actualizarRelacion"
+        />
+      </template>
+    </Dialog>
   </div>
 </template>
 
 <script setup>
-import { computed, ref } from 'vue'
+import { computed, reactive, ref } from 'vue'
 import Button from 'primevue/button'
+import Dialog from 'primevue/dialog'
 import InputText from 'primevue/inputtext'
+import Select from 'primevue/select'
 import { FilterMatchMode } from '@primevue/core/api'
 import { useExcelExport } from '@/composables/useExportExcel'
 import { jobtypeContratoColumns } from './columns'
@@ -154,6 +279,29 @@ const dt = ref()
 const activePanels = ref(['0'])
 const columns = ref(jobtypeContratoColumns)
 const { exportToExcel, parseDataFromTable } = useExcelExport()
+
+const showAlta = ref(false)
+const showEdicion = ref(false)
+const altaRows = ref([])
+const altaSelectedRow = ref(null)
+
+const paisOptions = [
+  { label: 'ARG/UY', value: 'ARG/UY' },
+  { label: 'ARG', value: 'ARG' },
+  { label: 'UY', value: 'UY' }
+]
+
+const altaForm = reactive({
+  pais: 'ARG/UY',
+  jobtype: '',
+  contrato: ''
+})
+
+const editForm = reactive({
+  jobtype: '',
+  contratoActual: '',
+  contratoNuevo: ''
+})
 
 const filters = ref(
   Object.fromEntries(
@@ -166,6 +314,8 @@ const selectedRow = computed({
   set: (value) => store.setSelectedRow(value)
 })
 
+const canAgregarRelacion = computed(() => Boolean(altaForm.jobtype.trim() && altaForm.contrato.trim() && altaForm.pais))
+
 const buscar = async () => {
   activePanels.value = ['0', '1']
   await store.search()
@@ -176,6 +326,11 @@ const columnStyle = (col) => ({
   width: col.width || '140px',
   minWidth: col.minWidth || col.width || '100px',
   maxWidth: 'none'
+})
+
+const popupColumnStyle = (width) => ({
+  width,
+  minWidth: width
 })
 
 const rowClass = (data) => ({
@@ -199,18 +354,63 @@ const exportarExcel = () => {
   })
 }
 
-const editar = () => {
-  // ACA TIENE QUE CONECTAR EL POPUP / FORMULARIO DE EDICION
-  // Por ahora queda habilitado al seleccionar una fila.
+const abrirAlta = () => {
+  altaForm.pais = 'ARG/UY'
+  altaForm.jobtype = ''
+  altaForm.contrato = ''
+  altaRows.value = []
+  altaSelectedRow.value = null
+  showAlta.value = true
+}
+
+const agregarRelacionPreview = () => {
+  if (!canAgregarRelacion.value) return
+
+  altaRows.value = [
+    ...altaRows.value,
+    {
+      id: Date.now(),
+      codigoTarea: altaForm.jobtype.trim().toUpperCase(),
+      tarea: altaForm.jobtype.trim(),
+      nombreContrato: altaForm.contrato.trim(),
+      pais: altaForm.pais
+    }
+  ]
+
+  altaForm.jobtype = ''
+  altaForm.contrato = ''
+}
+
+const eliminarAltaPreview = () => {
+  if (!altaSelectedRow.value) return
+  altaRows.value = altaRows.value.filter((row) => row.id !== altaSelectedRow.value.id)
+  altaSelectedRow.value = null
+}
+
+const relacionar = () => {
+  // ACA TIENE QUE CONECTAR EL BACKEND - ALTA RELACION JOBTYPE-CONTRATO
+  // Enviar altaRows.value al servicio real y refrescar la grilla principal.
+  showAlta.value = false
+}
+
+const abrirEdicion = () => {
+  if (!store.selectedRow) return
+
+  editForm.jobtype = store.selectedRow.tarea || store.selectedRow.codigoTarea || ''
+  editForm.contratoActual = store.selectedRow.nombreContrato || ''
+  editForm.contratoNuevo = ''
+  showEdicion.value = true
+}
+
+const actualizarRelacion = () => {
+  // ACA TIENE QUE CONECTAR EL BACKEND - ACTUALIZAR RELACION JOBTYPE-CONTRATO
+  // Usar store.selectedRow y editForm.contratoNuevo para actualizar la relacion.
+  showEdicion.value = false
 }
 
 const eliminar = () => {
   // ACA TIENE QUE CONECTAR EL BACKEND - ELIMINAR RELACION JOBTYPE-CONTRATO
   // Por ahora queda habilitado al seleccionar una fila.
-}
-
-const agregar = () => {
-  // ACA TIENE QUE CONECTAR EL POPUP / FORMULARIO DE ALTA
 }
 </script>
 
@@ -357,5 +557,120 @@ const agregar = () => {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
+}
+
+.jobtype-popup :deep(.p-dialog-header) {
+  padding: 14px 16px 10px !important;
+  border-bottom: 1px solid #e4ebef !important;
+  cursor: move !important;
+}
+
+.jobtype-popup :deep(.p-dialog-title) {
+  color: #456273 !important;
+  font-size: 18px !important;
+  font-weight: 400 !important;
+}
+
+.jobtype-popup :deep(.p-dialog-content) {
+  padding: 22px 16px 10px !important;
+  overflow: visible !important;
+}
+
+.jobtype-popup :deep(.p-dialog-footer) {
+  padding: 10px 16px 18px !important;
+  border-top: 1px solid #edf2f5 !important;
+}
+
+.jobtype-alta-form,
+.jobtype-edit-form {
+  display: grid;
+  gap: 18px;
+  align-items: end;
+}
+
+.jobtype-alta-form {
+  grid-template-columns: 136px 1fr 1fr 130px;
+  margin-bottom: 26px;
+}
+
+.jobtype-edit-form {
+  grid-template-columns: 1fr 1fr;
+  column-gap: 22px;
+  row-gap: 16px;
+}
+
+.jobtype-field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.jobtype-field label {
+  color: #000000;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.jobtype-input,
+.jobtype-select {
+  width: 100% !important;
+  height: 34px !important;
+}
+
+.jobtype-input--active {
+  border-color: #00b4b5 !important;
+}
+
+.jobtype-field--offset {
+  grid-column: 2 / 3;
+}
+
+.jobtype-popup-button,
+.jobtype-popup-button:enabled:hover,
+.jobtype-popup-button:enabled:focus {
+  min-width: 130px !important;
+  height: 40px !important;
+  border-radius: 22px !important;
+  border: 0 !important;
+  background: #00a9bd !important;
+  color: #ffffff !important;
+  box-shadow: 0 5px 10px rgba(0, 169, 189, .25) !important;
+  font-weight: 700 !important;
+}
+
+.jobtype-popup-button:disabled,
+.jobtype-popup-button.p-disabled {
+  background: #b8c6ce !important;
+  color: #ffffff !important;
+  box-shadow: none !important;
+  opacity: 1 !important;
+}
+
+.jobtype-popup-button--relacionar,
+.jobtype-popup-button--update {
+  float: right;
+}
+
+.jobtype-popup-grid {
+  min-height: 208px;
+}
+
+.jobtype-popup-grid :deep(.p-datatable-thead > tr > th) {
+  height: 40px !important;
+  color: #456273 !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+}
+
+.jobtype-popup-grid :deep(.p-datatable-tbody > tr > td) {
+  height: 34px !important;
+}
+
+.jobtype-popup-grid :deep(.p-paginator) {
+  justify-content: center !important;
+}
+
+.jobtype-popup-grid :deep(.p-paginator-left-content) {
+  margin-right: auto !important;
 }
 </style>
