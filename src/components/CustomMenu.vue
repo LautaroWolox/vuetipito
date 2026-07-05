@@ -167,7 +167,7 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside));
   top: calc(100% + 5px);
   right: 0;
   min-width: 152px;
-  background: #ffffff;
+  background: #ffffff !important;
   border-radius: 0;
   box-shadow: 0 6px 14px rgba(18, 34, 50, 0.11);
   z-index: 1000;
@@ -187,37 +187,64 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside));
   }
 }
 
+.dropdown-content .logout-btn,
 .logout-btn,
-:deep(.logout-btn.p-button) {
+:deep(.dropdown-content .logout-btn.p-button),
+:deep(.logout-btn.p-button),
+:deep(.logout-btn.p-button.p-button-text) {
   width: 100% !important;
-  min-height: 32px !important;
-  padding: 0 11px !important;
+  min-height: 34px !important;
+  height: 34px !important;
+  padding: 0 12px !important;
   border-radius: 0 !important;
   background: #ffffff !important;
+  background-color: #ffffff !important;
   border: 0 !important;
   color: #e52424 !important;
   display: flex !important;
   align-items: center !important;
   justify-content: flex-start !important;
-  gap: 7px !important;
+  gap: 8px !important;
   font-weight: 500 !important;
   box-shadow: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
+.dropdown-content .logout-btn:hover,
 .logout-btn:hover,
-:deep(.logout-btn.p-button:hover) {
-  background: rgba(0, 180, 181, .08) !important;
+:deep(.dropdown-content .logout-btn.p-button:hover),
+:deep(.logout-btn.p-button:hover),
+:deep(.logout-btn.p-button:enabled:hover),
+:deep(.logout-btn.p-button.p-button-text:hover),
+:deep(.logout-btn.p-button.p-button-text:enabled:hover) {
+  background: rgba(0, 180, 181, .055) !important;
+  background-color: rgba(0, 180, 181, .055) !important;
   color: #008fa1 !important;
+  box-shadow: none !important;
+  border: 0 !important;
 }
 
 .logout-btn :deep(.p-button-icon),
 .logout-btn :deep(.pi) {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
   font-size: 12px !important;
+  color: currentColor !important;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 .logout-btn :deep(.p-button-label) {
+  display: inline-flex !important;
+  align-items: center !important;
+  color: currentColor !important;
+  opacity: 1 !important;
+  visibility: visible !important;
   font-size: 11px !important;
   font-weight: 500 !important;
+  line-height: 1 !important;
 }
 
 .color-gradient {
@@ -240,7 +267,7 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside));
     #00b4b5 100%
   );
   background-size: 360% 100%;
-  animation: fmColorBarFlow 7.5s linear infinite;
+  animation: fmColorBarFlow 22s linear infinite;
 }
 
 @keyframes fmColorBarFlow {
@@ -249,7 +276,7 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside));
   }
 
   100% {
-    background-position: 360% 50%;
+    background-position: 100% 50%;
   }
 }
 
