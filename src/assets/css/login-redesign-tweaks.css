@@ -1,15 +1,15 @@
 .login-page .login-logo {
-  transform-origin: center center;
-  animation: fmLogo3dSpin 2.8s linear infinite !important;
-}
-
-.login-page .login-logo-fm {
-  display: inline-block;
   animation: none !important;
   transform: none !important;
 }
 
-@keyframes fmLogo3dSpin {
+.login-page .login-logo-fm {
+  display: inline-block;
+  transform-origin: center center;
+  animation: fmLetters3dSpin 2.8s linear infinite !important;
+}
+
+@keyframes fmLetters3dSpin {
   0% {
     transform: perspective(700px) rotateY(0deg) scale(1);
     opacity: .94;
