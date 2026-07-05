@@ -98,6 +98,7 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside));
   display: flex;
   align-items: center;
   margin-left: auto;
+  transform: translateX(8px);
 }
 
 .user-profile,
@@ -143,8 +144,8 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside));
 .username {
   color: #ffffff;
   font-weight: 600;
-  font-size: 11px;
-  max-width: 120px;
+  font-size: 12px;
+  max-width: 128px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -163,7 +164,7 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside));
 
 .dropdown-content {
   position: absolute;
-  top: 100%;
+  top: calc(100% + 5px);
   right: 0;
   min-width: 152px;
   background: #ffffff;
@@ -173,7 +174,6 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside));
   overflow: hidden;
   animation: dropdownFadeIn 0.18s ease-out;
   border: 1px solid #e5edf2;
-  border-top: 0;
 }
 
 @keyframes dropdownFadeIn {
@@ -206,8 +206,8 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside));
 
 .logout-btn:hover,
 :deep(.logout-btn.p-button:hover) {
-  background: #fff5f5 !important;
-  color: #d51f1f !important;
+  background: rgba(0, 180, 181, .08) !important;
+  color: #008fa1 !important;
 }
 
 .logout-btn :deep(.p-button-icon),
@@ -240,7 +240,7 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside));
     #00b4b5 100%
   );
   background-size: 360% 100%;
-  animation: fmColorBarFlow 2.8s linear infinite;
+  animation: fmColorBarFlow 7.5s linear infinite;
 }
 
 @keyframes fmColorBarFlow {
