@@ -1,12 +1,25 @@
 .jobtype-popup--alta.p-dialog {
   width: 620px !important;
+  max-width: calc(100vw - 48px) !important;
 }
 
 .jobtype-popup--edicion.p-dialog {
   width: 460px !important;
+  max-width: calc(100vw - 48px) !important;
+}
+
+.jobtype-popup .p-dialog-content {
+  max-height: none !important;
+  overflow: hidden !important;
 }
 
 .jobtype-popup .jobtype-popup-grid.p-datatable {
-  min-height: 92px !important;
-  max-height: 124px !important;
+  min-height: 78px !important;
+  max-height: 96px !important;
+  overflow: hidden !important;
+}
+
+.jobtype-popup .jobtype-popup-grid .p-datatable-wrapper {
+  max-height: 58px !important;
+  overflow: hidden !important;
 }
