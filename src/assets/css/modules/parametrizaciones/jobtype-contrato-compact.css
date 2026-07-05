@@ -23,3 +23,10 @@
   max-height: 58px !important;
   overflow: hidden !important;
 }
+
+.jobtype-popup .jobtype-popup-grid .p-paginator {
+  height: 24px !important;
+  min-height: 24px !important;
+  padding: 0 6px !important;
+  overflow: hidden !important;
+}
