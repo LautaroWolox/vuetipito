@@ -1,42 +1,103 @@
 .jobtype-popup--alta.p-dialog {
-  width: 620px !important;
+  width: 880px !important;
   max-width: calc(100vw - 48px) !important;
 }
 
 .jobtype-popup--edicion.p-dialog {
-  width: 460px !important;
+  width: 520px !important;
   max-width: calc(100vw - 48px) !important;
+}
+
+.jobtype-popup .p-dialog-header {
+  min-height: 52px !important;
+  padding: 14px 20px !important;
+}
+
+.jobtype-popup .p-dialog-title {
+  font-size: 18px !important;
 }
 
 .jobtype-popup .p-dialog-content {
   max-height: none !important;
+  padding: 24px 22px 12px !important;
   overflow: hidden !important;
+}
+
+.jobtype-popup .p-dialog-footer {
+  min-height: 76px !important;
+  padding: 18px 22px 26px !important;
+}
+
+.jobtype-popup .jobtype-alta-form {
+  grid-template-columns: 138px 1fr 1fr 130px !important;
+  gap: 18px !important;
+  margin-bottom: 22px !important;
+}
+
+.jobtype-popup .jobtype-field {
+  gap: 7px !important;
+}
+
+.jobtype-popup .jobtype-field label {
+  font-size: 13px !important;
+}
+
+.jobtype-popup .jobtype-input,
+.jobtype-popup .jobtype-select,
+.jobtype-popup .jobtype-input.p-inputtext,
+.jobtype-popup .jobtype-select.p-select {
+  height: 34px !important;
+  min-height: 34px !important;
+  max-height: 34px !important;
+  font-size: 14px !important;
+}
+
+.jobtype-popup .jobtype-popup-button,
+.jobtype-popup .jobtype-popup-button.p-button {
+  min-width: 130px !important;
+  height: 40px !important;
+  min-height: 40px !important;
+  padding: 0 22px !important;
+  border-radius: 22px !important;
+  font-size: 16px !important;
 }
 
 .jobtype-popup .jobtype-popup-grid.p-datatable {
-  min-height: 78px !important;
-  max-height: 96px !important;
+  min-height: 230px !important;
+  max-height: none !important;
   overflow: hidden !important;
 }
 
-.jobtype-popup .jobtype-popup-grid .p-datatable-wrapper {
-  max-height: 58px !important;
-  overflow: hidden !important;
+.jobtype-popup .jobtype-popup-grid .p-datatable-wrapper,
+.jobtype-popup .jobtype-popup-grid .p-datatable-table-container {
+  max-height: none !important;
+  overflow-x: hidden !important;
+  overflow-y: hidden !important;
 }
 
-.jobtype-popup .jobtype-popup-grid .p-paginator {
-  height: 24px !important;
-  min-height: 24px !important;
-  padding: 0 6px !important;
-  overflow: hidden !important;
+.jobtype-popup .jobtype-popup-grid .p-datatable-table,
+.jobtype-popup .jobtype-popup-grid table {
+  width: 100% !important;
+  min-width: 100% !important;
+  max-width: 100% !important;
+  table-layout: fixed !important;
 }
 
 .jobtype-popup .jobtype-popup-grid th {
-  height: 30px !important;
-  padding: 0 8px !important;
+  height: 44px !important;
+  padding: 0 14px !important;
+  font-size: 14px !important;
 }
 
 .jobtype-popup .jobtype-popup-grid td {
-  height: 22px !important;
-  padding: 0 8px !important;
+  height: 164px !important;
+  padding: 0 14px !important;
+  background: #ffffff !important;
+}
+
+.jobtype-popup .jobtype-popup-grid .p-paginator {
+  min-height: 62px !important;
+  height: 62px !important;
+  padding: 8px 12px !important;
+  overflow: hidden !important;
 }
