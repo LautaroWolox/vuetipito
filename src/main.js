@@ -15,6 +15,7 @@ import './assets/css/fm-popup-final-overrides.css';
 import './assets/css/fm-button-final-overrides.css';
 import './assets/css/fm-grid-actions-prime-fix.css';
 import './assets/css/fm-dialog-close-final-fix.css';
+import './assets/css/login-redesign-tweaks.css';
 import Lara from '@primeuix/themes/lara';
 
 import { definePreset } from '@primeuix/themes';
@@ -120,6 +121,6 @@ app.component('FmAlertDialog', FmAlertDialog);
 app.component('FmActionButton', FmActionButton);
 app.component('FmGridActions', FmGridActions);
 app.component('FmTypingLoader', FmTypingLoader);
-
 app.directive('tooltip', Tooltip);
-app.mount('#app');
+
+app.mount('#app')
