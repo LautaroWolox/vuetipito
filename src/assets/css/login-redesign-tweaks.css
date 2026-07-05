@@ -1,33 +1,23 @@
 .login-page .login-logo-fm {
   display: inline-block;
   transform-origin: center center;
-  animation: fmLogoWorldSpin 3.2s linear infinite !important;
+  animation: fmLogoArrowClockwiseSpin 2.6s linear infinite !important;
 }
 
-@keyframes fmLogoWorldSpin {
+@keyframes fmLogoArrowClockwiseSpin {
   0% {
     transform: rotate(0deg) scale(1);
-    opacity: .95;
-  }
-
-  25% {
-    transform: rotate(90deg) scale(1.04);
-    opacity: 1;
+    opacity: .94;
   }
 
   50% {
-    transform: rotate(180deg) scale(1.08);
-    opacity: 1;
-  }
-
-  75% {
-    transform: rotate(270deg) scale(1.04);
+    transform: rotate(180deg) scale(1.07);
     opacity: 1;
   }
 
   100% {
     transform: rotate(360deg) scale(1);
-    opacity: .95;
+    opacity: .94;
   }
 }
 
