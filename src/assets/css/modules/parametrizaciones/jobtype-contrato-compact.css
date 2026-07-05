@@ -89,8 +89,13 @@
   font-size: 14px !important;
 }
 
+.jobtype-popup .jobtype-popup-grid tbody {
+  min-height: 164px !important;
+  background: #ffffff !important;
+}
+
 .jobtype-popup .jobtype-popup-grid td {
-  height: 164px !important;
+  height: 34px !important;
   padding: 0 14px !important;
   background: #ffffff !important;
 }
