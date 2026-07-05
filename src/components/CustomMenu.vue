@@ -313,24 +313,82 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside));
 }
 
 :deep(.p-menubar .p-submenu-list) {
-  background: white;
-  border: none;
-  border-radius: 8px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-  padding: 0.5rem 0;
-  margin-top: 0.5rem;
+  min-width: 250px;
+  padding: 0;
+  margin-top: 0;
+  background: #ffffff !important;
+  border: 0;
+  border-radius: 0;
+  box-shadow: 0 14px 26px rgba(22, 40, 54, 0.16);
+  overflow: visible;
+}
+
+:deep(.p-menubar .p-submenu-list .p-menuitem-content) {
+  min-height: 56px;
+  background: #ffffff !important;
+  border-radius: 0 !important;
+  transition: background-color .16s ease, color .16s ease;
 }
 
 :deep(.p-menubar .p-submenu-list .p-menuitem-content .p-menuitem-link) {
-  padding: 0.75rem 1.25rem;
-  color: #495057 !important;
+  min-height: 56px;
+  padding: 0 28px;
+  color: #263746 !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+  display: flex;
+  align-items: center;
 }
 
-:deep(.p-menubar .p-submenu-list .p-menuitem-content .p-menuitem-link:hover) {
-  background: #f8f9fa !important;
+:deep(.p-menubar .p-submenu-list .p-menuitem-content .p-menuitem-text) {
+  color: inherit !important;
+  font-size: 16px;
+  font-weight: 400;
 }
 
-:deep(.p-menubar .p-submenu-list .p-menuitem-content .p-menuitem-link .p-menuitem-text) {
-  font-size: 0.9rem;
+:deep(.p-menubar .p-submenu-list .p-submenu-icon),
+:deep(.p-menubar .p-submenu-list .p-menuitem-link .p-menuitem-icon),
+:deep(.p-menubar .p-submenu-list .p-menuitem-link .p-icon) {
+  color: #9fb1bd !important;
+}
+
+:deep(.p-menubar .p-submenu-list .p-menuitem-content:hover),
+:deep(.p-menubar .p-submenu-list .p-menuitem.p-focus > .p-menuitem-content),
+:deep(.p-menubar .p-submenu-list .p-menuitem-active > .p-menuitem-content),
+:deep(.p-menubar .p-submenu-list .p-menuitem:hover > .p-menuitem-content) {
+  background: #dff8fb !important;
+  color: #0096a4 !important;
+}
+
+:deep(.p-menubar .p-submenu-list .p-menuitem-content:hover .p-menuitem-link),
+:deep(.p-menubar .p-submenu-list .p-menuitem.p-focus > .p-menuitem-content .p-menuitem-link),
+:deep(.p-menubar .p-submenu-list .p-menuitem-active > .p-menuitem-content .p-menuitem-link),
+:deep(.p-menubar .p-submenu-list .p-menuitem:hover > .p-menuitem-content .p-menuitem-link) {
+  background: transparent !important;
+  color: #0096a4 !important;
+}
+
+:deep(.p-menubar .p-submenu-list .p-menuitem-content:hover .p-menuitem-text),
+:deep(.p-menubar .p-submenu-list .p-menuitem.p-focus > .p-menuitem-content .p-menuitem-text),
+:deep(.p-menubar .p-submenu-list .p-menuitem-active > .p-menuitem-content .p-menuitem-text),
+:deep(.p-menubar .p-submenu-list .p-menuitem:hover > .p-menuitem-content .p-menuitem-text) {
+  color: #0096a4 !important;
+}
+
+:deep(.p-menubar .p-submenu-list .p-menuitem-content:hover .p-submenu-icon),
+:deep(.p-menubar .p-submenu-list .p-menuitem.p-focus > .p-menuitem-content .p-submenu-icon),
+:deep(.p-menubar .p-submenu-list .p-menuitem-active > .p-menuitem-content .p-submenu-icon),
+:deep(.p-menubar .p-submenu-list .p-menuitem:hover > .p-menuitem-content .p-submenu-icon),
+:deep(.p-menubar .p-submenu-list .p-menuitem-content:hover .p-icon),
+:deep(.p-menubar .p-submenu-list .p-menuitem.p-focus > .p-menuitem-content .p-icon),
+:deep(.p-menubar .p-submenu-list .p-menuitem-active > .p-menuitem-content .p-icon),
+:deep(.p-menubar .p-submenu-list .p-menuitem:hover > .p-menuitem-content .p-icon) {
+  color: #0096a4 !important;
+}
+
+:deep(.p-menubar .p-submenu-list .p-submenu-list) {
+  margin-left: 0;
+  margin-top: 0;
+  border-left: 4px solid #00a9bd;
 }
 </style>
