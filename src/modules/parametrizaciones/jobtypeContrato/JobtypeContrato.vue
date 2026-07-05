@@ -150,7 +150,7 @@
       :modal="false"
       :draggable="true"
       :resizable="false"
-      :style="{ width: '868px' }"
+      :style="{ width: '760px', maxWidth: 'calc(100vw - 48px)' }"
     >
       <div class="jobtype-alta-form">
         <div class="jobtype-field jobtype-field--pais">
@@ -165,12 +165,12 @@
           />
         </div>
 
-        <div class="jobtype-field jobtype-field--wide">
+        <div class="jobtype-field">
           <label for="alta-jobtype">Jobtype</label>
           <InputText id="alta-jobtype" v-model="altaForm.jobtype" class="jobtype-input" />
         </div>
 
-        <div class="jobtype-field jobtype-field--wide">
+        <div class="jobtype-field">
           <label for="alta-contrato">Contrato</label>
           <InputText id="alta-contrato" v-model="altaForm.contrato" class="jobtype-input" />
         </div>
@@ -187,26 +187,29 @@
         class="fm-pass-grid jobtype-popup-grid"
         :value="altaRows"
         dataKey="id"
-        tableStyle="table-layout: fixed; width: max-content; min-width: 100%"
+        tableStyle="table-layout: fixed; width: 100%; min-width: 100%"
         scrollable
-        scrollHeight="166px"
+        scrollHeight="150px"
         paginator
         :rows="5"
+        v-model:selection="altaSelectedRow"
+        selectionMode="single"
         paginatorTemplate="FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
         currentPageReportTemplate="Página {currentPage} de {totalPages}"
         showGridlines
+        @row-click="onAltaRowClick"
       >
-        <Column field="codigoTarea" header="CODIGO_TAREA" :style="popupColumnStyle('190px')" />
-        <Column field="tarea" header="TAREA" :style="popupColumnStyle('230px')" />
+        <Column field="codigoTarea" header="CODIGO_TAREA" :style="popupColumnStyle('150px')" />
+        <Column field="tarea" header="TAREA" :style="popupColumnStyle('250px')" />
         <Column field="nombreContrato" header="NOMBRE_CONTRATO" :style="popupColumnStyle('210px')" />
-        <Column field="pais" header="PAIS" :style="popupColumnStyle('190px')" />
+        <Column field="pais" header="PAIS" :style="popupColumnStyle('90px')" />
 
         <template #paginatorstart>
           <Button
             icon="pi pi-trash"
             text
             rounded
-            class="fm-grid-action-final jobtype-grid-action"
+            class="fm-grid-action-final jobtype-grid-action jobtype-popup-trash"
             :disabled="!altaSelectedRow"
             title="Eliminar"
             aria-label="Eliminar"
@@ -234,7 +237,7 @@
       :modal="false"
       :draggable="true"
       :resizable="false"
-      :style="{ width: '524px' }"
+      :style="{ width: '500px', maxWidth: 'calc(100vw - 48px)' }"
     >
       <div class="jobtype-edit-form">
         <div class="jobtype-field">
@@ -286,13 +289,14 @@ const altaRows = ref([])
 const altaSelectedRow = ref(null)
 
 const paisOptions = [
+  { label: '', value: '' },
   { label: 'ARG/UY', value: 'ARG/UY' },
   { label: 'ARG', value: 'ARG' },
   { label: 'UY', value: 'UY' }
 ]
 
 const altaForm = reactive({
-  pais: 'ARG/UY',
+  pais: '',
   jobtype: '',
   contrato: ''
 })
@@ -330,7 +334,8 @@ const columnStyle = (col) => ({
 
 const popupColumnStyle = (width) => ({
   width,
-  minWidth: width
+  minWidth: width,
+  maxWidth: width
 })
 
 const rowClass = (data) => ({
@@ -340,6 +345,10 @@ const rowClass = (data) => ({
 
 const onRowClick = (event) => {
   if (event?.data) store.setSelectedRow(event.data)
+}
+
+const onAltaRowClick = (event) => {
+  altaSelectedRow.value = event?.data || null
 }
 
 const exportarExcel = () => {
@@ -355,7 +364,7 @@ const exportarExcel = () => {
 }
 
 const abrirAlta = () => {
-  altaForm.pais = 'ARG/UY'
+  altaForm.pais = ''
   altaForm.jobtype = ''
   altaForm.contrato = ''
   altaRows.value = []
@@ -559,62 +568,86 @@ const eliminar = () => {
   justify-content: center !important;
 }
 
-.jobtype-popup :deep(.p-dialog-header) {
-  padding: 14px 16px 10px !important;
-  border-bottom: 1px solid #e4ebef !important;
+:global(.jobtype-popup.p-dialog) {
+  border-radius: 2px !important;
+  box-shadow: 0 12px 28px rgba(21, 37, 50, .18) !important;
+  overflow: hidden !important;
+}
+
+:global(.jobtype-popup .p-dialog-header) {
+  min-height: 40px !important;
+  padding: 9px 14px !important;
+  border-bottom: 1px solid #e2e9ee !important;
   cursor: move !important;
 }
 
-.jobtype-popup :deep(.p-dialog-title) {
+:global(.jobtype-popup .p-dialog-title) {
   color: #456273 !important;
   font-size: 18px !important;
   font-weight: 400 !important;
 }
 
-.jobtype-popup :deep(.p-dialog-content) {
-  padding: 22px 16px 10px !important;
-  overflow: visible !important;
+:global(.jobtype-popup .p-dialog-header-close) {
+  width: 24px !important;
+  height: 24px !important;
+  color: #9eb1bc !important;
 }
 
-.jobtype-popup :deep(.p-dialog-footer) {
-  padding: 10px 16px 18px !important;
+:global(.jobtype-popup .p-dialog-content) {
+  padding: 14px 16px 10px !important;
+  overflow: hidden !important;
+}
+
+:global(.jobtype-popup .p-dialog-footer) {
+  padding: 10px 16px 14px !important;
   border-top: 1px solid #edf2f5 !important;
+  display: flex !important;
+  justify-content: flex-end !important;
 }
 
 .jobtype-alta-form,
 .jobtype-edit-form {
   display: grid;
-  gap: 18px;
   align-items: end;
 }
 
 .jobtype-alta-form {
-  grid-template-columns: 136px 1fr 1fr 130px;
-  margin-bottom: 26px;
+  grid-template-columns: 120px minmax(0, 1fr) minmax(0, 1fr) 112px;
+  gap: 14px;
+  margin-bottom: 16px;
 }
 
 .jobtype-edit-form {
   grid-template-columns: 1fr 1fr;
-  column-gap: 22px;
-  row-gap: 16px;
+  column-gap: 20px;
+  row-gap: 14px;
 }
 
 .jobtype-field {
   display: flex;
   flex-direction: column;
-  gap: 7px;
+  gap: 6px;
+  min-width: 0;
 }
 
 .jobtype-field label {
   color: #000000;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 700;
 }
 
 .jobtype-input,
 .jobtype-select {
   width: 100% !important;
-  height: 34px !important;
+  height: 32px !important;
+  min-height: 32px !important;
+  font-size: 13px !important;
+}
+
+.jobtype-select :deep(.p-select-label) {
+  padding-top: 6px !important;
+  padding-bottom: 6px !important;
+  font-size: 13px !important;
 }
 
 .jobtype-input--active {
@@ -628,49 +661,116 @@ const eliminar = () => {
 .jobtype-popup-button,
 .jobtype-popup-button:enabled:hover,
 .jobtype-popup-button:enabled:focus {
-  min-width: 130px !important;
-  height: 40px !important;
-  border-radius: 22px !important;
-  border: 0 !important;
+  min-width: 108px !important;
+  height: 32px !important;
+  padding: 0 18px !important;
+  border-radius: 18px !important;
+  border: 1px solid #00a9bd !important;
   background: #00a9bd !important;
   color: #ffffff !important;
-  box-shadow: 0 5px 10px rgba(0, 169, 189, .25) !important;
+  box-shadow: 0 3px 7px rgba(0, 169, 189, .18) !important;
+  font-size: 12px !important;
   font-weight: 700 !important;
 }
 
 .jobtype-popup-button:disabled,
 .jobtype-popup-button.p-disabled {
   background: #b8c6ce !important;
+  border-color: #b8c6ce !important;
   color: #ffffff !important;
   box-shadow: none !important;
   opacity: 1 !important;
 }
 
+.jobtype-popup-button--add {
+  align-self: end;
+  justify-self: stretch;
+}
+
 .jobtype-popup-button--relacionar,
 .jobtype-popup-button--update {
-  float: right;
+  min-width: 116px !important;
 }
 
 .jobtype-popup-grid {
-  min-height: 208px;
+  min-height: 190px;
+  border: 1px solid #d7e1e7;
+}
+
+.jobtype-popup-grid :deep(.p-datatable-wrapper) {
+  overflow-x: hidden !important;
+}
+
+.jobtype-popup-grid :deep(.p-datatable-table) {
+  width: 100% !important;
+  min-width: 100% !important;
+  table-layout: fixed !important;
 }
 
 .jobtype-popup-grid :deep(.p-datatable-thead > tr > th) {
-  height: 40px !important;
+  height: 36px !important;
+  padding: 0 10px !important;
   color: #456273 !important;
-  font-size: 14px !important;
+  font-size: 13px !important;
   font-weight: 700 !important;
+  white-space: nowrap !important;
 }
 
 .jobtype-popup-grid :deep(.p-datatable-tbody > tr > td) {
-  height: 34px !important;
+  height: 32px !important;
+  padding: 0 10px !important;
+  font-size: 12px !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+.jobtype-popup-grid :deep(.p-datatable-tbody > tr) {
+  cursor: pointer;
+}
+
+.jobtype-popup-grid :deep(.p-datatable-tbody > tr:hover > td),
+.jobtype-popup-grid :deep(.p-datatable-tbody > tr.p-highlight > td) {
+  background: #e8f8fb !important;
+  color: #0f2f3d !important;
 }
 
 .jobtype-popup-grid :deep(.p-paginator) {
+  min-height: 42px !important;
+  padding: 4px 8px !important;
   justify-content: center !important;
+  border-top: 1px solid #edf2f5 !important;
 }
 
 .jobtype-popup-grid :deep(.p-paginator-left-content) {
   margin-right: auto !important;
+}
+
+.jobtype-popup-grid :deep(.p-paginator-page),
+.jobtype-popup-grid :deep(.p-paginator-first),
+.jobtype-popup-grid :deep(.p-paginator-prev),
+.jobtype-popup-grid :deep(.p-paginator-next),
+.jobtype-popup-grid :deep(.p-paginator-last) {
+  min-width: 24px !important;
+  width: 24px !important;
+  height: 24px !important;
+  margin: 0 1px !important;
+  font-size: 12px !important;
+}
+
+.jobtype-popup-trash {
+  width: 16px !important;
+  height: 16px !important;
+}
+
+@media (max-width: 820px) {
+  .jobtype-alta-form {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .jobtype-popup-button--add {
+    justify-self: start;
+    width: 112px;
+  }
 }
 </style>
