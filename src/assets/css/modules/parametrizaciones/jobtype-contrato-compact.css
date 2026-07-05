@@ -1,0 +1,12 @@
+.jobtype-popup--alta.p-dialog {
+  width: 620px !important;
+}
+
+.jobtype-popup--edicion.p-dialog {
+  width: 460px !important;
+}
+
+.jobtype-popup .jobtype-popup-grid.p-datatable {
+  min-height: 92px !important;
+  max-height: 124px !important;
+}
