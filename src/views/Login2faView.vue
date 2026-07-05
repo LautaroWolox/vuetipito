@@ -241,8 +241,8 @@ onBeforeUnmount(() => window.removeEventListener('message', handleMessage))
 
 .login-eyebrow {
   position: absolute;
-  right: 34px;
-  bottom: 48px;
+  right: 22px;
+  bottom: 22px;
   z-index: 1;
   display: inline-flex;
   align-items: center;
