@@ -178,15 +178,15 @@ onBeforeUnmount(() => window.removeEventListener('message', handleMessage))
 }
 
 .login-logo {
-  width: 74px;
-  height: 74px;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
   background: transparent;
   box-shadow: none;
   margin: 0;
   position: absolute;
-  top: 14px;
-  left: 44px;
+  top: 8px;
+  left: 28px;
   z-index: 1;
   display: flex;
   align-items: center;
@@ -206,7 +206,7 @@ onBeforeUnmount(() => window.removeEventListener('message', handleMessage))
   position: relative;
   z-index: 1;
   color: #1d3444;
-  font-size: 20px;
+  font-size: 19px;
   font-weight: 900;
   letter-spacing: -.03em;
   line-height: 1;
@@ -243,8 +243,8 @@ onBeforeUnmount(() => window.removeEventListener('message', handleMessage))
 
 .login-eyebrow {
   position: absolute;
-  right: 18px;
-  bottom: 14px;
+  right: 10px;
+  bottom: 6px;
   z-index: 1;
   display: inline-flex;
   align-items: center;
