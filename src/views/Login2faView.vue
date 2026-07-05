@@ -178,15 +178,15 @@ onBeforeUnmount(() => window.removeEventListener('message', handleMessage))
 }
 
 .login-logo {
-  width: 84px;
-  height: 84px;
+  width: 74px;
+  height: 74px;
   border-radius: 50%;
   background: transparent;
   box-shadow: none;
   margin: 0;
   position: absolute;
-  top: 16px;
-  left: 34px;
+  top: 14px;
+  left: 44px;
   z-index: 1;
   display: flex;
   align-items: center;
@@ -198,7 +198,7 @@ onBeforeUnmount(() => window.removeEventListener('message', handleMessage))
   position: absolute;
   inset: 5px;
   border-radius: 50%;
-  border: 6px solid rgba(255, 255, 255, .92);
+  border: 5px solid rgba(255, 255, 255, .92);
   box-shadow: 0 12px 28px rgba(0, 0, 0, .13), inset 0 1px 0 rgba(255, 255, 255, .25);
 }
 
@@ -206,9 +206,9 @@ onBeforeUnmount(() => window.removeEventListener('message', handleMessage))
   position: relative;
   z-index: 1;
   color: #1d3444;
-  font-size: 23px;
+  font-size: 20px;
   font-weight: 900;
-  letter-spacing: -.04em;
+  letter-spacing: -.03em;
   line-height: 1;
   animation: fmLogoBreath 3.2s ease-in-out infinite;
 }
@@ -226,23 +226,25 @@ onBeforeUnmount(() => window.removeEventListener('message', handleMessage))
 
 .login-brand-title {
   position: absolute;
-  left: 34px;
-  right: 34px;
+  left: 24px;
+  right: 24px;
   top: 202px;
   z-index: 1;
   margin: 0;
   color: #ffffff;
-  font-size: clamp(31px, 4.05vw, 45px);
+  font-size: clamp(34px, 4.3vw, 48px);
   line-height: 1;
   font-weight: 800;
-  letter-spacing: -.04em;
+  letter-spacing: -.02em;
   text-align: center;
+  transform: scaleX(1.04);
+  transform-origin: center;
 }
 
 .login-eyebrow {
   position: absolute;
-  right: 22px;
-  bottom: 22px;
+  right: 18px;
+  bottom: 14px;
   z-index: 1;
   display: inline-flex;
   align-items: center;
