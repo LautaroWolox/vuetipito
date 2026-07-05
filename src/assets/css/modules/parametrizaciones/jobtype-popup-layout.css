@@ -7,7 +7,7 @@
 .jobtype-popup .jobtype-field label{font-size:12px!important}
 .jobtype-popup .jobtype-input,.jobtype-popup .jobtype-select{height:32px!important;min-height:32px!important;font-size:13px!important}
 .jobtype-popup .jobtype-popup-button{min-width:120px!important;height:36px!important;font-size:14px!important}
-.jobtype-empty-grid__header{grid-template-columns:190px 1fr 240px 110px;height:42px}
-.jobtype-empty-grid__header div{font-size:13px;padding:0 13px}
-.jobtype-empty-grid__body{height:150px}
-.jobtype-empty-grid__footer{height:40px}
+.jobtype-empty-grid__header{grid-template-columns:190px 1fr 240px 110px!important;height:42px!important}
+.jobtype-empty-grid__header div{font-size:13px!important;padding:0 13px!important}
+.jobtype-empty-grid__body{height:150px!important}
+.jobtype-empty-grid__footer{height:40px!important}
