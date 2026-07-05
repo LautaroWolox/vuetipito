@@ -1,13 +1,14 @@
-.jobtype-popup--alta.p-dialog{width:1020px!important;max-width:calc(100vw - 48px)!important}
-.jobtype-popup .p-dialog-header{min-height:46px!important;padding:11px 20px!important}
-.jobtype-popup .p-dialog-title{font-size:17px!important}
-.jobtype-popup .p-dialog-content{padding:18px 24px 10px!important;overflow:hidden!important}
-.jobtype-popup .p-dialog-footer{min-height:64px!important;padding:14px 24px 20px!important}
-.jobtype-popup .jobtype-alta-form{grid-template-columns:140px 1fr 1fr 132px!important;gap:18px!important;margin-bottom:18px!important}
-.jobtype-popup .jobtype-field label{font-size:12px!important}
-.jobtype-popup .jobtype-input,.jobtype-popup .jobtype-select{height:32px!important;min-height:32px!important;font-size:13px!important}
-.jobtype-popup .jobtype-popup-button{min-width:120px!important;height:36px!important;font-size:14px!important}
-.jobtype-empty-grid__header{grid-template-columns:190px 1fr 240px 110px!important;height:42px!important}
-.jobtype-empty-grid__header div{font-size:13px!important;padding:0 13px!important}
-.jobtype-empty-grid__body{height:150px!important}
-.jobtype-empty-grid__footer{height:40px!important}
+.jobtype-popup--alta{width:860px!important;max-width:calc(100vw - 64px)!important}
+.jobtype-popup--alta.p-dialog{width:860px!important;max-width:calc(100vw - 64px)!important}
+.jobtype-popup .p-dialog-header{min-height:42px!important;padding:9px 16px!important}
+.jobtype-popup .p-dialog-title{font-size:16px!important;font-weight:400!important}
+.jobtype-popup .p-dialog-content{padding:16px 18px 10px!important;overflow:hidden!important}
+.jobtype-popup .p-dialog-footer{min-height:56px!important;padding:12px 18px 16px!important}
+.jobtype-popup .jobtype-alta-form{grid-template-columns:130px 1fr 1fr 118px!important;gap:14px!important;margin-bottom:14px!important}
+.jobtype-popup .jobtype-field label{font-size:12px!important;line-height:1.1!important}
+.jobtype-popup .jobtype-input,.jobtype-popup .jobtype-select{height:31px!important;min-height:31px!important;font-size:13px!important}
+.jobtype-popup .jobtype-popup-button{min-width:112px!important;height:34px!important;min-height:34px!important;font-size:13px!important;border-radius:18px!important}
+.jobtype-empty-grid__header{grid-template-columns:180px 1fr 220px 90px!important;height:40px!important}
+.jobtype-empty-grid__header div{font-size:12px!important;padding:0 12px!important}
+.jobtype-empty-grid__body{height:132px!important}
+.jobtype-empty-grid__footer{height:36px!important}
