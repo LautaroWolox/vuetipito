@@ -17,6 +17,7 @@ import './assets/css/components/grids/fm-grid-actions.css';
 import './assets/css/components/menus/fm-menubar-submenus.css';
 import './assets/css/components/dialogs/fm-dialog-close.css';
 import './assets/css/modules/login/login-redesign.css';
+import './assets/css/modules/parametrizaciones/jobtype-contrato.css';
 import Lara from '@primeuix/themes/lara';
 
 import { definePreset } from '@primeuix/themes';
