@@ -1,7 +1,12 @@
-.login-page .login-logo-fm {
-  display: inline-block;
+.login-page .login-logo {
   transform-origin: center center;
   animation: fmLogoArrowClockwiseSpin 2.6s linear infinite !important;
+}
+
+.login-page .login-logo-fm {
+  display: inline-block;
+  animation: none !important;
+  transform: none !important;
 }
 
 @keyframes fmLogoArrowClockwiseSpin {
@@ -11,7 +16,7 @@
   }
 
   50% {
-    transform: rotate(180deg) scale(1.07);
+    transform: rotate(180deg) scale(1.06);
     opacity: 1;
   }
 
