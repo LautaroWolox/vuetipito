@@ -1,0 +1,33 @@
+/* ========================================================================
+   CMO ACTIVIDAD SELECTED ROW
+   ------------------------------------------------------------------------
+   Marca toda la fila seleccionada con un turquesa mas oscuro, toque donde
+   toque el usuario dentro de la fila.
+   ======================================================================== */
+
+.cmo-actividad-grid .p-datatable-tbody > tr.cmo-actividad-row-selected > td,
+.cmo-actividad-grid .p-datatable-tbody > tr.jobtype-row-selected > td,
+.cmo-actividad-grid .p-datatable-tbody > tr.fm-selected-row > td,
+.cmo-actividad-grid .p-datatable-tbody > tr.p-highlight > td,
+.cmo-actividad-grid .p-datatable-tbody > tr[aria-selected="true"] > td {
+  background: #c9f0f3 !important;
+  color: #062f3b !important;
+  font-weight: 700 !important;
+}
+
+.cmo-actividad-grid .p-datatable-tbody > tr.cmo-actividad-row-selected:hover > td,
+.cmo-actividad-grid .p-datatable-tbody > tr.jobtype-row-selected:hover > td,
+.cmo-actividad-grid .p-datatable-tbody > tr.fm-selected-row:hover > td,
+.cmo-actividad-grid .p-datatable-tbody > tr.p-highlight:hover > td,
+.cmo-actividad-grid .p-datatable-tbody > tr[aria-selected="true"]:hover > td {
+  background: #b7e9ed !important;
+  color: #062f3b !important;
+}
+
+.cmo-actividad-grid .p-datatable-tbody > tr.cmo-actividad-row-selected > td:first-child,
+.cmo-actividad-grid .p-datatable-tbody > tr.jobtype-row-selected > td:first-child,
+.cmo-actividad-grid .p-datatable-tbody > tr.fm-selected-row > td:first-child,
+.cmo-actividad-grid .p-datatable-tbody > tr.p-highlight > td:first-child,
+.cmo-actividad-grid .p-datatable-tbody > tr[aria-selected="true"] > td:first-child {
+  box-shadow: inset 3px 0 0 #00a9bd !important;
+}
