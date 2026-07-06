@@ -5,6 +5,11 @@ const MAXIMIZE_CLASS = 'jobtype-modal-maximize'
 const EXPANDED_CLASS = 'jobtype-modal--expanded'
 const CMO_ALTA_SELECTOR = '.cmo-actividad-modal--alta'
 
+const CMO_EMPTY_GRID_BACKGROUND = [
+  'linear-gradient(to right, transparent 0, transparent 24%, #b7cbd7 24%, #b7cbd7 calc(24% + 1px), transparent calc(24% + 1px), transparent 54%, #b7cbd7 54%, #b7cbd7 calc(54% + 1px), transparent calc(54% + 1px), transparent 76%, #b7cbd7 76%, #b7cbd7 calc(76% + 1px), transparent calc(76% + 1px), transparent 100%)',
+  'repeating-linear-gradient(to bottom, transparent 0, transparent 47px, #d5e1e8 47px, #d5e1e8 48px)'
+].join(', ')
+
 const createToggle = () => {
   const toggle = document.createElement('span')
   toggle.setAttribute('role', 'button')
@@ -24,6 +29,11 @@ const createToggle = () => {
 const setImportant = (element, property, value) => {
   if (!element) return
   element.style.setProperty(property, value, 'important')
+}
+
+const removeImportant = (element, property) => {
+  if (!element) return
+  element.style.removeProperty(property)
 }
 
 const setToggleState = (modal, toggle) => {
@@ -47,8 +57,8 @@ const fixCmoActividadPopup = (modal) => {
   const empty = modal.querySelector('.cmo-actividad-popup-datatable .jobtype-popup-grid-empty, .cmo-actividad-popup-datatable .p-datatable-empty-message')
   const isExpanded = modal.classList.contains(EXPANDED_CLASS)
   const isEmpty = Boolean(empty)
-  const bodyHeight = isEmpty ? (isExpanded ? '210px' : '170px') : (isExpanded ? '382px' : '210px')
-  const emptyHeight = isEmpty ? (isExpanded ? '146px' : '106px') : null
+  const bodyHeight = isExpanded ? '340px' : '230px'
+  const emptyHeight = isExpanded ? '276px' : '166px'
 
   if (shell) {
     shell.classList.toggle('cmo-actividad-popup-grid-shell--empty', isEmpty)
@@ -56,7 +66,7 @@ const fixCmoActividadPopup = (modal) => {
     setImportant(shell, 'border-left-width', '1px')
     setImportant(shell, 'border-left-style', 'solid')
     setImportant(shell, 'border-left-color', '#00a9bd')
-    setImportant(shell, 'background', '#ffffff')
+    setImportant(shell, 'background-color', '#ffffff')
     setImportant(shell, 'overflow', 'hidden')
   }
 
@@ -64,7 +74,7 @@ const fixCmoActividadPopup = (modal) => {
     setImportant(table, 'width', '100%')
     setImportant(table, 'max-width', '100%')
     setImportant(table, 'min-width', '0')
-    setImportant(table, 'background', '#ffffff')
+    setImportant(table, 'background-color', '#ffffff')
     setImportant(table, 'border-left-width', '0')
   }
 
@@ -72,24 +82,39 @@ const fixCmoActividadPopup = (modal) => {
     setImportant(wrapper, 'height', bodyHeight)
     setImportant(wrapper, 'min-height', bodyHeight)
     setImportant(wrapper, 'max-height', bodyHeight)
-    setImportant(wrapper, 'background', '#ffffff')
+    setImportant(wrapper, 'background-color', '#ffffff')
     setImportant(wrapper, 'overflow-x', 'hidden')
     setImportant(wrapper, 'overflow-y', isEmpty ? 'hidden' : 'auto')
     setImportant(wrapper, 'border-left-width', '0')
     setImportant(wrapper, 'border-left-style', 'none')
+
+    if (isEmpty) {
+      setImportant(wrapper, 'background-image', CMO_EMPTY_GRID_BACKGROUND)
+      setImportant(wrapper, 'background-position', '0 64px, 0 64px')
+      setImportant(wrapper, 'background-repeat', 'no-repeat, repeat')
+      setImportant(wrapper, 'background-size', '100% 100%, 100% 48px')
+    } else {
+      removeImportant(wrapper, 'background-image')
+      removeImportant(wrapper, 'background-position')
+      removeImportant(wrapper, 'background-repeat')
+      removeImportant(wrapper, 'background-size')
+    }
   })
 
   modal.querySelectorAll('.cmo-actividad-popup-datatable .p-datatable-tbody, .cmo-actividad-popup-datatable .p-datatable-tbody > tr, .cmo-actividad-popup-datatable .p-datatable-tbody > tr > td').forEach((node) => {
-    setImportant(node, 'background', '#ffffff')
+    setImportant(node, 'background-color', 'transparent')
   })
 
-  if (emptyHeight) {
+  if (isEmpty) {
     modal.querySelectorAll('.cmo-actividad-popup-datatable .p-datatable-empty-message > td, .cmo-actividad-popup-datatable .jobtype-popup-grid-empty').forEach((node) => {
       setImportant(node, 'height', emptyHeight)
       setImportant(node, 'min-height', emptyHeight)
       setImportant(node, 'max-height', emptyHeight)
-      setImportant(node, 'padding', isExpanded ? '48px 12px' : '28px 12px')
-      setImportant(node, 'background', '#ffffff')
+      setImportant(node, 'padding', isExpanded ? '112px 12px' : '62px 12px')
+      setImportant(node, 'background-color', 'transparent')
+      setImportant(node, 'border-top-width', '1px')
+      setImportant(node, 'border-top-style', 'solid')
+      setImportant(node, 'border-top-color', '#d5e1e8')
     })
   }
 }
