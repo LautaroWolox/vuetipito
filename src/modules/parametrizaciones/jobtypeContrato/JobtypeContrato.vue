@@ -107,103 +107,104 @@
     <Dialog
       v-model:visible="showAlta"
       header="Alta Jobtype - Contrato"
-      class="fm-dialog jobtype-popup jobtype-popup--alta"
+      class="jobtype-modal jobtype-modal--alta"
       appendTo="body"
-      :modal="false"
+      :modal="true"
       :draggable="true"
       :resizable="false"
-      :style="{ width: '880px', maxWidth: 'calc(100vw - 48px)' }"
+      :style="{ width: '820px', maxWidth: 'calc(100vw - 64px)' }"
     >
-      <div class="jobtype-alta-form">
-        <div class="jobtype-field jobtype-field--pais">
+      <div class="jobtype-modal-form">
+        <div class="jobtype-modal-field jobtype-modal-field--pais">
           <label for="alta-pais">Pais</label>
-          <Select id="alta-pais" v-model="altaForm.pais" :options="paisOptions" optionLabel="label" optionValue="value" class="jobtype-select" />
+          <Select id="alta-pais" v-model="altaForm.pais" :options="paisOptions" optionLabel="label" optionValue="value" class="jobtype-modal-select" />
         </div>
 
-        <div class="jobtype-field">
+        <div class="jobtype-modal-field">
           <label for="alta-jobtype">Jobtype</label>
-          <InputText id="alta-jobtype" v-model="altaForm.jobtype" class="jobtype-input" />
+          <InputText id="alta-jobtype" v-model="altaForm.jobtype" class="jobtype-modal-input" />
         </div>
 
-        <div class="jobtype-field">
+        <div class="jobtype-modal-field">
           <label for="alta-contrato">Contrato</label>
-          <InputText id="alta-contrato" v-model="altaForm.contrato" class="jobtype-input" />
+          <InputText id="alta-contrato" v-model="altaForm.contrato" class="jobtype-modal-input" />
         </div>
 
-        <Button label="AGREGAR" class="jobtype-popup-button jobtype-popup-button--add" :disabled="!canAgregarRelacion" @click="agregarRelacionPreview" />
+        <Button label="AGREGAR" class="jobtype-modal-button jobtype-modal-button--add" :disabled="!canAgregarRelacion" @click="agregarRelacionPreview" />
       </div>
 
-      <div v-if="altaRows.length === 0" class="jobtype-empty-grid">
-        <div class="jobtype-empty-grid__header">
+      <div class="jobtype-modal-grid" aria-label="Relaciones a crear">
+        <div class="jobtype-modal-grid__header">
           <div>CODIGO_TAREA</div>
           <div>TAREA</div>
           <div>NOMBRE_CONTRATO</div>
           <div>PAIS</div>
         </div>
-        <div class="jobtype-empty-grid__body"></div>
-        <div class="jobtype-empty-grid__footer">
-          <Button icon="pi pi-trash" text rounded class="fm-grid-action-final jobtype-grid-action jobtype-popup-trash" disabled title="Eliminar" aria-label="Eliminar" />
+
+        <div class="jobtype-modal-grid__body">
+          <button
+            v-for="row in altaRows"
+            :key="row.id"
+            type="button"
+            class="jobtype-modal-grid__row"
+            :class="{ 'jobtype-modal-grid__row--selected': altaSelectedRow?.id === row.id }"
+            @click="altaSelectedRow = row"
+          >
+            <span>{{ row.codigoTarea }}</span>
+            <span>{{ row.tarea }}</span>
+            <span>{{ row.nombreContrato }}</span>
+            <span>{{ row.pais }}</span>
+          </button>
+        </div>
+
+        <div class="jobtype-modal-grid__footer">
+          <Button icon="pi pi-trash" text rounded class="jobtype-modal-icon-button" :disabled="!altaSelectedRow" title="Eliminar" aria-label="Eliminar" v-tooltip.top="'Eliminar'" @click="eliminarAltaPreview" />
+
+          <div class="jobtype-modal-pager" aria-hidden="true">
+            <i class="pi pi-angle-double-left"></i>
+            <i class="pi pi-angle-left"></i>
+            <span>Página</span>
+            <span class="jobtype-modal-pager__page">1</span>
+            <span>de 1</span>
+            <i class="pi pi-angle-right"></i>
+            <i class="pi pi-angle-double-right"></i>
+          </div>
         </div>
       </div>
 
-      <DataTable
-        v-else
-        class="fm-pass-grid jobtype-popup-grid"
-        :value="altaRows"
-        dataKey="id"
-        tableStyle="table-layout: fixed; width: 100%; min-width: 100%"
-        v-model:selection="altaSelectedRow"
-        selectionMode="single"
-        :paginator="altaRows.length > 5"
-        :rows="5"
-        paginatorTemplate="FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
-        currentPageReportTemplate="Página {currentPage} de {totalPages}"
-        showGridlines
-        @row-click="onAltaRowClick"
-      >
-        <Column field="codigoTarea" header="CODIGO_TAREA" :style="popupColumnStyle('190px')" />
-        <Column field="tarea" header="TAREA" :style="popupColumnStyle('230px')" />
-        <Column field="nombreContrato" header="NOMBRE_CONTRATO" :style="popupColumnStyle('210px')" />
-        <Column field="pais" header="PAIS" :style="popupColumnStyle('190px')" />
-
-        <template #paginatorstart>
-          <Button icon="pi pi-trash" text rounded class="fm-grid-action-final jobtype-grid-action jobtype-popup-trash" :disabled="!altaSelectedRow" title="Eliminar" aria-label="Eliminar" v-tooltip.top="'Eliminar'" @click="eliminarAltaPreview" />
-        </template>
-      </DataTable>
-
       <template #footer>
-        <Button label="RELACIONAR" class="jobtype-popup-button jobtype-popup-button--relacionar" :disabled="altaRows.length === 0" @click="relacionar" />
+        <Button label="RELACIONAR" class="jobtype-modal-button jobtype-modal-button--relacionar" :disabled="altaRows.length === 0" @click="relacionar" />
       </template>
     </Dialog>
 
     <Dialog
       v-model:visible="showEdicion"
       header="Edición Jobtype-Contrato"
-      class="fm-dialog jobtype-popup jobtype-popup--edicion"
+      class="jobtype-modal jobtype-modal--edicion"
       appendTo="body"
-      :modal="false"
+      :modal="true"
       :draggable="true"
       :resizable="false"
-      :style="{ width: '520px', maxWidth: 'calc(100vw - 48px)' }"
+      :style="{ width: '500px', maxWidth: 'calc(100vw - 64px)' }"
     >
       <div class="jobtype-edit-form">
-        <div class="jobtype-field">
+        <div class="jobtype-modal-field">
           <label for="edit-jobtype">JobType</label>
-          <InputText id="edit-jobtype" v-model="editForm.jobtype" class="jobtype-input" disabled />
+          <InputText id="edit-jobtype" v-model="editForm.jobtype" class="jobtype-modal-input" disabled />
         </div>
 
-        <div class="jobtype-field">
+        <div class="jobtype-modal-field">
           <label for="edit-contrato-actual">Contrato</label>
-          <InputText id="edit-contrato-actual" v-model="editForm.contratoActual" class="jobtype-input" disabled />
+          <InputText id="edit-contrato-actual" v-model="editForm.contratoActual" class="jobtype-modal-input" disabled />
         </div>
 
-        <div class="jobtype-field jobtype-field--offset">
-          <InputText id="edit-contrato-nuevo" v-model="editForm.contratoNuevo" class="jobtype-input jobtype-input--active" />
+        <div class="jobtype-modal-field jobtype-field--offset">
+          <InputText id="edit-contrato-nuevo" v-model="editForm.contratoNuevo" class="jobtype-modal-input jobtype-input--active" />
         </div>
       </div>
 
       <template #footer>
-        <Button label="ACTUALIZAR" class="jobtype-popup-button jobtype-popup-button--update" @click="actualizarRelacion" />
+        <Button label="ACTUALIZAR" class="jobtype-modal-button jobtype-modal-button--update" @click="actualizarRelacion" />
       </template>
     </Dialog>
   </div>
@@ -275,12 +276,6 @@ const columnStyle = (col) => ({
   maxWidth: 'none'
 })
 
-const popupColumnStyle = (width) => ({
-  width,
-  minWidth: width,
-  maxWidth: width
-})
-
 const rowClass = (data) => ({
   'fm-selected-row': store.selectedRow?.id === data?.id,
   'jobtype-row-selected': store.selectedRow?.id === data?.id
@@ -288,10 +283,6 @@ const rowClass = (data) => ({
 
 const onRowClick = (event) => {
   if (event?.data) store.setSelectedRow(event.data)
-}
-
-const onAltaRowClick = (event) => {
-  altaSelectedRow.value = event?.data || null
 }
 
 const exportarExcel = () => {
