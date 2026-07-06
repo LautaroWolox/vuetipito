@@ -107,24 +107,71 @@
   border-left-style: none !important;
 }
 
+#tabla .p-datatable-thead > tr > th {
+  font-size: 11px !important;
+  line-height: 14px !important;
+  padding-top: 7px !important;
+  padding-bottom: 7px !important;
+}
+
+#tabla .p-datatable-tbody > tr > td,
+#tabla .p-datatable-tbody > tr > td .fm-cell-text {
+  font-size: 12px !important;
+  line-height: 16px !important;
+}
+
+#tabla .p-datatable-tbody > tr > td {
+  padding-top: 6px !important;
+  padding-bottom: 6px !important;
+}
+
 #tabla .p-datatable-tbody .fm-icon-btn {
-  width: 24px !important;
-  min-width: 24px !important;
-  height: 24px !important;
-  min-height: 24px !important;
+  width: 26px !important;
+  min-width: 26px !important;
+  height: 26px !important;
+  min-height: 26px !important;
+  color: #007f8f !important;
+}
+
+#tabla .p-datatable-tbody .fm-icon-btn:hover,
+#tabla .p-datatable-tbody .fm-icon-btn:focus,
+#tabla .p-datatable-tbody .fm-icon-btn:focus-visible {
+  color: #005f6b !important;
 }
 
 #tabla .p-datatable-tbody .fm-icon-btn .pi {
-  width: 18px !important;
-  height: 18px !important;
-  font-size: 18px !important;
-  line-height: 18px !important;
+  width: 20px !important;
+  height: 20px !important;
+  font-size: 20px !important;
+  line-height: 20px !important;
+}
+
+#tabla .fm-grid-actions {
+  gap: 10px !important;
+}
+
+#tabla .fm-grid-actions .p-button,
+#tabla .fm-grid-actions .p-button.fm-icon-btn,
+#tabla .fm-grid-actions .p-button.fm-grid-action-button {
+  width: 22px !important;
+  min-width: 22px !important;
+  max-width: 22px !important;
+  height: 22px !important;
+  min-height: 22px !important;
+  max-height: 22px !important;
+  color: #002236 !important;
+}
+
+#tabla .fm-grid-actions .p-button:hover,
+#tabla .fm-grid-actions .p-button:focus,
+#tabla .fm-grid-actions .p-button:focus-visible {
+  color: #007f8f !important;
 }
 
 #tabla .fm-grid-actions .p-button .p-button-icon,
 #tabla .fm-grid-actions .p-button .pi {
-  width: 19px !important;
-  height: 19px !important;
-  font-size: 19px !important;
-  line-height: 19px !important;
+  width: 20px !important;
+  height: 20px !important;
+  font-size: 20px !important;
+  line-height: 20px !important;
 }
