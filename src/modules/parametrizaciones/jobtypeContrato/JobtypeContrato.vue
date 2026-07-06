@@ -106,14 +106,23 @@
 
     <Dialog
       v-model:visible="showAlta"
-      header="Alta Jobtype - Contrato"
       class="jobtype-modal jobtype-modal--alta"
       appendTo="body"
       :modal="true"
       :draggable="true"
       :resizable="false"
+      :closable="false"
       :style="{ width: '780px', maxWidth: 'calc(100vw - 64px)' }"
     >
+      <template #header>
+        <div class="jobtype-modal-header">
+          <span class="jobtype-modal-title">Alta Jobtype - Contrato</span>
+          <button type="button" class="jobtype-modal-close" aria-label="Cerrar" @click="showAlta = false">
+            <i class="pi pi-times" aria-hidden="true"></i>
+          </button>
+        </div>
+      </template>
+
       <div class="jobtype-modal-form">
         <div class="jobtype-modal-field jobtype-modal-field--pais">
           <label for="alta-pais">Pais</label>
@@ -202,14 +211,23 @@
 
     <Dialog
       v-model:visible="showEdicion"
-      header="Edición Jobtype-Contrato"
       class="jobtype-modal jobtype-modal--edicion"
       appendTo="body"
       :modal="true"
       :draggable="true"
       :resizable="false"
+      :closable="false"
       :style="{ width: '500px', maxWidth: 'calc(100vw - 64px)' }"
     >
+      <template #header>
+        <div class="jobtype-modal-header">
+          <span class="jobtype-modal-title">Edición Jobtype-Contrato</span>
+          <button type="button" class="jobtype-modal-close" aria-label="Cerrar" @click="showEdicion = false">
+            <i class="pi pi-times" aria-hidden="true"></i>
+          </button>
+        </div>
+      </template>
+
       <div class="jobtype-edit-form">
         <div class="jobtype-modal-field">
           <label for="edit-jobtype">JobType</label>
