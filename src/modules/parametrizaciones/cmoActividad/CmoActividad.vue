@@ -24,81 +24,81 @@
             loading-title="Cargando CMO-Actividad"
             loading-message="Consultando relaciones CMO-Actividad"
           >
-            <div class="cmo-actividad-grid-wrap">
-              <DataTable
-                id="tabla-cmo-actividad"
-                ref="dt"
-                class="fm-pass-grid jobtype-contrato-grid cmo-actividad-grid"
-                :value="store.rows"
-                dataKey="id"
-                tableStyle="table-layout: fixed; width: max-content; min-width: 100%"
-                scrollable
-                scrollHeight="430px"
-                removableSort
-                sortMode="multiple"
-                filterDisplay="row"
-                v-model:filters="filters"
-                v-model:selection="selectedRow"
-                selectionMode="single"
-                :rowClass="rowClass"
-                paginator
-                :rows="10"
-                :rowsPerPageOptions="[10, 20, 50, 100]"
-                paginatorTemplate="FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink RowsPerPageDropdown"
-                currentPageReportTemplate="Pagina {currentPage} de {totalPages}"
-                :resizableColumns="true"
-                columnResizeMode="expand"
-                showGridlines
-                @row-click="onRowClick"
+            <DataTable
+              id="tabla-cmo-actividad"
+              ref="dt"
+              class="fm-pass-grid jobtype-contrato-grid cmo-actividad-grid"
+              :value="store.rows"
+              dataKey="id"
+              tableStyle="table-layout: fixed; width: max-content; min-width: 100%"
+              scrollable
+              scrollHeight="430px"
+              removableSort
+              sortMode="multiple"
+              filterDisplay="row"
+              v-model:filters="filters"
+              v-model:selection="selectedRow"
+              selectionMode="single"
+              :rowClass="rowClass"
+              paginator
+              :rows="10"
+              :rowsPerPageOptions="[10, 20, 50, 100]"
+              paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
+              currentPageReportTemplate="Pagina {currentPage} de {totalPages}"
+              :resizableColumns="true"
+              columnResizeMode="expand"
+              showGridlines
+              @row-click="onRowClick"
+            >
+              <template #paginatorstart>
+                <div class="jobtype-grid-actions cmo-actividad-grid-actions" aria-label="Acciones de grilla">
+                  <Button icon="pi pi-download" text rounded class="fm-grid-action-final jobtype-grid-action" title="Exportar" aria-label="Exportar" v-tooltip.top="'Exportar'" @click="exportarExcel" />
+                  <Button icon="pi pi-plus" text rounded class="fm-grid-action-final jobtype-grid-action" title="Nueva Relación" aria-label="Nueva Relación" v-tooltip.top="'Nueva Relación'" @click="abrirAlta" />
+                  <Button icon="pi pi-pencil" text rounded class="fm-grid-action-final jobtype-grid-action" :disabled="!store.hasSelection" title="Editar" aria-label="Editar" v-tooltip.top="'Editar'" @click="abrirEdicion" />
+                  <Button icon="pi pi-trash" text rounded class="fm-grid-action-final jobtype-grid-action" :disabled="!store.hasSelection" title="Eliminar" aria-label="Eliminar" v-tooltip.top="'Eliminar'" @click="eliminar" />
+                </div>
+              </template>
+
+              <template #paginatorend>
+                <span class="fm-grid-counter">
+                  Mostrando {{ store.rows.length ? 1 : 0 }} - {{ Math.min(10, store.rows.length) }} de {{ store.rows.length }}
+                </span>
+              </template>
+
+              <template #empty>
+                <div class="fm-grid-empty">No hay resultados</div>
+              </template>
+
+              <Column
+                v-for="col in columns"
+                :key="col.field"
+                :field="col.field"
+                :sortField="col.field"
+                :filterField="col.field"
+                :header="col.header"
+                sortable
+                filter
+                :showFilterMenu="false"
+                :exportable="col.exportable"
+                :style="columnStyle(col)"
+                :headerStyle="columnStyle(col)"
+                :bodyStyle="columnStyle(col)"
               >
-                <template #paginatorend>
-                  <span class="fm-grid-counter">
-                    Mostrando {{ store.rows.length ? 1 : 0 }} - {{ Math.min(10, store.rows.length) }} de {{ store.rows.length }}
+                <template #filter="{ filterModel, filterCallback }">
+                  <div class="fm-filter-cell jobtype-filter-cell cmo-actividad-filter-cell">
+                    <span class="fm-filter-prefix">~</span>
+                    <InputText type="text" v-model="filterModel.value" @input="filterCallback()" class="fm-column-filter" />
+                    <span class="fm-filter-more">...</span>
+                  </div>
+                </template>
+
+                <template #body="{ data }">
+                  <span class="fm-cell-text jobtype-cell-text" :title="String(data[col.field] ?? '')">
+                    {{ data[col.field] ?? '' }}
                   </span>
                 </template>
-
-                <template #empty>
-                  <div class="fm-grid-empty">No hay resultados</div>
-                </template>
-
-                <Column
-                  v-for="col in columns"
-                  :key="col.field"
-                  :field="col.field"
-                  :sortField="col.field"
-                  :filterField="col.field"
-                  :header="col.header"
-                  sortable
-                  filter
-                  :showFilterMenu="false"
-                  :exportable="col.exportable"
-                  :style="columnStyle(col)"
-                  :headerStyle="columnStyle(col)"
-                  :bodyStyle="columnStyle(col)"
-                >
-                  <template #filter="{ filterModel, filterCallback }">
-                    <div class="fm-filter-cell jobtype-filter-cell cmo-actividad-filter-cell">
-                      <span class="fm-filter-prefix">~</span>
-                      <InputText type="text" v-model="filterModel.value" @input="filterCallback()" class="fm-column-filter" />
-                      <span class="fm-filter-more">...</span>
-                    </div>
-                  </template>
-
-                  <template #body="{ data }">
-                    <span class="fm-cell-text jobtype-cell-text" :title="String(data[col.field] ?? '')">
-                      {{ data[col.field] ?? '' }}
-                    </span>
-                  </template>
-                </Column>
-              </DataTable>
-
-              <div class="cmo-actividad-grid-actions-fixed" aria-label="Acciones de grilla">
-                <Button icon="pi pi-download" text rounded class="cmo-actividad-grid-action" title="Exportar" aria-label="Exportar" v-tooltip.top="'Exportar'" @click="exportarExcel" />
-                <Button icon="pi pi-plus" text rounded class="cmo-actividad-grid-action" title="Nueva Relación" aria-label="Nueva Relación" v-tooltip.top="'Nueva Relación'" @click="abrirAlta" />
-                <Button icon="pi pi-pencil" text rounded class="cmo-actividad-grid-action" :disabled="!store.hasSelection" title="Editar" aria-label="Editar" v-tooltip.top="'Editar'" @click="abrirEdicion" />
-                <Button icon="pi pi-trash" text rounded class="cmo-actividad-grid-action" :disabled="!store.hasSelection" title="Eliminar" aria-label="Eliminar" v-tooltip.top="'Eliminar'" @click="eliminar" />
-              </div>
-            </div>
+              </Column>
+            </DataTable>
           </FmGridShell>
         </AccordionContent>
       </AccordionPanel>
@@ -279,53 +279,13 @@ const eliminar = () => {
   padding: 14px 16px;
 }
 
-.cmo-actividad-grid-wrap {
-  position: relative;
-  width: 100%;
-  min-width: 0;
-}
-
-.cmo-actividad-grid-wrap::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 35px;
-  width: 2px;
-  background: #00a9bd;
-  z-index: 7;
-  pointer-events: none;
-}
-
-.cmo-actividad-grid-wrap :deep(.p-datatable),
-.cmo-actividad-grid-wrap :deep(.p-datatable-wrapper),
-.cmo-actividad-grid-wrap :deep(.p-datatable-table-container) {
-  border-left-width: 0 !important;
-}
-
-.cmo-actividad-grid-wrap :deep(.p-paginator) {
-  min-height: 34px !important;
-  height: 34px !important;
-  padding-left: 136px !important;
-  padding-right: 210px !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  gap: 5px !important;
-}
-
-.cmo-actividad-grid-wrap :deep(.p-paginator .p-select),
-.cmo-actividad-grid-wrap :deep(.p-paginator .p-dropdown) {
-  margin-left: 8px !important;
-}
-
-.cmo-actividad-grid-wrap :deep(.p-paginator-end) {
-  position: absolute !important;
-  right: 10px !important;
-}
-
 .cmo-actividad-grid :deep(.p-datatable-table) {
   table-layout: fixed !important;
+}
+
+.cmo-actividad-grid :deep(.p-datatable-wrapper),
+.cmo-actividad-grid :deep(.p-datatable-table-container) {
+  border-left-width: 2px !important;
 }
 
 .cmo-actividad-grid :deep(.p-datatable-thead > tr > th),
@@ -350,77 +310,59 @@ const eliminar = () => {
   font-weight: 600 !important;
 }
 
-.cmo-actividad-grid-actions-fixed {
-  position: absolute;
-  left: 10px;
-  bottom: 9px;
-  z-index: 9;
-  display: inline-flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 12px;
-  width: 96px;
-  height: 18px;
-  overflow: visible;
-  pointer-events: auto;
-}
-
-.cmo-actividad-grid-action.p-button,
-.cmo-actividad-grid-action.p-button:enabled,
-.cmo-actividad-grid-action.p-button:hover,
-.cmo-actividad-grid-action.p-button:focus,
-.cmo-actividad-grid-action.p-button:active,
-.cmo-actividad-grid-action.p-button:focus-visible {
-  width: 15px !important;
-  min-width: 15px !important;
-  max-width: 15px !important;
-  height: 15px !important;
-  min-height: 15px !important;
-  max-height: 15px !important;
+.cmo-actividad-grid-actions {
   display: inline-flex !important;
   align-items: center !important;
-  justify-content: center !important;
+  justify-content: flex-start !important;
+  gap: 12px !important;
+  min-width: 92px !important;
+  overflow: visible !important;
+  line-height: 1 !important;
+}
+
+.cmo-actividad-grid-actions :deep(.p-button.jobtype-grid-action) {
+  width: 16px !important;
+  min-width: 16px !important;
+  max-width: 16px !important;
+  height: 16px !important;
+  min-height: 16px !important;
+  max-height: 16px !important;
   padding: 0 !important;
   margin: 0 !important;
   border: 0 !important;
   border-radius: 0 !important;
   background: transparent !important;
   background-color: transparent !important;
-  background-image: none !important;
-  box-shadow: none !important;
-  outline: 0 !important;
   color: #002236 !important;
-  opacity: 1 !important;
-}
-
-.cmo-actividad-grid-action.p-button:disabled,
-.cmo-actividad-grid-action.p-button.p-disabled {
-  color: #b7c1c8 !important;
-  background: transparent !important;
   box-shadow: none !important;
-  opacity: .72 !important;
 }
 
-.cmo-actividad-grid-action.p-button:enabled:hover,
-.cmo-actividad-grid-action.p-button:enabled:focus,
-.cmo-actividad-grid-action.p-button:enabled:active {
+.cmo-actividad-grid-actions :deep(.p-button.jobtype-grid-action:hover),
+.cmo-actividad-grid-actions :deep(.p-button.jobtype-grid-action:focus) {
   color: #008fa1 !important;
   background: transparent !important;
   box-shadow: none !important;
 }
 
-.cmo-actividad-grid-action :deep(.p-button-label) {
+.cmo-actividad-grid-actions :deep(.p-button.jobtype-grid-action:disabled),
+.cmo-actividad-grid-actions :deep(.p-button.jobtype-grid-action.p-disabled) {
+  color: #b7c1c8 !important;
+  opacity: .68 !important;
+  cursor: not-allowed !important;
+}
+
+.cmo-actividad-grid-actions :deep(.p-button-label) {
   display: none !important;
 }
 
-.cmo-actividad-grid-action :deep(.p-button-icon),
-.cmo-actividad-grid-action :deep(.pi) {
-  width: 13px !important;
-  min-width: 13px !important;
-  height: 13px !important;
-  min-height: 13px !important;
-  font-size: 13px !important;
-  line-height: 13px !important;
+.cmo-actividad-grid-actions :deep(.p-button-icon),
+.cmo-actividad-grid-actions :deep(.pi) {
+  width: 12px !important;
+  min-width: 12px !important;
+  height: 12px !important;
+  min-height: 12px !important;
+  font-size: 12px !important;
+  line-height: 12px !important;
   margin: 0 !important;
   color: currentColor !important;
 }
