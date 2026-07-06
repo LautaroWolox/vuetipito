@@ -279,13 +279,20 @@ const eliminar = () => {
   padding: 14px 16px;
 }
 
+.cmo-actividad-grid {
+  border-left-width: 1px !important;
+  border-left-style: solid !important;
+  border-left-color: #00a9bd !important;
+}
+
 .cmo-actividad-grid :deep(.p-datatable-table) {
   table-layout: fixed !important;
 }
 
 .cmo-actividad-grid :deep(.p-datatable-wrapper),
 .cmo-actividad-grid :deep(.p-datatable-table-container) {
-  border-left-width: 2px !important;
+  border-left-width: 0 !important;
+  border-left-style: none !important;
 }
 
 .cmo-actividad-grid :deep(.p-datatable-thead > tr > th),
@@ -304,10 +311,29 @@ const eliminar = () => {
 
 .cmo-actividad-grid :deep(.p-datatable-tbody > tr.cmo-actividad-row-selected > td),
 .cmo-actividad-grid :deep(.p-datatable-tbody > tr.jobtype-row-selected > td),
-.cmo-actividad-grid :deep(.p-datatable-tbody > tr.p-highlight > td) {
-  background: #e8f8fb !important;
-  color: #0f2f3d !important;
-  font-weight: 600 !important;
+.cmo-actividad-grid :deep(.p-datatable-tbody > tr.fm-selected-row > td),
+.cmo-actividad-grid :deep(.p-datatable-tbody > tr.p-highlight > td),
+.cmo-actividad-grid :deep(.p-datatable-tbody > tr[aria-selected="true"] > td) {
+  background: #b8e9ee !important;
+  color: #062f3b !important;
+  font-weight: 700 !important;
+}
+
+.cmo-actividad-grid :deep(.p-datatable-tbody > tr.cmo-actividad-row-selected:hover > td),
+.cmo-actividad-grid :deep(.p-datatable-tbody > tr.jobtype-row-selected:hover > td),
+.cmo-actividad-grid :deep(.p-datatable-tbody > tr.fm-selected-row:hover > td),
+.cmo-actividad-grid :deep(.p-datatable-tbody > tr.p-highlight:hover > td),
+.cmo-actividad-grid :deep(.p-datatable-tbody > tr[aria-selected="true"]:hover > td) {
+  background: #a7dfe5 !important;
+  color: #062f3b !important;
+}
+
+.cmo-actividad-grid :deep(.p-datatable-tbody > tr.cmo-actividad-row-selected > td:first-child),
+.cmo-actividad-grid :deep(.p-datatable-tbody > tr.jobtype-row-selected > td:first-child),
+.cmo-actividad-grid :deep(.p-datatable-tbody > tr.fm-selected-row > td:first-child),
+.cmo-actividad-grid :deep(.p-datatable-tbody > tr.p-highlight > td:first-child),
+.cmo-actividad-grid :deep(.p-datatable-tbody > tr[aria-selected="true"] > td:first-child) {
+  box-shadow: inset 2px 0 0 #008fa1 !important;
 }
 
 .cmo-actividad-grid-actions {
