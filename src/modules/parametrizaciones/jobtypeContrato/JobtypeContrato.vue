@@ -176,10 +176,6 @@
           showGridlines
           @row-click="onAltaRowClick"
         >
-          <template #paginatorstart>
-            <Button icon="pi pi-trash" text rounded class="fm-grid-action-final jobtype-grid-action jobtype-modal-icon-button" :disabled="!altaSelectedRow" title="Eliminar" aria-label="Eliminar" v-tooltip.top="'Eliminar'" @click="eliminarAltaPreview" />
-          </template>
-
           <template #empty>
             <div class="jobtype-popup-grid-empty">No hay relaciones agregadas</div>
           </template>
@@ -213,6 +209,18 @@
             </template>
           </Column>
         </DataTable>
+
+        <Button
+          icon="pi pi-trash"
+          text
+          rounded
+          class="fm-grid-action-final jobtype-grid-action jobtype-modal-icon-button jobtype-popup-trash-standalone"
+          :disabled="!altaSelectedRow"
+          title="Eliminar"
+          aria-label="Eliminar"
+          v-tooltip.top="'Eliminar'"
+          @click="eliminarAltaPreview"
+        />
       </div>
 
       <template #footer>
