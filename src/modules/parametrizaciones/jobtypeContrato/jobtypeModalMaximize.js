@@ -5,11 +5,6 @@ const MAXIMIZE_CLASS = 'jobtype-modal-maximize'
 const EXPANDED_CLASS = 'jobtype-modal--expanded'
 const CMO_ALTA_SELECTOR = '.cmo-actividad-modal--alta'
 
-const CMO_EMPTY_GRID_BACKGROUND = [
-  'linear-gradient(to right, transparent 0, transparent 24%, #b7cbd7 24%, #b7cbd7 calc(24% + 1px), transparent calc(24% + 1px), transparent 54%, #b7cbd7 54%, #b7cbd7 calc(54% + 1px), transparent calc(54% + 1px), transparent 76%, #b7cbd7 76%, #b7cbd7 calc(76% + 1px), transparent calc(76% + 1px), transparent 100%)',
-  'repeating-linear-gradient(to bottom, transparent 0, transparent 47px, #d5e1e8 47px, #d5e1e8 48px)'
-].join(', ')
-
 const createToggle = () => {
   const toggle = document.createElement('span')
   toggle.setAttribute('role', 'button')
@@ -31,9 +26,12 @@ const setImportant = (element, property, value) => {
   element.style.setProperty(property, value, 'important')
 }
 
-const removeImportant = (element, property) => {
+const clearGridBackground = (element) => {
   if (!element) return
-  element.style.removeProperty(property)
+  element.style.removeProperty('background-image')
+  element.style.removeProperty('background-position')
+  element.style.removeProperty('background-repeat')
+  element.style.removeProperty('background-size')
 }
 
 const setToggleState = (modal, toggle) => {
@@ -79,6 +77,7 @@ const fixCmoActividadPopup = (modal) => {
   }
 
   wrappers.forEach((wrapper) => {
+    clearGridBackground(wrapper)
     setImportant(wrapper, 'height', bodyHeight)
     setImportant(wrapper, 'min-height', bodyHeight)
     setImportant(wrapper, 'max-height', bodyHeight)
@@ -87,22 +86,10 @@ const fixCmoActividadPopup = (modal) => {
     setImportant(wrapper, 'overflow-y', isEmpty ? 'hidden' : 'auto')
     setImportant(wrapper, 'border-left-width', '0')
     setImportant(wrapper, 'border-left-style', 'none')
-
-    if (isEmpty) {
-      setImportant(wrapper, 'background-image', CMO_EMPTY_GRID_BACKGROUND)
-      setImportant(wrapper, 'background-position', '0 64px, 0 64px')
-      setImportant(wrapper, 'background-repeat', 'no-repeat, repeat')
-      setImportant(wrapper, 'background-size', '100% 100%, 100% 48px')
-    } else {
-      removeImportant(wrapper, 'background-image')
-      removeImportant(wrapper, 'background-position')
-      removeImportant(wrapper, 'background-repeat')
-      removeImportant(wrapper, 'background-size')
-    }
   })
 
   modal.querySelectorAll('.cmo-actividad-popup-datatable .p-datatable-tbody, .cmo-actividad-popup-datatable .p-datatable-tbody > tr, .cmo-actividad-popup-datatable .p-datatable-tbody > tr > td').forEach((node) => {
-    setImportant(node, 'background-color', 'transparent')
+    setImportant(node, 'background-color', '#ffffff')
   })
 
   if (isEmpty) {
@@ -111,7 +98,7 @@ const fixCmoActividadPopup = (modal) => {
       setImportant(node, 'min-height', emptyHeight)
       setImportant(node, 'max-height', emptyHeight)
       setImportant(node, 'padding', isExpanded ? '112px 12px' : '62px 12px')
-      setImportant(node, 'background-color', 'transparent')
+      setImportant(node, 'background-color', '#ffffff')
       setImportant(node, 'border-top-width', '1px')
       setImportant(node, 'border-top-style', 'solid')
       setImportant(node, 'border-top-color', '#d5e1e8')
