@@ -167,8 +167,8 @@
           selectionMode="single"
           :rowClass="altaRowClass"
           paginator
-          :rows="5"
-          :rowsPerPageOptions="[5, 10, 20]"
+          :rows="10"
+          :rowsPerPageOptions="[10, 20, 30]"
           paginatorTemplate="FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
           currentPageReportTemplate="Página {currentPage} de {totalPages}"
           :resizableColumns="true"
