@@ -122,21 +122,104 @@
             tabindex="0"
             class="jobtype-modal-close"
             aria-label="Cerrar"
-            @click="showAlta = false"
-            @keydown.enter.prevent="showAlta = false"
-            @keydown.space.prevent="showAlta = false"
+            @click="cerrarAlta"
+            @keydown.enter.prevent="cerrarAlta"
+            @keydown.space.prevent="cerrarAlta"
           >
             <i class="pi pi-times" aria-hidden="true"></i>
           </span>
         </div>
       </template>
 
-      <div class="cmo-actividad-popup-placeholder">
-        <span>Popup CMO-Actividad preparado para adaptar el flujo específico.</span>
+      <div class="cmo-actividad-modal-form">
+        <div class="jobtype-modal-field cmo-actividad-modal-field">
+          <label for="alta-cmo-actividad-actividad">Actividad</label>
+          <InputText id="alta-cmo-actividad-actividad" v-model="altaForm.actividad" class="jobtype-modal-input cmo-actividad-modal-input" />
+        </div>
+
+        <div class="jobtype-modal-field cmo-actividad-modal-field">
+          <label for="alta-cmo-actividad-cmo">CMO</label>
+          <InputText id="alta-cmo-actividad-cmo" v-model="altaForm.cmo" class="jobtype-modal-input cmo-actividad-modal-input" />
+        </div>
+
+        <Button label="AGREGAR" class="jobtype-modal-button jobtype-modal-button--add cmo-actividad-modal-button--add" :disabled="!canAgregarCmoActividad" @click="agregarCmoActividadPreview" />
+      </div>
+
+      <div class="jobtype-popup-grid-shell cmo-actividad-popup-grid-shell">
+        <DataTable
+          id="tabla-alta-cmo-actividad"
+          class="fm-pass-grid jobtype-popup-datatable cmo-actividad-popup-datatable"
+          :value="altaRows"
+          dataKey="id"
+          tableStyle="table-layout: fixed; width: max-content; min-width: 100%"
+          scrollable
+          scrollHeight="210px"
+          removableSort
+          sortMode="multiple"
+          filterDisplay="row"
+          v-model:filters="altaTableFilters"
+          v-model:selection="altaSelectedRow"
+          selectionMode="single"
+          :rowClass="altaRowClass"
+          paginator
+          :rows="10"
+          :rowsPerPageOptions="[10, 20, 30]"
+          paginatorTemplate="FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
+          currentPageReportTemplate="Página {currentPage} de {totalPages}"
+          :resizableColumns="true"
+          columnResizeMode="expand"
+          showGridlines
+          @row-click="onAltaRowClick"
+        >
+          <template #empty>
+            <div class="jobtype-popup-grid-empty">No hay relaciones agregadas</div>
+          </template>
+
+          <Column
+            v-for="col in altaGridColumns"
+            :key="col.key"
+            :field="col.key"
+            :sortField="col.key"
+            :filterField="col.key"
+            :header="col.label"
+            sortable
+            filter
+            :showFilterMenu="false"
+            :style="altaColumnStyle(col)"
+            :headerStyle="altaColumnStyle(col)"
+            :bodyStyle="altaColumnStyle(col)"
+          >
+            <template #filter="{ filterModel, filterCallback }">
+              <div class="fm-filter-cell jobtype-filter-cell jobtype-popup-filter-cell cmo-actividad-popup-filter-cell">
+                <span class="fm-filter-prefix">~</span>
+                <InputText type="text" v-model="filterModel.value" @input="filterCallback()" class="fm-column-filter" />
+                <span class="fm-filter-more">...</span>
+              </div>
+            </template>
+
+            <template #body="{ data }">
+              <span class="fm-cell-text jobtype-cell-text" :title="String(data[col.key] ?? '')">
+                {{ data[col.key] ?? '' }}
+              </span>
+            </template>
+          </Column>
+        </DataTable>
+
+        <Button
+          icon="pi pi-trash"
+          text
+          rounded
+          class="fm-grid-action-final jobtype-grid-action jobtype-modal-icon-button jobtype-popup-trash-standalone cmo-actividad-popup-trash"
+          :disabled="!altaSelectedRow"
+          title="Eliminar"
+          aria-label="Eliminar"
+          v-tooltip.top="'Eliminar'"
+          @click="eliminarAltaPreview"
+        />
       </div>
 
       <template #footer>
-        <Button label="RELACIONAR" class="jobtype-modal-button jobtype-modal-button--relacionar" disabled />
+        <Button label="RELACIONAR" class="jobtype-modal-button jobtype-modal-button--relacionar" :disabled="altaRows.length === 0" @click="relacionarCmoActividad" />
       </template>
     </Dialog>
 
@@ -179,7 +262,7 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue'
+import { computed, reactive, ref } from 'vue'
 import Button from 'primevue/button'
 import Dialog from 'primevue/dialog'
 import InputText from 'primevue/inputtext'
@@ -196,6 +279,20 @@ const { exportToExcel, parseDataFromTable } = useExcelExport()
 
 const showAlta = ref(false)
 const showEdicion = ref(false)
+const altaRows = ref([])
+const altaSelectedRow = ref(null)
+
+const altaGridColumns = ref([
+  { key: 'codigoActividad', label: 'CODIGO_ACTIVIDAD', width: '190px', minWidth: '150px' },
+  { key: 'descActividad', label: 'DESC_ACTIVIDAD', width: '220px', minWidth: '170px' },
+  { key: 'codigoS4', label: 'CODIGO_S4', width: '180px', minWidth: '140px' },
+  { key: 'cmo', label: 'CMO', width: '180px', minWidth: '140px' }
+])
+
+const altaForm = reactive({
+  actividad: '',
+  cmo: ''
+})
 
 const filters = ref(
   Object.fromEntries(
@@ -203,10 +300,18 @@ const filters = ref(
   )
 )
 
+const altaTableFilters = ref(
+  Object.fromEntries(
+    altaGridColumns.value.map((col) => [col.key, { value: null, matchMode: FilterMatchMode.CONTAINS }])
+  )
+)
+
 const selectedRow = computed({
   get: () => store.selectedRow,
   set: (value) => store.setSelectedRow(value)
 })
+
+const canAgregarCmoActividad = computed(() => Boolean(altaForm.actividad.trim() && altaForm.cmo.trim()))
 
 const buscar = async () => {
   activePanels.value = ['0', '1']
@@ -220,14 +325,30 @@ const columnStyle = (col) => ({
   maxWidth: 'none'
 })
 
+const altaColumnStyle = (col) => ({
+  width: col.width || '140px',
+  minWidth: col.minWidth || col.width || '100px',
+  maxWidth: 'none'
+})
+
 const rowClass = (data) => ({
   'fm-selected-row': store.selectedRow?.id === data?.id,
   'jobtype-row-selected': store.selectedRow?.id === data?.id,
   'cmo-actividad-row-selected': store.selectedRow?.id === data?.id
 })
 
+const altaRowClass = (data) => ({
+  'fm-selected-row': altaSelectedRow.value?.id === data?.id,
+  'jobtype-row-selected': altaSelectedRow.value?.id === data?.id,
+  'cmo-actividad-row-selected': altaSelectedRow.value?.id === data?.id
+})
+
 const onRowClick = (event) => {
   if (event?.data) store.setSelectedRow(event.data)
+}
+
+const onAltaRowClick = (event) => {
+  if (event?.data) altaSelectedRow.value = event.data
 }
 
 const exportarExcel = () => {
@@ -243,7 +364,52 @@ const exportarExcel = () => {
 }
 
 const abrirAlta = () => {
+  altaForm.actividad = ''
+  altaForm.cmo = ''
+  altaRows.value = []
+  altaSelectedRow.value = null
+  Object.values(altaTableFilters.value).forEach((filter) => {
+    filter.value = null
+  })
   showAlta.value = true
+}
+
+const cerrarAlta = () => {
+  showAlta.value = false
+}
+
+const agregarCmoActividadPreview = () => {
+  if (!canAgregarCmoActividad.value) return
+
+  const actividad = altaForm.actividad.trim()
+  const cmo = altaForm.cmo.trim()
+  const codigoActividad = actividad.toUpperCase()
+
+  const newRow = {
+    id: Date.now(),
+    codigoActividad,
+    descActividad: actividad,
+    codigoS4: codigoActividad,
+    cmo: cmo.toUpperCase()
+  }
+
+  altaRows.value = [...altaRows.value, newRow]
+  altaSelectedRow.value = newRow
+  altaForm.actividad = ''
+  altaForm.cmo = ''
+}
+
+const eliminarAltaPreview = () => {
+  if (!altaSelectedRow.value) return
+  const deletedId = altaSelectedRow.value.id
+  altaRows.value = altaRows.value.filter((row) => row.id !== deletedId)
+  altaSelectedRow.value = null
+}
+
+const relacionarCmoActividad = () => {
+  // ACA TIENE QUE CONECTAR EL BACKEND - ALTA RELACION CMO-ACTIVIDAD
+  // Enviar altaRows.value al servicio real y refrescar la grilla principal.
+  showAlta.value = false
 }
 
 const abrirEdicion = () => {
@@ -285,7 +451,8 @@ const eliminar = () => {
   border-left-color: #00a9bd !important;
 }
 
-.cmo-actividad-grid :deep(.p-datatable-table) {
+.cmo-actividad-grid :deep(.p-datatable-table),
+.cmo-actividad-popup-datatable :deep(.p-datatable-table) {
   table-layout: fixed !important;
 }
 
@@ -296,16 +463,20 @@ const eliminar = () => {
 }
 
 .cmo-actividad-grid :deep(.p-datatable-thead > tr > th),
-.cmo-actividad-grid :deep(.p-datatable-tbody > tr > td) {
+.cmo-actividad-grid :deep(.p-datatable-tbody > tr > td),
+.cmo-actividad-popup-datatable :deep(.p-datatable-thead > tr > th),
+.cmo-actividad-popup-datatable :deep(.p-datatable-tbody > tr > td) {
   overflow: hidden !important;
   vertical-align: middle !important;
 }
 
-.cmo-actividad-grid :deep(.p-datatable-tbody > tr) {
+.cmo-actividad-grid :deep(.p-datatable-tbody > tr),
+.cmo-actividad-popup-datatable :deep(.p-datatable-tbody > tr) {
   cursor: pointer;
 }
 
-.cmo-actividad-grid :deep(.p-datatable-tbody > tr:hover > td) {
+.cmo-actividad-grid :deep(.p-datatable-tbody > tr:hover > td),
+.cmo-actividad-popup-datatable :deep(.p-datatable-tbody > tr:hover > td) {
   background: rgba(0, 180, 181, .06) !important;
 }
 
@@ -313,17 +484,40 @@ const eliminar = () => {
 .cmo-actividad-grid :deep(.p-datatable-tbody > tr.jobtype-row-selected > td),
 .cmo-actividad-grid :deep(.p-datatable-tbody > tr.fm-selected-row > td),
 .cmo-actividad-grid :deep(.p-datatable-tbody > tr.p-highlight > td),
-.cmo-actividad-grid :deep(.p-datatable-tbody > tr[aria-selected="true"] > td) {
+.cmo-actividad-grid :deep(.p-datatable-tbody > tr[aria-selected="true"] > td),
+.cmo-actividad-popup-datatable :deep(.p-datatable-tbody > tr.cmo-actividad-row-selected > td),
+.cmo-actividad-popup-datatable :deep(.p-datatable-tbody > tr.jobtype-row-selected > td),
+.cmo-actividad-popup-datatable :deep(.p-datatable-tbody > tr.fm-selected-row > td),
+.cmo-actividad-popup-datatable :deep(.p-datatable-tbody > tr.p-highlight > td),
+.cmo-actividad-popup-datatable :deep(.p-datatable-tbody > tr[aria-selected="true"] > td) {
   background: #b8e9ee !important;
   color: #062f3b !important;
-  font-weight: 700 !important;
+  font-weight: 800 !important;
+}
+
+.cmo-actividad-grid :deep(.p-datatable-tbody > tr.cmo-actividad-row-selected > td .jobtype-cell-text),
+.cmo-actividad-grid :deep(.p-datatable-tbody > tr.jobtype-row-selected > td .jobtype-cell-text),
+.cmo-actividad-grid :deep(.p-datatable-tbody > tr.fm-selected-row > td .jobtype-cell-text),
+.cmo-actividad-grid :deep(.p-datatable-tbody > tr.p-highlight > td .jobtype-cell-text),
+.cmo-actividad-grid :deep(.p-datatable-tbody > tr[aria-selected="true"] > td .jobtype-cell-text),
+.cmo-actividad-popup-datatable :deep(.p-datatable-tbody > tr.cmo-actividad-row-selected > td .jobtype-cell-text),
+.cmo-actividad-popup-datatable :deep(.p-datatable-tbody > tr.jobtype-row-selected > td .jobtype-cell-text),
+.cmo-actividad-popup-datatable :deep(.p-datatable-tbody > tr.fm-selected-row > td .jobtype-cell-text),
+.cmo-actividad-popup-datatable :deep(.p-datatable-tbody > tr.p-highlight > td .jobtype-cell-text),
+.cmo-actividad-popup-datatable :deep(.p-datatable-tbody > tr[aria-selected="true"] > td .jobtype-cell-text) {
+  font-weight: 800 !important;
 }
 
 .cmo-actividad-grid :deep(.p-datatable-tbody > tr.cmo-actividad-row-selected:hover > td),
 .cmo-actividad-grid :deep(.p-datatable-tbody > tr.jobtype-row-selected:hover > td),
 .cmo-actividad-grid :deep(.p-datatable-tbody > tr.fm-selected-row:hover > td),
 .cmo-actividad-grid :deep(.p-datatable-tbody > tr.p-highlight:hover > td),
-.cmo-actividad-grid :deep(.p-datatable-tbody > tr[aria-selected="true"]:hover > td) {
+.cmo-actividad-grid :deep(.p-datatable-tbody > tr[aria-selected="true"]:hover > td),
+.cmo-actividad-popup-datatable :deep(.p-datatable-tbody > tr.cmo-actividad-row-selected:hover > td),
+.cmo-actividad-popup-datatable :deep(.p-datatable-tbody > tr.jobtype-row-selected:hover > td),
+.cmo-actividad-popup-datatable :deep(.p-datatable-tbody > tr.fm-selected-row:hover > td),
+.cmo-actividad-popup-datatable :deep(.p-datatable-tbody > tr.p-highlight:hover > td),
+.cmo-actividad-popup-datatable :deep(.p-datatable-tbody > tr[aria-selected="true"]:hover > td) {
   background: #a7dfe5 !important;
   color: #062f3b !important;
 }
@@ -332,7 +526,12 @@ const eliminar = () => {
 .cmo-actividad-grid :deep(.p-datatable-tbody > tr.jobtype-row-selected > td:first-child),
 .cmo-actividad-grid :deep(.p-datatable-tbody > tr.fm-selected-row > td:first-child),
 .cmo-actividad-grid :deep(.p-datatable-tbody > tr.p-highlight > td:first-child),
-.cmo-actividad-grid :deep(.p-datatable-tbody > tr[aria-selected="true"] > td:first-child) {
+.cmo-actividad-grid :deep(.p-datatable-tbody > tr[aria-selected="true"] > td:first-child),
+.cmo-actividad-popup-datatable :deep(.p-datatable-tbody > tr.cmo-actividad-row-selected > td:first-child),
+.cmo-actividad-popup-datatable :deep(.p-datatable-tbody > tr.jobtype-row-selected > td:first-child),
+.cmo-actividad-popup-datatable :deep(.p-datatable-tbody > tr.fm-selected-row > td:first-child),
+.cmo-actividad-popup-datatable :deep(.p-datatable-tbody > tr.p-highlight > td:first-child),
+.cmo-actividad-popup-datatable :deep(.p-datatable-tbody > tr[aria-selected="true"] > td:first-child) {
   box-shadow: inset 2px 0 0 #008fa1 !important;
 }
 
@@ -391,6 +590,41 @@ const eliminar = () => {
   line-height: 12px !important;
   margin: 0 !important;
   color: currentColor !important;
+}
+
+.cmo-actividad-modal-form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 130px;
+  align-items: end;
+  gap: 16px;
+  padding: 16px 18px 14px;
+  border-bottom: 1px solid #edf2f5;
+  background: #ffffff;
+}
+
+.cmo-actividad-modal-field label {
+  margin-bottom: 6px;
+  color: #000000;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.cmo-actividad-modal-input {
+  width: 100% !important;
+  height: 33px !important;
+  min-height: 33px !important;
+}
+
+.cmo-actividad-modal-button--add {
+  align-self: end;
+  width: 118px !important;
+  min-width: 118px !important;
+  height: 34px !important;
+  min-height: 34px !important;
+}
+
+.cmo-actividad-popup-grid-shell {
+  margin: 12px 18px 0;
 }
 
 .cmo-actividad-popup-placeholder {
