@@ -18,73 +18,83 @@
   border-left-style: none !important;
 }
 
-/* Iconos de columnas NOTA / INCLUIR */
+/* Iconos de columnas NOTA / INCLUIR: visibles, oscuros y sin deformar la fila. */
 #tabla .p-datatable-tbody .fm-icon-btn {
-  width: 38px !important;
-  min-width: 38px !important;
-  height: 38px !important;
-  min-height: 38px !important;
-  color: #004f59 !important;
+  width: 24px !important;
+  min-width: 24px !important;
+  max-width: 24px !important;
+  height: 24px !important;
+  min-height: 24px !important;
+  max-height: 24px !important;
+  padding: 0 !important;
+  margin: 0 auto !important;
+  color: #005f6b !important;
   overflow: visible !important;
+  transform: none !important;
 }
 
 #tabla .p-datatable-tbody .fm-icon-btn:hover,
 #tabla .p-datatable-tbody .fm-icon-btn:focus,
 #tabla .p-datatable-tbody .fm-icon-btn:focus-visible {
-  color: #002f36 !important;
+  color: #003f47 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  outline: none !important;
 }
 
 #tabla .p-datatable-tbody .fm-icon-btn .pi,
 #tabla .p-datatable-tbody .fm-icon-btn .pi-file-edit,
 #tabla .p-datatable-tbody .fm-icon-btn .pi-replay {
-  width: 32px !important;
-  height: 32px !important;
-  min-width: 32px !important;
-  min-height: 32px !important;
-  font-size: 32px !important;
-  line-height: 32px !important;
+  width: 19px !important;
+  height: 19px !important;
+  min-width: 19px !important;
+  min-height: 19px !important;
+  font-size: 19px !important;
+  line-height: 19px !important;
   color: currentColor !important;
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
   overflow: visible !important;
+  transform: none !important;
 }
 
 #tabla .p-datatable-tbody .fm-icon-btn .pi::before,
 #tabla .p-datatable-tbody .fm-icon-btn .pi-file-edit::before,
 #tabla .p-datatable-tbody .fm-icon-btn .pi-replay::before {
-  font-size: 32px !important;
-  line-height: 32px !important;
+  font-size: 19px !important;
+  line-height: 19px !important;
   color: currentColor !important;
   display: inline-block !important;
-  transform: scale(1.45) !important;
+  transform: none !important;
   transform-origin: center center !important;
 }
 
-/* Iconos inferiores EXPORTAR / EXCLUIR / REPROCESAR */
+/* Iconos inferiores EXPORTAR / EXCLUIR / REPROCESAR: separados, oscuros y prolijos. */
 #tabla .fm-grid-actions-final,
-#tabla .fm-grid-actions,
-.fm-grid-actions-final,
-.fm-grid-actions {
-  gap: 18px !important;
+#tabla .fm-grid-actions {
+  gap: 10px !important;
   overflow: visible !important;
+  align-items: center !important;
+  padding-left: 4px !important;
 }
 
 #tabla .fm-grid-actions-final .p-button,
 #tabla .fm-grid-actions-final .fm-grid-action-final-root,
 #tabla .fm-grid-actions .p-button,
 #tabla .fm-grid-actions .p-button.fm-icon-btn,
-#tabla .fm-grid-actions .p-button.fm-grid-action-button,
-.fm-grid-actions-final .p-button,
-.fm-grid-actions-final .fm-grid-action-final-root {
-  width: 38px !important;
-  min-width: 38px !important;
-  max-width: 38px !important;
-  height: 38px !important;
-  min-height: 38px !important;
-  max-height: 38px !important;
-  color: #001f2f !important;
+#tabla .fm-grid-actions .p-button.fm-grid-action-button {
+  width: 22px !important;
+  min-width: 22px !important;
+  max-width: 22px !important;
+  height: 22px !important;
+  min-height: 22px !important;
+  max-height: 22px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  color: #002c3b !important;
   overflow: visible !important;
+  transform: none !important;
 }
 
 #tabla .fm-grid-actions-final .p-button:hover,
@@ -92,11 +102,11 @@
 #tabla .fm-grid-actions-final .p-button:focus-visible,
 #tabla .fm-grid-actions .p-button:hover,
 #tabla .fm-grid-actions .p-button:focus,
-#tabla .fm-grid-actions .p-button:focus-visible,
-.fm-grid-actions-final .p-button:hover,
-.fm-grid-actions-final .p-button:focus,
-.fm-grid-actions-final .p-button:focus-visible {
-  color: #004f59 !important;
+#tabla .fm-grid-actions .p-button:focus-visible {
+  color: #005f6b !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  outline: none !important;
 }
 
 #tabla .fm-grid-actions-final .p-button .p-button-icon,
@@ -106,21 +116,19 @@
 #tabla .fm-grid-actions .p-button .pi,
 #tabla .fm-grid-actions .p-button .pi-download,
 #tabla .fm-grid-actions .p-button .pi-trash,
-#tabla .fm-grid-actions .p-button .pi-refresh,
-.fm-grid-actions-final .p-button .p-button-icon,
-.fm-grid-actions-final .p-button .pi,
-.fm-grid-actions-final .fm-grid-action-final-icon {
-  width: 32px !important;
-  height: 32px !important;
-  min-width: 32px !important;
-  min-height: 32px !important;
-  font-size: 32px !important;
-  line-height: 32px !important;
+#tabla .fm-grid-actions .p-button .pi-refresh {
+  width: 18px !important;
+  height: 18px !important;
+  min-width: 18px !important;
+  min-height: 18px !important;
+  font-size: 18px !important;
+  line-height: 18px !important;
   color: currentColor !important;
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
   overflow: visible !important;
+  transform: none !important;
 }
 
 #tabla .fm-grid-actions-final .p-button .p-button-icon::before,
@@ -130,14 +138,11 @@
 #tabla .fm-grid-actions .p-button .pi::before,
 #tabla .fm-grid-actions .p-button .pi-download::before,
 #tabla .fm-grid-actions .p-button .pi-trash::before,
-#tabla .fm-grid-actions .p-button .pi-refresh::before,
-.fm-grid-actions-final .p-button .p-button-icon::before,
-.fm-grid-actions-final .p-button .pi::before,
-.fm-grid-actions-final .fm-grid-action-final-icon::before {
-  font-size: 32px !important;
-  line-height: 32px !important;
+#tabla .fm-grid-actions .p-button .pi-refresh::before {
+  font-size: 18px !important;
+  line-height: 18px !important;
   color: currentColor !important;
   display: inline-block !important;
-  transform: scale(1.45) !important;
+  transform: none !important;
   transform-origin: center center !important;
 }
