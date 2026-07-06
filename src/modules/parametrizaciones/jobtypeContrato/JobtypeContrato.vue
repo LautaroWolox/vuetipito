@@ -150,75 +150,69 @@
         <Button label="AGREGAR" class="jobtype-modal-button jobtype-modal-button--add" :disabled="!canAgregarRelacion" @click="agregarRelacionPreview" />
       </div>
 
-      <div class="jobtype-modal-grid jobtype-modal-grid--main-like" aria-label="Relaciones a crear">
-        <div class="jobtype-modal-grid__header" :style="altaGridStyle">
-          <div v-for="(col, index) in altaGridColumns" :key="col.key" class="jobtype-modal-grid__header-cell">
-            <span>{{ col.label }}</span>
-            <span class="jobtype-modal-grid__sort">↕</span>
-            <button
-              v-if="index < altaGridColumns.length - 1"
-              type="button"
-              class="jobtype-modal-grid__resize-handle"
-              aria-label="Redimensionar columna"
-              @mousedown.stop.prevent="startAltaColumnResize($event, index)"
-            />
-          </div>
-        </div>
+      <div class="jobtype-popup-grid-shell">
+        <DataTable
+          id="tabla-alta-jobtype-contrato"
+          class="fm-pass-grid jobtype-popup-datatable"
+          :value="altaRows"
+          dataKey="id"
+          tableStyle="table-layout: fixed; width: max-content; min-width: 100%"
+          scrollable
+          scrollHeight="210px"
+          removableSort
+          sortMode="multiple"
+          filterDisplay="row"
+          v-model:filters="altaTableFilters"
+          v-model:selection="altaSelectedRow"
+          selectionMode="single"
+          :rowClass="altaRowClass"
+          paginator
+          :rows="5"
+          :rowsPerPageOptions="[5, 10, 20]"
+          paginatorTemplate="FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
+          currentPageReportTemplate="Página {currentPage} de {totalPages}"
+          :resizableColumns="true"
+          columnResizeMode="expand"
+          showGridlines
+          @row-click="onAltaRowClick"
+        >
+          <template #paginatorstart>
+            <Button icon="pi pi-trash" text rounded class="fm-grid-action-final jobtype-grid-action jobtype-modal-icon-button" :disabled="!altaSelectedRow" title="Eliminar" aria-label="Eliminar" v-tooltip.top="'Eliminar'" @click="eliminarAltaPreview" />
+          </template>
 
-        <div class="jobtype-modal-grid__filters" :style="altaGridStyle">
-          <div v-for="col in altaGridColumns" :key="`filter-${col.key}`" class="jobtype-modal-grid__filter-cell">
-            <span class="jobtype-modal-grid__filter-prefix">~</span>
-            <input v-model="altaGridFilters[col.key]" type="text" class="jobtype-modal-grid__filter-input" />
-            <span class="jobtype-modal-grid__filter-more">...</span>
-          </div>
-        </div>
+          <template #empty>
+            <div class="jobtype-popup-grid-empty">No hay relaciones agregadas</div>
+          </template>
 
-        <div class="jobtype-modal-grid__body">
-          <button
-            v-for="row in filteredAltaRows"
-            :key="row.id"
-            type="button"
-            class="jobtype-modal-grid__row"
-            :class="{ 'jobtype-modal-grid__row--selected': altaSelectedRow?.id === row.id }"
-            :style="altaGridStyle"
-            @click="selectAltaRow(row)"
+          <Column
+            v-for="col in altaGridColumns"
+            :key="col.key"
+            :field="col.key"
+            :sortField="col.key"
+            :filterField="col.key"
+            :header="col.label"
+            sortable
+            filter
+            :showFilterMenu="false"
+            :style="altaColumnStyle(col)"
+            :headerStyle="altaColumnStyle(col)"
+            :bodyStyle="altaColumnStyle(col)"
           >
-            <span
-              v-for="col in altaGridColumns"
-              :key="`${row.id}-${col.key}`"
-              class="jobtype-modal-grid__cell"
-              :class="{ 'jobtype-modal-grid__cell--selected': isAltaCellSelected(row, col.key) }"
-              :title="String(row[col.key] ?? '')"
-              @click.stop="selectAltaCell(row, col.key)"
-            >
-              {{ row[col.key] ?? '' }}
-            </span>
-          </button>
+            <template #filter="{ filterModel, filterCallback }">
+              <div class="fm-filter-cell jobtype-filter-cell jobtype-popup-filter-cell">
+                <span class="fm-filter-prefix">~</span>
+                <InputText type="text" v-model="filterModel.value" @input="filterCallback()" class="fm-column-filter" />
+                <span class="fm-filter-more">...</span>
+              </div>
+            </template>
 
-          <div
-            v-for="index in altaPlaceholderRows"
-            :key="`placeholder-${index}`"
-            class="jobtype-modal-grid__row jobtype-modal-grid__row--empty"
-            :style="altaGridStyle"
-            aria-hidden="true"
-          >
-            <span v-for="col in altaGridColumns" :key="`placeholder-${index}-${col.key}`" class="jobtype-modal-grid__cell"></span>
-          </div>
-        </div>
-
-        <div class="jobtype-modal-grid__footer">
-          <Button icon="pi pi-trash" text rounded class="fm-grid-action-final jobtype-grid-action jobtype-modal-icon-button" :disabled="!altaSelectedRow" title="Eliminar" aria-label="Eliminar" v-tooltip.top="'Eliminar'" @click="eliminarAltaPreview" />
-
-          <div class="jobtype-modal-pager" aria-hidden="true">
-            <i class="pi pi-angle-double-left"></i>
-            <i class="pi pi-angle-left"></i>
-            <span>Página</span>
-            <span class="jobtype-modal-pager__page">1</span>
-            <span>de {{ altaGridTotalPages }}</span>
-            <i class="pi pi-angle-right"></i>
-            <i class="pi pi-angle-double-right"></i>
-          </div>
-        </div>
+            <template #body="{ data }">
+              <span class="fm-cell-text jobtype-cell-text" :title="String(data[col.key] ?? '')">
+                {{ data[col.key] ?? '' }}
+              </span>
+            </template>
+          </Column>
+        </DataTable>
       </div>
 
       <template #footer>
@@ -300,18 +294,11 @@ const altaSelectedRow = ref(null)
 const altaSelectedCell = ref(null)
 
 const altaGridColumns = ref([
-  { key: 'codigoTarea', label: 'CODIGO_TAREA', width: 180, minWidth: 120 },
-  { key: 'tarea', label: 'TAREA', width: 270, minWidth: 140 },
-  { key: 'nombreContrato', label: 'NOMBRE_CONTRATO', width: 200, minWidth: 150 },
-  { key: 'pais', label: 'PAIS', width: 80, minWidth: 70 }
+  { key: 'codigoTarea', label: 'CODIGO_TAREA', width: '170px', minWidth: '140px' },
+  { key: 'tarea', label: 'TAREA', width: '250px', minWidth: '180px' },
+  { key: 'nombreContrato', label: 'NOMBRE_CONTRATO', width: '210px', minWidth: '170px' },
+  { key: 'pais', label: 'PAIS', width: '100px', minWidth: '90px' }
 ])
-
-const altaGridFilters = reactive({
-  codigoTarea: '',
-  tarea: '',
-  nombreContrato: '',
-  pais: ''
-})
 
 const paisOptions = [
   { label: '', value: '' },
@@ -338,26 +325,18 @@ const filters = ref(
   )
 )
 
+const altaTableFilters = ref(
+  Object.fromEntries(
+    altaGridColumns.value.map((col) => [col.key, { value: null, matchMode: FilterMatchMode.CONTAINS }])
+  )
+)
+
 const selectedRow = computed({
   get: () => store.selectedRow,
   set: (value) => store.setSelectedRow(value)
 })
 
 const canAgregarRelacion = computed(() => Boolean(altaForm.jobtype.trim() && altaForm.contrato.trim() && altaForm.pais))
-
-const altaGridTemplateColumns = computed(() => altaGridColumns.value.map((col) => `${col.width}px`).join(' '))
-const altaGridStyle = computed(() => ({ gridTemplateColumns: altaGridTemplateColumns.value }))
-const filteredAltaRows = computed(() => {
-  return altaRows.value.filter((row) => {
-    return altaGridColumns.value.every((col) => {
-      const query = String(altaGridFilters[col.key] || '').trim().toLowerCase()
-      if (!query) return true
-      return String(row[col.key] ?? '').toLowerCase().includes(query)
-    })
-  })
-})
-const altaPlaceholderRows = computed(() => Math.max(5 - filteredAltaRows.value.length, 0))
-const altaGridTotalPages = computed(() => Math.max(1, Math.ceil(filteredAltaRows.value.length / 5)))
 
 const buscar = async () => {
   activePanels.value = ['0', '1']
@@ -371,13 +350,31 @@ const columnStyle = (col) => ({
   maxWidth: 'none'
 })
 
+const altaColumnStyle = (col) => ({
+  width: col.width || '140px',
+  minWidth: col.minWidth || col.width || '100px',
+  maxWidth: 'none'
+})
+
 const rowClass = (data) => ({
   'fm-selected-row': store.selectedRow?.id === data?.id,
   'jobtype-row-selected': store.selectedRow?.id === data?.id
 })
 
+const altaRowClass = (data) => ({
+  'fm-selected-row': altaSelectedRow.value?.id === data?.id,
+  'jobtype-row-selected': altaSelectedRow.value?.id === data?.id
+})
+
 const onRowClick = (event) => {
   if (event?.data) store.setSelectedRow(event.data)
+}
+
+const onAltaRowClick = (event) => {
+  if (event?.data) {
+    altaSelectedRow.value = event.data
+    altaSelectedCell.value = { rowId: event.data.id, field: 'codigoTarea' }
+  }
 }
 
 const exportarExcel = () => {
@@ -399,8 +396,8 @@ const abrirAlta = () => {
   altaRows.value = []
   altaSelectedRow.value = null
   altaSelectedCell.value = null
-  altaGridColumns.value.forEach((col) => {
-    altaGridFilters[col.key] = ''
+  Object.values(altaTableFilters.value).forEach((filter) => {
+    filter.value = null
   })
   showAlta.value = true
 }
@@ -423,55 +420,12 @@ const agregarRelacionPreview = () => {
   altaForm.contrato = ''
 }
 
-const selectAltaRow = (row) => {
-  altaSelectedRow.value = row
-  altaSelectedCell.value = { rowId: row.id, field: altaSelectedCell.value?.field || 'codigoTarea' }
-}
-
-const selectAltaCell = (row, field) => {
-  altaSelectedRow.value = row
-  altaSelectedCell.value = { rowId: row.id, field }
-}
-
-const isAltaCellSelected = (row, field) => altaSelectedCell.value?.rowId === row.id && altaSelectedCell.value?.field === field
-
 const eliminarAltaPreview = () => {
   if (!altaSelectedRow.value) return
   const deletedId = altaSelectedRow.value.id
   altaRows.value = altaRows.value.filter((row) => row.id !== deletedId)
   altaSelectedRow.value = null
   altaSelectedCell.value = null
-}
-
-const startAltaColumnResize = (event, columnIndex) => {
-  const currentColumn = altaGridColumns.value[columnIndex]
-  const nextColumn = altaGridColumns.value[columnIndex + 1]
-  if (!currentColumn || !nextColumn) return
-
-  const startX = event.clientX
-  const startWidth = currentColumn.width
-  const nextStartWidth = nextColumn.width
-  const totalWidth = startWidth + nextStartWidth
-
-  const onMouseMove = (moveEvent) => {
-    const delta = moveEvent.clientX - startX
-    const maxWidth = totalWidth - nextColumn.minWidth
-    const newCurrentWidth = Math.min(Math.max(startWidth + delta, currentColumn.minWidth), maxWidth)
-    const newNextWidth = totalWidth - newCurrentWidth
-
-    altaGridColumns.value[columnIndex] = { ...currentColumn, width: newCurrentWidth }
-    altaGridColumns.value[columnIndex + 1] = { ...nextColumn, width: newNextWidth }
-  }
-
-  const onMouseUp = () => {
-    window.removeEventListener('mousemove', onMouseMove)
-    window.removeEventListener('mouseup', onMouseUp)
-    document.body.classList.remove('jobtype-column-resizing')
-  }
-
-  document.body.classList.add('jobtype-column-resizing')
-  window.addEventListener('mousemove', onMouseMove)
-  window.addEventListener('mouseup', onMouseUp)
 }
 
 const relacionar = () => {
@@ -523,26 +477,33 @@ const eliminar = () => {
   padding: 14px 16px;
 }
 
-.jobtype-contrato-grid :deep(.p-datatable-table) {
+.jobtype-contrato-grid :deep(.p-datatable-table),
+.jobtype-popup-datatable :deep(.p-datatable-table) {
   table-layout: fixed !important;
 }
 
 .jobtype-contrato-grid :deep(.p-datatable-thead > tr > th),
-.jobtype-contrato-grid :deep(.p-datatable-tbody > tr > td) {
+.jobtype-contrato-grid :deep(.p-datatable-tbody > tr > td),
+.jobtype-popup-datatable :deep(.p-datatable-thead > tr > th),
+.jobtype-popup-datatable :deep(.p-datatable-tbody > tr > td) {
   overflow: hidden !important;
   vertical-align: middle !important;
 }
 
-.jobtype-contrato-grid :deep(.p-datatable-tbody > tr) {
+.jobtype-contrato-grid :deep(.p-datatable-tbody > tr),
+.jobtype-popup-datatable :deep(.p-datatable-tbody > tr) {
   cursor: pointer;
 }
 
-.jobtype-contrato-grid :deep(.p-datatable-tbody > tr:hover > td) {
+.jobtype-contrato-grid :deep(.p-datatable-tbody > tr:hover > td),
+.jobtype-popup-datatable :deep(.p-datatable-tbody > tr:hover > td) {
   background: rgba(0, 180, 181, .06) !important;
 }
 
 .jobtype-contrato-grid :deep(.p-datatable-tbody > tr.jobtype-row-selected > td),
-.jobtype-contrato-grid :deep(.p-datatable-tbody > tr.p-highlight > td) {
+.jobtype-contrato-grid :deep(.p-datatable-tbody > tr.p-highlight > td),
+.jobtype-popup-datatable :deep(.p-datatable-tbody > tr.jobtype-row-selected > td),
+.jobtype-popup-datatable :deep(.p-datatable-tbody > tr.p-highlight > td) {
   background: #e8f8fb !important;
   color: #0f2f3d !important;
   font-weight: 600 !important;
