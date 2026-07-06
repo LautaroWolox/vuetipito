@@ -20,53 +20,95 @@
 
 /* Iconos de columnas NOTA / INCLUIR */
 #tabla .p-datatable-tbody .fm-icon-btn {
-  width: 30px !important;
-  min-width: 30px !important;
-  height: 30px !important;
-  min-height: 30px !important;
-  color: #006f7d !important;
+  width: 34px !important;
+  min-width: 34px !important;
+  height: 34px !important;
+  min-height: 34px !important;
+  color: #005f6b !important;
+  overflow: visible !important;
 }
 
 #tabla .p-datatable-tbody .fm-icon-btn:hover,
 #tabla .p-datatable-tbody .fm-icon-btn:focus,
 #tabla .p-datatable-tbody .fm-icon-btn:focus-visible {
-  color: #004f59 !important;
+  color: #003f47 !important;
 }
 
-#tabla .p-datatable-tbody .fm-icon-btn .pi {
-  width: 23px !important;
-  height: 23px !important;
-  font-size: 23px !important;
-  line-height: 23px !important;
+#tabla .p-datatable-tbody .fm-icon-btn .pi,
+#tabla .p-datatable-tbody .fm-icon-btn .pi::before,
+#tabla .p-datatable-tbody .fm-icon-btn .pi-file-edit,
+#tabla .p-datatable-tbody .fm-icon-btn .pi-file-edit::before,
+#tabla .p-datatable-tbody .fm-icon-btn .pi-replay,
+#tabla .p-datatable-tbody .fm-icon-btn .pi-replay::before {
+  width: 30px !important;
+  height: 30px !important;
+  min-width: 30px !important;
+  min-height: 30px !important;
+  font-size: 30px !important;
+  line-height: 30px !important;
+  color: currentColor !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  overflow: visible !important;
 }
 
 /* Iconos inferiores EXPORTAR / EXCLUIR / REPROCESAR */
+#tabla .fm-grid-actions-final,
 #tabla .fm-grid-actions {
-  gap: 12px !important;
+  gap: 14px !important;
+  overflow: visible !important;
 }
 
+#tabla .fm-grid-actions-final .p-button,
+#tabla .fm-grid-actions-final .fm-grid-action-final-root,
 #tabla .fm-grid-actions .p-button,
 #tabla .fm-grid-actions .p-button.fm-icon-btn,
 #tabla .fm-grid-actions .p-button.fm-grid-action-button {
-  width: 26px !important;
-  min-width: 26px !important;
-  max-width: 26px !important;
-  height: 26px !important;
-  min-height: 26px !important;
-  max-height: 26px !important;
+  width: 34px !important;
+  min-width: 34px !important;
+  max-width: 34px !important;
+  height: 34px !important;
+  min-height: 34px !important;
+  max-height: 34px !important;
   color: #001f2f !important;
+  overflow: visible !important;
 }
 
+#tabla .fm-grid-actions-final .p-button:hover,
+#tabla .fm-grid-actions-final .p-button:focus,
+#tabla .fm-grid-actions-final .p-button:focus-visible,
 #tabla .fm-grid-actions .p-button:hover,
 #tabla .fm-grid-actions .p-button:focus,
 #tabla .fm-grid-actions .p-button:focus-visible {
-  color: #006f7d !important;
+  color: #005f6b !important;
 }
 
+#tabla .fm-grid-actions-final .p-button .p-button-icon,
+#tabla .fm-grid-actions-final .p-button .p-button-icon::before,
+#tabla .fm-grid-actions-final .p-button .pi,
+#tabla .fm-grid-actions-final .p-button .pi::before,
+#tabla .fm-grid-actions-final .fm-grid-action-final-icon,
+#tabla .fm-grid-actions-final .fm-grid-action-final-icon::before,
 #tabla .fm-grid-actions .p-button .p-button-icon,
-#tabla .fm-grid-actions .p-button .pi {
-  width: 23px !important;
-  height: 23px !important;
-  font-size: 23px !important;
-  line-height: 23px !important;
+#tabla .fm-grid-actions .p-button .p-button-icon::before,
+#tabla .fm-grid-actions .p-button .pi,
+#tabla .fm-grid-actions .p-button .pi::before,
+#tabla .fm-grid-actions .p-button .pi-download,
+#tabla .fm-grid-actions .p-button .pi-download::before,
+#tabla .fm-grid-actions .p-button .pi-trash,
+#tabla .fm-grid-actions .p-button .pi-trash::before,
+#tabla .fm-grid-actions .p-button .pi-refresh,
+#tabla .fm-grid-actions .p-button .pi-refresh::before {
+  width: 30px !important;
+  height: 30px !important;
+  min-width: 30px !important;
+  min-height: 30px !important;
+  font-size: 30px !important;
+  line-height: 30px !important;
+  color: currentColor !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  overflow: visible !important;
 }
