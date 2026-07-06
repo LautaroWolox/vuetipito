@@ -150,10 +150,11 @@
         <Button label="AGREGAR" class="jobtype-modal-button jobtype-modal-button--add" :disabled="!canAgregarRelacion" @click="agregarRelacionPreview" />
       </div>
 
-      <div class="jobtype-modal-grid" aria-label="Relaciones a crear">
+      <div class="jobtype-modal-grid jobtype-modal-grid--main-like" aria-label="Relaciones a crear">
         <div class="jobtype-modal-grid__header" :style="altaGridStyle">
           <div v-for="(col, index) in altaGridColumns" :key="col.key" class="jobtype-modal-grid__header-cell">
             <span>{{ col.label }}</span>
+            <span class="jobtype-modal-grid__sort">↕</span>
             <button
               v-if="index < altaGridColumns.length - 1"
               type="button"
@@ -164,9 +165,17 @@
           </div>
         </div>
 
+        <div class="jobtype-modal-grid__filters" :style="altaGridStyle">
+          <div v-for="col in altaGridColumns" :key="`filter-${col.key}`" class="jobtype-modal-grid__filter-cell">
+            <span class="jobtype-modal-grid__filter-prefix">~</span>
+            <input v-model="altaGridFilters[col.key]" type="text" class="jobtype-modal-grid__filter-input" />
+            <span class="jobtype-modal-grid__filter-more">...</span>
+          </div>
+        </div>
+
         <div class="jobtype-modal-grid__body">
           <button
-            v-for="row in altaRows"
+            v-for="row in filteredAltaRows"
             :key="row.id"
             type="button"
             class="jobtype-modal-grid__row"
@@ -297,6 +306,13 @@ const altaGridColumns = ref([
   { key: 'pais', label: 'PAIS', width: 80, minWidth: 70 }
 ])
 
+const altaGridFilters = reactive({
+  codigoTarea: '',
+  tarea: '',
+  nombreContrato: '',
+  pais: ''
+})
+
 const paisOptions = [
   { label: '', value: '' },
   { label: 'ARG/UY', value: 'ARG/UY' },
@@ -331,8 +347,17 @@ const canAgregarRelacion = computed(() => Boolean(altaForm.jobtype.trim() && alt
 
 const altaGridTemplateColumns = computed(() => altaGridColumns.value.map((col) => `${col.width}px`).join(' '))
 const altaGridStyle = computed(() => ({ gridTemplateColumns: altaGridTemplateColumns.value }))
-const altaPlaceholderRows = computed(() => Math.max(5 - altaRows.value.length, 0))
-const altaGridTotalPages = computed(() => Math.max(1, Math.ceil(altaRows.value.length / 5)))
+const filteredAltaRows = computed(() => {
+  return altaRows.value.filter((row) => {
+    return altaGridColumns.value.every((col) => {
+      const query = String(altaGridFilters[col.key] || '').trim().toLowerCase()
+      if (!query) return true
+      return String(row[col.key] ?? '').toLowerCase().includes(query)
+    })
+  })
+})
+const altaPlaceholderRows = computed(() => Math.max(5 - filteredAltaRows.value.length, 0))
+const altaGridTotalPages = computed(() => Math.max(1, Math.ceil(filteredAltaRows.value.length / 5)))
 
 const buscar = async () => {
   activePanels.value = ['0', '1']
@@ -374,6 +399,9 @@ const abrirAlta = () => {
   altaRows.value = []
   altaSelectedRow.value = null
   altaSelectedCell.value = null
+  altaGridColumns.value.forEach((col) => {
+    altaGridFilters[col.key] = ''
+  })
   showAlta.value = true
 }
 
