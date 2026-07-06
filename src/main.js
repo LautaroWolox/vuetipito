@@ -32,6 +32,7 @@ import './assets/css/modules/parametrizaciones/jobtype-popup-scroll-lines-final.
 import './assets/css/modules/parametrizaciones/jobtype-popup-datatable-final.css';
 import './assets/css/modules/parametrizaciones/jobtype-popup-trash-left-final.css';
 import './assets/css/modules/parametrizaciones/cmo-actividad-selected-row.css';
+import './assets/css/modules/parametrizaciones/cmo-actividad-popup-fit.css';
 import Lara from '@primeuix/themes/lara';
 
 import { definePreset } from '@primeuix/themes';
