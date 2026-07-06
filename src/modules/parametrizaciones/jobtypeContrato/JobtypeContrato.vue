@@ -117,9 +117,17 @@
       <template #header>
         <div class="jobtype-modal-header">
           <span class="jobtype-modal-title">Alta Jobtype - Contrato</span>
-          <button type="button" class="jobtype-modal-close" aria-label="Cerrar" @click="showAlta = false">
+          <span
+            role="button"
+            tabindex="0"
+            class="jobtype-modal-close"
+            aria-label="Cerrar"
+            @click="showAlta = false"
+            @keydown.enter.prevent="showAlta = false"
+            @keydown.space.prevent="showAlta = false"
+          >
             <i class="pi pi-times" aria-hidden="true"></i>
-          </button>
+          </span>
         </div>
       </template>
 
@@ -222,9 +230,17 @@
       <template #header>
         <div class="jobtype-modal-header">
           <span class="jobtype-modal-title">Edición Jobtype-Contrato</span>
-          <button type="button" class="jobtype-modal-close" aria-label="Cerrar" @click="showEdicion = false">
+          <span
+            role="button"
+            tabindex="0"
+            class="jobtype-modal-close"
+            aria-label="Cerrar"
+            @click="showEdicion = false"
+            @keydown.enter.prevent="showEdicion = false"
+            @keydown.space.prevent="showEdicion = false"
+          >
             <i class="pi pi-times" aria-hidden="true"></i>
-          </button>
+          </span>
         </div>
       </template>
 
