@@ -30,7 +30,23 @@ html body #app .cmo-actividad-page .cmo-actividad-grid .p-datatable-tbody > tr.p
 html body #app .cmo-actividad-page .cmo-actividad-grid .p-datatable-tbody > tr[aria-selected="true"] > td {
   background: #b8e9ee !important;
   color: #062f3b !important;
-  font-weight: 700 !important;
+  font-weight: 800 !important;
+}
+
+html body #app .cmo-actividad-page .cmo-actividad-grid .p-datatable-tbody > tr.cmo-actividad-row-selected > td .jobtype-cell-text,
+html body #app .cmo-actividad-page .cmo-actividad-grid .p-datatable-tbody > tr.jobtype-row-selected > td .jobtype-cell-text,
+html body #app .cmo-actividad-page .cmo-actividad-grid .p-datatable-tbody > tr.fm-selected-row > td .jobtype-cell-text,
+html body #app .cmo-actividad-page .cmo-actividad-grid .p-datatable-tbody > tr.p-highlight > td .jobtype-cell-text,
+html body #app .cmo-actividad-page .cmo-actividad-grid .p-datatable-tbody > tr.p-selectable-row.p-highlight > td .jobtype-cell-text,
+html body #app .cmo-actividad-page .cmo-actividad-grid .p-datatable-tbody > tr[aria-selected="true"] > td .jobtype-cell-text,
+html body #app .cmo-actividad-page .cmo-actividad-grid .p-datatable-tbody > tr.cmo-actividad-row-selected > td span,
+html body #app .cmo-actividad-page .cmo-actividad-grid .p-datatable-tbody > tr.jobtype-row-selected > td span,
+html body #app .cmo-actividad-page .cmo-actividad-grid .p-datatable-tbody > tr.fm-selected-row > td span,
+html body #app .cmo-actividad-page .cmo-actividad-grid .p-datatable-tbody > tr.p-highlight > td span,
+html body #app .cmo-actividad-page .cmo-actividad-grid .p-datatable-tbody > tr.p-selectable-row.p-highlight > td span,
+html body #app .cmo-actividad-page .cmo-actividad-grid .p-datatable-tbody > tr[aria-selected="true"] > td span {
+  color: #062f3b !important;
+  font-weight: 800 !important;
 }
 
 html body #app .cmo-actividad-page .cmo-actividad-grid .p-datatable-tbody > tr.cmo-actividad-row-selected:hover > td,
@@ -41,6 +57,22 @@ html body #app .cmo-actividad-page .cmo-actividad-grid .p-datatable-tbody > tr.p
 html body #app .cmo-actividad-page .cmo-actividad-grid .p-datatable-tbody > tr[aria-selected="true"]:hover > td {
   background: #a7dfe5 !important;
   color: #062f3b !important;
+}
+
+html body #app .cmo-actividad-page .cmo-actividad-grid .p-datatable-tbody > tr.cmo-actividad-row-selected:hover > td .jobtype-cell-text,
+html body #app .cmo-actividad-page .cmo-actividad-grid .p-datatable-tbody > tr.jobtype-row-selected:hover > td .jobtype-cell-text,
+html body #app .cmo-actividad-page .cmo-actividad-grid .p-datatable-tbody > tr.fm-selected-row:hover > td .jobtype-cell-text,
+html body #app .cmo-actividad-page .cmo-actividad-grid .p-datatable-tbody > tr.p-highlight:hover > td .jobtype-cell-text,
+html body #app .cmo-actividad-page .cmo-actividad-grid .p-datatable-tbody > tr.p-selectable-row.p-highlight:hover > td .jobtype-cell-text,
+html body #app .cmo-actividad-page .cmo-actividad-grid .p-datatable-tbody > tr[aria-selected="true"]:hover > td .jobtype-cell-text,
+html body #app .cmo-actividad-page .cmo-actividad-grid .p-datatable-tbody > tr.cmo-actividad-row-selected:hover > td span,
+html body #app .cmo-actividad-page .cmo-actividad-grid .p-datatable-tbody > tr.jobtype-row-selected:hover > td span,
+html body #app .cmo-actividad-page .cmo-actividad-grid .p-datatable-tbody > tr.fm-selected-row:hover > td span,
+html body #app .cmo-actividad-page .cmo-actividad-grid .p-datatable-tbody > tr.p-highlight:hover > td span,
+html body #app .cmo-actividad-page .cmo-actividad-grid .p-datatable-tbody > tr.p-selectable-row.p-highlight:hover > td span,
+html body #app .cmo-actividad-page .cmo-actividad-grid .p-datatable-tbody > tr[aria-selected="true"]:hover > td span {
+  color: #062f3b !important;
+  font-weight: 800 !important;
 }
 
 html body #app .cmo-actividad-page .cmo-actividad-grid .p-datatable-tbody > tr.cmo-actividad-row-selected > td:first-child,
