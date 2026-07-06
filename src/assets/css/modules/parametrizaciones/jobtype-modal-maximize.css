@@ -59,24 +59,41 @@
 }
 
 .jobtype-modal.jobtype-modal--expanded {
-  width: min(1080px, calc(100vw - 54px)) !important;
+  width: min(1180px, calc(100vw - 54px)) !important;
   max-width: calc(100vw - 54px) !important;
 }
 
 .jobtype-modal.jobtype-modal--expanded .p-dialog-content {
-  max-height: calc(100vh - 190px) !important;
+  max-height: calc(100vh - 172px) !important;
+  overflow: hidden !important;
 }
 
 .jobtype-modal.jobtype-modal--expanded .jobtype-modal-form {
   grid-template-columns: 145px 1fr 1fr 132px !important;
 }
 
+.jobtype-modal-grid--main-like .jobtype-modal-grid__body {
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  scrollbar-gutter: stable !important;
+  background-image: linear-gradient(to bottom, transparent 29px, #c1d2dc 30px) !important;
+  background-size: 100% 30px !important;
+}
+
 .jobtype-modal.jobtype-modal--expanded .jobtype-modal-grid--main-like .jobtype-modal-grid__body {
-  height: 260px !important;
+  height: min(420px, calc(100vh - 350px)) !important;
+  min-height: 330px !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
 }
 
 .jobtype-modal.jobtype-modal--expanded .jobtype-modal-grid--main-like .jobtype-modal-grid__header,
 .jobtype-modal.jobtype-modal--expanded .jobtype-modal-grid--main-like .jobtype-modal-grid__filters,
 .jobtype-modal.jobtype-modal--expanded .jobtype-modal-grid--main-like .jobtype-modal-grid__row {
   grid-template-columns: 210px minmax(0, 1.45fr) minmax(0, 1fr) minmax(90px, .4fr) !important;
+}
+
+.jobtype-modal.jobtype-modal--expanded .jobtype-modal-grid--main-like .jobtype-modal-grid__footer {
+  height: 34px !important;
+  min-height: 34px !important;
 }
