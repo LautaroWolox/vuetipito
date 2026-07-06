@@ -1,0 +1,31 @@
+/* ========================================================================
+   JOBTYPE POPUP GRID GUTTER FIX
+   ------------------------------------------------------------------------
+   Evita la franja/rectangulo vacio al final de la grilla interna.
+   La caja de la grilla toma el ancho real de sus columnas y no deja
+   sobrante visual despues de PAIS.
+   ======================================================================== */
+
+.jobtype-modal-grid--main-like {
+  width: max-content !important;
+  max-width: 100% !important;
+}
+
+.jobtype-modal-grid--main-like .jobtype-modal-grid__header,
+.jobtype-modal-grid--main-like .jobtype-modal-grid__filters,
+.jobtype-modal-grid--main-like .jobtype-modal-grid__row,
+.jobtype-modal-grid--main-like .jobtype-modal-grid__footer {
+  width: max-content !important;
+  max-width: 100% !important;
+}
+
+.jobtype-modal-grid--main-like .jobtype-modal-grid__header-cell:last-child,
+.jobtype-modal-grid--main-like .jobtype-modal-grid__filter-cell:last-child,
+.jobtype-modal-grid--main-like .jobtype-modal-grid__cell:last-child {
+  border-right: 0 !important;
+}
+
+.jobtype-modal-grid--main-like .jobtype-modal-grid__body {
+  width: max-content !important;
+  max-width: 100% !important;
+}
