@@ -26,6 +26,7 @@ import './assets/css/modules/parametrizaciones/jobtype-trash-icon-fix.css';
 import './assets/css/modules/parametrizaciones/jobtype-grid-icon-alignment.css';
 import './assets/css/modules/parametrizaciones/jobtype-popup-grid-main-like.css';
 import './assets/css/modules/parametrizaciones/jobtype-popup-grid-gutter-fix.css';
+import './assets/css/modules/parametrizaciones/jobtype-modal-maximize.css';
 import Lara from '@primeuix/themes/lara';
 
 import { definePreset } from '@primeuix/themes';
@@ -33,6 +34,7 @@ import { createApp } from 'vue';
 import { createPinia } from 'pinia';
 import { strings } from './strings.js'
 import { fmPrimePassThrough } from './components/shared/primePassThrough.js'
+import { initJobtypeModalMaximize } from './modules/parametrizaciones/jobtypeContrato/jobtypeModalMaximize.js'
 
 import piniaPluginPersistedState from "pinia-plugin-persistedstate";
 import PrimeVue from 'primevue/config';
@@ -128,5 +130,7 @@ app.component('FmActionButton', FmActionButton);
 app.component('FmGridActions', FmGridActions);
 app.component('FmTypingLoader', FmTypingLoader);
 app.directive('tooltip', Tooltip);
+
+initJobtypeModalMaximize();
 
 app.mount('#app')
