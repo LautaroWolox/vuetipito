@@ -112,7 +112,7 @@
       :modal="true"
       :draggable="true"
       :resizable="false"
-      :style="{ width: '820px', maxWidth: 'calc(100vw - 64px)' }"
+      :style="{ width: '780px', maxWidth: 'calc(100vw - 64px)' }"
     >
       <div class="jobtype-modal-form">
         <div class="jobtype-modal-field jobtype-modal-field--pais">
@@ -181,7 +181,7 @@
         </div>
 
         <div class="jobtype-modal-grid__footer">
-          <Button icon="pi pi-trash" text rounded class="jobtype-modal-icon-button" :disabled="!altaSelectedRow" title="Eliminar" aria-label="Eliminar" v-tooltip.top="'Eliminar'" @click="eliminarAltaPreview" />
+          <Button icon="pi pi-trash" text rounded class="fm-grid-action-final jobtype-grid-action jobtype-modal-icon-button" :disabled="!altaSelectedRow" title="Eliminar" aria-label="Eliminar" v-tooltip.top="'Eliminar'" @click="eliminarAltaPreview" />
 
           <div class="jobtype-modal-pager" aria-hidden="true">
             <i class="pi pi-angle-double-left"></i>
@@ -257,10 +257,10 @@ const altaSelectedRow = ref(null)
 const altaSelectedCell = ref(null)
 
 const altaGridColumns = ref([
-  { key: 'codigoTarea', label: 'CODIGO_TAREA', width: 190, minWidth: 120 },
-  { key: 'tarea', label: 'TAREA', width: 290, minWidth: 140 },
-  { key: 'nombreContrato', label: 'NOMBRE_CONTRATO', width: 210, minWidth: 150 },
-  { key: 'pais', label: 'PAIS', width: 90, minWidth: 70 }
+  { key: 'codigoTarea', label: 'CODIGO_TAREA', width: 180, minWidth: 120 },
+  { key: 'tarea', label: 'TAREA', width: 270, minWidth: 140 },
+  { key: 'nombreContrato', label: 'NOMBRE_CONTRATO', width: 200, minWidth: 150 },
+  { key: 'pais', label: 'PAIS', width: 80, minWidth: 70 }
 ])
 
 const paisOptions = [
@@ -271,7 +271,7 @@ const paisOptions = [
 ]
 
 const altaForm = reactive({
-  pais: 'ARG/UY',
+  pais: '',
   jobtype: '',
   contrato: ''
 })
@@ -334,7 +334,7 @@ const exportarExcel = () => {
 }
 
 const abrirAlta = () => {
-  altaForm.pais = 'ARG/UY'
+  altaForm.pais = ''
   altaForm.jobtype = ''
   altaForm.contrato = ''
   altaRows.value = []
