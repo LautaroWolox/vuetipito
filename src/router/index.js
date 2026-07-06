@@ -232,11 +232,7 @@ const routes = [
         path: 'configuraCmoActividad.html',
         name: 'CMOA',
         beforeEnter: allowed,
-        component: () => import('../views/IframeView.vue'),
-        props: {
-          urlParam: '/configuraCmoActividad.html',
-          titleParam: 'configuracion cmo-actividad'
-        }
+        component: () => import('../modules/parametrizaciones/cmoActividad/CmoActividad.vue')
       },
       {
         path: 'consultarActas.html',
