@@ -134,11 +134,17 @@
       </div>
 
       <div class="jobtype-modal-grid" aria-label="Relaciones a crear">
-        <div class="jobtype-modal-grid__header">
-          <div>CODIGO_TAREA</div>
-          <div>TAREA</div>
-          <div>NOMBRE_CONTRATO</div>
-          <div>PAIS</div>
+        <div class="jobtype-modal-grid__header" :style="altaGridStyle">
+          <div v-for="(col, index) in altaGridColumns" :key="col.key" class="jobtype-modal-grid__header-cell">
+            <span>{{ col.label }}</span>
+            <button
+              v-if="index < altaGridColumns.length - 1"
+              type="button"
+              class="jobtype-modal-grid__resize-handle"
+              aria-label="Redimensionar columna"
+              @mousedown.stop.prevent="startAltaColumnResize($event, index)"
+            />
+          </div>
         </div>
 
         <div class="jobtype-modal-grid__body">
@@ -148,13 +154,30 @@
             type="button"
             class="jobtype-modal-grid__row"
             :class="{ 'jobtype-modal-grid__row--selected': altaSelectedRow?.id === row.id }"
-            @click="altaSelectedRow = row"
+            :style="altaGridStyle"
+            @click="selectAltaRow(row)"
           >
-            <span>{{ row.codigoTarea }}</span>
-            <span>{{ row.tarea }}</span>
-            <span>{{ row.nombreContrato }}</span>
-            <span>{{ row.pais }}</span>
+            <span
+              v-for="col in altaGridColumns"
+              :key="`${row.id}-${col.key}`"
+              class="jobtype-modal-grid__cell"
+              :class="{ 'jobtype-modal-grid__cell--selected': isAltaCellSelected(row, col.key) }"
+              :title="String(row[col.key] ?? '')"
+              @click.stop="selectAltaCell(row, col.key)"
+            >
+              {{ row[col.key] ?? '' }}
+            </span>
           </button>
+
+          <div
+            v-for="index in altaPlaceholderRows"
+            :key="`placeholder-${index}`"
+            class="jobtype-modal-grid__row jobtype-modal-grid__row--empty"
+            :style="altaGridStyle"
+            aria-hidden="true"
+          >
+            <span v-for="col in altaGridColumns" :key="`placeholder-${index}-${col.key}`" class="jobtype-modal-grid__cell"></span>
+          </div>
         </div>
 
         <div class="jobtype-modal-grid__footer">
@@ -165,7 +188,7 @@
             <i class="pi pi-angle-left"></i>
             <span>Página</span>
             <span class="jobtype-modal-pager__page">1</span>
-            <span>de 1</span>
+            <span>de {{ altaGridTotalPages }}</span>
             <i class="pi pi-angle-right"></i>
             <i class="pi pi-angle-double-right"></i>
           </div>
@@ -231,6 +254,14 @@ const showAlta = ref(false)
 const showEdicion = ref(false)
 const altaRows = ref([])
 const altaSelectedRow = ref(null)
+const altaSelectedCell = ref(null)
+
+const altaGridColumns = ref([
+  { key: 'codigoTarea', label: 'CODIGO_TAREA', width: 190, minWidth: 120 },
+  { key: 'tarea', label: 'TAREA', width: 290, minWidth: 140 },
+  { key: 'nombreContrato', label: 'NOMBRE_CONTRATO', width: 210, minWidth: 150 },
+  { key: 'pais', label: 'PAIS', width: 90, minWidth: 70 }
+])
 
 const paisOptions = [
   { label: '', value: '' },
@@ -263,6 +294,11 @@ const selectedRow = computed({
 })
 
 const canAgregarRelacion = computed(() => Boolean(altaForm.jobtype.trim() && altaForm.contrato.trim() && altaForm.pais))
+
+const altaGridTemplateColumns = computed(() => altaGridColumns.value.map((col) => `${col.width}px`).join(' '))
+const altaGridStyle = computed(() => ({ gridTemplateColumns: altaGridTemplateColumns.value }))
+const altaPlaceholderRows = computed(() => Math.max(5 - altaRows.value.length, 0))
+const altaGridTotalPages = computed(() => Math.max(1, Math.ceil(altaRows.value.length / 5)))
 
 const buscar = async () => {
   activePanels.value = ['0', '1']
@@ -303,31 +339,77 @@ const abrirAlta = () => {
   altaForm.contrato = ''
   altaRows.value = []
   altaSelectedRow.value = null
+  altaSelectedCell.value = null
   showAlta.value = true
 }
 
 const agregarRelacionPreview = () => {
   if (!canAgregarRelacion.value) return
 
-  altaRows.value = [
-    ...altaRows.value,
-    {
-      id: Date.now(),
-      codigoTarea: altaForm.jobtype.trim().toUpperCase(),
-      tarea: altaForm.jobtype.trim(),
-      nombreContrato: altaForm.contrato.trim(),
-      pais: altaForm.pais
-    }
-  ]
+  const newRow = {
+    id: Date.now(),
+    codigoTarea: altaForm.jobtype.trim().toUpperCase(),
+    tarea: altaForm.jobtype.trim(),
+    nombreContrato: altaForm.contrato.trim(),
+    pais: altaForm.pais
+  }
 
+  altaRows.value = [...altaRows.value, newRow]
+  altaSelectedRow.value = newRow
+  altaSelectedCell.value = { rowId: newRow.id, field: 'codigoTarea' }
   altaForm.jobtype = ''
   altaForm.contrato = ''
 }
 
+const selectAltaRow = (row) => {
+  altaSelectedRow.value = row
+  altaSelectedCell.value = { rowId: row.id, field: altaSelectedCell.value?.field || 'codigoTarea' }
+}
+
+const selectAltaCell = (row, field) => {
+  altaSelectedRow.value = row
+  altaSelectedCell.value = { rowId: row.id, field }
+}
+
+const isAltaCellSelected = (row, field) => altaSelectedCell.value?.rowId === row.id && altaSelectedCell.value?.field === field
+
 const eliminarAltaPreview = () => {
   if (!altaSelectedRow.value) return
-  altaRows.value = altaRows.value.filter((row) => row.id !== altaSelectedRow.value.id)
+  const deletedId = altaSelectedRow.value.id
+  altaRows.value = altaRows.value.filter((row) => row.id !== deletedId)
   altaSelectedRow.value = null
+  altaSelectedCell.value = null
+}
+
+const startAltaColumnResize = (event, columnIndex) => {
+  const currentColumn = altaGridColumns.value[columnIndex]
+  const nextColumn = altaGridColumns.value[columnIndex + 1]
+  if (!currentColumn || !nextColumn) return
+
+  const startX = event.clientX
+  const startWidth = currentColumn.width
+  const nextStartWidth = nextColumn.width
+  const totalWidth = startWidth + nextStartWidth
+
+  const onMouseMove = (moveEvent) => {
+    const delta = moveEvent.clientX - startX
+    const maxWidth = totalWidth - nextColumn.minWidth
+    const newCurrentWidth = Math.min(Math.max(startWidth + delta, currentColumn.minWidth), maxWidth)
+    const newNextWidth = totalWidth - newCurrentWidth
+
+    altaGridColumns.value[columnIndex] = { ...currentColumn, width: newCurrentWidth }
+    altaGridColumns.value[columnIndex + 1] = { ...nextColumn, width: newNextWidth }
+  }
+
+  const onMouseUp = () => {
+    window.removeEventListener('mousemove', onMouseMove)
+    window.removeEventListener('mouseup', onMouseUp)
+    document.body.classList.remove('jobtype-column-resizing')
+  }
+
+  document.body.classList.add('jobtype-column-resizing')
+  window.addEventListener('mousemove', onMouseMove)
+  window.addEventListener('mouseup', onMouseUp)
 }
 
 const relacionar = () => {
