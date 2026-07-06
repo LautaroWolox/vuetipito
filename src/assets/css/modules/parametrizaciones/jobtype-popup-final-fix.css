@@ -1,1 +1,142 @@
-.jobtype-modal .p-dialog-header-close.p-button{width:26px!important;min-width:26px!important;max-width:26px!important;height:26px!important;min-height:26px!important;max-height:26px!important;padding:0!important;border:0!important;border-radius:50%!important;background:transparent!important;color:#9fb1bd!important;box-shadow:none!important;transform:none!important}.jobtype-modal .p-dialog-header-close.p-button:hover,.jobtype-modal .p-dialog-header-close.p-button:focus,.jobtype-modal .p-dialog-header-close.p-button:focus-visible{background:transparent!important;color:#008fa1!important;box-shadow:none!important;outline:none!important;transform:none!important}.jobtype-modal .p-dialog-header-close .p-button-icon,.jobtype-modal .p-dialog-header-close .p-icon{width:14px!important;height:14px!important;font-size:14px!important;color:inherit!important}.jobtype-modal-grid__row span{border-right:1px solid #edf2f5}.jobtype-modal-grid__row span:last-child{border-right:0}.jobtype-modal-grid__row--selected span{font-weight:600}.jobtype-modal-grid__body{background-image:linear-gradient(#edf2f5 1px,transparent 1px)!important;background-size:100% 32px!important}.jobtype-modal-pager .pi{cursor:pointer}.jobtype-modal-pager .pi:hover{color:#008fa1!important}
+/* ========================================================================
+   JOBTYPE MODAL - FIX FINAL
+   ------------------------------------------------------------------------
+   Ultima capa importada para pisar hover global de botones y terminar
+   la grilla interna dinamica del popup.
+   ======================================================================== */
+
+.jobtype-modal .p-dialog-header .p-dialog-header-close,
+.jobtype-modal .p-dialog-header .p-dialog-header-close.p-button,
+.jobtype-modal .p-dialog-header .p-dialog-header-close.p-button-text,
+.jobtype-modal .p-dialog-header .p-dialog-header-close.p-button-icon-only {
+  width: 26px !important;
+  min-width: 26px !important;
+  max-width: 26px !important;
+  height: 26px !important;
+  min-height: 26px !important;
+  max-height: 26px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
+  border-radius: 50% !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  color: #30475a !important;
+  box-shadow: none !important;
+  outline: none !important;
+  transform: none !important;
+}
+
+.jobtype-modal .p-dialog-header .p-dialog-header-close:hover,
+.jobtype-modal .p-dialog-header .p-dialog-header-close:focus,
+.jobtype-modal .p-dialog-header .p-dialog-header-close:active,
+.jobtype-modal .p-dialog-header .p-dialog-header-close:focus-visible,
+.jobtype-modal .p-dialog-header .p-dialog-header-close.p-button:hover,
+.jobtype-modal .p-dialog-header .p-dialog-header-close.p-button:focus,
+.jobtype-modal .p-dialog-header .p-dialog-header-close.p-button:active,
+.jobtype-modal .p-dialog-header .p-dialog-header-close.p-button:focus-visible {
+  width: 26px !important;
+  min-width: 26px !important;
+  max-width: 26px !important;
+  height: 26px !important;
+  min-height: 26px !important;
+  max-height: 26px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  color: #008fa1 !important;
+  box-shadow: none !important;
+  outline: none !important;
+  transform: none !important;
+}
+
+.jobtype-modal .p-dialog-header .p-dialog-header-close::before,
+.jobtype-modal .p-dialog-header .p-dialog-header-close::after,
+.jobtype-modal .p-dialog-header .p-dialog-header-close .p-ink {
+  display: none !important;
+  opacity: 0 !important;
+}
+
+.jobtype-modal .p-dialog-header .p-dialog-header-close .p-button-icon,
+.jobtype-modal .p-dialog-header .p-dialog-header-close .p-icon,
+.jobtype-modal .p-dialog-header .p-dialog-header-close svg {
+  width: 15px !important;
+  height: 15px !important;
+  font-size: 15px !important;
+  color: currentColor !important;
+}
+
+.jobtype-modal-grid {
+  border-color: #cfdde5 !important;
+}
+
+.jobtype-modal-grid__header,
+.jobtype-modal-grid__row {
+  grid-template-columns: 190px minmax(0, 1fr) 210px 90px !important;
+}
+
+.jobtype-modal-grid__body {
+  position: relative !important;
+  height: 160px !important;
+  overflow: hidden !important;
+  background-color: #ffffff !important;
+  background-image:
+    linear-gradient(to right, transparent 189px, #edf2f5 189px, #edf2f5 190px, transparent 190px),
+    linear-gradient(to right, transparent calc(100% - 300px), #edf2f5 calc(100% - 300px), #edf2f5 calc(100% - 299px), transparent calc(100% - 299px)),
+    linear-gradient(to right, transparent calc(100% - 90px), #edf2f5 calc(100% - 90px), #edf2f5 calc(100% - 89px), transparent calc(100% - 89px)),
+    linear-gradient(to bottom, #edf2f5 1px, transparent 1px) !important;
+  background-size: 100% 100%, 100% 100%, 100% 100%, 100% 32px !important;
+}
+
+.jobtype-modal-grid__row {
+  position: relative !important;
+  z-index: 1 !important;
+  height: 32px !important;
+  border-bottom: 1px solid #dbe6ec !important;
+  background: #ffffff !important;
+}
+
+.jobtype-modal-grid__row:hover {
+  background: rgba(0, 180, 181, .06) !important;
+}
+
+.jobtype-modal-grid__row--selected {
+  background: #e8f8fb !important;
+  color: #0f2f3d !important;
+  font-weight: 600 !important;
+}
+
+.jobtype-modal-grid__row span {
+  height: 32px !important;
+  border-right: 1px solid #edf2f5 !important;
+}
+
+.jobtype-modal-grid__row span:last-child {
+  border-right: 0 !important;
+}
+
+.jobtype-modal-grid__row--selected span {
+  background: #e8f8fb !important;
+}
+
+.jobtype-modal-grid__footer {
+  border-top-color: #dbe6ec !important;
+}
+
+.jobtype-modal-icon-button.p-button:hover,
+.jobtype-modal-icon-button.p-button:focus,
+.jobtype-modal-icon-button.p-button:active {
+  background: transparent !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  color: #008fa1 !important;
+}
+
+.jobtype-modal-pager .pi {
+  cursor: pointer;
+}
+
+.jobtype-modal-pager .pi:hover {
+  color: #008fa1 !important;
+}
