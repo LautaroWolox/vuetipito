@@ -1,0 +1,72 @@
+/* ========================================================================
+   REGISTRO OTS FALLIDAS - ICONOS FINALES
+   ------------------------------------------------------------------------
+   Ajuste puntual pedido para la grilla de OTs Fallidas Reproceso.
+   No toca otras pantallas.
+   ======================================================================== */
+
+#tabla.fm-pass-grid,
+#tabla.p-datatable {
+  border-left-width: 1px !important;
+  border-left-style: solid !important;
+  border-left-color: #00a9bd !important;
+}
+
+#tabla .p-datatable-wrapper,
+#tabla .p-datatable-table-container {
+  border-left-width: 0 !important;
+  border-left-style: none !important;
+}
+
+/* Iconos de columnas NOTA / INCLUIR */
+#tabla .p-datatable-tbody .fm-icon-btn {
+  width: 30px !important;
+  min-width: 30px !important;
+  height: 30px !important;
+  min-height: 30px !important;
+  color: #006f7d !important;
+}
+
+#tabla .p-datatable-tbody .fm-icon-btn:hover,
+#tabla .p-datatable-tbody .fm-icon-btn:focus,
+#tabla .p-datatable-tbody .fm-icon-btn:focus-visible {
+  color: #004f59 !important;
+}
+
+#tabla .p-datatable-tbody .fm-icon-btn .pi {
+  width: 23px !important;
+  height: 23px !important;
+  font-size: 23px !important;
+  line-height: 23px !important;
+}
+
+/* Iconos inferiores EXPORTAR / EXCLUIR / REPROCESAR */
+#tabla .fm-grid-actions {
+  gap: 12px !important;
+}
+
+#tabla .fm-grid-actions .p-button,
+#tabla .fm-grid-actions .p-button.fm-icon-btn,
+#tabla .fm-grid-actions .p-button.fm-grid-action-button {
+  width: 26px !important;
+  min-width: 26px !important;
+  max-width: 26px !important;
+  height: 26px !important;
+  min-height: 26px !important;
+  max-height: 26px !important;
+  color: #001f2f !important;
+}
+
+#tabla .fm-grid-actions .p-button:hover,
+#tabla .fm-grid-actions .p-button:focus,
+#tabla .fm-grid-actions .p-button:focus-visible {
+  color: #006f7d !important;
+}
+
+#tabla .fm-grid-actions .p-button .p-button-icon,
+#tabla .fm-grid-actions .p-button .pi {
+  width: 23px !important;
+  height: 23px !important;
+  font-size: 23px !important;
+  line-height: 23px !important;
+}
