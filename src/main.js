@@ -27,6 +27,7 @@ import './assets/css/modules/parametrizaciones/jobtype-grid-icon-alignment.css';
 import './assets/css/modules/parametrizaciones/jobtype-popup-grid-main-like.css';
 import './assets/css/modules/parametrizaciones/jobtype-popup-grid-gutter-fix.css';
 import './assets/css/modules/parametrizaciones/jobtype-modal-maximize.css';
+import './assets/css/modules/parametrizaciones/jobtype-modal-trash-flat.css';
 import Lara from '@primeuix/themes/lara';
 
 import { definePreset } from '@primeuix/themes';
