@@ -21,6 +21,7 @@ import './assets/css/modules/parametrizaciones/jobtype-contrato.css';
 import './assets/css/modules/parametrizaciones/jobtype-contrato-compact.css';
 import './assets/css/modules/parametrizaciones/jobtype-popup-layout.css';
 import './assets/css/modules/parametrizaciones/jobtype-popup-final-fix.css';
+import './assets/css/modules/parametrizaciones/jobtype-close-kill.css';
 import Lara from '@primeuix/themes/lara';
 
 import { definePreset } from '@primeuix/themes';
