@@ -92,3 +92,39 @@
   align-items: center !important;
   justify-content: center !important;
 }
+
+/* Registro OTs Fallidas: ajuste pedido en grilla de reproceso. */
+#tabla.fm-pass-grid,
+#tabla.p-datatable {
+  border-left-width: 1px !important;
+  border-left-style: solid !important;
+  border-left-color: #00a9bd !important;
+}
+
+#tabla .p-datatable-wrapper,
+#tabla .p-datatable-table-container {
+  border-left-width: 0 !important;
+  border-left-style: none !important;
+}
+
+#tabla .p-datatable-tbody .fm-icon-btn {
+  width: 24px !important;
+  min-width: 24px !important;
+  height: 24px !important;
+  min-height: 24px !important;
+}
+
+#tabla .p-datatable-tbody .fm-icon-btn .pi {
+  width: 18px !important;
+  height: 18px !important;
+  font-size: 18px !important;
+  line-height: 18px !important;
+}
+
+#tabla .fm-grid-actions .p-button .p-button-icon,
+#tabla .fm-grid-actions .p-button .pi {
+  width: 19px !important;
+  height: 19px !important;
+  font-size: 19px !important;
+  line-height: 19px !important;
+}
