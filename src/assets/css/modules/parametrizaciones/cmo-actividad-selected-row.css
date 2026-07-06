@@ -1,33 +1,53 @@
 /* ========================================================================
    CMO ACTIVIDAD SELECTED ROW
    ------------------------------------------------------------------------
-   Marca toda la fila seleccionada con un turquesa mas oscuro, toque donde
-   toque el usuario dentro de la fila.
+   Capa final con alta prioridad para seleccion de filas y linea lateral.
+   Se usa porque el componente y la grilla global tienen reglas scoped con
+   !important que pisan estilos menos especificos.
    ======================================================================== */
 
-.cmo-actividad-grid .p-datatable-tbody > tr.cmo-actividad-row-selected > td,
-.cmo-actividad-grid .p-datatable-tbody > tr.jobtype-row-selected > td,
-.cmo-actividad-grid .p-datatable-tbody > tr.fm-selected-row > td,
-.cmo-actividad-grid .p-datatable-tbody > tr.p-highlight > td,
-.cmo-actividad-grid .p-datatable-tbody > tr[aria-selected="true"] > td {
-  background: #c9f0f3 !important;
+html body #app .cmo-actividad-page .cmo-actividad-grid.fm-pass-grid,
+html body #app .cmo-actividad-page .cmo-actividad-grid.jobtype-contrato-grid,
+html body #app .cmo-actividad-page .cmo-actividad-grid.p-datatable {
+  border-left-width: 1px !important;
+  border-left-style: solid !important;
+  border-left-color: #00a9bd !important;
+}
+
+html body #app .cmo-actividad-page .cmo-actividad-grid .p-datatable-wrapper,
+html body #app .cmo-actividad-page .cmo-actividad-grid .p-datatable-table-container,
+html body #app .cmo-actividad-page .cmo-actividad-grid .p-datatable-scrollable-wrapper,
+html body #app .cmo-actividad-page .cmo-actividad-grid .p-datatable-scrollable-view {
+  border-left-width: 0 !important;
+  border-left-style: none !important;
+}
+
+html body #app .cmo-actividad-page .cmo-actividad-grid .p-datatable-tbody > tr.cmo-actividad-row-selected > td,
+html body #app .cmo-actividad-page .cmo-actividad-grid .p-datatable-tbody > tr.jobtype-row-selected > td,
+html body #app .cmo-actividad-page .cmo-actividad-grid .p-datatable-tbody > tr.fm-selected-row > td,
+html body #app .cmo-actividad-page .cmo-actividad-grid .p-datatable-tbody > tr.p-highlight > td,
+html body #app .cmo-actividad-page .cmo-actividad-grid .p-datatable-tbody > tr.p-selectable-row.p-highlight > td,
+html body #app .cmo-actividad-page .cmo-actividad-grid .p-datatable-tbody > tr[aria-selected="true"] > td {
+  background: #b8e9ee !important;
   color: #062f3b !important;
   font-weight: 700 !important;
 }
 
-.cmo-actividad-grid .p-datatable-tbody > tr.cmo-actividad-row-selected:hover > td,
-.cmo-actividad-grid .p-datatable-tbody > tr.jobtype-row-selected:hover > td,
-.cmo-actividad-grid .p-datatable-tbody > tr.fm-selected-row:hover > td,
-.cmo-actividad-grid .p-datatable-tbody > tr.p-highlight:hover > td,
-.cmo-actividad-grid .p-datatable-tbody > tr[aria-selected="true"]:hover > td {
-  background: #b7e9ed !important;
+html body #app .cmo-actividad-page .cmo-actividad-grid .p-datatable-tbody > tr.cmo-actividad-row-selected:hover > td,
+html body #app .cmo-actividad-page .cmo-actividad-grid .p-datatable-tbody > tr.jobtype-row-selected:hover > td,
+html body #app .cmo-actividad-page .cmo-actividad-grid .p-datatable-tbody > tr.fm-selected-row:hover > td,
+html body #app .cmo-actividad-page .cmo-actividad-grid .p-datatable-tbody > tr.p-highlight:hover > td,
+html body #app .cmo-actividad-page .cmo-actividad-grid .p-datatable-tbody > tr.p-selectable-row.p-highlight:hover > td,
+html body #app .cmo-actividad-page .cmo-actividad-grid .p-datatable-tbody > tr[aria-selected="true"]:hover > td {
+  background: #a7dfe5 !important;
   color: #062f3b !important;
 }
 
-.cmo-actividad-grid .p-datatable-tbody > tr.cmo-actividad-row-selected > td:first-child,
-.cmo-actividad-grid .p-datatable-tbody > tr.jobtype-row-selected > td:first-child,
-.cmo-actividad-grid .p-datatable-tbody > tr.fm-selected-row > td:first-child,
-.cmo-actividad-grid .p-datatable-tbody > tr.p-highlight > td:first-child,
-.cmo-actividad-grid .p-datatable-tbody > tr[aria-selected="true"] > td:first-child {
-  box-shadow: inset 3px 0 0 #00a9bd !important;
+html body #app .cmo-actividad-page .cmo-actividad-grid .p-datatable-tbody > tr.cmo-actividad-row-selected > td:first-child,
+html body #app .cmo-actividad-page .cmo-actividad-grid .p-datatable-tbody > tr.jobtype-row-selected > td:first-child,
+html body #app .cmo-actividad-page .cmo-actividad-grid .p-datatable-tbody > tr.fm-selected-row > td:first-child,
+html body #app .cmo-actividad-page .cmo-actividad-grid .p-datatable-tbody > tr.p-highlight > td:first-child,
+html body #app .cmo-actividad-page .cmo-actividad-grid .p-datatable-tbody > tr.p-selectable-row.p-highlight > td:first-child,
+html body #app .cmo-actividad-page .cmo-actividad-grid .p-datatable-tbody > tr[aria-selected="true"] > td:first-child {
+  box-shadow: inset 2px 0 0 #008fa1 !important;
 }
