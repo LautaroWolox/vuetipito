@@ -10,10 +10,14 @@
   max-width: calc(100vw - 64px) !important;
 }
 
+.jobtype-modal .p-dialog-header button,
+.jobtype-modal .p-dialog-header .p-button,
 .jobtype-modal .p-dialog-header .p-dialog-header-close,
 .jobtype-modal .p-dialog-header .p-dialog-header-close.p-button,
-.jobtype-modal .p-dialog-header .p-dialog-header-close.p-button-text,
-.jobtype-modal .p-dialog-header .p-dialog-header-close.p-button-icon-only {
+.jobtype-modal .p-dialog-header .p-dialog-close-button,
+.jobtype-modal .p-dialog-header .p-dialog-close-button.p-button,
+.jobtype-modal .p-dialog-header button[aria-label="Close"],
+.jobtype-modal .p-dialog-header button[aria-label="Cerrar"] {
   width: 24px !important;
   min-width: 24px !important;
   max-width: 24px !important;
@@ -32,14 +36,22 @@
   transform: none !important;
 }
 
+.jobtype-modal .p-dialog-header button:hover,
+.jobtype-modal .p-dialog-header button:focus,
+.jobtype-modal .p-dialog-header button:active,
+.jobtype-modal .p-dialog-header button:focus-visible,
+.jobtype-modal .p-dialog-header .p-button:hover,
+.jobtype-modal .p-dialog-header .p-button:focus,
+.jobtype-modal .p-dialog-header .p-button:active,
+.jobtype-modal .p-dialog-header .p-button:focus-visible,
 .jobtype-modal .p-dialog-header .p-dialog-header-close:hover,
 .jobtype-modal .p-dialog-header .p-dialog-header-close:focus,
 .jobtype-modal .p-dialog-header .p-dialog-header-close:active,
 .jobtype-modal .p-dialog-header .p-dialog-header-close:focus-visible,
-.jobtype-modal .p-dialog-header .p-dialog-header-close.p-button:hover,
-.jobtype-modal .p-dialog-header .p-dialog-header-close.p-button:focus,
-.jobtype-modal .p-dialog-header .p-dialog-header-close.p-button:active,
-.jobtype-modal .p-dialog-header .p-dialog-header-close.p-button:focus-visible {
+.jobtype-modal .p-dialog-header .p-dialog-close-button:hover,
+.jobtype-modal .p-dialog-header .p-dialog-close-button:focus,
+.jobtype-modal .p-dialog-header .p-dialog-close-button:active,
+.jobtype-modal .p-dialog-header .p-dialog-close-button:focus-visible {
   width: 24px !important;
   min-width: 24px !important;
   max-width: 24px !important;
@@ -57,44 +69,46 @@
   transform: none !important;
 }
 
-.jobtype-modal .p-dialog-header .p-dialog-header-close::before,
-.jobtype-modal .p-dialog-header .p-dialog-header-close::after,
-.jobtype-modal .p-dialog-header .p-dialog-header-close .p-ink,
-.jobtype-modal .p-dialog-header .p-dialog-header-close .p-ripple,
-.jobtype-modal .p-dialog-header .p-dialog-header-close .p-button-focus-overlay {
+.jobtype-modal .p-dialog-header button::before,
+.jobtype-modal .p-dialog-header button::after,
+.jobtype-modal .p-dialog-header .p-button::before,
+.jobtype-modal .p-dialog-header .p-button::after,
+.jobtype-modal .p-dialog-header .p-ink,
+.jobtype-modal .p-dialog-header .p-ripple,
+.jobtype-modal .p-dialog-header .p-button-focus-overlay {
   display: none !important;
   opacity: 0 !important;
   background: transparent !important;
 }
 
-.jobtype-modal .p-dialog-header .p-dialog-header-close .p-button-icon,
-.jobtype-modal .p-dialog-header .p-dialog-header-close .p-icon,
-.jobtype-modal .p-dialog-header .p-dialog-header-close svg {
+.jobtype-modal .p-dialog-header button .p-button-icon,
+.jobtype-modal .p-dialog-header button .p-icon,
+.jobtype-modal .p-dialog-header button svg,
+.jobtype-modal .p-dialog-header .p-button .p-button-icon,
+.jobtype-modal .p-dialog-header .p-button .p-icon,
+.jobtype-modal .p-dialog-header .p-button svg {
   width: 15px !important;
   height: 15px !important;
   font-size: 15px !important;
   color: currentColor !important;
+  fill: currentColor !important;
 }
 
 .jobtype-modal-button,
 .jobtype-modal-button.p-button,
 .jobtype-modal-button.p-button:enabled:hover,
 .jobtype-modal-button.p-button:enabled:focus,
-.jobtype-modal-button.p-button:enabled:active {
-  border: 0 !important;
-  outline: 0 !important;
-  box-shadow: none !important;
-}
-
+.jobtype-modal-button.p-button:enabled:active,
 .jobtype-modal-button.p-button:disabled,
 .jobtype-modal-button.p-button.p-disabled {
   border: 0 !important;
+  border-color: transparent !important;
   outline: 0 !important;
   box-shadow: none !important;
 }
 
 .jobtype-modal-grid {
-  border-color: #cfdde5 !important;
+  border-color: #bfd0d9 !important;
 }
 
 .jobtype-modal-grid__header,
@@ -102,15 +116,19 @@
   display: grid !important;
 }
 
+.jobtype-modal-grid__header {
+  border-bottom-color: #bfd0d9 !important;
+}
+
 .jobtype-modal-grid__header-cell {
   position: relative !important;
   display: flex !important;
   align-items: center !important;
   min-width: 0 !important;
-  padding: 0 11px !important;
-  border-right: 1px solid #d7e1e7 !important;
-  color: #456273 !important;
-  font-size: 12px !important;
+  padding: 0 10px !important;
+  border-right: 1px solid #c8d7df !important;
+  color: #405d6f !important;
+  font-size: 11px !important;
   font-weight: 700 !important;
   line-height: 1.1 !important;
   white-space: nowrap !important;
@@ -159,7 +177,7 @@
   height: 32px !important;
   padding: 0 !important;
   border: 0 !important;
-  border-bottom: 1px solid #dbe6ec !important;
+  border-bottom: 1px solid #cbd9e1 !important;
   background: #ffffff !important;
   color: #0f2f3d !important;
   font-size: 12px !important;
@@ -187,8 +205,8 @@
   display: flex !important;
   align-items: center !important;
   min-width: 0 !important;
-  padding: 0 11px !important;
-  border-right: 1px solid #edf2f5 !important;
+  padding: 0 10px !important;
+  border-right: 1px solid #d3e0e7 !important;
   overflow: hidden !important;
   text-overflow: ellipsis !important;
   white-space: nowrap !important;
@@ -209,7 +227,7 @@
 }
 
 .jobtype-modal-grid__footer {
-  border-top-color: #dbe6ec !important;
+  border-top-color: #bfd0d9 !important;
 }
 
 .jobtype-modal-icon-button.p-button,
@@ -227,9 +245,9 @@
   border-radius: 0 !important;
   background: transparent !important;
   background-color: transparent !important;
-  color: #b7c1c8 !important;
+  color: #617887 !important;
   box-shadow: none !important;
-  opacity: .78 !important;
+  opacity: 1 !important;
 }
 
 .jobtype-modal-icon-button.p-button:hover,
@@ -243,12 +261,12 @@
 
 .jobtype-modal-icon-button .p-button-icon,
 .jobtype-modal-icon-button .pi {
-  width: 12px !important;
-  min-width: 12px !important;
-  height: 12px !important;
-  min-height: 12px !important;
-  font-size: 12px !important;
-  line-height: 12px !important;
+  width: 13px !important;
+  min-width: 13px !important;
+  height: 13px !important;
+  min-height: 13px !important;
+  font-size: 13px !important;
+  line-height: 13px !important;
 }
 
 .jobtype-modal-pager .pi {
