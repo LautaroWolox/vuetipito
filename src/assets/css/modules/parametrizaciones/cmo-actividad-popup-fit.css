@@ -5,7 +5,7 @@
    bien minimizada y maximizada.
 
    - No corta columnas.
-   - No muestra scroll cuando esta vacia.
+   - No muestra scroll gigante cuando esta vacia.
    - Mantiene scroll cuando hay muchos datos.
    - Mantiene linea turquesa fina.
    ======================================================================== */
@@ -21,13 +21,23 @@
   overflow: hidden !important;
 }
 
+.cmo-actividad-modal--alta .cmo-actividad-popup-grid-shell.jobtype-popup-grid-shell::before,
+.cmo-actividad-modal--alta .cmo-actividad-popup-grid-shell.jobtype-popup-grid-shell::after {
+  display: none !important;
+  content: none !important;
+}
+
 .cmo-actividad-modal--alta .cmo-actividad-popup-datatable.p-datatable,
 .cmo-actividad-modal--alta .cmo-actividad-popup-datatable .p-datatable,
 .cmo-actividad-modal--alta .cmo-actividad-popup-datatable .p-datatable-wrapper,
-.cmo-actividad-modal--alta .cmo-actividad-popup-datatable .p-datatable-table-container {
+.cmo-actividad-modal--alta .cmo-actividad-popup-datatable .p-datatable-table-container,
+.cmo-actividad-modal--alta .cmo-actividad-popup-datatable .p-datatable-scrollable-wrapper,
+.cmo-actividad-modal--alta .cmo-actividad-popup-datatable .p-datatable-scrollable-view {
   width: 100% !important;
   max-width: 100% !important;
   min-width: 0 !important;
+  border-left-width: 0 !important;
+  border-left-style: none !important;
   overflow-x: hidden !important;
 }
 
@@ -38,11 +48,7 @@
   max-height: 210px !important;
   overflow-y: auto !important;
   border-bottom: 1px solid #9fb8c7 !important;
-}
-
-.cmo-actividad-modal--alta .cmo-actividad-popup-datatable .p-datatable-wrapper:has(.p-datatable-empty-message),
-.cmo-actividad-modal--alta .cmo-actividad-popup-datatable .p-datatable-table-container:has(.p-datatable-empty-message) {
-  overflow-y: hidden !important;
+  background: #ffffff !important;
 }
 
 .cmo-actividad-modal--alta .cmo-actividad-popup-datatable .p-datatable-table {
@@ -50,6 +56,7 @@
   min-width: 100% !important;
   max-width: 100% !important;
   table-layout: fixed !important;
+  border-left-width: 0 !important;
 }
 
 .cmo-actividad-modal--alta .cmo-actividad-popup-datatable .p-datatable-thead > tr > th,
@@ -91,11 +98,30 @@
   min-width: 0 !important;
 }
 
+/* Estado vacio: no debe quedar celeste ni mostrar un scroll gigante. */
+.cmo-actividad-modal--alta .cmo-actividad-popup-grid-shell:has(.jobtype-popup-grid-empty) .p-datatable-wrapper,
+.cmo-actividad-modal--alta .cmo-actividad-popup-grid-shell:has(.jobtype-popup-grid-empty) .p-datatable-table-container {
+  height: 210px !important;
+  min-height: 210px !important;
+  max-height: 210px !important;
+  overflow-y: hidden !important;
+  background: #ffffff !important;
+}
+
+.cmo-actividad-modal--alta .cmo-actividad-popup-grid-shell:has(.jobtype-popup-grid-empty) .p-datatable-tbody,
+.cmo-actividad-modal--alta .cmo-actividad-popup-grid-shell:has(.jobtype-popup-grid-empty) .p-datatable-tbody > tr,
+.cmo-actividad-modal--alta .cmo-actividad-popup-grid-shell:has(.jobtype-popup-grid-empty) .p-datatable-tbody > tr > td,
+.cmo-actividad-modal--alta .cmo-actividad-popup-datatable .p-datatable-empty-message > td,
+.cmo-actividad-modal--alta .cmo-actividad-popup-datatable .jobtype-popup-grid-empty {
+  background: #ffffff !important;
+}
+
 .cmo-actividad-modal--alta .cmo-actividad-popup-datatable .p-datatable-empty-message > td,
 .cmo-actividad-modal--alta .cmo-actividad-popup-datatable .jobtype-popup-grid-empty {
   height: 146px !important;
+  min-height: 146px !important;
+  max-height: 146px !important;
   padding: 38px 12px !important;
-  background: #ffffff !important;
   color: #6f8594 !important;
   font-size: 12px !important;
   font-weight: 500 !important;
@@ -108,22 +134,31 @@
   background: #ffffff !important;
 }
 
+/* Maximizado con datos: puede crecer y scrollear. */
 .jobtype-modal.jobtype-modal--expanded.cmo-actividad-modal--alta .cmo-actividad-popup-datatable .p-datatable-wrapper,
 .jobtype-modal.jobtype-modal--expanded.cmo-actividad-modal--alta .cmo-actividad-popup-datatable .p-datatable-table-container {
   height: 382px !important;
   min-height: 382px !important;
   max-height: 382px !important;
   overflow-y: auto !important;
+  background: #ffffff !important;
 }
 
-.jobtype-modal.jobtype-modal--expanded.cmo-actividad-modal--alta .cmo-actividad-popup-datatable .p-datatable-wrapper:has(.p-datatable-empty-message),
-.jobtype-modal.jobtype-modal--expanded.cmo-actividad-modal--alta .cmo-actividad-popup-datatable .p-datatable-table-container:has(.p-datatable-empty-message) {
+/* Maximizado vacio: no mostrar scroll gigante ni cuerpo celeste enorme. */
+.jobtype-modal.jobtype-modal--expanded.cmo-actividad-modal--alta .cmo-actividad-popup-grid-shell:has(.jobtype-popup-grid-empty) .p-datatable-wrapper,
+.jobtype-modal.jobtype-modal--expanded.cmo-actividad-modal--alta .cmo-actividad-popup-grid-shell:has(.jobtype-popup-grid-empty) .p-datatable-table-container {
+  height: 230px !important;
+  min-height: 230px !important;
+  max-height: 230px !important;
   overflow-y: hidden !important;
+  background: #ffffff !important;
 }
 
-.jobtype-modal.jobtype-modal--expanded.cmo-actividad-modal--alta .cmo-actividad-popup-datatable .p-datatable-empty-message > td,
-.jobtype-modal.jobtype-modal--expanded.cmo-actividad-modal--alta .cmo-actividad-popup-datatable .jobtype-popup-grid-empty {
-  height: 318px !important;
-  padding: 122px 12px !important;
+.jobtype-modal.jobtype-modal--expanded.cmo-actividad-modal--alta .cmo-actividad-popup-grid-shell:has(.jobtype-popup-grid-empty) .p-datatable-empty-message > td,
+.jobtype-modal.jobtype-modal--expanded.cmo-actividad-modal--alta .cmo-actividad-popup-grid-shell:has(.jobtype-popup-grid-empty) .jobtype-popup-grid-empty {
+  height: 166px !important;
+  min-height: 166px !important;
+  max-height: 166px !important;
+  padding: 48px 12px !important;
   background: #ffffff !important;
 }
