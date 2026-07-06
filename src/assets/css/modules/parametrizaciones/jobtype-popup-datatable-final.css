@@ -9,6 +9,7 @@
   width: 100% !important;
   min-width: 0 !important;
   border: 1px solid #9fb8c7 !important;
+  border-left: 4px solid #00a9bd !important;
   background: #ffffff !important;
   overflow: hidden !important;
 }
@@ -21,31 +22,33 @@
   max-width: 100% !important;
 }
 
+.jobtype-popup-datatable .p-datatable-table-container,
 .jobtype-popup-datatable .p-datatable-wrapper {
-  height: 210px !important;
-  max-height: 210px !important;
-  overflow-y: auto !important;
-  overflow-x: auto !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  overflow-x: hidden !important;
+  overflow-y: hidden !important;
   border-bottom: 1px solid #9fb8c7 !important;
 }
 
 .jobtype-popup-datatable .p-datatable-table {
   table-layout: fixed !important;
-  width: max-content !important;
+  width: 100% !important;
   min-width: 100% !important;
   border-collapse: separate !important;
   border-spacing: 0 !important;
 }
 
 .jobtype-popup-datatable .p-datatable-thead > tr > th {
-  height: 30px !important;
-  min-height: 30px !important;
+  height: 31px !important;
+  min-height: 31px !important;
   padding: 0 7px !important;
-  border-right: 1px solid #b7cbd6 !important;
+  border-right: 1px solid #9fb8c7 !important;
   border-bottom: 1px solid #9fb8c7 !important;
   background: #f8fafb !important;
   color: #163849 !important;
-  font-size: 10px !important;
+  font-size: 11px !important;
   font-weight: 700 !important;
   line-height: 1.1 !important;
   text-transform: uppercase !important;
@@ -58,11 +61,11 @@
 }
 
 .jobtype-popup-datatable .p-datatable-thead > tr.p-datatable-filter-row > th {
-  height: 30px !important;
-  min-height: 30px !important;
+  height: 31px !important;
+  min-height: 31px !important;
   padding: 3px 5px !important;
   background: #ffffff !important;
-  border-bottom: 1px solid #b7cbd6 !important;
+  border-bottom: 1px solid #9fb8c7 !important;
 }
 
 .jobtype-popup-datatable .jobtype-popup-filter-cell,
@@ -100,16 +103,16 @@
 }
 
 .jobtype-popup-datatable .p-datatable-tbody > tr > td {
-  height: 30px !important;
-  min-height: 30px !important;
-  max-height: 30px !important;
+  height: 31px !important;
+  min-height: 31px !important;
+  max-height: 31px !important;
   padding: 0 7px !important;
   border-right: 1px solid #b7cbd6 !important;
   border-bottom: 1px solid #c1d2dc !important;
   background: #ffffff !important;
   color: #0f2f3d !important;
   font-size: 12px !important;
-  line-height: 30px !important;
+  line-height: 31px !important;
   white-space: nowrap !important;
   overflow: hidden !important;
   text-overflow: ellipsis !important;
@@ -128,12 +131,13 @@
 
 .jobtype-popup-datatable .p-datatable-empty-message > td,
 .jobtype-popup-grid-empty {
-  height: 150px !important;
-  padding: 28px 12px !important;
+  height: 138px !important;
+  padding: 34px 12px !important;
   color: #6f8594 !important;
   font-size: 12px !important;
   font-weight: 500 !important;
   text-align: center !important;
+  vertical-align: middle !important;
 }
 
 .jobtype-popup-datatable .p-paginator,
@@ -141,6 +145,7 @@
   height: 34px !important;
   min-height: 34px !important;
   max-height: 34px !important;
+  position: relative !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -154,7 +159,9 @@
 
 .jobtype-popup-datatable .p-paginator-start {
   position: absolute !important;
-  left: 12px !important;
+  left: 14px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
   display: inline-flex !important;
   align-items: center !important;
   overflow: visible !important;
@@ -179,18 +186,56 @@
   box-shadow: none !important;
 }
 
-.jobtype-popup-datatable .jobtype-modal-icon-button.p-button {
-  margin-left: 0 !important;
+.jobtype-popup-datatable .jobtype-modal-icon-button.p-button,
+.jobtype-popup-datatable .jobtype-modal-icon-button.p-button:enabled,
+.jobtype-popup-datatable .jobtype-modal-icon-button.p-button:hover,
+.jobtype-popup-datatable .jobtype-modal-icon-button.p-button:focus,
+.jobtype-popup-datatable .jobtype-modal-icon-button.p-button:active {
+  width: 22px !important;
+  min-width: 22px !important;
+  height: 22px !important;
+  min-height: 22px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
   color: #4f6673 !important;
   background: transparent !important;
+  background-color: transparent !important;
   box-shadow: none !important;
+  outline: 0 !important;
 }
 
+.jobtype-popup-datatable .jobtype-modal-icon-button.p-button:disabled,
+.jobtype-popup-datatable .jobtype-modal-icon-button.p-button.p-disabled {
+  color: #b7c1c8 !important;
+  background: transparent !important;
+  opacity: .78 !important;
+}
+
+.jobtype-popup-datatable .jobtype-modal-icon-button.p-button .p-button-icon,
+.jobtype-popup-datatable .jobtype-modal-icon-button.p-button .pi {
+  width: 16px !important;
+  min-width: 16px !important;
+  height: 16px !important;
+  min-height: 16px !important;
+  font-size: 16px !important;
+  line-height: 16px !important;
+  color: currentColor !important;
+}
+
+.jobtype-modal.jobtype-modal--expanded .jobtype-popup-datatable .p-datatable-table-container,
 .jobtype-modal.jobtype-modal--expanded .jobtype-popup-datatable .p-datatable-wrapper {
   height: 300px !important;
   max-height: 300px !important;
   overflow-y: auto !important;
-  overflow-x: auto !important;
+  overflow-x: hidden !important;
+}
+
+.jobtype-modal.jobtype-modal--expanded .jobtype-popup-datatable .p-datatable-empty-message > td,
+.jobtype-modal.jobtype-modal--expanded .jobtype-popup-grid-empty {
+  height: 238px !important;
+  padding: 82px 12px !important;
 }
 
 .jobtype-modal.jobtype-modal--expanded .jobtype-popup-grid-shell {
