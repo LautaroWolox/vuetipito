@@ -2,22 +2,26 @@
    CMO ACTIVIDAD POPUP FIT
    ------------------------------------------------------------------------
    Ajuste final para que la grilla del popup Alta CMO - Actividad se vea
-   bien minimizada y maximizada.
+   armada en estado normal y maximizado.
 
-   - No corta columnas.
-   - No muestra scroll gigante cuando esta vacia.
-   - Mantiene scroll cuando hay muchos datos.
-   - Mantiene linea turquesa fina.
+   La altura final y el fondo cuadriculado cuando esta vacia se refuerzan
+   tambien desde jobtypeModalMaximize.js porque PrimeVue renderiza wrappers
+   internos dinamicos.
    ======================================================================== */
+
+.cmo-actividad-modal--alta {
+  width: min(1180px, calc(100vw - 70px)) !important;
+  max-width: calc(100vw - 70px) !important;
+}
 
 .cmo-actividad-modal--alta .cmo-actividad-popup-grid-shell.jobtype-popup-grid-shell {
   width: calc(100% - 36px) !important;
   max-width: calc(100% - 36px) !important;
-  margin: 12px 18px 0 !important;
+  margin: 14px 18px 0 !important;
   border-left-width: 1px !important;
   border-left-style: solid !important;
   border-left-color: #00a9bd !important;
-  background: #ffffff !important;
+  background-color: #ffffff !important;
   overflow: hidden !important;
 }
 
@@ -43,12 +47,12 @@
 
 .cmo-actividad-modal--alta .cmo-actividad-popup-datatable .p-datatable-wrapper,
 .cmo-actividad-modal--alta .cmo-actividad-popup-datatable .p-datatable-table-container {
-  height: 210px !important;
-  min-height: 210px !important;
-  max-height: 210px !important;
+  height: 230px !important;
+  min-height: 230px !important;
+  max-height: 230px !important;
   overflow-y: auto !important;
   border-bottom: 1px solid #9fb8c7 !important;
-  background: #ffffff !important;
+  background-color: #ffffff !important;
 }
 
 .cmo-actividad-modal--alta .cmo-actividad-popup-datatable .p-datatable-table {
@@ -89,39 +93,19 @@
 }
 
 .cmo-actividad-modal--alta .cmo-actividad-popup-datatable .jobtype-popup-filter-cell,
-.cmo-actividad-modal--alta .cmo-actividad-popup-datatable .fm-filter-cell {
-  min-width: 0 !important;
-}
-
+.cmo-actividad-modal--alta .cmo-actividad-popup-datatable .fm-filter-cell,
 .cmo-actividad-modal--alta .cmo-actividad-popup-datatable .fm-column-filter,
 .cmo-actividad-modal--alta .cmo-actividad-popup-datatable .p-inputtext {
   min-width: 0 !important;
 }
 
-/* Estado vacio: no debe quedar celeste ni mostrar un scroll gigante. */
-.cmo-actividad-modal--alta .cmo-actividad-popup-grid-shell:has(.jobtype-popup-grid-empty) .p-datatable-wrapper,
-.cmo-actividad-modal--alta .cmo-actividad-popup-grid-shell:has(.jobtype-popup-grid-empty) .p-datatable-table-container {
-  height: 210px !important;
-  min-height: 210px !important;
-  max-height: 210px !important;
+.cmo-actividad-modal--alta .cmo-actividad-popup-grid-shell--empty .p-datatable-wrapper,
+.cmo-actividad-modal--alta .cmo-actividad-popup-grid-shell--empty .p-datatable-table-container {
   overflow-y: hidden !important;
-  background: #ffffff !important;
-}
-
-.cmo-actividad-modal--alta .cmo-actividad-popup-grid-shell:has(.jobtype-popup-grid-empty) .p-datatable-tbody,
-.cmo-actividad-modal--alta .cmo-actividad-popup-grid-shell:has(.jobtype-popup-grid-empty) .p-datatable-tbody > tr,
-.cmo-actividad-modal--alta .cmo-actividad-popup-grid-shell:has(.jobtype-popup-grid-empty) .p-datatable-tbody > tr > td,
-.cmo-actividad-modal--alta .cmo-actividad-popup-datatable .p-datatable-empty-message > td,
-.cmo-actividad-modal--alta .cmo-actividad-popup-datatable .jobtype-popup-grid-empty {
-  background: #ffffff !important;
 }
 
 .cmo-actividad-modal--alta .cmo-actividad-popup-datatable .p-datatable-empty-message > td,
 .cmo-actividad-modal--alta .cmo-actividad-popup-datatable .jobtype-popup-grid-empty {
-  height: 146px !important;
-  min-height: 146px !important;
-  max-height: 146px !important;
-  padding: 38px 12px !important;
   color: #6f8594 !important;
   font-size: 12px !important;
   font-weight: 500 !important;
@@ -129,36 +113,21 @@
   vertical-align: middle !important;
 }
 
-.cmo-actividad-modal--alta .cmo-actividad-popup-datatable .p-datatable-tbody > tr.p-datatable-empty-message:hover > td,
-.cmo-actividad-modal--alta .cmo-actividad-popup-datatable .p-datatable-tbody > tr:hover > td:has(.jobtype-popup-grid-empty) {
-  background: #ffffff !important;
+.jobtype-modal.jobtype-modal--expanded.cmo-actividad-modal--alta {
+  width: min(1760px, calc(100vw - 40px)) !important;
+  max-width: calc(100vw - 40px) !important;
 }
 
-/* Maximizado con datos: puede crecer y scrollear. */
 .jobtype-modal.jobtype-modal--expanded.cmo-actividad-modal--alta .cmo-actividad-popup-datatable .p-datatable-wrapper,
 .jobtype-modal.jobtype-modal--expanded.cmo-actividad-modal--alta .cmo-actividad-popup-datatable .p-datatable-table-container {
-  height: 382px !important;
-  min-height: 382px !important;
-  max-height: 382px !important;
+  height: 340px !important;
+  min-height: 340px !important;
+  max-height: 340px !important;
   overflow-y: auto !important;
-  background: #ffffff !important;
+  background-color: #ffffff !important;
 }
 
-/* Maximizado vacio: no mostrar scroll gigante ni cuerpo celeste enorme. */
-.jobtype-modal.jobtype-modal--expanded.cmo-actividad-modal--alta .cmo-actividad-popup-grid-shell:has(.jobtype-popup-grid-empty) .p-datatable-wrapper,
-.jobtype-modal.jobtype-modal--expanded.cmo-actividad-modal--alta .cmo-actividad-popup-grid-shell:has(.jobtype-popup-grid-empty) .p-datatable-table-container {
-  height: 230px !important;
-  min-height: 230px !important;
-  max-height: 230px !important;
+.jobtype-modal.jobtype-modal--expanded.cmo-actividad-modal--alta .cmo-actividad-popup-grid-shell--empty .p-datatable-wrapper,
+.jobtype-modal.jobtype-modal--expanded.cmo-actividad-modal--alta .cmo-actividad-popup-grid-shell--empty .p-datatable-table-container {
   overflow-y: hidden !important;
-  background: #ffffff !important;
-}
-
-.jobtype-modal.jobtype-modal--expanded.cmo-actividad-modal--alta .cmo-actividad-popup-grid-shell:has(.jobtype-popup-grid-empty) .p-datatable-empty-message > td,
-.jobtype-modal.jobtype-modal--expanded.cmo-actividad-modal--alta .cmo-actividad-popup-grid-shell:has(.jobtype-popup-grid-empty) .jobtype-popup-grid-empty {
-  height: 166px !important;
-  min-height: 166px !important;
-  max-height: 166px !important;
-  padding: 48px 12px !important;
-  background: #ffffff !important;
 }
