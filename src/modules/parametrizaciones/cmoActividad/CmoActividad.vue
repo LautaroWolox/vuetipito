@@ -44,7 +44,7 @@
                 paginator
                 :rows="10"
                 :rowsPerPageOptions="[10, 20, 50, 100]"
-                paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
+                paginatorTemplate="FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink RowsPerPageDropdown"
                 currentPageReportTemplate="Pagina {currentPage} de {totalPages}"
                 :resizableColumns="true"
                 columnResizeMode="expand"
@@ -285,8 +285,43 @@ const eliminar = () => {
   min-width: 0;
 }
 
+.cmo-actividad-grid-wrap::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 35px;
+  width: 2px;
+  background: #00a9bd;
+  z-index: 7;
+  pointer-events: none;
+}
+
+.cmo-actividad-grid-wrap :deep(.p-datatable),
+.cmo-actividad-grid-wrap :deep(.p-datatable-wrapper),
+.cmo-actividad-grid-wrap :deep(.p-datatable-table-container) {
+  border-left-width: 0 !important;
+}
+
 .cmo-actividad-grid-wrap :deep(.p-paginator) {
-  padding-left: 104px !important;
+  min-height: 34px !important;
+  height: 34px !important;
+  padding-left: 136px !important;
+  padding-right: 210px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 5px !important;
+}
+
+.cmo-actividad-grid-wrap :deep(.p-paginator .p-select),
+.cmo-actividad-grid-wrap :deep(.p-paginator .p-dropdown) {
+  margin-left: 8px !important;
+}
+
+.cmo-actividad-grid-wrap :deep(.p-paginator-end) {
+  position: absolute !important;
+  right: 10px !important;
 }
 
 .cmo-actividad-grid :deep(.p-datatable-table) {
@@ -317,13 +352,14 @@ const eliminar = () => {
 
 .cmo-actividad-grid-actions-fixed {
   position: absolute;
-  left: 12px;
-  bottom: 8px;
-  z-index: 8;
+  left: 10px;
+  bottom: 9px;
+  z-index: 9;
   display: inline-flex;
   align-items: center;
   justify-content: flex-start;
   gap: 12px;
+  width: 96px;
   height: 18px;
   overflow: visible;
   pointer-events: auto;
@@ -335,12 +371,12 @@ const eliminar = () => {
 .cmo-actividad-grid-action.p-button:focus,
 .cmo-actividad-grid-action.p-button:active,
 .cmo-actividad-grid-action.p-button:focus-visible {
-  width: 16px !important;
-  min-width: 16px !important;
-  max-width: 16px !important;
-  height: 16px !important;
-  min-height: 16px !important;
-  max-height: 16px !important;
+  width: 15px !important;
+  min-width: 15px !important;
+  max-width: 15px !important;
+  height: 15px !important;
+  min-height: 15px !important;
+  max-height: 15px !important;
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
