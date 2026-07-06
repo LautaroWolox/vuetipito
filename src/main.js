@@ -29,6 +29,7 @@ import './assets/css/modules/parametrizaciones/jobtype-popup-grid-gutter-fix.css
 import './assets/css/modules/parametrizaciones/jobtype-modal-maximize.css';
 import './assets/css/modules/parametrizaciones/jobtype-modal-trash-flat.css';
 import './assets/css/modules/parametrizaciones/jobtype-popup-scroll-lines-final.css';
+import './assets/css/modules/parametrizaciones/jobtype-popup-datatable-final.css';
 import Lara from '@primeuix/themes/lara';
 
 import { definePreset } from '@primeuix/themes';
