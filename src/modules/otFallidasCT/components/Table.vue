@@ -221,11 +221,71 @@ const exportarExcel = () => {
   padding-right: 8px;
 }
 
+:deep(#tabla.fm-pass-grid),
+:deep(#tabla.p-datatable) {
+  border-left-width: 1px !important;
+  border-left-style: solid !important;
+  border-left-color: #00a9bd !important;
+}
+
+:deep(#tabla .p-datatable-wrapper),
+:deep(#tabla .p-datatable-table-container) {
+  border-left-width: 0 !important;
+  border-left-style: none !important;
+}
+
 :deep(.p-datatable-tbody > tr) {
   cursor: pointer;
 }
 
-:deep(.fm-icon-btn .pi) {
-  font-size: 16px;
+:deep(#tabla .fm-icon-btn) {
+  width: 32px !important;
+  min-width: 32px !important;
+  height: 32px !important;
+  min-height: 32px !important;
+  padding: 0 !important;
+  color: #006f7d !important;
+}
+
+:deep(#tabla .fm-icon-btn:hover),
+:deep(#tabla .fm-icon-btn:focus),
+:deep(#tabla .fm-icon-btn:focus-visible) {
+  color: #004f59 !important;
+}
+
+:deep(#tabla .fm-icon-btn .pi) {
+  width: 25px !important;
+  height: 25px !important;
+  font-size: 25px !important;
+  line-height: 25px !important;
+}
+
+:deep(#tabla .fm-grid-actions) {
+  gap: 12px !important;
+}
+
+:deep(#tabla .fm-grid-actions .p-button),
+:deep(#tabla .fm-grid-actions .p-button.fm-icon-btn),
+:deep(#tabla .fm-grid-actions .p-button.fm-grid-action-button) {
+  width: 30px !important;
+  min-width: 30px !important;
+  height: 30px !important;
+  min-height: 30px !important;
+  padding: 0 !important;
+  color: #001f2f !important;
+}
+
+:deep(#tabla .fm-grid-actions .p-button:hover),
+:deep(#tabla .fm-grid-actions .p-button:focus),
+:deep(#tabla .fm-grid-actions .p-button:focus-visible) {
+  color: #006f7d !important;
+}
+
+:deep(#tabla .fm-grid-actions .p-button .p-button-icon),
+:deep(#tabla .fm-grid-actions .p-button .pi) {
+  width: 25px !important;
+  height: 25px !important;
+  font-size: 25px !important;
+  line-height: 25px !important;
 }
 </style>
