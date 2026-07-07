@@ -1,0 +1,70 @@
+.jobtype-modal--alta .jobtype-alta-grid-shell {
+  width: 100% !important;
+  min-width: 0 !important;
+}
+
+.jobtype-modal--alta #tabla-jobtype-alta.fm-pass-grid,
+.jobtype-modal--alta #tabla-jobtype-alta.p-datatable {
+  width: 100% !important;
+  min-width: 100% !important;
+  border-left-width: 2px !important;
+  border-left-style: solid !important;
+  border-left-color: #00a9bd !important;
+}
+
+.jobtype-modal--alta #tabla-jobtype-alta .p-datatable-table-container,
+.jobtype-modal--alta #tabla-jobtype-alta .p-datatable-wrapper {
+  width: 100% !important;
+  min-width: 100% !important;
+  overflow-x: hidden !important;
+}
+
+.jobtype-modal--alta #tabla-jobtype-alta .p-datatable-table {
+  width: 100% !important;
+  min-width: 100% !important;
+  table-layout: fixed !important;
+}
+
+.jobtype-modal--alta #tabla-jobtype-alta .p-datatable-thead > tr > th,
+.jobtype-modal--alta #tabla-jobtype-alta .p-datatable-tbody > tr > td {
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+  vertical-align: middle !important;
+}
+
+.jobtype-modal--alta #tabla-jobtype-alta .p-datatable-thead > tr > th:last-child,
+.jobtype-modal--alta #tabla-jobtype-alta .p-datatable-tbody > tr > td:last-child {
+  border-right: 0 !important;
+}
+
+.jobtype-modal--alta #tabla-jobtype-alta .fm-filter-cell,
+.jobtype-modal--alta #tabla-jobtype-alta .jobtype-filter-cell--alta,
+.jobtype-modal--alta #tabla-jobtype-alta .fm-column-filter,
+.jobtype-modal--alta #tabla-jobtype-alta .p-inputtext {
+  width: 100% !important;
+  min-width: 0 !important;
+}
+
+.jobtype-modal--alta #tabla-jobtype-alta .p-datatable-emptymessage > td,
+.jobtype-modal--alta #tabla-jobtype-alta .p-datatable-empty-message > td,
+.jobtype-modal--alta #tabla-jobtype-alta .jobtype-alta-empty {
+  height: 148px !important;
+  min-height: 148px !important;
+}
+
+.jobtype-modal--alta #tabla-jobtype-alta .jobtype-alta-empty {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: #6d8392 !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+}
+
+.jobtype-modal--alta #tabla-jobtype-alta .p-paginator,
+.jobtype-modal--alta #tabla-jobtype-alta .p-datatable-paginator-bottom {
+  min-height: 34px !important;
+  height: 34px !important;
+  padding-top: 4px !important;
+  padding-bottom: 4px !important;
+}
