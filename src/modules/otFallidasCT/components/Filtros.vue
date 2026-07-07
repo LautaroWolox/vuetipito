@@ -71,4 +71,34 @@ const buscar = async () => store.search()
 .otf-filter-actions :deep(.fm-action-button) {
   min-width: 104px;
 }
+
+.otf-filters :deep(.otf-filter-element--disabled) {
+  opacity: 1 !important;
+}
+
+.otf-filters :deep(.otf-filter-element--disabled label) {
+  color: #52616c !important;
+}
+
+.otf-filters :deep(.otf-filter-element--disabled .p-inputtext),
+.otf-filters :deep(.otf-filter-element--disabled .p-select),
+.otf-filters :deep(.otf-filter-element--disabled .ct-date-button) {
+  background: #d5dde3 !important;
+  background-color: #d5dde3 !important;
+  border-color: #9eacb7 !important;
+  color: #53636f !important;
+  cursor: not-allowed !important;
+}
+
+.otf-filters :deep(.otf-filter-element--disabled .p-inputtext::placeholder),
+.otf-filters :deep(.otf-filter-element--disabled .ct-date-button span),
+.otf-filters :deep(.otf-filter-element--disabled .p-select-label) {
+  color: #53636f !important;
+}
+
+.otf-filters :deep(.otf-filter-element--disabled .p-select-dropdown),
+.otf-filters :deep(.otf-filter-element--disabled .ct-date-button svg) {
+  color: #53636f !important;
+  stroke: #53636f !important;
+}
 </style>
