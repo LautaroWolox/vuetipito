@@ -72,6 +72,7 @@
 .jobtype-modal--alta .jobtype-alta-grid-shell > .jobtype-alta-trash-left.p-button,
 .jobtype-modal--alta .jobtype-alta-grid-shell > .jobtype-alta-trash-left.p-button.p-button-text,
 .jobtype-modal--alta .jobtype-alta-grid-shell > .jobtype-alta-trash-left.p-button.p-button-rounded,
+.jobtype-modal--alta .jobtype-alta-grid-shell > .jobtype-alta-trash-left.p-button.p-button-icon-only,
 .jobtype-modal--alta .jobtype-alta-grid-shell > .jobtype-alta-trash-left.p-button:enabled,
 .jobtype-modal--alta .jobtype-alta-grid-shell > .jobtype-alta-trash-left.p-button:disabled,
 .jobtype-modal--alta .jobtype-alta-grid-shell > .jobtype-alta-trash-left.p-button.p-disabled,
@@ -107,15 +108,6 @@
   opacity: .55 !important;
 }
 
-.jobtype-modal--alta .jobtype-alta-grid-shell > .jobtype-alta-trash-left.p-button:enabled:hover,
-.jobtype-modal--alta .jobtype-alta-grid-shell > .jobtype-alta-trash-left.p-button:enabled:focus,
-.jobtype-modal--alta .jobtype-alta-grid-shell > .jobtype-alta-trash-left.p-button:enabled:active {
-  color: #001f2f !important;
-  background: transparent !important;
-  background-color: transparent !important;
-  box-shadow: none !important;
-}
-
 .jobtype-modal--alta .jobtype-alta-grid-shell > .jobtype-alta-trash-left.p-button::before,
 .jobtype-modal--alta .jobtype-alta-grid-shell > .jobtype-alta-trash-left.p-button::after,
 .jobtype-modal--alta .jobtype-alta-grid-shell > .jobtype-alta-trash-left.p-button .p-ink,
@@ -125,6 +117,8 @@
   content: none !important;
   opacity: 0 !important;
   background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
   box-shadow: none !important;
 }
 
