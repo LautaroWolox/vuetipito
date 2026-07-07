@@ -6,7 +6,7 @@
     </div>
     <template #footer>
       <div class="fm-note-footer">
-        <Button label="CERRAR" class="fm-btn fm-btn--primary fm-note-close-button" @click="cerrar" />
+        <button type="button" class="fm-note-close-native" @click="cerrar">CERRAR</button>
       </div>
     </template>
   </Dialog>
@@ -45,42 +45,35 @@ const cerrar = () => {
   align-items: center;
 }
 
-.fm-note-footer :deep(.fm-note-close-button),
-.fm-note-footer :deep(.p-button.fm-note-close-button) {
-  width: 172px !important;
-  min-width: 172px !important;
-  max-width: 172px !important;
-  height: 56px !important;
-  min-height: 56px !important;
-  max-height: 56px !important;
-  flex: 0 0 172px !important;
-  padding: 0 24px !important;
-  border: 1px solid #00a9bd !important;
-  border-radius: 7px !important;
-  background: #00a9bd !important;
-  background-color: #00a9bd !important;
-  color: #ffffff !important;
-  box-shadow: none !important;
-  transform: none !important;
+.fm-note-close-native {
+  width: 160px;
+  min-width: 160px;
+  max-width: 160px;
+  height: 56px;
+  min-height: 56px;
+  max-height: 56px;
+  padding: 0 24px;
+  border: 1px solid #00a9bd;
+  border-radius: 7px;
+  background: #00a9bd;
+  color: #ffffff;
+  box-shadow: none;
+  font-family: inherit;
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: .2px;
+  text-align: center;
+  cursor: pointer;
 }
 
-.fm-note-footer :deep(.fm-note-close-button .p-button-label),
-.fm-note-footer :deep(.p-button.fm-note-close-button .p-button-label) {
-  font-size: 24px !important;
-  font-weight: 800 !important;
-  line-height: 1 !important;
-  letter-spacing: .2px !important;
-  color: #ffffff !important;
-}
-
-.fm-note-footer :deep(.fm-note-close-button:hover),
-.fm-note-footer :deep(.fm-note-close-button:focus),
-.fm-note-footer :deep(.fm-note-close-button:focus-visible) {
-  border-color: #008fa1 !important;
-  background: #008fa1 !important;
-  background-color: #008fa1 !important;
-  color: #ffffff !important;
-  box-shadow: none !important;
-  transform: none !important;
+.fm-note-close-native:hover,
+.fm-note-close-native:focus,
+.fm-note-close-native:focus-visible {
+  border-color: #008fa1;
+  background: #008fa1;
+  color: #ffffff;
+  box-shadow: none;
+  outline: none;
 }
 </style>
