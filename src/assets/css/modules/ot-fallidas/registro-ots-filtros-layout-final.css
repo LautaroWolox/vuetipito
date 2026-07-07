@@ -1,7 +1,7 @@
 /* ========================================================================
    REGISTRO OTS FALLIDAS - FILTROS LAYOUT FINAL
    ------------------------------------------------------------------------
-   Distribucion compacta y pareja:
+   Distribucion compacta, centrada y pareja:
    Fila 1: Nro OT | Fecha Desde | Fecha Hasta | Contratista controlado
    Fila 2: Descripcion Error | Excluida | Pais
    ======================================================================== */
@@ -14,14 +14,14 @@
 
 .otf-filter-grid {
   display: grid !important;
-  grid-template-columns: 220px 320px 320px 500px !important;
-  column-gap: 16px !important;
-  row-gap: 4px !important;
+  grid-template-columns: 180px 300px 300px 520px !important;
+  column-gap: 12px !important;
+  row-gap: 6px !important;
   align-items: end !important;
-  justify-content: start !important;
-  width: calc(100% - 48px) !important;
-  margin-left: 24px !important;
-  margin-right: 24px !important;
+  justify-content: center !important;
+  width: min(calc(100% - 40px), 1336px) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
 
 .otf-filter-grid .otf-filter-element {
@@ -56,16 +56,17 @@
 }
 
 .otf-filter-grid .otf-filter-element--contratista .p-select {
-  max-width: 500px !important;
+  max-width: 520px !important;
 }
 
 @media (max-width: 1500px) {
   .otf-filter-grid {
-    grid-template-columns: 220px 300px 300px 420px !important;
+    grid-template-columns: 180px 280px 280px 460px !important;
+    width: min(calc(100% - 40px), 1236px) !important;
   }
 
   .otf-filter-grid .otf-filter-element--contratista .p-select {
-    max-width: 420px !important;
+    max-width: 460px !important;
   }
 }
 
@@ -73,7 +74,7 @@
   .otf-filter-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
     width: calc(100% - 32px) !important;
-    margin-left: 16px !important;
-    margin-right: 16px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
 }
