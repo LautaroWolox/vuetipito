@@ -44,7 +44,29 @@ const buscar = async () => store.search()
 }
 
 .otf-filter-grid {
-  align-items: end;
+  display: grid !important;
+  grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+  column-gap: 16px !important;
+  row-gap: 10px !important;
+  align-items: end !important;
+}
+
+.otf-filter-grid :deep(.otf-filter-element) {
+  width: 100% !important;
+  min-width: 0 !important;
+}
+
+.otf-filter-grid :deep(.otf-filter-element--nro-ot),
+.otf-filter-grid :deep(.otf-filter-element--fecha-desde),
+.otf-filter-grid :deep(.otf-filter-element--fecha-hasta),
+.otf-filter-grid :deep(.otf-filter-element--descripcion-error),
+.otf-filter-grid :deep(.otf-filter-element--excluida),
+.otf-filter-grid :deep(.otf-filter-element--pais) {
+  grid-column: span 1 !important;
+}
+
+.otf-filter-grid :deep(.otf-filter-element--contratista) {
+  grid-column: span 3 !important;
 }
 
 .otf-filter-actions {
@@ -54,5 +76,15 @@ const buscar = async () => store.search()
 .otf-filter-actions :deep(.p-button),
 .otf-filter-actions :deep(.fm-action-button) {
   min-width: 104px;
+}
+
+@media (max-width: 1200px) {
+  .otf-filter-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+
+  .otf-filter-grid :deep(.otf-filter-element--contratista) {
+    grid-column: span 2 !important;
+  }
 }
 </style>
