@@ -8,6 +8,7 @@
       optionLabel="name"
       class="w-full"
       showClear
+      :disabled="disabled"
       @update:modelValue="$emit('update:modelValue', $event)"
     />
   </div>
@@ -18,7 +19,8 @@ import Select from 'primevue/select'
 
 defineProps({
   modelValue: { type: [Object, String, null], default: null },
-  options: { type: Array, default: () => [] }
+  options: { type: Array, default: () => [] },
+  disabled: { type: Boolean, default: false }
 })
 
 defineEmits(['update:modelValue'])
