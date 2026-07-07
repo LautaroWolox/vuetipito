@@ -1,7 +1,7 @@
 /* ========================================================================
    REGISTRO OTS FALLIDAS - FILTROS LAYOUT FINAL
    ------------------------------------------------------------------------
-   Distribucion compacta, centrada y pareja:
+   Distribucion compacta, centrada y aislada de fm-filter-grid:
    Fila 1: Nro OT | Fecha Desde | Fecha Hasta | Contratista controlado
    Fila 2: Descripcion Error | Excluida | Pais
    ======================================================================== */
@@ -10,16 +10,20 @@
   border-left-width: 1px !important;
   border-left-style: solid !important;
   border-left-color: #00a9bd !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
 }
 
 .otf-filter-grid {
   display: grid !important;
-  grid-template-columns: 180px 300px 300px 520px !important;
+  grid-template-columns: 180px 280px 280px 460px !important;
   column-gap: 12px !important;
   row-gap: 6px !important;
   align-items: end !important;
   justify-content: center !important;
-  width: min(calc(100% - 40px), 1336px) !important;
+  width: 1176px !important;
+  max-width: calc(100% - 48px) !important;
   margin-left: auto !important;
   margin-right: auto !important;
 }
@@ -55,18 +59,14 @@
   min-width: 0 !important;
 }
 
-.otf-filter-grid .otf-filter-element--contratista .p-select {
-  max-width: 520px !important;
+.otf-filter-actions {
+  align-self: center !important;
 }
 
-@media (max-width: 1500px) {
+@media (min-width: 1501px) {
   .otf-filter-grid {
-    grid-template-columns: 180px 280px 280px 460px !important;
-    width: min(calc(100% - 40px), 1236px) !important;
-  }
-
-  .otf-filter-grid .otf-filter-element--contratista .p-select {
-    max-width: 460px !important;
+    grid-template-columns: 180px 300px 300px 500px !important;
+    width: 1316px !important;
   }
 }
 
@@ -74,6 +74,7 @@
   .otf-filter-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
     width: calc(100% - 32px) !important;
+    max-width: none !important;
     margin-left: auto !important;
     margin-right: auto !important;
   }
