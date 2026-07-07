@@ -238,10 +238,10 @@ const exportarExcel = () => {
 }
 
 :deep(#tabla .fm-icon-btn) {
-  width: 28px !important;
-  min-width: 28px !important;
-  height: 28px !important;
-  min-height: 28px !important;
+  width: 24px !important;
+  min-width: 24px !important;
+  height: 24px !important;
+  min-height: 24px !important;
   padding: 0 !important;
   color: #001f2f !important;
   background: transparent !important;
@@ -258,11 +258,11 @@ const exportarExcel = () => {
 
 :deep(#tabla .fm-icon-btn .pi),
 :deep(#tabla .fm-icon-btn .pi::before) {
-  width: 21px !important;
-  min-width: 21px !important;
-  height: 21px !important;
-  min-height: 21px !important;
-  font-size: 21px !important;
-  line-height: 21px !important;
+  width: 18px !important;
+  min-width: 18px !important;
+  height: 18px !important;
+  min-height: 18px !important;
+  font-size: 18px !important;
+  line-height: 18px !important;
 }
 </style>
