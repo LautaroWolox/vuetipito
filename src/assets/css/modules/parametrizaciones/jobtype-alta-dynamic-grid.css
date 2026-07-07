@@ -31,13 +31,44 @@
   max-height: 260px !important;
 }
 
+.jobtype-modal--alta .jobtype-alta-grid__inner {
+  width: 100% !important;
+  min-width: 100% !important;
+}
+
+.jobtype-modal--alta .jobtype-alta-grid__header,
+.jobtype-modal--alta .jobtype-alta-grid__filters,
+.jobtype-modal--alta .jobtype-alta-grid__row {
+  grid-template-columns: minmax(180px, 1.05fr) minmax(300px, 1.38fr) minmax(300px, 1.38fr) minmax(220px, .9fr) !important;
+}
+
+.jobtype-modal--alta .jobtype-alta-grid__header-cell,
+.jobtype-modal--alta .jobtype-alta-grid__filter-cell,
+.jobtype-modal--alta .jobtype-alta-grid__cell {
+  box-sizing: border-box !important;
+}
+
+.jobtype-modal--alta .jobtype-alta-grid__header-cell:last-child,
+.jobtype-modal--alta .jobtype-alta-grid__filter-cell:last-child,
+.jobtype-modal--alta .jobtype-alta-grid__cell:nth-last-of-type(2) {
+  border-right: 0 !important;
+}
+
+.jobtype-modal--alta .jobtype-alta-grid__filter-cell:last-child .jobtype-alta-grid__filter-input,
+.jobtype-modal--alta .jobtype-alta-grid__filter-cell:last-child .p-inputtext {
+  width: 100% !important;
+  min-width: 160px !important;
+}
+
 .jobtype-modal--alta .jobtype-alta-grid__body {
   height: 132px !important;
   min-height: 132px !important;
   max-height: 132px !important;
+  width: 100% !important;
 }
 
 .jobtype-modal--alta .jobtype-alta-grid__empty {
+  width: 100% !important;
   height: 132px !important;
   min-height: 132px !important;
 }
@@ -64,18 +95,18 @@
 .jobtype-modal--alta.jobtype-modal--expanded .jobtype-alta-grid__header,
 .jobtype-modal--alta.jobtype-modal--expanded .jobtype-alta-grid__filters,
 .jobtype-modal--alta.jobtype-modal--expanded .jobtype-alta-grid__row {
-  grid-template-columns: minmax(180px, 1.05fr) minmax(300px, 1.45fr) minmax(300px, 1.45fr) minmax(220px, .95fr) !important;
+  grid-template-columns: minmax(190px, 1.05fr) minmax(320px, 1.45fr) minmax(320px, 1.45fr) minmax(240px, .95fr) !important;
 }
 
 .jobtype-modal--alta.jobtype-modal--expanded .jobtype-alta-grid__filter-cell:last-child .jobtype-alta-grid__filter-input,
 .jobtype-modal--alta.jobtype-modal--expanded .jobtype-alta-grid__filter-cell:last-child .p-inputtext {
   width: 100% !important;
-  min-width: 160px !important;
+  min-width: 180px !important;
 }
 
 .jobtype-modal--alta.jobtype-modal--expanded .jobtype-alta-grid__header-cell:last-child,
 .jobtype-modal--alta.jobtype-modal--expanded .jobtype-alta-grid__filter-cell:last-child,
-.jobtype-modal--alta.jobtype-modal--expanded .jobtype-alta-grid__cell:last-of-type {
+.jobtype-modal--alta.jobtype-modal--expanded .jobtype-alta-grid__cell:nth-last-of-type(2) {
   border-right: 0 !important;
 }
 
