@@ -11,7 +11,7 @@
     </div>
 
     <div class="fm-actions fm-filter-actions otf-filter-actions">
-      <FmButton class="fm-filter-action-button" :label="store.loading ? 'BUSCANDO...' : 'BUSCAR'" icon="pi-search" :disabled="store.loading" :loading="store.loading" @click="buscar" />
+      <FmButton class="fm-filter-action-button" label="BUSCAR" icon="pi-search" :disabled="store.loading" @click="buscar" />
       <FmButton class="fm-filter-action-button" label="LIMPIAR" icon="pi-filter-slash" variant="outline" @click="limpiar" />
     </div>
   </div>

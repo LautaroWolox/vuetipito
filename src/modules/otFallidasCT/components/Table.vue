@@ -1,5 +1,6 @@
 <template>
   <FmGridShell
+    class="otf-grid-shell"
     :loading="store.loading"
     loading-title="Procesando OTs"
     loading-message="Consultando datos y preparando la grilla"
@@ -34,7 +35,7 @@
       @select-all-change="onSelectAllChange"
     >
       <template #paginatorstart>
-        <FmGridActions @export="exportarExcel" @delete="excluir" @refresh="reprocesar" />
+        <FmGridActions size="large" @export="exportarExcel" @delete="excluir" @refresh="reprocesar" />
       </template>
 
       <template #paginatorend>
@@ -221,11 +222,47 @@ const exportarExcel = () => {
   padding-right: 8px;
 }
 
+.otf-grid-shell {
+  border-left-width: 2px !important;
+}
+
+:deep(#tabla.fm-pass-grid),
+:deep(#tabla.p-datatable) {
+  border-left-width: 2px !important;
+  border-left-style: solid !important;
+  border-left-color: #00a9bd !important;
+}
+
 :deep(.p-datatable-tbody > tr) {
   cursor: pointer;
 }
 
-:deep(.fm-icon-btn .pi) {
-  font-size: 16px;
+:deep(#tabla .fm-icon-btn) {
+  width: 24px !important;
+  min-width: 24px !important;
+  height: 24px !important;
+  min-height: 24px !important;
+  padding: 0 !important;
+  color: #001f2f !important;
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+:deep(#tabla .fm-icon-btn:hover),
+:deep(#tabla .fm-icon-btn:focus),
+:deep(#tabla .fm-icon-btn:focus-visible) {
+  color: #006f7d !important;
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+:deep(#tabla .fm-icon-btn .pi),
+:deep(#tabla .fm-icon-btn .pi::before) {
+  width: 18px !important;
+  min-width: 18px !important;
+  height: 18px !important;
+  min-height: 18px !important;
+  font-size: 18px !important;
+  line-height: 18px !important;
 }
 </style>
