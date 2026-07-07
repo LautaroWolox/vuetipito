@@ -31,6 +31,7 @@ import './assets/css/modules/parametrizaciones/jobtype-modal-trash-flat.css';
 import './assets/css/modules/parametrizaciones/jobtype-popup-scroll-lines-final.css';
 import './assets/css/modules/parametrizaciones/jobtype-popup-datatable-final.css';
 import './assets/css/modules/parametrizaciones/jobtype-popup-trash-left-final.css';
+import './assets/css/modules/parametrizaciones/jobtype-alta-dynamic-grid.css';
 import './assets/css/modules/reporteSas/grid-ajustes.css';
 import Lara from '@primeuix/themes/lara';
 
