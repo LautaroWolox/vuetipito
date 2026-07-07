@@ -1,5 +1,6 @@
 <template>
   <FmGridShell
+    class="otf-grid-shell"
     :loading="store.loading"
     loading-title="Procesando OTs"
     loading-message="Consultando datos y preparando la grilla"
@@ -221,15 +222,26 @@ const exportarExcel = () => {
   padding-right: 8px;
 }
 
+.otf-grid-shell {
+  border-left-width: 2px !important;
+}
+
+:deep(#tabla.fm-pass-grid),
+:deep(#tabla.p-datatable) {
+  border-left-width: 2px !important;
+  border-left-style: solid !important;
+  border-left-color: #00a9bd !important;
+}
+
 :deep(.p-datatable-tbody > tr) {
   cursor: pointer;
 }
 
 :deep(#tabla .fm-icon-btn) {
-  width: 32px !important;
-  min-width: 32px !important;
-  height: 32px !important;
-  min-height: 32px !important;
+  width: 28px !important;
+  min-width: 28px !important;
+  height: 28px !important;
+  min-height: 28px !important;
   padding: 0 !important;
   color: #001f2f !important;
   background: transparent !important;
@@ -246,11 +258,11 @@ const exportarExcel = () => {
 
 :deep(#tabla .fm-icon-btn .pi),
 :deep(#tabla .fm-icon-btn .pi::before) {
-  width: 25px !important;
-  min-width: 25px !important;
-  height: 25px !important;
-  min-height: 25px !important;
-  font-size: 25px !important;
-  line-height: 25px !important;
+  width: 21px !important;
+  min-width: 21px !important;
+  height: 21px !important;
+  min-height: 21px !important;
+  font-size: 21px !important;
+  line-height: 21px !important;
 }
 </style>
