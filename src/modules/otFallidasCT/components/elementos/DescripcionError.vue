@@ -29,7 +29,9 @@ defineEmits(['update:modelValue'])
   white-space: nowrap;
 }
 
-.otf-filter-element :deep(.p-inputtext) {
-  width: 100%;
+.otf-filter-element--descripcion-error :deep(.p-inputtext) {
+  width: calc(50% - 8px) !important;
+  max-width: 340px !important;
+  min-width: 220px !important;
 }
 </style>
