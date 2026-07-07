@@ -30,8 +30,8 @@ defineEmits(['update:modelValue'])
 }
 
 .otf-filter-element--nro-ot :deep(.p-inputtext) {
-  width: calc(50% - 8px) !important;
-  max-width: 340px !important;
-  min-width: 220px !important;
+  width: 100% !important;
+  max-width: none !important;
+  min-width: 0 !important;
 }
 </style>
