@@ -150,77 +150,84 @@
         <Button label="AGREGAR" class="jobtype-modal-button jobtype-modal-button--add" :disabled="!canAgregarRelacion" @click="agregarRelacionPreview" />
       </div>
 
-      <div class="jobtype-popup-grid-shell">
-        <DataTable
-          id="tabla-alta-jobtype-contrato"
-          class="fm-pass-grid jobtype-popup-datatable"
-          :value="altaRows"
-          dataKey="id"
-          tableStyle="table-layout: fixed; width: max-content; min-width: 100%"
-          scrollable
-          scrollHeight="210px"
-          removableSort
-          sortMode="multiple"
-          filterDisplay="row"
-          v-model:filters="altaTableFilters"
-          v-model:selection="altaSelectedRow"
-          selectionMode="single"
-          :rowClass="altaRowClass"
-          paginator
-          :rows="10"
-          :rowsPerPageOptions="[10, 20, 30]"
-          paginatorTemplate="FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
-          currentPageReportTemplate="Página {currentPage} de {totalPages}"
-          :resizableColumns="true"
-          columnResizeMode="expand"
-          showGridlines
-          @row-click="onAltaRowClick"
-        >
-          <template #empty>
-            <div class="jobtype-popup-grid-empty">No hay relaciones agregadas</div>
-          </template>
+      <div class="jobtype-alta-grid" aria-label="Relaciones agregadas para alta">
+        <div class="jobtype-alta-grid__table">
+          <div class="jobtype-alta-grid__header" :style="altaGridTemplateStyle">
+            <div v-for="col in altaGridColumns" :key="`header-${col.key}`" class="jobtype-alta-grid__header-cell">
+              <span>{{ col.label }}</span>
+              <span class="jobtype-alta-grid__sort">↕</span>
+            </div>
+          </div>
 
-          <Column
-            v-for="col in altaGridColumns"
-            :key="col.key"
-            :field="col.key"
-            :sortField="col.key"
-            :filterField="col.key"
-            :header="col.label"
-            sortable
-            filter
-            :showFilterMenu="false"
-            :style="altaColumnStyle(col)"
-            :headerStyle="altaColumnStyle(col)"
-            :bodyStyle="altaColumnStyle(col)"
-          >
-            <template #filter="{ filterModel, filterCallback }">
-              <div class="fm-filter-cell jobtype-filter-cell jobtype-popup-filter-cell">
-                <span class="fm-filter-prefix">~</span>
-                <InputText type="text" v-model="filterModel.value" @input="filterCallback()" class="fm-column-filter" />
-                <span class="fm-filter-more">...</span>
-              </div>
-            </template>
+          <div class="jobtype-alta-grid__filters" :style="altaGridTemplateStyle">
+            <div v-for="col in altaGridColumns" :key="`filter-${col.key}`" class="jobtype-alta-grid__filter-cell">
+              <span class="jobtype-alta-grid__filter-prefix">~</span>
+              <InputText
+                type="text"
+                v-model="altaTableFilters[col.key].value"
+                class="jobtype-alta-grid__filter-input"
+                @input="onAltaFilterInput"
+              />
+              <span class="jobtype-alta-grid__filter-more">...</span>
+            </div>
+          </div>
 
-            <template #body="{ data }">
-              <span class="fm-cell-text jobtype-cell-text" :title="String(data[col.key] ?? '')">
-                {{ data[col.key] ?? '' }}
+          <div class="jobtype-alta-grid__body">
+            <div v-if="!filteredAltaRows.length" class="jobtype-alta-grid__empty">
+              No hay relaciones agregadas
+            </div>
+
+            <button
+              v-for="row in pagedAltaRows"
+              v-else
+              :key="row.id"
+              type="button"
+              class="jobtype-alta-grid__row"
+              :class="{ 'jobtype-alta-grid__row--selected': altaSelectedRow?.id === row.id }"
+              :style="altaGridTemplateStyle"
+              @click="onAltaRowClick({ data: row })"
+            >
+              <span
+                v-for="col in altaGridColumns"
+                :key="`${row.id}-${col.key}`"
+                class="jobtype-alta-grid__cell"
+                :title="String(row[col.key] ?? '')"
+              >
+                {{ row[col.key] ?? '' }}
               </span>
-            </template>
-          </Column>
-        </DataTable>
+            </button>
+          </div>
 
-        <Button
-          icon="pi pi-trash"
-          text
-          rounded
-          class="fm-grid-action-final jobtype-grid-action jobtype-modal-icon-button jobtype-popup-trash-standalone"
-          :disabled="!altaSelectedRow"
-          title="Eliminar"
-          aria-label="Eliminar"
-          v-tooltip.top="'Eliminar'"
-          @click="eliminarAltaPreview"
-        />
+          <div class="jobtype-alta-grid__footer">
+            <button
+              type="button"
+              class="jobtype-alta-grid__icon-button"
+              :disabled="!altaSelectedRow"
+              title="Eliminar"
+              aria-label="Eliminar"
+              v-tooltip.top="'Eliminar'"
+              @click="eliminarAltaPreview"
+            >
+              <i class="pi pi-trash" aria-hidden="true"></i>
+            </button>
+
+            <div class="jobtype-alta-grid__pager" aria-label="Paginación de relaciones agregadas">
+              <button type="button" :disabled="altaSafeCurrentPage <= 1" @click="goAltaPage(1)">
+                <i class="pi pi-angle-double-left" aria-hidden="true"></i>
+              </button>
+              <button type="button" :disabled="altaSafeCurrentPage <= 1" @click="goAltaPage(altaSafeCurrentPage - 1)">
+                <i class="pi pi-angle-left" aria-hidden="true"></i>
+              </button>
+              <span>Página {{ altaTotalPages ? altaSafeCurrentPage : 0 }} de {{ altaTotalPages }}</span>
+              <button type="button" :disabled="altaSafeCurrentPage >= altaTotalPages" @click="goAltaPage(altaSafeCurrentPage + 1)">
+                <i class="pi pi-angle-right" aria-hidden="true"></i>
+              </button>
+              <button type="button" :disabled="altaSafeCurrentPage >= altaTotalPages" @click="goAltaPage(altaTotalPages)">
+                <i class="pi pi-angle-double-right" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
 
       <template #footer>
@@ -300,11 +307,13 @@ const showEdicion = ref(false)
 const altaRows = ref([])
 const altaSelectedRow = ref(null)
 const altaSelectedCell = ref(null)
+const altaRowsPerPage = 10
+const altaCurrentPage = ref(1)
 
 const altaGridColumns = ref([
-  { key: 'codigoTarea', label: 'CODIGO_TAREA', width: '170px', minWidth: '140px' },
-  { key: 'tarea', label: 'TAREA', width: '250px', minWidth: '180px' },
-  { key: 'nombreContrato', label: 'NOMBRE_CONTRATO', width: '210px', minWidth: '170px' },
+  { key: 'codigoTarea', label: 'CODIGO_TAREA', width: '190px', minWidth: '150px' },
+  { key: 'tarea', label: 'TAREA', width: '260px', minWidth: '180px' },
+  { key: 'nombreContrato', label: 'NOMBRE_CONTRATO', width: '230px', minWidth: '180px' },
   { key: 'pais', label: 'PAIS', width: '100px', minWidth: '90px' }
 ])
 
@@ -342,6 +351,32 @@ const altaTableFilters = ref(
 const selectedRow = computed({
   get: () => store.selectedRow,
   set: (value) => store.setSelectedRow(value)
+})
+
+const altaGridTemplateStyle = computed(() => ({
+  gridTemplateColumns: altaGridColumns.value.map((col) => col.width || '1fr').join(' ')
+}))
+
+const filteredAltaRows = computed(() => {
+  return altaRows.value.filter((row) => {
+    return altaGridColumns.value.every((col) => {
+      const filterValue = String(altaTableFilters.value[col.key]?.value ?? '').trim().toLowerCase()
+      if (!filterValue) return true
+      return String(row[col.key] ?? '').toLowerCase().includes(filterValue)
+    })
+  })
+})
+
+const altaTotalPages = computed(() => Math.ceil(filteredAltaRows.value.length / altaRowsPerPage))
+const altaSafeCurrentPage = computed(() => {
+  if (!altaTotalPages.value) return 0
+  return Math.min(Math.max(altaCurrentPage.value, 1), altaTotalPages.value)
+})
+
+const pagedAltaRows = computed(() => {
+  if (!altaTotalPages.value) return []
+  const start = (altaSafeCurrentPage.value - 1) * altaRowsPerPage
+  return filteredAltaRows.value.slice(start, start + altaRowsPerPage)
 })
 
 const canAgregarRelacion = computed(() => Boolean(altaForm.jobtype.trim() && altaForm.contrato.trim() && altaForm.pais))
@@ -385,6 +420,19 @@ const onAltaRowClick = (event) => {
   }
 }
 
+const onAltaFilterInput = () => {
+  altaCurrentPage.value = 1
+  if (altaSelectedRow.value && !filteredAltaRows.value.some((row) => row.id === altaSelectedRow.value.id)) {
+    altaSelectedRow.value = null
+    altaSelectedCell.value = null
+  }
+}
+
+const goAltaPage = (page) => {
+  if (!altaTotalPages.value) return
+  altaCurrentPage.value = Math.min(Math.max(page, 1), altaTotalPages.value)
+}
+
 const exportarExcel = () => {
   const parsed = parseDataFromTable(dt)
   exportToExcel({
@@ -404,6 +452,7 @@ const abrirAlta = () => {
   altaRows.value = []
   altaSelectedRow.value = null
   altaSelectedCell.value = null
+  altaCurrentPage.value = 1
   Object.values(altaTableFilters.value).forEach((filter) => {
     filter.value = null
   })
@@ -424,6 +473,7 @@ const agregarRelacionPreview = () => {
   altaRows.value = [...altaRows.value, newRow]
   altaSelectedRow.value = newRow
   altaSelectedCell.value = { rowId: newRow.id, field: 'codigoTarea' }
+  altaCurrentPage.value = Math.max(1, Math.ceil(altaRows.value.length / altaRowsPerPage))
   altaForm.jobtype = ''
   altaForm.contrato = ''
 }
@@ -434,6 +484,9 @@ const eliminarAltaPreview = () => {
   altaRows.value = altaRows.value.filter((row) => row.id !== deletedId)
   altaSelectedRow.value = null
   altaSelectedCell.value = null
+  if (altaCurrentPage.value > altaTotalPages.value) {
+    altaCurrentPage.value = Math.max(altaTotalPages.value, 1)
+  }
 }
 
 const relacionar = () => {
@@ -485,33 +538,26 @@ const eliminar = () => {
   padding: 14px 16px;
 }
 
-.jobtype-contrato-grid :deep(.p-datatable-table),
-.jobtype-popup-datatable :deep(.p-datatable-table) {
+.jobtype-contrato-grid :deep(.p-datatable-table) {
   table-layout: fixed !important;
 }
 
 .jobtype-contrato-grid :deep(.p-datatable-thead > tr > th),
-.jobtype-contrato-grid :deep(.p-datatable-tbody > tr > td),
-.jobtype-popup-datatable :deep(.p-datatable-thead > tr > th),
-.jobtype-popup-datatable :deep(.p-datatable-tbody > tr > td) {
+.jobtype-contrato-grid :deep(.p-datatable-tbody > tr > td) {
   overflow: hidden !important;
   vertical-align: middle !important;
 }
 
-.jobtype-contrato-grid :deep(.p-datatable-tbody > tr),
-.jobtype-popup-datatable :deep(.p-datatable-tbody > tr) {
+.jobtype-contrato-grid :deep(.p-datatable-tbody > tr) {
   cursor: pointer;
 }
 
-.jobtype-contrato-grid :deep(.p-datatable-tbody > tr:hover > td),
-.jobtype-popup-datatable :deep(.p-datatable-tbody > tr:hover > td) {
+.jobtype-contrato-grid :deep(.p-datatable-tbody > tr:hover > td) {
   background: rgba(0, 180, 181, .06) !important;
 }
 
 .jobtype-contrato-grid :deep(.p-datatable-tbody > tr.jobtype-row-selected > td),
-.jobtype-contrato-grid :deep(.p-datatable-tbody > tr.p-highlight > td),
-.jobtype-popup-datatable :deep(.p-datatable-tbody > tr.jobtype-row-selected > td),
-.jobtype-popup-datatable :deep(.p-datatable-tbody > tr.p-highlight > td) {
+.jobtype-contrato-grid :deep(.p-datatable-tbody > tr.p-highlight > td) {
   background: #e8f8fb !important;
   color: #0f2f3d !important;
   font-weight: 600 !important;
@@ -579,5 +625,261 @@ const eliminar = () => {
   font-size: 12px !important;
   line-height: 12px !important;
   margin: 0 !important;
+}
+
+.jobtype-alta-grid {
+  width: 100%;
+  min-width: 0;
+}
+
+.jobtype-alta-grid__table {
+  width: 100%;
+  min-width: 0;
+  border: 1px solid #b9cad5;
+  border-left: 2px solid #00a9bd;
+  background: #ffffff;
+  overflow: hidden;
+}
+
+.jobtype-alta-grid__header,
+.jobtype-alta-grid__filters,
+.jobtype-alta-grid__row {
+  display: grid;
+  width: 100%;
+}
+
+.jobtype-alta-grid__header {
+  height: 30px;
+  min-height: 30px;
+  background: #f6f9fb;
+  border-bottom: 1px solid #b9cad5;
+}
+
+.jobtype-alta-grid__header-cell {
+  min-width: 0;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 0 8px;
+  border-right: 1px solid #cbd9e1;
+  color: #153649;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.jobtype-alta-grid__header-cell:last-child {
+  border-right: 0;
+}
+
+.jobtype-alta-grid__header-cell span:first-child {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.jobtype-alta-grid__sort {
+  flex: 0 0 auto;
+  color: #9aaeb9;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.jobtype-alta-grid__filters {
+  height: 32px;
+  min-height: 32px;
+  background: #ffffff;
+  border-bottom: 1px solid #d8e3e9;
+}
+
+.jobtype-alta-grid__filter-cell {
+  min-width: 0;
+  height: 32px;
+  display: grid;
+  grid-template-columns: 12px minmax(0, 1fr) 16px;
+  align-items: center;
+  gap: 3px;
+  padding: 4px 6px;
+  border-right: 1px solid #cbd9e1;
+}
+
+.jobtype-alta-grid__filter-cell:last-child {
+  border-right: 0;
+}
+
+.jobtype-alta-grid__filter-prefix,
+.jobtype-alta-grid__filter-more {
+  color: #000000;
+  font-size: 10px;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.jobtype-alta-grid__filter-input,
+.jobtype-alta-grid__filter-input.p-inputtext {
+  width: 100%;
+  min-width: 0;
+  height: 23px;
+  min-height: 23px;
+  max-height: 23px;
+  padding: 0 5px;
+  border: 1px solid #c7d6df;
+  border-radius: 3px;
+  background: #ffffff;
+  color: #0f2f3d;
+  font-size: 11px;
+  line-height: 23px;
+  box-shadow: none;
+}
+
+.jobtype-alta-grid__body {
+  height: 108px;
+  min-height: 108px;
+  max-height: 108px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background: #ffffff;
+  border-bottom: 1px solid #cbd9e1;
+}
+
+.jobtype-alta-grid__empty {
+  height: 108px;
+  min-height: 108px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 12px;
+  color: #6d8392;
+  font-size: 13px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.jobtype-alta-grid__row {
+  height: 30px;
+  min-height: 30px;
+  padding: 0;
+  border: 0;
+  border-bottom: 1px solid #edf2f5;
+  background: #ffffff;
+  color: #0f2f3d;
+  text-align: left;
+  cursor: pointer;
+}
+
+.jobtype-alta-grid__row:hover,
+.jobtype-alta-grid__row--selected {
+  background: #eefbfc;
+}
+
+.jobtype-alta-grid__cell {
+  min-width: 0;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  border-right: 1px solid #d8e3e9;
+  color: #0f2f3d;
+  font-size: 12px;
+  line-height: 30px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.jobtype-alta-grid__cell:last-child {
+  border-right: 0;
+}
+
+.jobtype-alta-grid__footer {
+  height: 34px;
+  min-height: 34px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 8px 0 54px;
+  background: #ffffff;
+}
+
+.jobtype-alta-grid__icon-button {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  width: 22px;
+  min-width: 22px;
+  height: 22px;
+  min-height: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #001f2f;
+  box-shadow: none;
+  outline: 0;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.jobtype-alta-grid__icon-button:disabled {
+  color: #001f2f;
+  opacity: .35;
+  cursor: not-allowed;
+}
+
+.jobtype-alta-grid__icon-button:not(:disabled):hover,
+.jobtype-alta-grid__icon-button:not(:disabled):focus {
+  color: #006f7d;
+}
+
+.jobtype-alta-grid__icon-button .pi {
+  width: 16px;
+  min-width: 16px;
+  height: 16px;
+  min-height: 16px;
+  font-size: 16px;
+  line-height: 16px;
+}
+
+.jobtype-alta-grid__pager {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  color: #4c6578;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.jobtype-alta-grid__pager button {
+  width: 24px;
+  min-width: 24px;
+  height: 24px;
+  min-height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #6e8798;
+  box-shadow: none;
+  cursor: pointer;
+}
+
+.jobtype-alta-grid__pager button:disabled {
+  color: #d7e0e5;
+  cursor: not-allowed;
+}
+
+.jobtype-alta-grid__pager .pi {
+  font-size: 12px;
+  line-height: 12px;
 }
 </style>
