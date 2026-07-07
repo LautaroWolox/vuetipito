@@ -35,4 +35,8 @@ defineEmits(['update:modelValue'])
 .otf-filter-element--disabled {
   opacity: .62;
 }
+
+.otf-filter-element--disabled :deep(.ct-date-picker) {
+  pointer-events: none;
+}
 </style>
