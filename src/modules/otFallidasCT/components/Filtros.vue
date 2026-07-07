@@ -1,6 +1,6 @@
 <template>
   <div class="fm-panel-content fm-panel-content--accent fm-filters otf-filters">
-    <div class="fm-filter-grid otf-filter-grid">
+    <div class="otf-filter-grid">
       <NroOT v-model="store.filters.nroOt" :disabled="nroOtFilterDisabled" />
       <FechaDesde v-model="store.filters.fechaDesde" :disabled="otherFiltersDisabled" />
       <FechaHasta v-model="store.filters.fechaHasta" :disabled="otherFiltersDisabled" />
@@ -41,16 +41,20 @@ const buscar = async () => store.search()
   border-left-width: 1px !important;
   border-left-style: solid !important;
   border-left-color: #00a9bd !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
 }
 
 .otf-filter-grid {
   display: grid !important;
-  grid-template-columns: 180px 300px 300px 520px !important;
+  grid-template-columns: 180px 280px 280px 460px !important;
   column-gap: 12px !important;
   row-gap: 6px !important;
   align-items: end !important;
   justify-content: center !important;
-  width: min(calc(100% - 40px), 1336px) !important;
+  width: 1224px !important;
+  max-width: calc(100% - 48px) !important;
   margin-left: auto !important;
   margin-right: auto !important;
 }
@@ -72,6 +76,7 @@ const buscar = async () => store.search()
 
 .otf-filter-actions {
   margin-top: 14px !important;
+  align-self: center !important;
 }
 
 .otf-filter-actions :deep(.p-button),
@@ -81,8 +86,8 @@ const buscar = async () => store.search()
 
 @media (max-width: 1500px) {
   .otf-filter-grid {
-    grid-template-columns: 180px 280px 280px 460px !important;
-    width: min(calc(100% - 40px), 1236px) !important;
+    grid-template-columns: 180px 270px 270px 420px !important;
+    width: 1176px !important;
   }
 }
 
@@ -92,8 +97,7 @@ const buscar = async () => store.search()
     column-gap: 12px !important;
     row-gap: 8px !important;
     width: calc(100% - 32px) !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
+    max-width: none !important;
   }
 }
 </style>
