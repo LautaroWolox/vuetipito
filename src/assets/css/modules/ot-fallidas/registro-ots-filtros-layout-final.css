@@ -1,0 +1,61 @@
+/* ========================================================================
+   REGISTRO OTS FALLIDAS - FILTROS LAYOUT FINAL
+   ------------------------------------------------------------------------
+   Distribuye los filtros sin espacios muertos:
+   Fila 1: Nro OT | Fecha Desde | Fecha Hasta | Contratista largo
+   Fila 2: Descripcion Error | Excluida | Pais
+   ======================================================================== */
+
+.otf-filters {
+  border-left-width: 1px !important;
+  border-left-style: solid !important;
+  border-left-color: #00a9bd !important;
+}
+
+.otf-filter-grid {
+  display: grid !important;
+  grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+  column-gap: 16px !important;
+  row-gap: 10px !important;
+  align-items: end !important;
+}
+
+.otf-filter-grid .otf-filter-element {
+  width: 100% !important;
+  min-width: 0 !important;
+}
+
+.otf-filter-grid .otf-filter-element--nro-ot,
+.otf-filter-grid .otf-filter-element--fecha-desde,
+.otf-filter-grid .otf-filter-element--fecha-hasta,
+.otf-filter-grid .otf-filter-element--descripcion-error,
+.otf-filter-grid .otf-filter-element--excluida,
+.otf-filter-grid .otf-filter-element--pais {
+  grid-column: span 1 !important;
+}
+
+.otf-filter-grid .otf-filter-element--contratista {
+  grid-column: span 3 !important;
+}
+
+.otf-filter-grid .otf-filter-element--nro-ot .p-inputtext,
+.otf-filter-grid .otf-filter-element--descripcion-error .p-inputtext,
+.otf-filter-grid .otf-filter-element--excluida .p-select,
+.otf-filter-grid .otf-filter-element--pais .p-select,
+.otf-filter-grid .otf-filter-element--fecha-desde .ct-date-picker,
+.otf-filter-grid .otf-filter-element--fecha-hasta .ct-date-picker,
+.otf-filter-grid .otf-filter-element--contratista .p-select {
+  width: 100% !important;
+  max-width: none !important;
+  min-width: 0 !important;
+}
+
+@media (max-width: 1200px) {
+  .otf-filter-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+
+  .otf-filter-grid .otf-filter-element--contratista {
+    grid-column: span 2 !important;
+  }
+}
