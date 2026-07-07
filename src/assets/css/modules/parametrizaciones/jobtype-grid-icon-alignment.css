@@ -5,6 +5,15 @@
    en la grilla principal ni en la grilla interna del popup.
    ======================================================================== */
 
+.jobtype-contrato-page .fm-pass-grid,
+.jobtype-contrato-page .fm-pt-datatable,
+.jobtype-contrato-page #tabla-jobtype-contrato.fm-pass-grid,
+.jobtype-contrato-page #tabla-jobtype-contrato.p-datatable {
+  border-left-width: 2px !important;
+  border-left-style: solid !important;
+  border-left-color: #00a9bd !important;
+}
+
 .jobtype-contrato-grid .p-paginator,
 .jobtype-contrato-grid .p-datatable-paginator-bottom {
   min-height: 34px !important;
@@ -52,6 +61,7 @@
   background: transparent !important;
   box-shadow: none !important;
   line-height: 22px !important;
+  color: #001f2f !important;
 }
 
 .jobtype-grid-actions .p-button.jobtype-grid-action .p-button-icon,
@@ -67,6 +77,20 @@
   font-size: 15px !important;
   line-height: 15px !important;
   margin: 0 !important;
+  color: #001f2f !important;
+}
+
+.jobtype-grid-actions .p-button.jobtype-grid-action:disabled,
+.jobtype-grid-actions .p-button.jobtype-grid-action.p-disabled {
+  color: #001f2f !important;
+  opacity: .35 !important;
+}
+
+.jobtype-grid-actions .p-button.jobtype-grid-action:disabled .p-button-icon,
+.jobtype-grid-actions .p-button.jobtype-grid-action:disabled .pi,
+.jobtype-grid-actions .p-button.jobtype-grid-action.p-disabled .p-button-icon,
+.jobtype-grid-actions .p-button.jobtype-grid-action.p-disabled .pi {
+  color: #001f2f !important;
 }
 
 .jobtype-grid-actions .p-button.jobtype-grid-action:enabled:hover,
@@ -74,7 +98,16 @@
 .jobtype-grid-actions .p-button.jobtype-grid-action:enabled:active {
   background: transparent !important;
   box-shadow: none !important;
-  color: #008fa1 !important;
+  color: #006f7d !important;
+}
+
+.jobtype-grid-actions .p-button.jobtype-grid-action:enabled:hover .p-button-icon,
+.jobtype-grid-actions .p-button.jobtype-grid-action:enabled:hover .pi,
+.jobtype-grid-actions .p-button.jobtype-grid-action:enabled:focus .p-button-icon,
+.jobtype-grid-actions .p-button.jobtype-grid-action:enabled:focus .pi,
+.jobtype-grid-actions .p-button.jobtype-grid-action:enabled:active .p-button-icon,
+.jobtype-grid-actions .p-button.jobtype-grid-action:enabled:active .pi {
+  color: #006f7d !important;
 }
 
 .jobtype-modal-grid {
@@ -115,6 +148,7 @@
   background: transparent !important;
   border: 0 !important;
   box-shadow: none !important;
+  color: #001f2f !important;
 }
 
 .jobtype-modal-icon-button.p-button .p-button-icon,
@@ -129,4 +163,20 @@
   overflow: visible !important;
   font-size: 15px !important;
   line-height: 15px !important;
+  color: #001f2f !important;
+}
+
+.jobtype-modal-icon-button.p-button:enabled:hover,
+.jobtype-modal-icon-button.p-button:enabled:focus,
+.jobtype-modal-icon-button.p-button:enabled:active {
+  color: #006f7d !important;
+}
+
+.jobtype-modal-icon-button.p-button:enabled:hover .p-button-icon,
+.jobtype-modal-icon-button.p-button:enabled:hover .pi,
+.jobtype-modal-icon-button.p-button:enabled:focus .p-button-icon,
+.jobtype-modal-icon-button.p-button:enabled:focus .pi,
+.jobtype-modal-icon-button.p-button:enabled:active .p-button-icon,
+.jobtype-modal-icon-button.p-button:enabled:active .pi {
+  color: #006f7d !important;
 }
