@@ -49,10 +49,10 @@ const buscar = async () => store.search()
   column-gap: 12px !important;
   row-gap: 6px !important;
   align-items: end !important;
-  justify-content: start !important;
-  width: calc(100% - 40px) !important;
-  margin-left: 20px !important;
-  margin-right: 20px !important;
+  justify-content: center !important;
+  width: min(calc(100% - 40px), 1336px) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
 
 .otf-filter-grid :deep(.otf-filter-element) {
@@ -82,6 +82,7 @@ const buscar = async () => store.search()
 @media (max-width: 1500px) {
   .otf-filter-grid {
     grid-template-columns: 180px 280px 280px 460px !important;
+    width: min(calc(100% - 40px), 1236px) !important;
   }
 }
 
@@ -91,8 +92,8 @@ const buscar = async () => store.search()
     column-gap: 12px !important;
     row-gap: 8px !important;
     width: calc(100% - 32px) !important;
-    margin-left: 16px !important;
-    margin-right: 16px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
 }
 </style>
