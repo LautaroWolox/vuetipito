@@ -210,17 +210,17 @@
           </Column>
         </DataTable>
 
-        <Button
-          icon="pi pi-trash"
-          text
-          rounded
-          class="fm-grid-action-final jobtype-grid-action jobtype-alta-trash-left"
+        <button
+          type="button"
+          class="jobtype-alta-trash-left"
           :disabled="!altaSelectedRow"
           title="Eliminar"
           aria-label="Eliminar"
           v-tooltip.top="'Eliminar'"
           @click="eliminarAltaPreview"
-        />
+        >
+          <i class="pi pi-trash" aria-hidden="true"></i>
+        </button>
       </div>
 
       <template #footer>
@@ -532,8 +532,7 @@ const eliminar = () => {
   padding-left: 2px;
 }
 
-.jobtype-grid-actions :deep(.p-button.jobtype-grid-action),
-.jobtype-alta-trash-left:deep(.p-button) {
+.jobtype-grid-actions :deep(.p-button.jobtype-grid-action) {
   width: 16px !important;
   min-width: 16px !important;
   max-width: 16px !important;
@@ -585,7 +584,11 @@ const eliminar = () => {
   min-width: 0;
 }
 
-.jobtype-alta-trash-left {
+.jobtype-alta-trash-left,
+.jobtype-alta-trash-left:hover,
+.jobtype-alta-trash-left:focus,
+.jobtype-alta-trash-left:active,
+.jobtype-alta-trash-left:disabled {
   position: absolute !important;
   left: 14px !important;
   bottom: 8px !important;
@@ -594,24 +597,36 @@ const eliminar = () => {
   min-width: 22px !important;
   height: 22px !important;
   min-height: 22px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
   padding: 0 !important;
+  margin: 0 !important;
   border: 0 !important;
+  border-radius: 0 !important;
+  outline: 0 !important;
   background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
   box-shadow: none !important;
   color: #001f2f !important;
-  opacity: .78 !important;
-}
-
-.jobtype-alta-trash-left:enabled:hover,
-.jobtype-alta-trash-left:enabled:focus {
-  color: #006f7d !important;
-  background: transparent !important;
-  box-shadow: none !important;
+  opacity: 1 !important;
+  cursor: pointer !important;
 }
 
 .jobtype-alta-trash-left:disabled {
+  opacity: .55 !important;
+  cursor: not-allowed !important;
+}
+
+.jobtype-alta-trash-left .pi {
+  width: 16px !important;
+  min-width: 16px !important;
+  height: 16px !important;
+  min-height: 16px !important;
+  font-size: 16px !important;
+  line-height: 16px !important;
   color: #001f2f !important;
-  opacity: .35 !important;
 }
 
 .jobtype-alta-empty {
