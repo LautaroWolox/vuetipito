@@ -176,12 +176,6 @@
           showGridlines
           @row-click="onAltaRowClick"
         >
-          <template #paginatorstart>
-            <div class="jobtype-grid-actions jobtype-grid-actions--alta" aria-label="Acciones de grilla alta">
-              <Button icon="pi pi-trash" text rounded class="fm-grid-action-final jobtype-grid-action" :disabled="!altaSelectedRow" title="Eliminar" aria-label="Eliminar" v-tooltip.top="'Eliminar'" @click="eliminarAltaPreview" />
-            </div>
-          </template>
-
           <template #empty>
             <div class="fm-grid-empty jobtype-alta-empty">No hay relaciones agregadas</div>
           </template>
@@ -215,6 +209,18 @@
             </template>
           </Column>
         </DataTable>
+
+        <Button
+          icon="pi pi-trash"
+          text
+          rounded
+          class="fm-grid-action-final jobtype-grid-action jobtype-alta-trash-left"
+          :disabled="!altaSelectedRow"
+          title="Eliminar"
+          aria-label="Eliminar"
+          v-tooltip.top="'Eliminar'"
+          @click="eliminarAltaPreview"
+        />
       </div>
 
       <template #footer>
@@ -526,7 +532,8 @@ const eliminar = () => {
   padding-left: 2px;
 }
 
-.jobtype-grid-actions :deep(.p-button.jobtype-grid-action) {
+.jobtype-grid-actions :deep(.p-button.jobtype-grid-action),
+.jobtype-alta-trash-left:deep(.p-button) {
   width: 16px !important;
   min-width: 16px !important;
   max-width: 16px !important;
@@ -573,8 +580,38 @@ const eliminar = () => {
 }
 
 .jobtype-alta-grid-shell {
+  position: relative;
   width: 100%;
   min-width: 0;
+}
+
+.jobtype-alta-trash-left {
+  position: absolute !important;
+  left: 14px !important;
+  bottom: 8px !important;
+  z-index: 5 !important;
+  width: 22px !important;
+  min-width: 22px !important;
+  height: 22px !important;
+  min-height: 22px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: #001f2f !important;
+  opacity: .78 !important;
+}
+
+.jobtype-alta-trash-left:enabled:hover,
+.jobtype-alta-trash-left:enabled:focus {
+  color: #006f7d !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.jobtype-alta-trash-left:disabled {
+  color: #001f2f !important;
+  opacity: .35 !important;
 }
 
 .jobtype-alta-empty {
