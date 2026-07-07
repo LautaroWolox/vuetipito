@@ -14,9 +14,9 @@
 
 .otf-filter-grid {
   display: grid !important;
-  grid-template-columns: 220px 320px 320px minmax(420px, 660px) !important;
+  grid-template-columns: 220px 320px 320px 500px !important;
   column-gap: 16px !important;
-  row-gap: 10px !important;
+  row-gap: 4px !important;
   align-items: end !important;
   justify-content: start !important;
   width: calc(100% - 48px) !important;
@@ -39,6 +39,10 @@
   grid-column: span 1 !important;
 }
 
+.otf-filter-grid .otf-filter-element--descripcion-error {
+  margin-top: -2px !important;
+}
+
 .otf-filter-grid .otf-filter-element--nro-ot .p-inputtext,
 .otf-filter-grid .otf-filter-element--descripcion-error .p-inputtext,
 .otf-filter-grid .otf-filter-element--excluida .p-select,
@@ -51,9 +55,17 @@
   min-width: 0 !important;
 }
 
+.otf-filter-grid .otf-filter-element--contratista .p-select {
+  max-width: 500px !important;
+}
+
 @media (max-width: 1500px) {
   .otf-filter-grid {
-    grid-template-columns: 220px 300px 300px minmax(360px, 1fr) !important;
+    grid-template-columns: 220px 300px 300px 420px !important;
+  }
+
+  .otf-filter-grid .otf-filter-element--contratista .p-select {
+    max-width: 420px !important;
   }
 }
 
