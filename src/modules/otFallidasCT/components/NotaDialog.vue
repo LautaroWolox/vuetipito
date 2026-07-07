@@ -46,34 +46,36 @@ const cerrar = () => {
 }
 
 .fm-note-close-native {
-  width: 96px;
-  min-width: 96px;
-  max-width: 96px;
-  height: 34px;
-  min-height: 34px;
-  max-height: 34px;
-  padding: 0 14px;
+  width: 88px;
+  min-width: 88px;
+  max-width: 88px;
+  height: 32px;
+  min-height: 32px;
+  max-height: 32px;
+  padding: 0 12px;
   border: 1px solid #00a9bd;
   border-radius: 5px;
-  background: #00a9bd;
-  color: #ffffff;
+  background: transparent;
+  color: #00a9bd;
   box-shadow: none;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 800;
   line-height: 1;
   letter-spacing: .2px;
   text-align: center;
   cursor: pointer;
+  transition: box-shadow .15s ease, border-color .15s ease, color .15s ease, transform .15s ease;
 }
 
 .fm-note-close-native:hover,
 .fm-note-close-native:focus,
 .fm-note-close-native:focus-visible {
   border-color: #008fa1;
-  background: #008fa1;
-  color: #ffffff;
-  box-shadow: none;
+  background: transparent;
+  color: #008fa1;
+  box-shadow: 0 8px 18px #9bdde5;
   outline: none;
+  transform: translateY(-1px);
 }
 </style>
