@@ -1,5 +1,5 @@
 <template>
-  <div class="fm-field fm-field--span-2 otf-filter-element otf-filter-element--descripcion-error">
+  <div class="fm-field fm-field--span-4 otf-filter-element otf-filter-element--descripcion-error">
     <label for="otf-descripcion-error">Descripcion Error</label>
     <InputText
       id="otf-descripcion-error"
