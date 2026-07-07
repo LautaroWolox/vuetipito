@@ -5,6 +5,7 @@
       inputId="otf-fecha-hasta"
       :modelValue="modelValue"
       placeholder="Hasta"
+      :disabled="disabled"
       @update:modelValue="$emit('update:modelValue', $event)"
     />
   </div>
@@ -14,7 +15,8 @@
 import CtDatePicker from '../CtDatePicker.vue'
 
 defineProps({
-  modelValue: { type: [Date, String, null], default: null }
+  modelValue: { type: [Date, String, null], default: null },
+  disabled: { type: Boolean, default: false }
 })
 
 defineEmits(['update:modelValue'])
