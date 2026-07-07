@@ -15,7 +15,6 @@ import './assets/css/components/dialogs/fm-popup-overrides.css';
 import './assets/css/modules/ot-fallidas/fm-button-overrides.css';
 import './assets/css/components/grids/fm-grid-actions.css';
 import './assets/css/modules/ot-fallidas/registro-ots-iconos-final.css';
-import './assets/css/modules/ot-fallidas/registro-ots-filtros-layout-final.css';
 import './assets/css/components/menus/fm-menubar-submenus.css';
 import './assets/css/components/dialogs/fm-dialog-close.css';
 import './assets/css/modules/login/login-redesign.css';
