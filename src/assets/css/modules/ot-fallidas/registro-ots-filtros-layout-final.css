@@ -2,9 +2,9 @@
    REGISTRO OTS FALLIDAS - FILTROS LAYOUT FINAL
    ------------------------------------------------------------------------
    Distribucion por zonas visuales:
-   - Nro OT / Descripcion Error centrados en la zona izquierda.
+   - Nro OT / Descripcion Error centrados y un poco mas separados.
    - Fecha Desde / Excluida y Fecha Hasta / Pais en la zona media.
-   - Contratista centrado en la zona derecha.
+   - Contratista centrado en la zona derecha con separacion pareja.
    ======================================================================== */
 
 .otf-filters {
@@ -38,6 +38,7 @@
   width: 220px !important;
   justify-self: center !important;
   grid-column: span 1 !important;
+  transform: translateX(-24px) !important;
 }
 
 .otf-filter-grid .otf-filter-element--fecha-desde,
@@ -53,6 +54,7 @@
   width: 500px !important;
   justify-self: center !important;
   grid-column: span 1 !important;
+  transform: translateX(24px) !important;
 }
 
 .otf-filter-grid .otf-filter-element--nro-ot .p-inputtext,
@@ -80,10 +82,12 @@
   .otf-filter-grid .otf-filter-element--nro-ot,
   .otf-filter-grid .otf-filter-element--descripcion-error {
     width: 200px !important;
+    transform: translateX(-20px) !important;
   }
 
   .otf-filter-grid .otf-filter-element--contratista {
     width: 440px !important;
+    transform: translateX(20px) !important;
   }
 }
 
@@ -101,5 +105,6 @@
   .otf-filter-grid .otf-filter-element--contratista {
     width: 100% !important;
     justify-self: stretch !important;
+    transform: none !important;
   }
 }
