@@ -1,5 +1,5 @@
 <template>
-  <div class="fm-field fm-field--span-2 otf-filter-element otf-filter-element--nro-ot">
+  <div class="fm-field fm-field--span-4 otf-filter-element otf-filter-element--nro-ot">
     <label for="otf-nro-ot">Nro. OT</label>
     <InputText
       id="otf-nro-ot"
