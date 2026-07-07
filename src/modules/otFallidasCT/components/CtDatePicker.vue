@@ -1,6 +1,6 @@
 <template>
-  <div ref="root" class="fm-date-picker ct-date-picker">
-    <button type="button" class="fm-date-button ct-date-button" :class="{ active: open }" @click="open = !open">
+  <div ref="root" class="fm-date-picker ct-date-picker" :class="{ 'ct-date-picker--disabled': disabled }">
+    <button type="button" class="fm-date-button ct-date-button" :class="{ active: open }" :disabled="disabled" @click="toggleOpen">
       <span>{{ displayValue }}</span>
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2v3M17 2v3M4 8h16M6 4h12a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z" /></svg>
     </button>
@@ -28,7 +28,7 @@
 </template>
 <script setup>
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
-const props = defineProps({ modelValue: { type: [Date, String, null], default: null }, placeholder: { type: String, default: 'Seleccionar fecha' }, inputId: { type: String, default: undefined } })
+const props = defineProps({ modelValue: { type: [Date, String, null], default: null }, placeholder: { type: String, default: 'Seleccionar fecha' }, inputId: { type: String, default: undefined }, disabled: { type: Boolean, default: false } })
 const emit = defineEmits(['update:modelValue'])
 const root = ref(null)
 const open = ref(false)
@@ -54,13 +54,22 @@ const calendarDays = computed(() => {
 })
 const isSelected = date => sameDay(date, selectedDate.value)
 const isToday = date => sameDay(date, now)
-const selectDay = date => { emit('update:modelValue', new Date(date)); open.value = false }
-const selectToday = () => { const today = new Date(); viewMonth.value = today.getMonth(); viewYear.value = today.getFullYear(); selectDay(today) }
-const clear = () => { emit('update:modelValue', null); open.value = false }
+const toggleOpen = () => { if (!props.disabled) open.value = !open.value }
+const selectDay = date => { if (props.disabled) return; emit('update:modelValue', new Date(date)); open.value = false }
+const selectToday = () => { if (props.disabled) return; const today = new Date(); viewMonth.value = today.getMonth(); viewYear.value = today.getFullYear(); selectDay(today) }
+const clear = () => { if (props.disabled) return; emit('update:modelValue', null); open.value = false }
 const previousMonth = () => { if (viewMonth.value === 0) { viewMonth.value = 11; viewYear.value-- } else viewMonth.value-- }
 const nextMonth = () => { if (viewMonth.value === 11) { viewMonth.value = 0; viewYear.value++ } else viewMonth.value++ }
 const close = event => { if (!root.value || root.value.contains(event.target)) return; open.value = false }
 watch(selectedDate, value => { if (value) { viewMonth.value = value.getMonth(); viewYear.value = value.getFullYear() } })
+watch(() => props.disabled, value => { if (value) open.value = false })
 onMounted(() => document.addEventListener('mousedown', close))
 onBeforeUnmount(() => document.removeEventListener('mousedown', close))
 </script>
+
+<style scoped>
+.ct-date-picker--disabled {
+  opacity: .72;
+  pointer-events: none;
+}
+</style>
