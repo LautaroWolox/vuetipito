@@ -293,63 +293,82 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside));
 }
 
 :deep(.p-menubar .p-menubar-root-list) {
-  gap: 0.5rem;
+  gap: 0;
+}
+
+:deep(.p-menubar .p-menubar-root-list > .p-menuitem > .p-menuitem-content) {
+  min-height: 53px;
+  height: 53px;
+  border-radius: 0;
 }
 
 :deep(.p-menubar .p-menubar-root-list > .p-menuitem > .p-menuitem-content .p-menuitem-link) {
-  padding: 1rem 1.5rem;
+  min-height: 53px;
+  height: 53px;
+  padding: 0 13px;
   color: white !important;
   font-weight: 500;
   transition: all 0.3s ease;
-  border-radius: 4px;
+  border-radius: 0;
 }
 
 :deep(.p-menubar .p-menubar-root-list > .p-menuitem > .p-menuitem-content .p-menuitem-link:hover) {
   background: rgba(255, 255, 255, 0.15) !important;
 }
 
-:deep(.p-menubar .p-menuitem-content .p-menuitem-link .p-menuitem-text) {
-  font-size: 0.95rem;
+:deep(.p-menubar .p-menubar-root-list > .p-menuitem > .p-menuitem-content .p-menuitem-text) {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1;
 }
 
 :deep(.p-menubar .p-submenu-list) {
-  min-width: 250px;
-  padding: 0;
-  margin-top: 0;
+  min-width: 156px !important;
+  width: max-content !important;
+  padding: 5px 0 !important;
+  margin-top: 0 !important;
   background: #ffffff !important;
-  border: 0;
-  border-radius: 0;
-  box-shadow: 0 14px 26px rgba(22, 40, 54, 0.16);
-  overflow: visible;
+  border: 1px solid #d5dee4 !important;
+  border-radius: 0 !important;
+  box-shadow: 0 6px 14px rgba(22, 40, 54, 0.16) !important;
+  overflow: visible !important;
 }
 
 :deep(.p-menubar .p-submenu-list .p-menuitem-content) {
-  min-height: 56px;
+  min-height: 21px !important;
+  height: 21px !important;
   background: #ffffff !important;
   border-radius: 0 !important;
   transition: background-color .16s ease, color .16s ease;
 }
 
 :deep(.p-menubar .p-submenu-list .p-menuitem-content .p-menuitem-link) {
-  min-height: 56px;
-  padding: 0 28px;
-  color: #263746 !important;
+  min-height: 21px !important;
+  height: 21px !important;
+  padding: 0 20px 0 12px !important;
+  color: #111111 !important;
   background: transparent !important;
   border-radius: 0 !important;
   display: flex;
   align-items: center;
+  gap: 5px;
 }
 
 :deep(.p-menubar .p-submenu-list .p-menuitem-content .p-menuitem-text) {
   color: inherit !important;
-  font-size: 16px;
-  font-weight: 400;
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  line-height: 1 !important;
 }
 
 :deep(.p-menubar .p-submenu-list .p-submenu-icon),
 :deep(.p-menubar .p-submenu-list .p-menuitem-link .p-menuitem-icon),
 :deep(.p-menubar .p-submenu-list .p-menuitem-link .p-icon) {
-  color: #9fb1bd !important;
+  color: #b3b3b3 !important;
+  width: 10px !important;
+  height: 10px !important;
+  font-size: 10px !important;
+  margin-left: auto !important;
 }
 
 :deep(.p-menubar .p-submenu-list .p-menuitem-content:hover),
@@ -382,13 +401,16 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside));
 :deep(.p-menubar .p-submenu-list .p-menuitem-content:hover .p-icon),
 :deep(.p-menubar .p-submenu-list .p-menuitem.p-focus > .p-menuitem-content .p-icon),
 :deep(.p-menubar .p-submenu-list .p-menuitem-active > .p-menuitem-content .p-icon),
-:deep(.p-menubar .p-submenu-list .p-menuitem:hover > .p-menuitem-content .p-icon) {
+:deep(.p-menubar .p-submenu-list .p-menuitem:hover > .p-icon) {
   color: #0096a4 !important;
 }
 
 :deep(.p-menubar .p-submenu-list .p-submenu-list) {
-  margin-left: 0;
-  margin-top: 0;
-  border-left: 4px solid #00a9bd;
+  min-width: 210px !important;
+  margin-left: 0 !important;
+  margin-top: -5px !important;
+  padding: 5px 0 !important;
+  border-left: 0 !important;
+  border-top: 4px solid #00a9bd !important;
 }
 </style>
