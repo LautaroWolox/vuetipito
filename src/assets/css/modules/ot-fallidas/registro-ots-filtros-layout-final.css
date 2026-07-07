@@ -1,9 +1,10 @@
 /* ========================================================================
    REGISTRO OTS FALLIDAS - FILTROS LAYOUT FINAL
    ------------------------------------------------------------------------
-   Distribucion compacta, centrada y aislada de fm-filter-grid:
-   Fila 1: Nro OT | Fecha Desde | Fecha Hasta | Contratista controlado
-   Fila 2: Descripcion Error | Excluida | Pais
+   Distribucion por zonas visuales:
+   - Nro OT / Descripcion Error centrados en la zona izquierda.
+   - Fecha Desde / Excluida y Fecha Hasta / Pais en la zona media.
+   - Contratista centrado en la zona derecha.
    ======================================================================== */
 
 .otf-filters {
@@ -17,42 +18,49 @@
 
 .otf-filter-grid {
   display: grid !important;
-  grid-template-columns: 180px 280px 280px 460px !important;
-  column-gap: 12px !important;
+  grid-template-columns: 460px 300px 300px 500px !important;
+  column-gap: 14px !important;
   row-gap: 6px !important;
   align-items: end !important;
   justify-content: center !important;
-  width: 1176px !important;
+  width: 1602px !important;
   max-width: calc(100% - 48px) !important;
   margin-left: auto !important;
   margin-right: auto !important;
 }
 
 .otf-filter-grid .otf-filter-element {
-  width: 100% !important;
   min-width: 0 !important;
 }
 
 .otf-filter-grid .otf-filter-element--nro-ot,
-.otf-filter-grid .otf-filter-element--fecha-desde,
-.otf-filter-grid .otf-filter-element--fecha-hasta,
-.otf-filter-grid .otf-filter-element--contratista,
-.otf-filter-grid .otf-filter-element--descripcion-error,
-.otf-filter-grid .otf-filter-element--excluida,
-.otf-filter-grid .otf-filter-element--pais {
+.otf-filter-grid .otf-filter-element--descripcion-error {
+  width: 220px !important;
+  justify-self: center !important;
   grid-column: span 1 !important;
 }
 
-.otf-filter-grid .otf-filter-element--descripcion-error {
-  margin-top: -2px !important;
+.otf-filter-grid .otf-filter-element--fecha-desde,
+.otf-filter-grid .otf-filter-element--fecha-hasta,
+.otf-filter-grid .otf-filter-element--excluida,
+.otf-filter-grid .otf-filter-element--pais {
+  width: 100% !important;
+  justify-self: stretch !important;
+  grid-column: span 1 !important;
+}
+
+.otf-filter-grid .otf-filter-element--contratista {
+  width: 500px !important;
+  justify-self: center !important;
+  grid-column: span 1 !important;
 }
 
 .otf-filter-grid .otf-filter-element--nro-ot .p-inputtext,
 .otf-filter-grid .otf-filter-element--descripcion-error .p-inputtext,
-.otf-filter-grid .otf-filter-element--excluida .p-select,
-.otf-filter-grid .otf-filter-element--pais .p-select,
 .otf-filter-grid .otf-filter-element--fecha-desde .ct-date-picker,
 .otf-filter-grid .otf-filter-element--fecha-hasta .ct-date-picker,
+.otf-filter-grid .otf-filter-element--excluida .p-select,
+.otf-filter-grid .otf-filter-element--pais .p-select,
 .otf-filter-grid .otf-filter-element--contratista .p-select {
   width: 100% !important;
   max-width: none !important;
@@ -63,10 +71,19 @@
   align-self: center !important;
 }
 
-@media (min-width: 1501px) {
+@media (max-width: 1700px) {
   .otf-filter-grid {
-    grid-template-columns: 180px 300px 300px 500px !important;
-    width: 1316px !important;
+    grid-template-columns: 400px 280px 280px 440px !important;
+    width: 1442px !important;
+  }
+
+  .otf-filter-grid .otf-filter-element--nro-ot,
+  .otf-filter-grid .otf-filter-element--descripcion-error {
+    width: 200px !important;
+  }
+
+  .otf-filter-grid .otf-filter-element--contratista {
+    width: 440px !important;
   }
 }
 
@@ -77,5 +94,12 @@
     max-width: none !important;
     margin-left: auto !important;
     margin-right: auto !important;
+  }
+
+  .otf-filter-grid .otf-filter-element--nro-ot,
+  .otf-filter-grid .otf-filter-element--descripcion-error,
+  .otf-filter-grid .otf-filter-element--contratista {
+    width: 100% !important;
+    justify-self: stretch !important;
   }
 }
