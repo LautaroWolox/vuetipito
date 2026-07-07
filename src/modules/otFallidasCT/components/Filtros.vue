@@ -1,13 +1,13 @@
 <template>
   <div class="fm-panel-content fm-panel-content--accent fm-filters otf-filters">
     <div class="fm-filter-grid otf-filter-grid">
-      <NroOT v-model="store.filters.nroOt" />
-      <FechaDesde v-model="store.filters.fechaDesde" />
-      <FechaHasta v-model="store.filters.fechaHasta" />
-      <Contratista v-model="store.filters.contratista" :options="store.contratistas" />
-      <DescripcionError v-model="store.filters.descripcionError" />
-      <Excluida v-model="store.filters.excluida" :options="store.excluidas" />
-      <Pais v-model="store.filters.pais" :options="store.paises" />
+      <NroOT v-model="store.filters.nroOt" :disabled="disableNroOt" />
+      <FechaDesde v-model="store.filters.fechaDesde" :disabled="disableAdvancedFilters" />
+      <FechaHasta v-model="store.filters.fechaHasta" :disabled="disableAdvancedFilters" />
+      <Contratista v-model="store.filters.contratista" :options="store.contratistas" :disabled="disableAdvancedFilters" />
+      <DescripcionError v-model="store.filters.descripcionError" :disabled="disableAdvancedFilters" />
+      <Excluida v-model="store.filters.excluida" :options="store.excluidas" :disabled="disableAdvancedFilters" />
+      <Pais v-model="store.filters.pais" :options="store.paises" :disabled="disableAdvancedFilters" />
     </div>
 
     <div class="fm-actions fm-filter-actions otf-filter-actions">
@@ -18,6 +18,7 @@
 </template>
 
 <script setup>
+import { computed } from 'vue'
 import { useFallidasCtStore } from '../store/CtFallidaStore'
 import NroOT from './elementos/NroOT.vue'
 import FechaDesde from './elementos/FechaDesde.vue'
@@ -28,6 +29,27 @@ import Excluida from './elementos/Excluida.vue'
 import Pais from './elementos/Pais.vue'
 
 const store = useFallidasCtStore()
+
+const hasValue = (value) => {
+  if (value === null || value === undefined) return false
+  if (value instanceof Date) return true
+  if (typeof value === 'object') return Boolean(value.code || value.name)
+  return String(value).trim().length > 0
+}
+
+const hasNroOt = computed(() => hasValue(store.filters.nroOt))
+const hasAdvancedFilters = computed(() => [
+  store.filters.fechaDesde,
+  store.filters.fechaHasta,
+  store.filters.contratista,
+  store.filters.descripcionError,
+  store.filters.excluida,
+  store.filters.pais
+].some(hasValue))
+
+const disableAdvancedFilters = computed(() => hasNroOt.value)
+const disableNroOt = computed(() => !hasNroOt.value && hasAdvancedFilters.value)
+
 const limpiar = () => store.clearFilters()
 const buscar = async () => store.search()
 </script>
