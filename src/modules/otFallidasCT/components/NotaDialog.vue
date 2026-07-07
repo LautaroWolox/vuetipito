@@ -47,20 +47,30 @@ const cerrar = () => {
 
 .fm-note-footer :deep(.fm-note-close-button),
 .fm-note-footer :deep(.p-button.fm-note-close-button) {
+  width: 172px !important;
+  min-width: 172px !important;
+  max-width: 172px !important;
   height: 56px !important;
   min-height: 56px !important;
-  min-width: 172px !important;
-  padding: 0 28px !important;
+  max-height: 56px !important;
+  flex: 0 0 172px !important;
+  padding: 0 24px !important;
   border: 1px solid #00a9bd !important;
   border-radius: 7px !important;
   background: #00a9bd !important;
   background-color: #00a9bd !important;
   color: #ffffff !important;
   box-shadow: none !important;
+  transform: none !important;
+}
+
+.fm-note-footer :deep(.fm-note-close-button .p-button-label),
+.fm-note-footer :deep(.p-button.fm-note-close-button .p-button-label) {
   font-size: 24px !important;
   font-weight: 800 !important;
   line-height: 1 !important;
   letter-spacing: .2px !important;
+  color: #ffffff !important;
 }
 
 .fm-note-footer :deep(.fm-note-close-button:hover),
