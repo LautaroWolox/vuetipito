@@ -68,3 +68,81 @@
   padding-top: 4px !important;
   padding-bottom: 4px !important;
 }
+
+.jobtype-modal--alta .jobtype-alta-grid-shell > .jobtype-alta-trash-left.p-button,
+.jobtype-modal--alta .jobtype-alta-grid-shell > .jobtype-alta-trash-left.p-button.p-button-text,
+.jobtype-modal--alta .jobtype-alta-grid-shell > .jobtype-alta-trash-left.p-button.p-button-rounded,
+.jobtype-modal--alta .jobtype-alta-grid-shell > .jobtype-alta-trash-left.p-button:enabled,
+.jobtype-modal--alta .jobtype-alta-grid-shell > .jobtype-alta-trash-left.p-button:disabled,
+.jobtype-modal--alta .jobtype-alta-grid-shell > .jobtype-alta-trash-left.p-button.p-disabled,
+.jobtype-modal--alta .jobtype-alta-grid-shell > .jobtype-alta-trash-left.p-button:hover,
+.jobtype-modal--alta .jobtype-alta-grid-shell > .jobtype-alta-trash-left.p-button:focus,
+.jobtype-modal--alta .jobtype-alta-grid-shell > .jobtype-alta-trash-left.p-button:active,
+.jobtype-modal--alta .jobtype-alta-grid-shell > .jobtype-alta-trash-left.p-button:focus-visible {
+  width: 22px !important;
+  min-width: 22px !important;
+  max-width: 22px !important;
+  height: 22px !important;
+  min-height: 22px !important;
+  max-height: 22px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  outline: 0 !important;
+  color: #001f2f !important;
+  opacity: 1 !important;
+}
+
+.jobtype-modal--alta .jobtype-alta-grid-shell > .jobtype-alta-trash-left.p-button:disabled,
+.jobtype-modal--alta .jobtype-alta-grid-shell > .jobtype-alta-trash-left.p-button.p-disabled {
+  color: #001f2f !important;
+  opacity: .55 !important;
+}
+
+.jobtype-modal--alta .jobtype-alta-grid-shell > .jobtype-alta-trash-left.p-button:enabled:hover,
+.jobtype-modal--alta .jobtype-alta-grid-shell > .jobtype-alta-trash-left.p-button:enabled:focus,
+.jobtype-modal--alta .jobtype-alta-grid-shell > .jobtype-alta-trash-left.p-button:enabled:active {
+  color: #001f2f !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+.jobtype-modal--alta .jobtype-alta-grid-shell > .jobtype-alta-trash-left.p-button::before,
+.jobtype-modal--alta .jobtype-alta-grid-shell > .jobtype-alta-trash-left.p-button::after,
+.jobtype-modal--alta .jobtype-alta-grid-shell > .jobtype-alta-trash-left.p-button .p-ink,
+.jobtype-modal--alta .jobtype-alta-grid-shell > .jobtype-alta-trash-left.p-button .p-ripple,
+.jobtype-modal--alta .jobtype-alta-grid-shell > .jobtype-alta-trash-left.p-button .p-button-focus-overlay {
+  display: none !important;
+  content: none !important;
+  opacity: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.jobtype-modal--alta .jobtype-alta-grid-shell > .jobtype-alta-trash-left.p-button .p-button-icon,
+.jobtype-modal--alta .jobtype-alta-grid-shell > .jobtype-alta-trash-left.p-button .pi,
+.jobtype-modal--alta .jobtype-alta-grid-shell > .jobtype-alta-trash-left.p-button svg,
+.jobtype-modal--alta .jobtype-alta-grid-shell > .jobtype-alta-trash-left.p-button path {
+  width: 16px !important;
+  min-width: 16px !important;
+  height: 16px !important;
+  min-height: 16px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 16px !important;
+  line-height: 16px !important;
+  color: #001f2f !important;
+  fill: #001f2f !important;
+  stroke: #001f2f !important;
+  opacity: 1 !important;
+}
