@@ -1,9 +1,10 @@
 <template>
-  <div class="fm-field fm-field--span-2 otf-filter-element otf-filter-element--fecha-hasta">
+  <div class="fm-field fm-field--span-2 otf-filter-element otf-filter-element--fecha-hasta" :class="{ 'otf-filter-element--disabled': disabled }">
     <label for="otf-fecha-hasta">Fecha Cierre OT Hasta</label>
     <CtDatePicker
       inputId="otf-fecha-hasta"
       :modelValue="modelValue"
+      :disabled="disabled"
       placeholder="Hasta"
       @update:modelValue="$emit('update:modelValue', $event)"
     />
@@ -14,7 +15,8 @@
 import CtDatePicker from '../CtDatePicker.vue'
 
 defineProps({
-  modelValue: { type: [Date, String, null], default: null }
+  modelValue: { type: [Date, String, null], default: null },
+  disabled: { type: Boolean, default: false }
 })
 
 defineEmits(['update:modelValue'])
@@ -28,5 +30,9 @@ defineEmits(['update:modelValue'])
 .otf-filter-element :deep(.p-datepicker),
 .otf-filter-element :deep(.ct-date-picker) {
   width: 100%;
+}
+
+.otf-filter-element--disabled {
+  opacity: .62;
 }
 </style>
