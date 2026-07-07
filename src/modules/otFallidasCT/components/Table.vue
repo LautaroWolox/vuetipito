@@ -34,7 +34,7 @@
       @select-all-change="onSelectAllChange"
     >
       <template #paginatorstart>
-        <FmGridActions @export="exportarExcel" @delete="excluir" @refresh="reprocesar" />
+        <FmGridActions size="large" @export="exportarExcel" @delete="excluir" @refresh="reprocesar" />
       </template>
 
       <template #paginatorend>
@@ -225,7 +225,32 @@ const exportarExcel = () => {
   cursor: pointer;
 }
 
-:deep(.fm-icon-btn .pi) {
-  font-size: 16px;
+:deep(#tabla .fm-icon-btn) {
+  width: 32px !important;
+  min-width: 32px !important;
+  height: 32px !important;
+  min-height: 32px !important;
+  padding: 0 !important;
+  color: #001f2f !important;
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+:deep(#tabla .fm-icon-btn:hover),
+:deep(#tabla .fm-icon-btn:focus),
+:deep(#tabla .fm-icon-btn:focus-visible) {
+  color: #006f7d !important;
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+:deep(#tabla .fm-icon-btn .pi),
+:deep(#tabla .fm-icon-btn .pi::before) {
+  width: 25px !important;
+  min-width: 25px !important;
+  height: 25px !important;
+  min-height: 25px !important;
+  font-size: 25px !important;
+  line-height: 25px !important;
 }
 </style>
