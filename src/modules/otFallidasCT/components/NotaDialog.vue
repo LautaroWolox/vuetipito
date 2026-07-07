@@ -46,21 +46,21 @@ const cerrar = () => {
 }
 
 .fm-note-close-native {
-  width: 108px;
-  min-width: 108px;
-  max-width: 108px;
-  height: 36px;
-  min-height: 36px;
-  max-height: 36px;
-  padding: 0 14px;
+  width: 96px;
+  min-width: 96px;
+  max-width: 96px;
+  height: 32px;
+  min-height: 32px;
+  max-height: 32px;
+  padding: 0 12px;
   border: 1px solid #00a9bd;
-  border-radius: 6px;
+  border-radius: 5px;
   background: #ffffff;
   color: #00a9bd;
   box-shadow: none;
   font-family: inherit;
-  font-size: 15px;
-  font-weight: 800;
+  font-size: 14px;
+  font-weight: 500;
   line-height: 1;
   letter-spacing: .2px;
   text-align: center;
