@@ -85,3 +85,43 @@
   line-height: 16px !important;
   overflow: visible !important;
 }
+
+.jobtype-modal--alta #tabla-jobtype-alta .p-paginator,
+.jobtype-modal--alta #tabla-jobtype-alta .p-datatable-paginator-bottom {
+  position: relative !important;
+  justify-content: center !important;
+  padding-left: 54px !important;
+  padding-right: 54px !important;
+}
+
+.jobtype-modal--alta #tabla-jobtype-alta .p-paginator-start {
+  position: absolute !important;
+  left: 14px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  min-height: 24px !important;
+}
+
+.jobtype-modal--alta #tabla-jobtype-alta .p-paginator-content {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.jobtype-modal--alta #tabla-jobtype-alta .jobtype-grid-actions--alta .p-button.jobtype-grid-action,
+.jobtype-modal--alta #tabla-jobtype-alta .jobtype-grid-actions--alta .p-button.jobtype-grid-action:disabled,
+.jobtype-modal--alta #tabla-jobtype-alta .jobtype-grid-actions--alta .p-button.jobtype-grid-action.p-disabled {
+  color: #001f2f !important;
+  opacity: .75 !important;
+}
+
+.jobtype-modal--alta #tabla-jobtype-alta .jobtype-grid-actions--alta .p-button.jobtype-grid-action .p-button-icon,
+.jobtype-modal--alta #tabla-jobtype-alta .jobtype-grid-actions--alta .p-button.jobtype-grid-action .pi,
+.jobtype-modal--alta #tabla-jobtype-alta .jobtype-grid-actions--alta .p-button.jobtype-grid-action:disabled .p-button-icon,
+.jobtype-modal--alta #tabla-jobtype-alta .jobtype-grid-actions--alta .p-button.jobtype-grid-action:disabled .pi,
+.jobtype-modal--alta #tabla-jobtype-alta .jobtype-grid-actions--alta .p-button.jobtype-grid-action.p-disabled .p-button-icon,
+.jobtype-modal--alta #tabla-jobtype-alta .jobtype-grid-actions--alta .p-button.jobtype-grid-action.p-disabled .pi {
+  color: #001f2f !important;
+  fill: #001f2f !important;
+  stroke: #001f2f !important;
+  opacity: 1 !important;
+}
