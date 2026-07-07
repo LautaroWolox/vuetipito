@@ -1,5 +1,5 @@
 <template>
-  <div class="fm-field fm-field--span-4 otf-filter-element otf-filter-element--descripcion-error">
+  <div class="fm-field fm-field--span-2 otf-filter-element otf-filter-element--descripcion-error">
     <label for="otf-descripcion-error">Descripcion Error</label>
     <InputText
       id="otf-descripcion-error"
@@ -7,6 +7,7 @@
       class="w-full"
       type="text"
       autocomplete="off"
+      :disabled="disabled"
       @update:modelValue="$emit('update:modelValue', $event)"
     />
   </div>
@@ -16,7 +17,8 @@
 import InputText from 'primevue/inputtext'
 
 defineProps({
-  modelValue: { type: [String, Number, null], default: '' }
+  modelValue: { type: [String, Number, null], default: '' },
+  disabled: { type: Boolean, default: false }
 })
 
 defineEmits(['update:modelValue'])
