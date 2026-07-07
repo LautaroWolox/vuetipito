@@ -1,10 +1,11 @@
 <template>
-  <div class="fm-field fm-field--span-2 otf-filter-element otf-filter-element--pais">
+  <div class="fm-field fm-field--span-2 otf-filter-element otf-filter-element--pais" :class="{ 'otf-filter-element--disabled': disabled }">
     <label for="otf-pais">Pais</label>
     <Select
       inputId="otf-pais"
       :modelValue="modelValue"
       :options="options"
+      :disabled="disabled"
       optionLabel="name"
       class="w-full"
       showClear
@@ -18,7 +19,8 @@ import Select from 'primevue/select'
 
 defineProps({
   modelValue: { type: [Object, String, null], default: null },
-  options: { type: Array, default: () => [] }
+  options: { type: Array, default: () => [] },
+  disabled: { type: Boolean, default: false }
 })
 
 defineEmits(['update:modelValue'])
@@ -31,5 +33,9 @@ defineEmits(['update:modelValue'])
 
 .otf-filter-element :deep(.p-select) {
   width: 100%;
+}
+
+.otf-filter-element--disabled {
+  opacity: .62;
 }
 </style>
