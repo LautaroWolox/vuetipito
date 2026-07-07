@@ -58,6 +58,8 @@ export const useFallidasCtStore = defineStore('fallidasCt', {
     loading: false,
     activeTab: ['0', '1'],
     filters: emptyFilters(),
+    disableNroOtFilter: false,
+    disableOtherFilters: false,
     rows: [],
     selectedRows: [],
     contratistaOptions,
@@ -77,6 +79,14 @@ export const useFallidasCtStore = defineStore('fallidasCt', {
     getNotExcluded: (state) => state.rows.filter((row) => state.selectedRows.includes(row.id) && row.excluida !== 'S')
   },
   actions: {
+    setDisableNroOtFilter(value) {
+      this.disableNroOtFilter = Boolean(value)
+    },
+
+    setDisableOtherFilters(value) {
+      this.disableOtherFilters = Boolean(value)
+    },
+
     async setData() {
       this.loading = true
       try {
