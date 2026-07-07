@@ -1,5 +1,5 @@
 <template>
-  <div class="fm-field fm-field--span-4 otf-filter-element otf-filter-element--nro-ot">
+  <div class="fm-field fm-field--span-2 otf-filter-element otf-filter-element--nro-ot">
     <label for="otf-nro-ot">Nro. OT</label>
     <InputText
       id="otf-nro-ot"
@@ -7,6 +7,7 @@
       class="w-full"
       type="text"
       autocomplete="off"
+      :disabled="disabled"
       @update:modelValue="$emit('update:modelValue', $event)"
     />
   </div>
@@ -16,7 +17,8 @@
 import InputText from 'primevue/inputtext'
 
 defineProps({
-  modelValue: { type: [String, Number, null], default: '' }
+  modelValue: { type: [String, Number, null], default: '' },
+  disabled: { type: Boolean, default: false }
 })
 
 defineEmits(['update:modelValue'])
