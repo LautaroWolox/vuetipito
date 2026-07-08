@@ -21,6 +21,35 @@
   border-left-color: #00a9bd !important;
 }
 
+.jobtype-contrato-page #tabla-jobtype-contrato .p-datatable-thead > tr > th,
+.jobtype-contrato-page #tabla-jobtype-contrato .p-datatable-tbody > tr > td {
+  border-right: 1px solid #a6e3ea !important;
+  border-bottom: 1px solid #c7edf2 !important;
+}
+
+.jobtype-contrato-page #tabla-jobtype-contrato .p-datatable-thead > tr > th {
+  border-bottom-color: #8ed9e2 !important;
+}
+
+.jobtype-contrato-page #tabla-jobtype-contrato .p-datatable-tbody > tr:hover > td {
+  background: #edfafa !important;
+}
+
+.jobtype-contrato-page #tabla-jobtype-contrato .p-datatable-tbody > tr.jobtype-row-selected > td,
+.jobtype-contrato-page #tabla-jobtype-contrato .p-datatable-tbody > tr.fm-selected-row > td,
+.jobtype-contrato-page #tabla-jobtype-contrato .p-datatable-tbody > tr.p-highlight > td {
+  background: #d7f3f6 !important;
+  color: #006f7d !important;
+  font-weight: 700 !important;
+}
+
+.jobtype-contrato-page #tabla-jobtype-contrato .p-datatable-tbody > tr.jobtype-row-selected .fm-cell-text,
+.jobtype-contrato-page #tabla-jobtype-contrato .p-datatable-tbody > tr.fm-selected-row .fm-cell-text,
+.jobtype-contrato-page #tabla-jobtype-contrato .p-datatable-tbody > tr.p-highlight .fm-cell-text {
+  color: #006f7d !important;
+  font-weight: 700 !important;
+}
+
 .jobtype-contrato-grid .p-paginator,
 .jobtype-contrato-grid .p-datatable-paginator-bottom {
   min-height: 34px !important;
