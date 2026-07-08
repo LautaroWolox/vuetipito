@@ -284,7 +284,7 @@
       :draggable="false"
       :resizable="false"
       :closable="false"
-      :style="{ width: '890px', maxWidth: 'calc(100vw - 32px)' }"
+      :style="{ width: '792px', maxWidth: 'calc(100vw - 32px)' }"
     >
       <template #header>
         <div class="jobtype-delete-confirm__header">
@@ -303,8 +303,11 @@
         </div>
       </template>
 
-      <div class="jobtype-delete-confirm__message">
-        Confirma que desea desactivar la relación seleccionada?
+      <div class="jobtype-delete-confirm__body">
+        <i class="pi pi-exclamation-triangle jobtype-delete-confirm__icon" aria-hidden="true"></i>
+        <span class="jobtype-delete-confirm__message">
+          ¿Confirma que desea desactivar la relación seleccionada?
+        </span>
       </div>
 
       <template #footer>
@@ -692,58 +695,80 @@ const confirmarEliminar = () => {
 }
 
 :global(.jobtype-delete-confirm .p-dialog-header) {
-  min-height: 80px !important;
+  min-height: 62px !important;
   padding: 0 !important;
-  border-bottom: 1px solid #e0e0e0 !important;
+  border-bottom: 1px solid #d8e0e5 !important;
 }
 
 :global(.jobtype-delete-confirm__header) {
   width: 100% !important;
-  min-height: 80px !important;
+  min-height: 62px !important;
   display: flex !important;
   align-items: center !important;
   justify-content: space-between !important;
-  padding: 0 18px 0 21px !important;
+  padding: 0 28px 0 22px !important;
 }
 
 :global(.jobtype-delete-confirm__title) {
-  color: #3c3c3c !important;
-  font-size: 25px !important;
+  color: #2c3e4d !important;
+  font-size: 30px !important;
   font-weight: 400 !important;
   line-height: 1 !important;
 }
 
 :global(.jobtype-delete-confirm__close) {
-  width: 24px !important;
-  height: 24px !important;
+  width: 32px !important;
+  height: 32px !important;
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
-  color: #bdbdbd !important;
+  color: #8da0aa !important;
   cursor: pointer !important;
 }
 
+:global(.jobtype-delete-confirm__close:hover),
+:global(.jobtype-delete-confirm__close:focus) {
+  color: #00a9bd !important;
+}
+
 :global(.jobtype-delete-confirm__close .pi) {
-  font-size: 17px !important;
+  font-size: 31px !important;
   font-weight: 700 !important;
 }
 
 :global(.jobtype-delete-confirm .p-dialog-content) {
-  padding: 24px 21px 37px !important;
-  border-bottom: 1px solid #e0e0e0 !important;
+  padding: 0 !important;
+  border-bottom: 1px solid #d8e0e5 !important;
   overflow: hidden !important;
 }
 
+:global(.jobtype-delete-confirm__body) {
+  min-height: 194px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 52px !important;
+  padding: 0 48px !important;
+}
+
+:global(.jobtype-delete-confirm__icon) {
+  width: 76px !important;
+  min-width: 76px !important;
+  color: #e5393f !important;
+  font-size: 67px !important;
+  line-height: 67px !important;
+  filter: drop-shadow(0 14px 18px rgba(229, 57, 63, .16)) !important;
+}
+
 :global(.jobtype-delete-confirm__message) {
-  color: #202124 !important;
-  font-size: 20px !important;
+  color: #2c3e4d !important;
+  font-size: 24px !important;
   font-weight: 400 !important;
-  line-height: 1.25 !important;
+  line-height: 1.3 !important;
 }
 
 :global(.jobtype-delete-confirm .p-dialog-footer) {
-  min-height: 72px !important;
-  padding: 0 16px !important;
+  min-height: 82px !important;
+  padding: 0 18px !important;
   border-top: 0 !important;
 }
 
@@ -756,20 +781,25 @@ const confirmarEliminar = () => {
 }
 
 :global(.jobtype-delete-confirm__button.p-button) {
-  min-width: 128px !important;
-  height: 47px !important;
-  border-radius: 24px !important;
-  padding: 0 18px !important;
-  font-size: 20px !important;
-  font-weight: 500 !important;
+  min-width: 160px !important;
+  height: 58px !important;
+  border-radius: 7px !important;
+  padding: 0 24px !important;
+  font-size: 25px !important;
+  font-weight: 700 !important;
   box-shadow: none !important;
 }
 
 :global(.jobtype-delete-confirm__button--cancel.p-button),
-:global(.jobtype-delete-confirm__button--cancel.p-button:enabled:hover),
 :global(.jobtype-delete-confirm__button--cancel.p-button:enabled:focus),
 :global(.jobtype-delete-confirm__button--cancel.p-button:enabled:active) {
   background: #ffffff !important;
+  border: 1px solid #00a9bd !important;
+  color: #00a9bd !important;
+}
+
+:global(.jobtype-delete-confirm__button--cancel.p-button:enabled:hover) {
+  background: #dff7fb !important;
   border: 1px solid #00a9bd !important;
   color: #00a9bd !important;
 }
