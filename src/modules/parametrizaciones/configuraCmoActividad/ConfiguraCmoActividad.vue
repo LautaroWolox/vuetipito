@@ -113,7 +113,7 @@
       :draggable="true"
       :resizable="false"
       :closable="false"
-      :style="{ width: '1080px', maxWidth: 'calc(100vw - 64px)' }"
+      :style="{ width: '980px', maxWidth: 'calc(100vw - 48px)' }"
     >
       <template #header>
         <div class="jobtype-modal-header">
@@ -132,8 +132,10 @@
         </div>
       </template>
 
-      <div class="jobtype-modal-form">
-        <div class="jobtype-modal-field jobtype-modal-field--pais">
+      <div class="jobtype-modal-form cmo-modal-form--jobtype-aligned">
+        <div class="jobtype-modal-field jobtype-modal-field--pais cmo-pais-placeholder" aria-hidden="true"></div>
+
+        <div class="jobtype-modal-field">
           <label for="alta-cmo-actividad">Actividad</label>
           <InputText id="alta-cmo-actividad" v-model="altaForm.actividad" class="jobtype-modal-input" />
         </div>
@@ -142,8 +144,6 @@
           <label for="alta-cmo-cmo">CMO</label>
           <InputText id="alta-cmo-cmo" v-model="altaForm.cmo" class="jobtype-modal-input" />
         </div>
-
-        <div class="jobtype-modal-field" aria-hidden="true"></div>
 
         <Button label="AGREGAR" class="jobtype-modal-button jobtype-modal-button--add" :disabled="!canAgregarRelacion" @click="agregarRelacionPreview" />
       </div>
@@ -156,7 +156,7 @@
           dataKey="id"
           tableStyle="table-layout: fixed; width: 100%; min-width: 100%"
           scrollable
-          scrollHeight="150px"
+          scrollHeight="210px"
           removableSort
           sortMode="multiple"
           filterDisplay="row"
