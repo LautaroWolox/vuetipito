@@ -107,7 +107,7 @@
 
     <Dialog
       v-model:visible="showAlta"
-      class="jobtype-modal jobtype-modal--alta cmo-alta-modal"
+      class="jobtype-modal jobtype-modal--alta"
       appendTo="body"
       :modal="true"
       :draggable="true"
@@ -132,35 +132,26 @@
         </div>
       </template>
 
-      <div
-        class="jobtype-modal-form cmo-modal-form"
-        style="display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr) 220px; align-items: end; column-gap: 28px; width: 100%; max-width: 100%; box-sizing: border-box;"
-      >
-        <div class="jobtype-modal-field" style="min-width: 0; max-width: 100%;">
+      <div class="jobtype-modal-form">
+        <div class="jobtype-modal-field jobtype-modal-field--pais">
           <label for="alta-cmo-actividad">Actividad</label>
-          <InputText id="alta-cmo-actividad" v-model="altaForm.actividad" class="jobtype-modal-input" style="width: 100%; min-width: 0; max-width: 100%;" />
+          <InputText id="alta-cmo-actividad" v-model="altaForm.actividad" class="jobtype-modal-input" />
         </div>
 
-        <div class="jobtype-modal-field" style="min-width: 0; max-width: 100%;">
+        <div class="jobtype-modal-field">
           <label for="alta-cmo-cmo">CMO</label>
-          <InputText id="alta-cmo-cmo" v-model="altaForm.cmo" class="jobtype-modal-input" style="width: 100%; min-width: 0; max-width: 100%;" />
+          <InputText id="alta-cmo-cmo" v-model="altaForm.cmo" class="jobtype-modal-input" />
         </div>
 
-        <button
-          type="button"
-          class="cmo-modal-button-add-native"
-          :disabled="!canAgregarRelacion"
-          :style="agregarButtonStyle"
-          @click="agregarRelacionPreview"
-        >
-          AGREGAR
-        </button>
+        <div class="jobtype-modal-field" aria-hidden="true"></div>
+
+        <Button label="AGREGAR" class="jobtype-modal-button jobtype-modal-button--add" :disabled="!canAgregarRelacion" @click="agregarRelacionPreview" />
       </div>
 
-      <div class="jobtype-alta-grid-shell cmo-alta-grid-shell" style="position: relative; width: 100%; max-width: 100%; overflow: hidden;">
+      <div class="jobtype-alta-grid-shell">
         <DataTable
-          id="tabla-cmo-alta"
-          class="fm-pass-grid jobtype-alta-datatable cmo-alta-datatable"
+          id="tabla-cmo-alta-jobtype"
+          class="fm-pass-grid jobtype-alta-datatable"
           :value="altaRows"
           dataKey="id"
           tableStyle="table-layout: fixed; width: 100%; min-width: 100%"
@@ -173,13 +164,18 @@
           v-model:selection="altaSelectedRow"
           selectionMode="single"
           :rowClass="altaRowClass"
+          paginator
+          :rows="10"
+          :rowsPerPageOptions="[10, 20, 50]"
+          paginatorTemplate="FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
+          currentPageReportTemplate="Página {currentPage} de {totalPages}"
           :resizableColumns="true"
           columnResizeMode="expand"
           showGridlines
           @row-click="onAltaRowClick"
         >
           <template #empty>
-            <div class="fm-grid-empty jobtype-alta-empty cmo-alta-empty">No hay relaciones agregadas</div>
+            <div class="fm-grid-empty jobtype-alta-empty">No hay relaciones agregadas</div>
           </template>
 
           <Column
@@ -197,7 +193,7 @@
             :bodyStyle="altaColumnStyle(col)"
           >
             <template #filter="{ filterModel, filterCallback }">
-              <div class="fm-filter-cell jobtype-filter-cell jobtype-filter-cell--alta cmo-filter-cell--alta">
+              <div class="fm-filter-cell jobtype-filter-cell jobtype-filter-cell--alta">
                 <span class="fm-filter-prefix">~</span>
                 <InputText type="text" v-model="filterModel.value" @input="filterCallback()" class="fm-column-filter" />
                 <span class="fm-filter-more">...</span>
@@ -205,38 +201,24 @@
             </template>
 
             <template #body="{ data }">
-              <span class="fm-cell-text jobtype-cell-text cmo-cell-text" :title="String(data[col.field] ?? '')">
+              <span class="fm-cell-text jobtype-cell-text" :title="String(data[col.field] ?? '')">
                 {{ data[col.field] ?? '' }}
               </span>
             </template>
           </Column>
         </DataTable>
 
-        <div
-          class="cmo-alta-manual-footer"
-          style="position: relative; display: flex; align-items: center; justify-content: center; width: 100%; height: 48px; min-height: 48px; padding: 0 12px; border-top: 1px solid #d7e1e7; background: #ffffff; box-sizing: border-box;"
+        <button
+          type="button"
+          class="jobtype-alta-trash-left"
+          :disabled="!altaSelectedRow"
+          title="Eliminar"
+          aria-label="Eliminar"
+          v-tooltip.top="'Eliminar'"
+          @click="eliminarAltaPreview"
         >
-          <button
-            type="button"
-            class="cmo-alta-trash-left"
-            :disabled="!altaSelectedRow"
-            title="Eliminar"
-            aria-label="Eliminar"
-            v-tooltip.top="'Eliminar'"
-            :style="trashButtonStyle"
-            @click="eliminarAltaPreview"
-          >
-            <i class="pi pi-trash" aria-hidden="true" style="font-size: 16px; line-height: 16px;"></i>
-          </button>
-
-          <div style="display: inline-flex; align-items: center; justify-content: center; gap: 16px; height: 34px; color: #2f4b5f;">
-            <button type="button" disabled :style="manualPaginatorButtonStyle"><i class="pi pi-angle-double-left"></i></button>
-            <button type="button" disabled :style="manualPaginatorButtonStyle"><i class="pi pi-angle-left"></i></button>
-            <span style="font-size: 14px; line-height: 28px; color: #2f4b5f; font-weight: 400;">{{ altaPageReport }}</span>
-            <button type="button" disabled :style="manualPaginatorButtonStyle"><i class="pi pi-angle-right"></i></button>
-            <button type="button" disabled :style="manualPaginatorButtonStyle"><i class="pi pi-angle-double-right"></i></button>
-          </div>
-        </div>
+          <i class="pi pi-trash" aria-hidden="true"></i>
+        </button>
       </div>
 
       <template #footer>
@@ -298,84 +280,6 @@ const selectedRow = computed({
 const firstVisibleRow = computed(() => (store.rows.length ? 1 : 0))
 const lastVisibleRow = computed(() => Math.min(10, store.rows.length))
 const canAgregarRelacion = computed(() => Boolean(altaForm.actividad.trim() && altaForm.cmo.trim()))
-const altaPageReport = computed(() => (altaRows.value.length ? 'Página 1 de 1' : 'Página 0 de 0'))
-
-const agregarButtonStyle = computed(() => ({
-  boxSizing: 'border-box',
-  width: '220px',
-  minWidth: '220px',
-  maxWidth: '220px',
-  height: '56px',
-  minHeight: '56px',
-  maxHeight: '56px',
-  display: 'inline-flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  justifySelf: 'start',
-  alignSelf: 'end',
-  padding: '0 18px',
-  margin: '0',
-  borderRadius: '28px',
-  border: `1px solid ${canAgregarRelacion.value ? '#00a9bd' : '#bccbd3'}`,
-  background: canAgregarRelacion.value ? '#00a9bd' : '#bccbd3',
-  color: '#ffffff',
-  fontFamily: 'inherit',
-  fontSize: '16px',
-  lineHeight: '16px',
-  fontWeight: 700,
-  textAlign: 'center',
-  textTransform: 'uppercase',
-  whiteSpace: 'nowrap',
-  boxShadow: 'none',
-  outline: '0',
-  opacity: '1',
-  cursor: canAgregarRelacion.value ? 'pointer' : 'not-allowed'
-}))
-
-const trashButtonStyle = computed(() => ({
-  position: 'absolute',
-  left: '16px',
-  top: '50%',
-  transform: 'translateY(-50%)',
-  width: '22px',
-  minWidth: '22px',
-  maxWidth: '22px',
-  height: '22px',
-  minHeight: '22px',
-  maxHeight: '22px',
-  display: 'inline-flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  padding: '0',
-  margin: '0',
-  border: '0',
-  borderRadius: '0',
-  background: 'transparent',
-  color: '#001f2f',
-  opacity: altaSelectedRow.value ? '.78' : '.35',
-  boxShadow: 'none',
-  outline: '0',
-  cursor: altaSelectedRow.value ? 'pointer' : 'not-allowed'
-}))
-
-const manualPaginatorButtonStyle = {
-  width: '28px',
-  minWidth: '28px',
-  height: '28px',
-  minHeight: '28px',
-  display: 'inline-flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  padding: '0',
-  margin: '0',
-  border: '0',
-  borderRadius: '50%',
-  background: 'transparent',
-  color: '#d9e2e7',
-  boxShadow: 'none',
-  outline: '0',
-  cursor: 'default'
-}
 
 const buscar = async () => {
   activePanels.value = ['0', '1']
@@ -402,8 +306,7 @@ const rowClass = (data) => ({
 
 const altaRowClass = (data) => ({
   'fm-selected-row': altaSelectedRow.value?.id === data?.id,
-  'jobtype-row-selected': altaSelectedRow.value?.id === data?.id,
-  'cmo-row-selected': altaSelectedRow.value?.id === data?.id
+  'jobtype-row-selected': altaSelectedRow.value?.id === data?.id
 })
 
 const onRowClick = (event) => {
