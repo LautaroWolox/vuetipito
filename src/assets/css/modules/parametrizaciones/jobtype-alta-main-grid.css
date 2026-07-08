@@ -7,7 +7,7 @@
 .jobtype-modal--alta #tabla-jobtype-alta.p-datatable {
   width: 100% !important;
   min-width: 100% !important;
-  border-left-width: 2px !important;
+  border-left-width: 1px !important;
   border-left-style: solid !important;
   border-left-color: #00a9bd !important;
 }
@@ -30,6 +30,31 @@
   box-sizing: border-box !important;
   overflow: hidden !important;
   vertical-align: middle !important;
+  border-right: 1px solid #a6e3ea !important;
+  border-bottom: 1px solid #c7edf2 !important;
+}
+
+.jobtype-modal--alta #tabla-jobtype-alta .p-datatable-thead > tr > th {
+  border-bottom-color: #8ed9e2 !important;
+}
+
+.jobtype-modal--alta #tabla-jobtype-alta .p-datatable-tbody > tr:hover > td {
+  background: #edfafa !important;
+}
+
+.jobtype-modal--alta #tabla-jobtype-alta .p-datatable-tbody > tr.jobtype-row-selected > td,
+.jobtype-modal--alta #tabla-jobtype-alta .p-datatable-tbody > tr.fm-selected-row > td,
+.jobtype-modal--alta #tabla-jobtype-alta .p-datatable-tbody > tr.p-highlight > td {
+  background: #d7f3f6 !important;
+  color: #006f7d !important;
+  font-weight: 700 !important;
+}
+
+.jobtype-modal--alta #tabla-jobtype-alta .p-datatable-tbody > tr.jobtype-row-selected .fm-cell-text,
+.jobtype-modal--alta #tabla-jobtype-alta .p-datatable-tbody > tr.fm-selected-row .fm-cell-text,
+.jobtype-modal--alta #tabla-jobtype-alta .p-datatable-tbody > tr.p-highlight .fm-cell-text {
+  color: #006f7d !important;
+  font-weight: 700 !important;
 }
 
 .jobtype-modal--alta #tabla-jobtype-alta .p-datatable-thead > tr > th:last-child,
