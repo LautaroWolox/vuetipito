@@ -12,6 +12,26 @@ body .jobtype-modal.cmo-alta-compact-modal {
   max-width: calc(100vw - 48px) !important;
 }
 
+body .p-dialog.jobtype-modal.cmo-alta-compact-modal.jobtype-modal--expanded,
+body .jobtype-modal.cmo-alta-compact-modal.jobtype-modal--expanded {
+  width: min(1180px, calc(100vw - 54px)) !important;
+  max-width: calc(100vw - 54px) !important;
+}
+
+body .jobtype-modal.cmo-alta-compact-modal.jobtype-modal--expanded .p-dialog-content {
+  max-height: calc(100vh - 172px) !important;
+  overflow: hidden !important;
+}
+
+body .jobtype-modal.cmo-alta-compact-modal.jobtype-modal--expanded .cmo-modal-form--jobtype-aligned {
+  grid-template-columns: 145px 1fr 1fr 132px !important;
+}
+
+body .jobtype-modal.cmo-alta-compact-modal.jobtype-modal--expanded #tabla-cmo-alta-jobtype .p-datatable-table-container,
+body .jobtype-modal.cmo-alta-compact-modal.jobtype-modal--expanded #tabla-cmo-alta-jobtype .p-datatable-wrapper {
+  max-height: min(360px, calc(100vh - 360px)) !important;
+}
+
 body .jobtype-modal.cmo-alta-compact-modal .cmo-pais-placeholder {
   visibility: hidden !important;
   pointer-events: none !important;
