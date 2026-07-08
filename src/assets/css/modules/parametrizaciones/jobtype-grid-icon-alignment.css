@@ -6,7 +6,8 @@
    ======================================================================== */
 
 .jobtype-contrato-page .jobtype-contrato-filters,
-.jobtype-contrato-page .p-accordionpanel:first-child .p-accordioncontent-content {
+.jobtype-contrato-page .p-accordionpanel:first-child .p-accordioncontent-content,
+.jobtype-contrato-page .p-accordionpanel:nth-child(2) .p-accordioncontent-content {
   border-left: 2px solid #00a9bd !important;
 }
 
@@ -14,7 +15,7 @@
 .jobtype-contrato-page .fm-pt-datatable,
 .jobtype-contrato-page #tabla-jobtype-contrato.fm-pass-grid,
 .jobtype-contrato-page #tabla-jobtype-contrato.p-datatable {
-  border-left: 2px solid #00a9bd !important;
+  border-left: 0 !important;
   box-shadow: none !important;
   outline: 0 !important;
 }
