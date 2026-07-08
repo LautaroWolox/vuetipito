@@ -34,9 +34,7 @@ import './assets/css/modules/parametrizaciones/jobtype-popup-datatable-final.css
 import './assets/css/modules/parametrizaciones/jobtype-popup-trash-left-final.css';
 import './assets/css/modules/parametrizaciones/jobtype-alta-dynamic-grid.css';
 import './assets/css/modules/parametrizaciones/cmo-actividad.css';
-import './assets/css/modules/parametrizaciones/cmo-actividad-popup-fix.css';
 import './assets/css/modules/reporteSas/grid-ajustes.css';
-import './assets/css/modules/parametrizaciones/cmo-actividad-popup-hard-fix.css';
 import Lara from '@primeuix/themes/lara';
 
 import { definePreset } from '@primeuix/themes';
