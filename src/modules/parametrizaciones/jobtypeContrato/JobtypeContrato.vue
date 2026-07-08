@@ -284,7 +284,7 @@
       :draggable="false"
       :resizable="false"
       :closable="false"
-      :style="{ width: '792px', maxWidth: 'calc(100vw - 32px)' }"
+      :style="{ width: '560px', maxWidth: 'calc(100vw - 32px)' }"
     >
       <template #header>
         <div class="jobtype-delete-confirm__header">
@@ -312,8 +312,12 @@
 
       <template #footer>
         <div class="jobtype-delete-confirm__footer">
-          <Button label="CANCELAR" class="jobtype-delete-confirm__button jobtype-delete-confirm__button--cancel" @click="cancelarEliminar" />
-          <Button label="ACEPTAR" class="jobtype-delete-confirm__button jobtype-delete-confirm__button--accept" @click="confirmarEliminar" />
+          <button type="button" class="jobtype-delete-confirm__button jobtype-delete-confirm__button--cancel" @click="cancelarEliminar">
+            CANCELAR
+          </button>
+          <button type="button" class="jobtype-delete-confirm__button jobtype-delete-confirm__button--accept" @click="confirmarEliminar">
+            ACEPTAR
+          </button>
         </div>
       </template>
     </Dialog>
@@ -695,30 +699,30 @@ const confirmarEliminar = () => {
 }
 
 :global(.jobtype-delete-confirm .p-dialog-header) {
-  min-height: 62px !important;
+  min-height: 56px !important;
   padding: 0 !important;
   border-bottom: 1px solid #d8e0e5 !important;
 }
 
 :global(.jobtype-delete-confirm__header) {
   width: 100% !important;
-  min-height: 62px !important;
+  min-height: 56px !important;
   display: flex !important;
   align-items: center !important;
   justify-content: space-between !important;
-  padding: 0 28px 0 22px !important;
+  padding: 0 18px 0 20px !important;
 }
 
 :global(.jobtype-delete-confirm__title) {
   color: #2c3e4d !important;
-  font-size: 30px !important;
+  font-size: 26px !important;
   font-weight: 400 !important;
   line-height: 1 !important;
 }
 
 :global(.jobtype-delete-confirm__close) {
-  width: 32px !important;
-  height: 32px !important;
+  width: 30px !important;
+  height: 30px !important;
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -732,7 +736,7 @@ const confirmarEliminar = () => {
 }
 
 :global(.jobtype-delete-confirm__close .pi) {
-  font-size: 31px !important;
+  font-size: 27px !important;
   font-weight: 700 !important;
 }
 
@@ -743,32 +747,32 @@ const confirmarEliminar = () => {
 }
 
 :global(.jobtype-delete-confirm__body) {
-  min-height: 194px !important;
+  min-height: 145px !important;
   display: flex !important;
   align-items: center !important;
-  gap: 52px !important;
-  padding: 0 48px !important;
+  gap: 32px !important;
+  padding: 0 38px !important;
 }
 
 :global(.jobtype-delete-confirm__icon) {
-  width: 76px !important;
-  min-width: 76px !important;
+  width: 56px !important;
+  min-width: 56px !important;
   color: #e5393f !important;
-  font-size: 67px !important;
-  line-height: 67px !important;
-  filter: drop-shadow(0 14px 18px rgba(229, 57, 63, .16)) !important;
+  font-size: 55px !important;
+  line-height: 55px !important;
+  filter: drop-shadow(0 10px 14px rgba(229, 57, 63, .13)) !important;
 }
 
 :global(.jobtype-delete-confirm__message) {
   color: #2c3e4d !important;
-  font-size: 24px !important;
+  font-size: 22px !important;
   font-weight: 400 !important;
-  line-height: 1.3 !important;
+  line-height: 1.28 !important;
 }
 
 :global(.jobtype-delete-confirm .p-dialog-footer) {
-  min-height: 82px !important;
-  padding: 0 18px !important;
+  min-height: 74px !important;
+  padding: 0 20px !important;
   border-top: 0 !important;
 }
 
@@ -780,35 +784,48 @@ const confirmarEliminar = () => {
   gap: 14px !important;
 }
 
-:global(.jobtype-delete-confirm__button.p-button) {
-  min-width: 160px !important;
-  height: 58px !important;
+:global(.jobtype-delete-confirm__button) {
+  min-width: 170px !important;
+  height: 56px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
   border-radius: 7px !important;
   padding: 0 24px !important;
-  font-size: 25px !important;
+  font-size: 24px !important;
   font-weight: 700 !important;
+  line-height: 1 !important;
+  cursor: pointer !important;
   box-shadow: none !important;
+  outline: 0 !important;
 }
 
-:global(.jobtype-delete-confirm__button--cancel.p-button),
-:global(.jobtype-delete-confirm__button--cancel.p-button:enabled:focus),
-:global(.jobtype-delete-confirm__button--cancel.p-button:enabled:active) {
+:global(.jobtype-delete-confirm__button--cancel) {
   background: #ffffff !important;
+  background-color: #ffffff !important;
   border: 1px solid #00a9bd !important;
   color: #00a9bd !important;
 }
 
-:global(.jobtype-delete-confirm__button--cancel.p-button:enabled:hover) {
+:global(.jobtype-delete-confirm__button--cancel:hover),
+:global(.jobtype-delete-confirm__button--cancel:focus) {
   background: #dff7fb !important;
+  background-color: #dff7fb !important;
   border: 1px solid #00a9bd !important;
   color: #00a9bd !important;
 }
 
-:global(.jobtype-delete-confirm__button--accept.p-button),
-:global(.jobtype-delete-confirm__button--accept.p-button:enabled:hover),
-:global(.jobtype-delete-confirm__button--accept.p-button:enabled:focus),
-:global(.jobtype-delete-confirm__button--accept.p-button:enabled:active) {
+:global(.jobtype-delete-confirm__button--accept) {
   background: #00a9bd !important;
+  background-color: #00a9bd !important;
+  border: 1px solid #00a9bd !important;
+  color: #ffffff !important;
+}
+
+:global(.jobtype-delete-confirm__button--accept:hover),
+:global(.jobtype-delete-confirm__button--accept:focus) {
+  background: #00a9bd !important;
+  background-color: #00a9bd !important;
   border: 1px solid #00a9bd !important;
   color: #ffffff !important;
 }
