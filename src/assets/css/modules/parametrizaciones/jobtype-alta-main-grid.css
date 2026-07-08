@@ -7,7 +7,7 @@
 .jobtype-modal--alta #tabla-jobtype-alta.p-datatable {
   width: 100% !important;
   min-width: 100% !important;
-  border-left: 1.5px solid #8ed9e2 !important;
+  border-left: 1px solid #00a9bd !important;
   box-shadow: none !important;
   outline: 0 !important;
 }
@@ -34,16 +34,16 @@
   box-sizing: border-box !important;
   overflow: hidden !important;
   vertical-align: middle !important;
-  border-right: 1.5px solid #8ed9e2 !important;
-  border-bottom: 1.5px solid #8ed9e2 !important;
+  border-right: 1px solid #d7e5eb !important;
+  border-bottom: 1px solid #e2edf2 !important;
 }
 
 .jobtype-modal--alta #tabla-jobtype-alta .p-datatable-thead > tr > th {
-  border-bottom-color: #8ed9e2 !important;
+  border-bottom-color: #bfe9ef !important;
 }
 
 .jobtype-modal--alta #tabla-jobtype-alta .p-datatable-tbody > tr:hover > td {
-  background: #edfafa !important;
+  background: #f2fbfc !important;
 }
 
 .jobtype-modal--alta #tabla-jobtype-alta .p-datatable-tbody > tr.jobtype-row-selected > td,
