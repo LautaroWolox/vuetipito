@@ -1,0 +1,103 @@
+/* ========================================================================
+   CONFIGURA CMO-ACTIVIDAD - AJUSTES POPUP ALTA
+   ------------------------------------------------------------------------
+   Ajustes específicos sobre el popup Alta CMO - Actividad usando la base
+   visual del popup Alta Jobtype - Contrato.
+   ======================================================================== */
+
+body .jobtype-modal .jobtype-alta-grid-shell:has(#tabla-cmo-alta-jobtype) {
+  position: relative !important;
+  overflow: visible !important;
+}
+
+body .jobtype-modal #tabla-cmo-alta-jobtype .p-datatable-paginator-bottom,
+body .jobtype-modal #tabla-cmo-alta-jobtype .p-paginator {
+  position: relative !important;
+  min-height: 48px !important;
+  height: 48px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 12px !important;
+  border-top: 1px solid #d7e1e7 !important;
+  background: #ffffff !important;
+  box-shadow: none !important;
+}
+
+body .jobtype-modal #tabla-cmo-alta-jobtype + button.jobtype-alta-trash-left,
+body .jobtype-modal #tabla-cmo-alta-jobtype + button.jobtype-alta-trash-left:hover,
+body .jobtype-modal #tabla-cmo-alta-jobtype + button.jobtype-alta-trash-left:focus,
+body .jobtype-modal #tabla-cmo-alta-jobtype + button.jobtype-alta-trash-left:active,
+body .jobtype-modal #tabla-cmo-alta-jobtype + button.jobtype-alta-trash-left:disabled {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  position: absolute !important;
+  left: 16px !important;
+  bottom: 13px !important;
+  z-index: 20 !important;
+  width: 22px !important;
+  min-width: 22px !important;
+  max-width: 22px !important;
+  height: 22px !important;
+  min-height: 22px !important;
+  max-height: 22px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
+  outline: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  color: #001f2f !important;
+  opacity: .36 !important;
+  cursor: not-allowed !important;
+}
+
+body .jobtype-modal #tabla-cmo-alta-jobtype + button.jobtype-alta-trash-left:not(:disabled) {
+  opacity: .78 !important;
+  cursor: pointer !important;
+}
+
+body .jobtype-modal #tabla-cmo-alta-jobtype + button.jobtype-alta-trash-left .pi,
+body .jobtype-modal #tabla-cmo-alta-jobtype + button.jobtype-alta-trash-left:disabled .pi {
+  width: 16px !important;
+  min-width: 16px !important;
+  height: 16px !important;
+  min-height: 16px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 16px !important;
+  line-height: 16px !important;
+  color: #001f2f !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+body .jobtype-modal #tabla-cmo-alta-jobtype .p-datatable-thead > tr.p-filter-column > th,
+body .jobtype-modal #tabla-cmo-alta-jobtype .p-datatable-thead > tr:nth-child(2) > th {
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+}
+
+body .jobtype-modal #tabla-cmo-alta-jobtype .jobtype-filter-cell--alta,
+body .jobtype-modal #tabla-cmo-alta-jobtype .fm-filter-cell.jobtype-filter-cell--alta {
+  width: 100% !important;
+  min-width: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+}
+
+body .jobtype-modal #tabla-cmo-alta-jobtype .jobtype-filter-cell--alta .fm-column-filter,
+body .jobtype-modal #tabla-cmo-alta-jobtype .jobtype-filter-cell--alta .p-inputtext {
+  width: calc(100% - 48px) !important;
+  min-width: 0 !important;
+  max-width: calc(100% - 48px) !important;
+}
