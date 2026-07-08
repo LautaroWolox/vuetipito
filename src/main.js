@@ -24,6 +24,7 @@ import './assets/css/modules/parametrizaciones/jobtype-popup-final-fix.css';
 import './assets/css/modules/parametrizaciones/jobtype-close-kill.css';
 import './assets/css/modules/parametrizaciones/jobtype-trash-icon-fix.css';
 import './assets/css/modules/parametrizaciones/jobtype-grid-icon-alignment.css';
+import './assets/css/modules/parametrizaciones/jobtype-search-button-size.css';
 import './assets/css/modules/parametrizaciones/jobtype-popup-grid-main-like.css';
 import './assets/css/modules/parametrizaciones/jobtype-popup-grid-gutter-fix.css';
 import './assets/css/modules/parametrizaciones/jobtype-modal-maximize.css';
