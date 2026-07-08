@@ -112,7 +112,7 @@
       :draggable="true"
       :resizable="false"
       :closable="false"
-      :style="{ width: '780px', maxWidth: 'calc(100vw - 64px)' }"
+      :style="{ width: '980px', maxWidth: 'calc(100vw - 48px)' }"
     >
       <template #header>
         <div class="jobtype-modal-header">
@@ -150,13 +150,13 @@
         <Button label="AGREGAR" class="jobtype-modal-button jobtype-modal-button--add" :disabled="!canAgregarRelacion" @click="agregarRelacionPreview" />
       </div>
 
-      <div class="jobtype-popup-grid-shell">
+      <div class="jobtype-alta-grid-shell">
         <DataTable
-          id="tabla-alta-jobtype-contrato"
-          class="fm-pass-grid jobtype-popup-datatable"
+          id="tabla-jobtype-alta"
+          class="fm-pass-grid jobtype-alta-datatable"
           :value="altaRows"
           dataKey="id"
-          tableStyle="table-layout: fixed; width: max-content; min-width: 100%"
+          tableStyle="table-layout: fixed; width: 100%; min-width: 100%"
           scrollable
           scrollHeight="210px"
           removableSort
@@ -168,7 +168,7 @@
           :rowClass="altaRowClass"
           paginator
           :rows="10"
-          :rowsPerPageOptions="[10, 20, 30]"
+          :rowsPerPageOptions="[10, 20, 50]"
           paginatorTemplate="FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
           currentPageReportTemplate="Página {currentPage} de {totalPages}"
           :resizableColumns="true"
@@ -177,16 +177,16 @@
           @row-click="onAltaRowClick"
         >
           <template #empty>
-            <div class="jobtype-popup-grid-empty">No hay relaciones agregadas</div>
+            <div class="fm-grid-empty jobtype-alta-empty">No hay relaciones agregadas</div>
           </template>
 
           <Column
-            v-for="col in altaGridColumns"
-            :key="col.key"
-            :field="col.key"
-            :sortField="col.key"
-            :filterField="col.key"
-            :header="col.label"
+            v-for="col in altaColumns"
+            :key="col.field"
+            :field="col.field"
+            :sortField="col.field"
+            :filterField="col.field"
+            :header="col.header"
             sortable
             filter
             :showFilterMenu="false"
@@ -195,7 +195,7 @@
             :bodyStyle="altaColumnStyle(col)"
           >
             <template #filter="{ filterModel, filterCallback }">
-              <div class="fm-filter-cell jobtype-filter-cell jobtype-popup-filter-cell">
+              <div class="fm-filter-cell jobtype-filter-cell jobtype-filter-cell--alta">
                 <span class="fm-filter-prefix">~</span>
                 <InputText type="text" v-model="filterModel.value" @input="filterCallback()" class="fm-column-filter" />
                 <span class="fm-filter-more">...</span>
@@ -203,24 +203,24 @@
             </template>
 
             <template #body="{ data }">
-              <span class="fm-cell-text jobtype-cell-text" :title="String(data[col.key] ?? '')">
-                {{ data[col.key] ?? '' }}
+              <span class="fm-cell-text jobtype-cell-text" :title="String(data[col.field] ?? '')">
+                {{ data[col.field] ?? '' }}
               </span>
             </template>
           </Column>
         </DataTable>
 
-        <Button
-          icon="pi pi-trash"
-          text
-          rounded
-          class="fm-grid-action-final jobtype-grid-action jobtype-modal-icon-button jobtype-popup-trash-standalone"
+        <button
+          type="button"
+          class="jobtype-alta-trash-left"
           :disabled="!altaSelectedRow"
           title="Eliminar"
           aria-label="Eliminar"
           v-tooltip.top="'Eliminar'"
           @click="eliminarAltaPreview"
-        />
+        >
+          <i class="pi pi-trash" aria-hidden="true"></i>
+        </button>
       </div>
 
       <template #footer>
@@ -275,6 +275,52 @@
         <Button label="ACTUALIZAR" class="jobtype-modal-button jobtype-modal-button--update" @click="actualizarRelacion" />
       </template>
     </Dialog>
+
+    <Dialog
+      v-model:visible="showEliminar"
+      class="jobtype-delete-confirm"
+      appendTo="body"
+      :modal="true"
+      :draggable="false"
+      :resizable="false"
+      :closable="false"
+      :style="{ width: '560px', maxWidth: 'calc(100vw - 32px)' }"
+    >
+      <template #header>
+        <div class="jobtype-delete-confirm__header">
+          <span class="jobtype-delete-confirm__title">Alerta</span>
+          <span
+            role="button"
+            tabindex="0"
+            class="jobtype-delete-confirm__close"
+            aria-label="Cerrar"
+            @click="cancelarEliminar"
+            @keydown.enter.prevent="cancelarEliminar"
+            @keydown.space.prevent="cancelarEliminar"
+          >
+            <i class="pi pi-times" aria-hidden="true"></i>
+          </span>
+        </div>
+      </template>
+
+      <div class="jobtype-delete-confirm__body">
+        <i class="pi pi-exclamation-triangle jobtype-delete-confirm__icon" aria-hidden="true"></i>
+        <span class="jobtype-delete-confirm__message">
+          ¿Confirma que desea desactivar la relación seleccionada?
+        </span>
+      </div>
+
+      <template #footer>
+        <div class="jobtype-delete-confirm__footer">
+          <button type="button" class="jobtype-delete-confirm__button jobtype-delete-confirm__button--cancel" @click="cancelarEliminar">
+            CANCELAR
+          </button>
+          <button type="button" class="jobtype-delete-confirm__button jobtype-delete-confirm__button--accept" @click="confirmarEliminar">
+            ACEPTAR
+          </button>
+        </div>
+      </template>
+    </Dialog>
   </div>
 </template>
 
@@ -297,15 +343,15 @@ const { exportToExcel, parseDataFromTable } = useExcelExport()
 
 const showAlta = ref(false)
 const showEdicion = ref(false)
+const showEliminar = ref(false)
 const altaRows = ref([])
 const altaSelectedRow = ref(null)
-const altaSelectedCell = ref(null)
 
-const altaGridColumns = ref([
-  { key: 'codigoTarea', label: 'CODIGO_TAREA', width: '170px', minWidth: '140px' },
-  { key: 'tarea', label: 'TAREA', width: '250px', minWidth: '180px' },
-  { key: 'nombreContrato', label: 'NOMBRE_CONTRATO', width: '210px', minWidth: '170px' },
-  { key: 'pais', label: 'PAIS', width: '100px', minWidth: '90px' }
+const altaColumns = ref([
+  { field: 'codigoTarea', header: 'CODIGO_TAREA', width: '20%', minWidth: '150px' },
+  { field: 'tarea', header: 'TAREA', width: '32%', minWidth: '220px' },
+  { field: 'nombreContrato', header: 'NOMBRE_CONTRATO', width: '32%', minWidth: '220px' },
+  { field: 'pais', header: 'PAIS', width: '16%', minWidth: '160px' }
 ])
 
 const paisOptions = [
@@ -335,7 +381,7 @@ const filters = ref(
 
 const altaTableFilters = ref(
   Object.fromEntries(
-    altaGridColumns.value.map((col) => [col.key, { value: null, matchMode: FilterMatchMode.CONTAINS }])
+    altaColumns.value.map((col) => [col.field, { value: null, matchMode: FilterMatchMode.CONTAINS }])
   )
 )
 
@@ -361,7 +407,7 @@ const columnStyle = (col) => ({
 const altaColumnStyle = (col) => ({
   width: col.width || '140px',
   minWidth: col.minWidth || col.width || '100px',
-  maxWidth: 'none'
+  maxWidth: col.width || 'none'
 })
 
 const rowClass = (data) => ({
@@ -379,10 +425,7 @@ const onRowClick = (event) => {
 }
 
 const onAltaRowClick = (event) => {
-  if (event?.data) {
-    altaSelectedRow.value = event.data
-    altaSelectedCell.value = { rowId: event.data.id, field: 'codigoTarea' }
-  }
+  if (event?.data) altaSelectedRow.value = event.data
 }
 
 const exportarExcel = () => {
@@ -403,7 +446,6 @@ const abrirAlta = () => {
   altaForm.contrato = ''
   altaRows.value = []
   altaSelectedRow.value = null
-  altaSelectedCell.value = null
   Object.values(altaTableFilters.value).forEach((filter) => {
     filter.value = null
   })
@@ -423,7 +465,6 @@ const agregarRelacionPreview = () => {
 
   altaRows.value = [...altaRows.value, newRow]
   altaSelectedRow.value = newRow
-  altaSelectedCell.value = { rowId: newRow.id, field: 'codigoTarea' }
   altaForm.jobtype = ''
   altaForm.contrato = ''
 }
@@ -433,7 +474,6 @@ const eliminarAltaPreview = () => {
   const deletedId = altaSelectedRow.value.id
   altaRows.value = altaRows.value.filter((row) => row.id !== deletedId)
   altaSelectedRow.value = null
-  altaSelectedCell.value = null
 }
 
 const relacionar = () => {
@@ -458,7 +498,18 @@ const actualizarRelacion = () => {
 }
 
 const eliminar = () => {
-  // ACA TIENE QUE CONECTAR EL BACKEND - ELIMINAR RELACION JOBTYPE-CONTRATO
+  if (!store.selectedRow) return
+  showEliminar.value = true
+}
+
+const cancelarEliminar = () => {
+  showEliminar.value = false
+}
+
+const confirmarEliminar = () => {
+  // ACA TIENE QUE CONECTAR EL BACKEND - DESACTIVAR RELACION JOBTYPE-CONTRATO
+  // Usar store.selectedRow para enviar la relacion seleccionada al servicio real.
+  showEliminar.value = false
 }
 </script>
 
@@ -486,32 +537,32 @@ const eliminar = () => {
 }
 
 .jobtype-contrato-grid :deep(.p-datatable-table),
-.jobtype-popup-datatable :deep(.p-datatable-table) {
+.jobtype-alta-datatable :deep(.p-datatable-table) {
   table-layout: fixed !important;
 }
 
 .jobtype-contrato-grid :deep(.p-datatable-thead > tr > th),
 .jobtype-contrato-grid :deep(.p-datatable-tbody > tr > td),
-.jobtype-popup-datatable :deep(.p-datatable-thead > tr > th),
-.jobtype-popup-datatable :deep(.p-datatable-tbody > tr > td) {
+.jobtype-alta-datatable :deep(.p-datatable-thead > tr > th),
+.jobtype-alta-datatable :deep(.p-datatable-tbody > tr > td) {
   overflow: hidden !important;
   vertical-align: middle !important;
 }
 
 .jobtype-contrato-grid :deep(.p-datatable-tbody > tr),
-.jobtype-popup-datatable :deep(.p-datatable-tbody > tr) {
+.jobtype-alta-datatable :deep(.p-datatable-tbody > tr) {
   cursor: pointer;
 }
 
 .jobtype-contrato-grid :deep(.p-datatable-tbody > tr:hover > td),
-.jobtype-popup-datatable :deep(.p-datatable-tbody > tr:hover > td) {
+.jobtype-alta-datatable :deep(.p-datatable-tbody > tr:hover > td) {
   background: rgba(0, 180, 181, .06) !important;
 }
 
 .jobtype-contrato-grid :deep(.p-datatable-tbody > tr.jobtype-row-selected > td),
 .jobtype-contrato-grid :deep(.p-datatable-tbody > tr.p-highlight > td),
-.jobtype-popup-datatable :deep(.p-datatable-tbody > tr.jobtype-row-selected > td),
-.jobtype-popup-datatable :deep(.p-datatable-tbody > tr.p-highlight > td) {
+.jobtype-alta-datatable :deep(.p-datatable-tbody > tr.jobtype-row-selected > td),
+.jobtype-alta-datatable :deep(.p-datatable-tbody > tr.p-highlight > td) {
   background: #e8f8fb !important;
   color: #0f2f3d !important;
   font-weight: 600 !important;
@@ -535,6 +586,10 @@ const eliminar = () => {
   line-height: 1 !important;
 }
 
+.jobtype-grid-actions--alta {
+  padding-left: 2px;
+}
+
 .jobtype-grid-actions :deep(.p-button.jobtype-grid-action) {
   width: 16px !important;
   min-width: 16px !important;
@@ -548,7 +603,7 @@ const eliminar = () => {
   border-radius: 0 !important;
   background: transparent !important;
   background-color: transparent !important;
-  color: #4f6673 !important;
+  color: #001f2f !important;
   box-shadow: none !important;
 }
 
@@ -561,8 +616,8 @@ const eliminar = () => {
 
 .jobtype-grid-actions :deep(.p-button.jobtype-grid-action:disabled),
 .jobtype-grid-actions :deep(.p-button.jobtype-grid-action.p-disabled) {
-  color: #b7c1c8 !important;
-  opacity: .68 !important;
+  color: #001f2f !important;
+  opacity: .35 !important;
   cursor: not-allowed !important;
 }
 
@@ -579,5 +634,199 @@ const eliminar = () => {
   font-size: 12px !important;
   line-height: 12px !important;
   margin: 0 !important;
+}
+
+.jobtype-alta-grid-shell {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+}
+
+.jobtype-alta-trash-left,
+.jobtype-alta-trash-left:hover,
+.jobtype-alta-trash-left:focus,
+.jobtype-alta-trash-left:active,
+.jobtype-alta-trash-left:disabled {
+  position: absolute !important;
+  left: 14px !important;
+  bottom: 8px !important;
+  z-index: 5 !important;
+  width: 22px !important;
+  min-width: 22px !important;
+  height: 22px !important;
+  min-height: 22px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  outline: 0 !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  color: #001f2f !important;
+  opacity: 1 !important;
+  cursor: pointer !important;
+}
+
+.jobtype-alta-trash-left:disabled {
+  opacity: .55 !important;
+  cursor: not-allowed !important;
+}
+
+.jobtype-alta-trash-left .pi {
+  width: 16px !important;
+  min-width: 16px !important;
+  height: 16px !important;
+  min-height: 16px !important;
+  font-size: 16px !important;
+  line-height: 16px !important;
+  color: #001f2f !important;
+}
+
+.jobtype-alta-empty {
+  height: 148px !important;
+  min-height: 148px !important;
+}
+
+:global(.jobtype-delete-confirm.p-dialog) {
+  border-radius: 0 !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .16) !important;
+  overflow: hidden !important;
+}
+
+:global(.jobtype-delete-confirm .p-dialog-header) {
+  min-height: 56px !important;
+  padding: 0 !important;
+  border-bottom: 1px solid #d8e0e5 !important;
+}
+
+:global(.jobtype-delete-confirm__header) {
+  width: 100% !important;
+  min-height: 56px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 0 18px 0 20px !important;
+}
+
+:global(.jobtype-delete-confirm__title) {
+  color: #2c3e4d !important;
+  font-size: 26px !important;
+  font-weight: 400 !important;
+  line-height: 1 !important;
+}
+
+:global(.jobtype-delete-confirm__close) {
+  width: 30px !important;
+  height: 30px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: #8da0aa !important;
+  cursor: pointer !important;
+}
+
+:global(.jobtype-delete-confirm__close:hover),
+:global(.jobtype-delete-confirm__close:focus) {
+  color: #00a9bd !important;
+}
+
+:global(.jobtype-delete-confirm__close .pi) {
+  font-size: 27px !important;
+  font-weight: 700 !important;
+}
+
+:global(.jobtype-delete-confirm .p-dialog-content) {
+  padding: 0 !important;
+  border-bottom: 1px solid #d8e0e5 !important;
+  overflow: hidden !important;
+}
+
+:global(.jobtype-delete-confirm__body) {
+  min-height: 145px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 32px !important;
+  padding: 0 38px !important;
+}
+
+:global(.jobtype-delete-confirm__icon) {
+  width: 56px !important;
+  min-width: 56px !important;
+  color: #e5393f !important;
+  font-size: 55px !important;
+  line-height: 55px !important;
+  filter: drop-shadow(0 10px 14px rgba(229, 57, 63, .13)) !important;
+}
+
+:global(.jobtype-delete-confirm__message) {
+  color: #2c3e4d !important;
+  font-size: 22px !important;
+  font-weight: 400 !important;
+  line-height: 1.28 !important;
+}
+
+:global(.jobtype-delete-confirm .p-dialog-footer) {
+  min-height: 74px !important;
+  padding: 0 20px !important;
+  border-top: 0 !important;
+}
+
+:global(.jobtype-delete-confirm__footer) {
+  width: 100% !important;
+  display: flex !important;
+  justify-content: flex-end !important;
+  align-items: center !important;
+  gap: 14px !important;
+}
+
+:global(.jobtype-delete-confirm__button) {
+  min-width: 170px !important;
+  height: 56px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 7px !important;
+  padding: 0 24px !important;
+  font-size: 24px !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+  cursor: pointer !important;
+  box-shadow: none !important;
+  outline: 0 !important;
+}
+
+:global(.jobtype-delete-confirm__button--cancel) {
+  background: #ffffff !important;
+  background-color: #ffffff !important;
+  border: 1px solid #00a9bd !important;
+  color: #00a9bd !important;
+}
+
+:global(.jobtype-delete-confirm__button--cancel:hover),
+:global(.jobtype-delete-confirm__button--cancel:focus) {
+  background: #dff7fb !important;
+  background-color: #dff7fb !important;
+  border: 1px solid #00a9bd !important;
+  color: #00a9bd !important;
+}
+
+:global(.jobtype-delete-confirm__button--accept) {
+  background: #00a9bd !important;
+  background-color: #00a9bd !important;
+  border: 1px solid #00a9bd !important;
+  color: #ffffff !important;
+}
+
+:global(.jobtype-delete-confirm__button--accept:hover),
+:global(.jobtype-delete-confirm__button--accept:focus) {
+  background: #00a9bd !important;
+  background-color: #00a9bd !important;
+  border: 1px solid #00a9bd !important;
+  color: #ffffff !important;
 }
 </style>

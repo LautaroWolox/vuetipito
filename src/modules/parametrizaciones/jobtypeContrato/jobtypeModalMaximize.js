@@ -3,6 +3,7 @@ const HEADER_SELECTOR = '.jobtype-modal-header'
 const CLOSE_SELECTOR = '.jobtype-modal-close'
 const MAXIMIZE_CLASS = 'jobtype-modal-maximize'
 const EXPANDED_CLASS = 'jobtype-modal--expanded'
+const BOUND_ATTR = 'data-jobtype-maximize-bound'
 
 const createToggle = () => {
   const toggle = document.createElement('span')
@@ -40,27 +41,44 @@ const toggleModalSize = (toggle) => {
   setToggleState(modal, toggle)
 }
 
-const enhanceModal = (modal) => {
-  const header = modal.querySelector(HEADER_SELECTOR)
-  if (!header || header.querySelector(`.${MAXIMIZE_CLASS}`)) return
+const bindToggle = (toggle) => {
+  if (!toggle || toggle.getAttribute(BOUND_ATTR) === 'true') return
 
-  const close = header.querySelector(CLOSE_SELECTOR)
-  const toggle = createToggle()
+  toggle.setAttribute(BOUND_ATTR, 'true')
 
-  toggle.addEventListener('click', () => toggleModalSize(toggle))
+  toggle.addEventListener('click', (event) => {
+    event.preventDefault()
+    event.stopPropagation()
+    toggleModalSize(toggle)
+  })
+
   toggle.addEventListener('keydown', (event) => {
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault()
+      event.stopPropagation()
       toggleModalSize(toggle)
     }
   })
+}
 
-  if (close) {
-    header.insertBefore(toggle, close)
-  } else {
-    header.appendChild(toggle)
+const enhanceModal = (modal) => {
+  const header = modal.querySelector(HEADER_SELECTOR)
+  if (!header) return
+
+  let toggle = header.querySelector(`.${MAXIMIZE_CLASS}`)
+
+  if (!toggle) {
+    const close = header.querySelector(CLOSE_SELECTOR)
+    toggle = createToggle()
+
+    if (close) {
+      header.insertBefore(toggle, close)
+    } else {
+      header.appendChild(toggle)
+    }
   }
 
+  bindToggle(toggle)
   setToggleState(modal, toggle)
 }
 
