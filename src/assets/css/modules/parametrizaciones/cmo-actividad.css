@@ -261,3 +261,105 @@
   font-size: 13px !important;
   font-weight: 500 !important;
 }
+
+body .cmo-alta-modal .cmo-modal-form {
+  grid-template-columns: minmax(240px, 1fr) minmax(240px, 1fr) 180px !important;
+  column-gap: 28px !important;
+}
+
+body .cmo-alta-modal .cmo-modal-button--add {
+  align-self: end !important;
+}
+
+body .cmo-alta-modal #tabla-cmo-alta.fm-pass-grid,
+body .cmo-alta-modal #tabla-cmo-alta.p-datatable {
+  width: 100% !important;
+  min-width: 100% !important;
+  border-left: 2px solid #00a9bd !important;
+}
+
+body .cmo-alta-modal #tabla-cmo-alta .p-datatable-table-container,
+body .cmo-alta-modal #tabla-cmo-alta .p-datatable-wrapper {
+  width: 100% !important;
+  min-width: 100% !important;
+  overflow-x: hidden !important;
+}
+
+body .cmo-alta-modal #tabla-cmo-alta .p-datatable-table {
+  width: 100% !important;
+  min-width: 100% !important;
+  table-layout: fixed !important;
+}
+
+body .cmo-alta-modal #tabla-cmo-alta .p-datatable-thead > tr > th,
+body .cmo-alta-modal #tabla-cmo-alta .p-datatable-tbody > tr > td {
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+  vertical-align: middle !important;
+}
+
+body .cmo-alta-modal #tabla-cmo-alta .fm-filter-cell,
+body .cmo-alta-modal #tabla-cmo-alta .cmo-filter-cell--alta,
+body .cmo-alta-modal #tabla-cmo-alta .fm-column-filter,
+body .cmo-alta-modal #tabla-cmo-alta .p-inputtext {
+  width: 100% !important;
+  min-width: 0 !important;
+}
+
+body .cmo-alta-modal #tabla-cmo-alta .p-datatable-emptymessage > td,
+body .cmo-alta-modal #tabla-cmo-alta .p-datatable-empty-message > td,
+body .cmo-alta-modal #tabla-cmo-alta .cmo-alta-empty {
+  height: 148px !important;
+  min-height: 148px !important;
+}
+
+body .cmo-alta-modal #tabla-cmo-alta .cmo-alta-empty {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: #6d8392 !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+}
+
+body .cmo-alta-modal #tabla-cmo-alta .p-paginator,
+body .cmo-alta-modal #tabla-cmo-alta .p-datatable-paginator-bottom {
+  min-height: 34px !important;
+  height: 34px !important;
+  padding-top: 4px !important;
+  padding-bottom: 4px !important;
+}
+
+body .cmo-alta-modal .cmo-alta-trash-left,
+body .cmo-alta-modal .cmo-alta-trash-left:hover,
+body .cmo-alta-modal .cmo-alta-trash-left:focus,
+body .cmo-alta-modal .cmo-alta-trash-left:active,
+body .cmo-alta-modal .cmo-alta-trash-left:disabled {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  color: #001f2f !important;
+}
+
+body .cmo-alta-modal .cmo-alta-trash-left .pi {
+  color: #001f2f !important;
+  font-size: 16px !important;
+}
+
+body .cmo-alta-modal #tabla-cmo-alta .p-datatable-tbody > tr.cmo-row-selected > td,
+body .cmo-alta-modal #tabla-cmo-alta .p-datatable-tbody > tr.jobtype-row-selected > td,
+body .cmo-alta-modal #tabla-cmo-alta .p-datatable-tbody > tr.fm-selected-row > td,
+body .cmo-alta-modal #tabla-cmo-alta .p-datatable-tbody > tr.p-highlight > td {
+  background: #d7f3f6 !important;
+  color: #006f7d !important;
+  font-weight: 700 !important;
+}
+
+@media (max-width: 900px) {
+  body .cmo-alta-modal .cmo-modal-form {
+    grid-template-columns: 1fr !important;
+    row-gap: 14px !important;
+  }
+}
