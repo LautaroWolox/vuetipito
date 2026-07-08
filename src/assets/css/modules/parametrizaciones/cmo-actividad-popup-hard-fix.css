@@ -1,8 +1,8 @@
 /* ========================================================================
    CONFIGURA CMO-ACTIVIDAD - HARD FIX FINAL
    ------------------------------------------------------------------------
-   Último override cargado al final para impedir que PrimeVue o legacy
-   agranden el botón AGREGAR o armen una caja grande en el paginador.
+   Último override cargado al final para que el popup Alta CMO - Actividad
+   respete el mismo layout visual que Alta Jobtype - Contrato.
    ======================================================================== */
 
 body .cmo-alta-modal .p-dialog-content {
@@ -12,11 +12,16 @@ body .cmo-alta-modal .p-dialog-content {
 body .cmo-alta-modal .cmo-modal-form,
 body .cmo-alta-modal .jobtype-modal-form.cmo-modal-form {
   display: grid !important;
-  grid-template-columns: 400px 520px 220px !important;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr) 220px !important;
   align-items: end !important;
-  justify-content: start !important;
-  gap: 28px !important;
-  padding-right: 24px !important;
+  justify-content: stretch !important;
+  column-gap: 28px !important;
+  row-gap: 12px !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  padding-right: 0 !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
 }
 
 body .cmo-alta-modal .cmo-modal-form > .jobtype-modal-field {
@@ -47,7 +52,7 @@ html body .cmo-alta-modal .cmo-modal-form > button.cmo-modal-button-add-native:d
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
-  justify-self: start !important;
+  justify-self: end !important;
   align-self: end !important;
   flex: 0 0 220px !important;
   padding: 0 18px !important;
@@ -174,7 +179,7 @@ html body .cmo-alta-modal .cmo-alta-trash-left {
 @media (max-width: 1260px) {
   body .cmo-alta-modal .cmo-modal-form,
   body .cmo-alta-modal .jobtype-modal-form.cmo-modal-form {
-    grid-template-columns: minmax(250px, 1fr) minmax(300px, 1.2fr) 220px !important;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr) 220px !important;
   }
 }
 
@@ -182,5 +187,9 @@ html body .cmo-alta-modal .cmo-alta-trash-left {
   body .cmo-alta-modal .cmo-modal-form,
   body .cmo-alta-modal .jobtype-modal-form.cmo-modal-form {
     grid-template-columns: 1fr !important;
+  }
+
+  html body .cmo-alta-modal .cmo-modal-form > button.cmo-modal-button-add-native {
+    justify-self: end !important;
   }
 }
