@@ -107,13 +107,13 @@
 
     <Dialog
       v-model:visible="showAlta"
-      class="jobtype-modal jobtype-modal--alta"
+      class="jobtype-modal jobtype-modal--alta cmo-alta-compact-modal"
       appendTo="body"
       :modal="true"
       :draggable="true"
       :resizable="false"
       :closable="false"
-      :style="{ width: '980px', maxWidth: 'calc(100vw - 48px)' }"
+      :style="{ width: '820px', maxWidth: 'calc(100vw - 96px)' }"
     >
       <template #header>
         <div class="jobtype-modal-header">
@@ -156,7 +156,7 @@
           dataKey="id"
           tableStyle="table-layout: fixed; width: 100%; min-width: 100%"
           scrollable
-          scrollHeight="210px"
+          scrollHeight="165px"
           removableSort
           sortMode="multiple"
           filterDisplay="row"
