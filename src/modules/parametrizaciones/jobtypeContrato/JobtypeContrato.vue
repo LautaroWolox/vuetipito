@@ -275,6 +275,45 @@
         <Button label="ACTUALIZAR" class="jobtype-modal-button jobtype-modal-button--update" @click="actualizarRelacion" />
       </template>
     </Dialog>
+
+    <Dialog
+      v-model:visible="showEliminar"
+      class="jobtype-delete-confirm"
+      appendTo="body"
+      :modal="true"
+      :draggable="false"
+      :resizable="false"
+      :closable="false"
+      :style="{ width: '890px', maxWidth: 'calc(100vw - 32px)' }"
+    >
+      <template #header>
+        <div class="jobtype-delete-confirm__header">
+          <span class="jobtype-delete-confirm__title">Alerta</span>
+          <span
+            role="button"
+            tabindex="0"
+            class="jobtype-delete-confirm__close"
+            aria-label="Cerrar"
+            @click="cancelarEliminar"
+            @keydown.enter.prevent="cancelarEliminar"
+            @keydown.space.prevent="cancelarEliminar"
+          >
+            <i class="pi pi-times" aria-hidden="true"></i>
+          </span>
+        </div>
+      </template>
+
+      <div class="jobtype-delete-confirm__message">
+        Confirma que desea desactivar la relación seleccionada?
+      </div>
+
+      <template #footer>
+        <div class="jobtype-delete-confirm__footer">
+          <Button label="CANCELAR" class="jobtype-delete-confirm__button jobtype-delete-confirm__button--cancel" @click="cancelarEliminar" />
+          <Button label="ACEPTAR" class="jobtype-delete-confirm__button jobtype-delete-confirm__button--accept" @click="confirmarEliminar" />
+        </div>
+      </template>
+    </Dialog>
   </div>
 </template>
 
@@ -297,6 +336,7 @@ const { exportToExcel, parseDataFromTable } = useExcelExport()
 
 const showAlta = ref(false)
 const showEdicion = ref(false)
+const showEliminar = ref(false)
 const altaRows = ref([])
 const altaSelectedRow = ref(null)
 
@@ -451,7 +491,18 @@ const actualizarRelacion = () => {
 }
 
 const eliminar = () => {
-  // ACA TIENE QUE CONECTAR EL BACKEND - ELIMINAR RELACION JOBTYPE-CONTRATO
+  if (!store.selectedRow) return
+  showEliminar.value = true
+}
+
+const cancelarEliminar = () => {
+  showEliminar.value = false
+}
+
+const confirmarEliminar = () => {
+  // ACA TIENE QUE CONECTAR EL BACKEND - DESACTIVAR RELACION JOBTYPE-CONTRATO
+  // Usar store.selectedRow para enviar la relacion seleccionada al servicio real.
+  showEliminar.value = false
 }
 </script>
 
@@ -632,5 +683,103 @@ const eliminar = () => {
 .jobtype-alta-empty {
   height: 148px !important;
   min-height: 148px !important;
+}
+
+:global(.jobtype-delete-confirm.p-dialog) {
+  border-radius: 0 !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .16) !important;
+  overflow: hidden !important;
+}
+
+:global(.jobtype-delete-confirm .p-dialog-header) {
+  min-height: 80px !important;
+  padding: 0 !important;
+  border-bottom: 1px solid #e0e0e0 !important;
+}
+
+:global(.jobtype-delete-confirm__header) {
+  width: 100% !important;
+  min-height: 80px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 0 18px 0 21px !important;
+}
+
+:global(.jobtype-delete-confirm__title) {
+  color: #3c3c3c !important;
+  font-size: 25px !important;
+  font-weight: 400 !important;
+  line-height: 1 !important;
+}
+
+:global(.jobtype-delete-confirm__close) {
+  width: 24px !important;
+  height: 24px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: #bdbdbd !important;
+  cursor: pointer !important;
+}
+
+:global(.jobtype-delete-confirm__close .pi) {
+  font-size: 17px !important;
+  font-weight: 700 !important;
+}
+
+:global(.jobtype-delete-confirm .p-dialog-content) {
+  padding: 24px 21px 37px !important;
+  border-bottom: 1px solid #e0e0e0 !important;
+  overflow: hidden !important;
+}
+
+:global(.jobtype-delete-confirm__message) {
+  color: #202124 !important;
+  font-size: 20px !important;
+  font-weight: 400 !important;
+  line-height: 1.25 !important;
+}
+
+:global(.jobtype-delete-confirm .p-dialog-footer) {
+  min-height: 72px !important;
+  padding: 0 16px !important;
+  border-top: 0 !important;
+}
+
+:global(.jobtype-delete-confirm__footer) {
+  width: 100% !important;
+  display: flex !important;
+  justify-content: flex-end !important;
+  align-items: center !important;
+  gap: 14px !important;
+}
+
+:global(.jobtype-delete-confirm__button.p-button) {
+  min-width: 128px !important;
+  height: 47px !important;
+  border-radius: 24px !important;
+  padding: 0 18px !important;
+  font-size: 20px !important;
+  font-weight: 500 !important;
+  box-shadow: none !important;
+}
+
+:global(.jobtype-delete-confirm__button--cancel.p-button),
+:global(.jobtype-delete-confirm__button--cancel.p-button:enabled:hover),
+:global(.jobtype-delete-confirm__button--cancel.p-button:enabled:focus),
+:global(.jobtype-delete-confirm__button--cancel.p-button:enabled:active) {
+  background: #ffffff !important;
+  border: 1px solid #00a9bd !important;
+  color: #00a9bd !important;
+}
+
+:global(.jobtype-delete-confirm__button--accept.p-button),
+:global(.jobtype-delete-confirm__button--accept.p-button:enabled:hover),
+:global(.jobtype-delete-confirm__button--accept.p-button:enabled:focus),
+:global(.jobtype-delete-confirm__button--accept.p-button:enabled:active) {
+  background: #00a9bd !important;
+  border: 1px solid #00a9bd !important;
+  color: #ffffff !important;
 }
 </style>
