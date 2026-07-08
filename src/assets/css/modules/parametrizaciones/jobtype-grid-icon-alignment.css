@@ -7,24 +7,29 @@
 
 .jobtype-contrato-page .jobtype-contrato-filters,
 .jobtype-contrato-page .p-accordionpanel:first-child .p-accordioncontent-content {
-  border-left-width: 1px !important;
-  border-left-style: solid !important;
-  border-left-color: #00a9bd !important;
+  border-left: 1.5px solid #8ed9e2 !important;
 }
 
 .jobtype-contrato-page .fm-pass-grid,
 .jobtype-contrato-page .fm-pt-datatable,
 .jobtype-contrato-page #tabla-jobtype-contrato.fm-pass-grid,
 .jobtype-contrato-page #tabla-jobtype-contrato.p-datatable {
-  border-left-width: 1px !important;
-  border-left-style: solid !important;
-  border-left-color: #00a9bd !important;
+  border-left: 1.5px solid #8ed9e2 !important;
+  box-shadow: none !important;
+  outline: 0 !important;
+}
+
+.jobtype-contrato-page #tabla-jobtype-contrato .p-datatable-table-container,
+.jobtype-contrato-page #tabla-jobtype-contrato .p-datatable-wrapper,
+.jobtype-contrato-page #tabla-jobtype-contrato .p-datatable-table {
+  box-shadow: none !important;
+  outline: 0 !important;
 }
 
 .jobtype-contrato-page #tabla-jobtype-contrato .p-datatable-thead > tr > th,
 .jobtype-contrato-page #tabla-jobtype-contrato .p-datatable-tbody > tr > td {
-  border-right: 1px solid #a6e3ea !important;
-  border-bottom: 1px solid #c7edf2 !important;
+  border-right: 1.5px solid #8ed9e2 !important;
+  border-bottom: 1.5px solid #8ed9e2 !important;
 }
 
 .jobtype-contrato-page #tabla-jobtype-contrato .p-datatable-thead > tr > th {
