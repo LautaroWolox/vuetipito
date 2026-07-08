@@ -113,7 +113,7 @@
       :draggable="true"
       :resizable="false"
       :closable="false"
-      :style="{ width: '820px', maxWidth: 'calc(100vw - 96px)' }"
+      :style="{ width: '1080px', maxWidth: 'calc(100vw - 64px)' }"
     >
       <template #header>
         <div class="jobtype-modal-header">
@@ -156,7 +156,7 @@
           dataKey="id"
           tableStyle="table-layout: fixed; width: 100%; min-width: 100%"
           scrollable
-          scrollHeight="165px"
+          scrollHeight="150px"
           removableSort
           sortMode="multiple"
           filterDisplay="row"
@@ -249,10 +249,10 @@ const altaRows = ref([])
 const altaSelectedRow = ref(null)
 
 const altaColumns = ref([
-  { field: 'codigoActividad', header: 'CODIGO_ACTIVIDAD', width: '24%', minWidth: '180px' },
-  { field: 'descActividad', header: 'DESC_ACTIVIDAD', width: '34%', minWidth: '220px' },
-  { field: 'codigoS4', header: 'CODIGO_S4', width: '24%', minWidth: '180px' },
-  { field: 'cmo', header: 'CMO', width: '18%', minWidth: '150px' }
+  { field: 'codigoActividad', header: 'CODIGO_ACTIVIDAD', width: '24%', minWidth: '140px' },
+  { field: 'descActividad', header: 'DESC_ACTIVIDAD', width: '34%', minWidth: '200px' },
+  { field: 'codigoS4', header: 'CODIGO_S4', width: '24%', minWidth: '140px' },
+  { field: 'cmo', header: 'CMO', width: '18%', minWidth: '110px' }
 ])
 
 const altaForm = reactive({
