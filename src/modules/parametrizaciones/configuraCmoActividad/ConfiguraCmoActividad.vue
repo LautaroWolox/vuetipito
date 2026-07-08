@@ -143,7 +143,7 @@
           <InputText id="alta-cmo-cmo" v-model="altaForm.cmo" class="jobtype-modal-input" />
         </div>
 
-        <Button label="AGREGAR" class="jobtype-modal-button jobtype-modal-button--add cmo-modal-button--add" :disabled="!canAgregarRelacion" @click="agregarRelacionPreview" />
+        <Button label="AGREGAR" class="jobtype-modal-button jobtype-modal-button--relacionar cmo-modal-button--add" :disabled="!canAgregarRelacion" @click="agregarRelacionPreview" />
       </div>
 
       <div class="jobtype-alta-grid-shell cmo-alta-grid-shell">
