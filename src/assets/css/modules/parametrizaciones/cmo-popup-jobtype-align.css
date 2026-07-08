@@ -7,43 +7,44 @@
 
 body .p-dialog.jobtype-modal.cmo-alta-compact-modal,
 body .jobtype-modal.cmo-alta-compact-modal {
-  width: 820px !important;
-  max-width: calc(100vw - 96px) !important;
+  width: 1080px !important;
+  max-width: calc(100vw - 64px) !important;
 }
 
 body .p-dialog.jobtype-modal.cmo-alta-compact-modal:not(.p-dialog-maximized) {
-  min-width: 760px !important;
+  min-width: 980px !important;
 }
 
 body .jobtype-modal.cmo-alta-compact-modal .p-dialog-header {
-  min-height: 54px !important;
-  height: 54px !important;
+  min-height: 52px !important;
+  height: 52px !important;
 }
 
 body .jobtype-modal.cmo-alta-compact-modal .p-dialog-content {
-  padding-top: 18px !important;
-  padding-bottom: 10px !important;
+  padding-top: 14px !important;
+  padding-bottom: 8px !important;
+  overflow-x: hidden !important;
 }
 
 body .jobtype-modal.cmo-alta-compact-modal .jobtype-modal-form {
-  margin-bottom: 16px !important;
-  column-gap: 22px !important;
+  margin-bottom: 14px !important;
+  column-gap: 24px !important;
 }
 
 body .jobtype-modal.cmo-alta-compact-modal .jobtype-modal-input,
 body .jobtype-modal.cmo-alta-compact-modal .p-inputtext {
-  height: 40px !important;
-  min-height: 40px !important;
+  height: 38px !important;
+  min-height: 38px !important;
 }
 
 body .jobtype-modal.cmo-alta-compact-modal .jobtype-modal-button--add,
 body .jobtype-modal.cmo-alta-compact-modal .jobtype-modal-button--add.p-button {
-  width: 180px !important;
-  min-width: 180px !important;
-  max-width: 180px !important;
-  height: 42px !important;
-  min-height: 42px !important;
-  max-height: 42px !important;
+  width: 190px !important;
+  min-width: 190px !important;
+  max-width: 190px !important;
+  height: 40px !important;
+  min-height: 40px !important;
+  max-height: 40px !important;
   border-radius: 22px !important;
   font-size: 13px !important;
 }
@@ -58,16 +59,39 @@ body .jobtype-modal .jobtype-alta-grid-shell:has(#tabla-cmo-alta-jobtype) {
   overflow: visible !important;
 }
 
+body .jobtype-modal.cmo-alta-compact-modal #tabla-cmo-alta-jobtype,
+body .jobtype-modal.cmo-alta-compact-modal #tabla-cmo-alta-jobtype .p-datatable,
+body .jobtype-modal.cmo-alta-compact-modal #tabla-cmo-alta-jobtype .p-datatable-wrapper,
+body .jobtype-modal.cmo-alta-compact-modal #tabla-cmo-alta-jobtype .p-datatable-table-container {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+}
+
+body .jobtype-modal.cmo-alta-compact-modal #tabla-cmo-alta-jobtype table,
+body .jobtype-modal.cmo-alta-compact-modal #tabla-cmo-alta-jobtype .p-datatable-table,
+body .jobtype-modal.cmo-alta-compact-modal #tabla-cmo-alta-jobtype .p-datatable-scrollable-table {
+  width: 100% !important;
+  min-width: 100% !important;
+  max-width: 100% !important;
+  table-layout: fixed !important;
+}
+
+body .jobtype-modal.cmo-alta-compact-modal #tabla-cmo-alta-jobtype th,
+body .jobtype-modal.cmo-alta-compact-modal #tabla-cmo-alta-jobtype td {
+  box-sizing: border-box !important;
+}
+
 body .jobtype-modal.cmo-alta-compact-modal #tabla-cmo-alta-jobtype .p-datatable-table-container,
 body .jobtype-modal.cmo-alta-compact-modal #tabla-cmo-alta-jobtype .p-datatable-wrapper {
-  max-height: 165px !important;
+  max-height: 152px !important;
 }
 
 body .jobtype-modal #tabla-cmo-alta-jobtype .p-datatable-paginator-bottom,
 body .jobtype-modal #tabla-cmo-alta-jobtype .p-paginator {
   position: relative !important;
-  min-height: 44px !important;
-  height: 44px !important;
+  min-height: 42px !important;
+  height: 42px !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -86,7 +110,7 @@ body .jobtype-modal #tabla-cmo-alta-jobtype + button.jobtype-alta-trash-left:dis
   -webkit-appearance: none !important;
   position: absolute !important;
   left: 16px !important;
-  bottom: 11px !important;
+  bottom: 10px !important;
   z-index: 20 !important;
   width: 22px !important;
   min-width: 22px !important;
@@ -156,18 +180,18 @@ body .jobtype-modal #tabla-cmo-alta-jobtype .jobtype-filter-cell--alta .p-inputt
 }
 
 body .jobtype-modal.cmo-alta-compact-modal .p-dialog-footer {
-  padding-top: 12px !important;
-  padding-bottom: 14px !important;
+  padding-top: 10px !important;
+  padding-bottom: 12px !important;
 }
 
 body .jobtype-modal.cmo-alta-compact-modal .jobtype-modal-button--relacionar,
 body .jobtype-modal.cmo-alta-compact-modal .jobtype-modal-button--relacionar.p-button {
-  width: 180px !important;
-  min-width: 180px !important;
-  max-width: 180px !important;
-  height: 42px !important;
-  min-height: 42px !important;
-  max-height: 42px !important;
+  width: 190px !important;
+  min-width: 190px !important;
+  max-width: 190px !important;
+  height: 40px !important;
+  min-height: 40px !important;
+  max-height: 40px !important;
   border-radius: 22px !important;
   font-size: 13px !important;
 }
