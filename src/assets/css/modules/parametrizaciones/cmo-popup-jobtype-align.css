@@ -5,16 +5,69 @@
    visual del popup Alta Jobtype - Contrato.
    ======================================================================== */
 
+body .p-dialog.jobtype-modal.cmo-alta-compact-modal,
+body .jobtype-modal.cmo-alta-compact-modal {
+  width: 820px !important;
+  max-width: calc(100vw - 96px) !important;
+}
+
+body .p-dialog.jobtype-modal.cmo-alta-compact-modal:not(.p-dialog-maximized) {
+  min-width: 760px !important;
+}
+
+body .jobtype-modal.cmo-alta-compact-modal .p-dialog-header {
+  min-height: 54px !important;
+  height: 54px !important;
+}
+
+body .jobtype-modal.cmo-alta-compact-modal .p-dialog-content {
+  padding-top: 18px !important;
+  padding-bottom: 10px !important;
+}
+
+body .jobtype-modal.cmo-alta-compact-modal .jobtype-modal-form {
+  margin-bottom: 16px !important;
+  column-gap: 22px !important;
+}
+
+body .jobtype-modal.cmo-alta-compact-modal .jobtype-modal-input,
+body .jobtype-modal.cmo-alta-compact-modal .p-inputtext {
+  height: 40px !important;
+  min-height: 40px !important;
+}
+
+body .jobtype-modal.cmo-alta-compact-modal .jobtype-modal-button--add,
+body .jobtype-modal.cmo-alta-compact-modal .jobtype-modal-button--add.p-button {
+  width: 180px !important;
+  min-width: 180px !important;
+  max-width: 180px !important;
+  height: 42px !important;
+  min-height: 42px !important;
+  max-height: 42px !important;
+  border-radius: 22px !important;
+  font-size: 13px !important;
+}
+
+body .jobtype-modal.cmo-alta-compact-modal .jobtype-modal-button--add .p-button-label {
+  font-size: 13px !important;
+  line-height: 13px !important;
+}
+
 body .jobtype-modal .jobtype-alta-grid-shell:has(#tabla-cmo-alta-jobtype) {
   position: relative !important;
   overflow: visible !important;
 }
 
+body .jobtype-modal.cmo-alta-compact-modal #tabla-cmo-alta-jobtype .p-datatable-table-container,
+body .jobtype-modal.cmo-alta-compact-modal #tabla-cmo-alta-jobtype .p-datatable-wrapper {
+  max-height: 165px !important;
+}
+
 body .jobtype-modal #tabla-cmo-alta-jobtype .p-datatable-paginator-bottom,
 body .jobtype-modal #tabla-cmo-alta-jobtype .p-paginator {
   position: relative !important;
-  min-height: 48px !important;
-  height: 48px !important;
+  min-height: 44px !important;
+  height: 44px !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -33,7 +86,7 @@ body .jobtype-modal #tabla-cmo-alta-jobtype + button.jobtype-alta-trash-left:dis
   -webkit-appearance: none !important;
   position: absolute !important;
   left: 16px !important;
-  bottom: 13px !important;
+  bottom: 11px !important;
   z-index: 20 !important;
   width: 22px !important;
   min-width: 22px !important;
@@ -100,4 +153,26 @@ body .jobtype-modal #tabla-cmo-alta-jobtype .jobtype-filter-cell--alta .p-inputt
   width: calc(100% - 48px) !important;
   min-width: 0 !important;
   max-width: calc(100% - 48px) !important;
+}
+
+body .jobtype-modal.cmo-alta-compact-modal .p-dialog-footer {
+  padding-top: 12px !important;
+  padding-bottom: 14px !important;
+}
+
+body .jobtype-modal.cmo-alta-compact-modal .jobtype-modal-button--relacionar,
+body .jobtype-modal.cmo-alta-compact-modal .jobtype-modal-button--relacionar.p-button {
+  width: 180px !important;
+  min-width: 180px !important;
+  max-width: 180px !important;
+  height: 42px !important;
+  min-height: 42px !important;
+  max-height: 42px !important;
+  border-radius: 22px !important;
+  font-size: 13px !important;
+}
+
+body .jobtype-modal.cmo-alta-compact-modal .jobtype-modal-button--relacionar .p-button-label {
+  font-size: 13px !important;
+  line-height: 13px !important;
 }
