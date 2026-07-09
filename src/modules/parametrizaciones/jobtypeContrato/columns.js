@@ -9,8 +9,15 @@ export const jobtypeContratoColumns = [
   {
     field: 'tarea',
     header: 'TAREA',
-    width: '360px',
-    minWidth: '260px',
+    width: '340px',
+    minWidth: '240px',
+    exportable: true
+  },
+  {
+    field: 'origen',
+    header: 'ORIGEN',
+    width: '150px',
+    minWidth: '120px',
     exportable: true
   },
   {
