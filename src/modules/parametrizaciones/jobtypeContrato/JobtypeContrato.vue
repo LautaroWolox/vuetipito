@@ -235,13 +235,13 @@
 
     <Dialog
       v-model:visible="showEdicion"
-      class="jobtype-modal jobtype-modal--edicion"
+      class="jobtype-modal jobtype-modal--edicion jobtype-modal--edicion-origen"
       appendTo="body"
       :modal="true"
       :draggable="true"
       :resizable="false"
       :closable="false"
-      :style="{ width: '500px', maxWidth: 'calc(100vw - 64px)' }"
+      :style="{ width: '940px', maxWidth: 'calc(100vw - 48px)' }"
     >
       <template #header>
         <div class="jobtype-modal-header">
@@ -260,7 +260,7 @@
         </div>
       </template>
 
-      <div class="jobtype-edit-form">
+      <div class="jobtype-edit-form jobtype-edit-form--origen">
         <div class="jobtype-modal-field">
           <label for="edit-jobtype">JobType</label>
           <InputText id="edit-jobtype" v-model="editForm.jobtype" class="jobtype-modal-input" disabled />
@@ -271,8 +271,21 @@
           <InputText id="edit-contrato-actual" v-model="editForm.contratoActual" class="jobtype-modal-input" disabled />
         </div>
 
-        <div class="jobtype-modal-field jobtype-field--offset">
+        <div class="jobtype-modal-field">
+          <label for="edit-pais">País</label>
+          <InputText id="edit-pais" v-model="editForm.pais" class="jobtype-modal-input" disabled />
+        </div>
+
+        <div class="jobtype-modal-field jobtype-edit-empty" aria-hidden="true"></div>
+
+        <div class="jobtype-modal-field">
+          <label for="edit-contrato-nuevo">Nuevo Contrato</label>
           <InputText id="edit-contrato-nuevo" v-model="editForm.contratoNuevo" class="jobtype-modal-input jobtype-input--active" />
+        </div>
+
+        <div class="jobtype-modal-field">
+          <label for="edit-origen">Origen</label>
+          <Select id="edit-origen" v-model="editForm.origen" :options="editOrigenOptions" optionLabel="label" optionValue="value" class="jobtype-modal-select jobtype-input--active" />
         </div>
       </div>
 
@@ -431,7 +444,9 @@ const altaForm = reactive({
 const editForm = reactive({
   jobtype: '',
   contratoActual: '',
-  contratoNuevo: ''
+  pais: '',
+  contratoNuevo: '',
+  origen: ''
 })
 
 const filters = ref(
@@ -452,6 +467,7 @@ const selectedRow = computed({
 })
 
 const origenOptions = computed(() => (altaForm.pais === 'PY' ? origenPyOptions : origenAllOptions))
+const editOrigenOptions = computed(() => (editForm.pais === 'PY' ? origenPyOptions : origenAllOptions))
 
 const canAgregarRelacion = computed(() => Boolean(
   altaForm.jobtype.trim() &&
@@ -460,22 +476,23 @@ const canAgregarRelacion = computed(() => Boolean(
   altaForm.origen
 ))
 
+const normalizarOrigenPorPais = (pais, origen) => {
+  if (pais === 'PY') return 'FAN'
+  if (['FAN', 'MXM'].includes(origen)) return origen
+  return ''
+}
+
 watch(
   () => altaForm.pais,
   (pais) => {
-    if (pais === 'PY') {
-      altaForm.origen = 'FAN'
-      return
-    }
+    altaForm.origen = normalizarOrigenPorPais(pais, altaForm.origen)
+  }
+)
 
-    if (!pais) {
-      altaForm.origen = ''
-      return
-    }
-
-    if (!['FAN', 'MXM'].includes(altaForm.origen)) {
-      altaForm.origen = ''
-    }
+watch(
+  () => editForm.pais,
+  (pais) => {
+    editForm.origen = normalizarOrigenPorPais(pais, editForm.origen)
   }
 )
 
@@ -608,13 +625,17 @@ const abrirEdicion = () => {
 
   editForm.jobtype = store.selectedRow.tarea || store.selectedRow.codigoTarea || ''
   editForm.contratoActual = store.selectedRow.nombreContrato || ''
+  editForm.pais = store.selectedRow.pais || ''
   editForm.contratoNuevo = ''
+  editForm.origen = normalizarOrigenPorPais(editForm.pais, store.selectedRow.origen || '')
   showEdicion.value = true
 }
 
 const actualizarRelacion = () => {
   // ACA TIENE QUE CONECTAR EL BACKEND - ACTUALIZAR RELACION JOBTYPE-CONTRATO
-  // Usar store.selectedRow y editForm.contratoNuevo para actualizar la relacion.
+  // Enviar al servicio real store.selectedRow + editForm.contratoNuevo + editForm.origen.
+  // Si editForm.contratoNuevo viene vacio, el backend puede mantener el contrato actual.
+  // Si editForm.pais es PY, el origen ya viaja forzado como FAN.
   showEdicion.value = false
 }
 
@@ -659,6 +680,31 @@ const confirmarEliminar = () => {
 
 .jobtype-modal-form--origen {
   grid-template-columns: 125px minmax(0, 1fr) minmax(0, 1fr) 125px 112px !important;
+}
+
+.jobtype-edit-form--origen {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 16px 22px !important;
+  padding: 8px 4px 28px !important;
+}
+
+.jobtype-edit-empty {
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+.jobtype-edit-form--origen .jobtype-modal-input,
+.jobtype-edit-form--origen .jobtype-modal-select,
+.jobtype-edit-form--origen .jobtype-modal-input.p-inputtext,
+.jobtype-edit-form--origen .jobtype-modal-select.p-select {
+  height: 34px !important;
+  min-height: 34px !important;
+  max-height: 34px !important;
+}
+
+.jobtype-edit-form--origen .jobtype-modal-select .p-select-label {
+  line-height: 24px !important;
 }
 
 .jobtype-contrato-grid :deep(.p-datatable-table),
