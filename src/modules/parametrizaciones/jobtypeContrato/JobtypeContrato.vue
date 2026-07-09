@@ -131,7 +131,7 @@
         </div>
       </template>
 
-      <div class="jobtype-modal-form">
+      <div class="jobtype-modal-form jobtype-modal-form--origen">
         <div class="jobtype-modal-field jobtype-modal-field--pais">
           <label for="alta-pais">Pais</label>
           <Select id="alta-pais" v-model="altaForm.pais" :options="paisOptions" optionLabel="label" optionValue="value" class="jobtype-modal-select" />
@@ -145,6 +145,11 @@
         <div class="jobtype-modal-field">
           <label for="alta-contrato">Contrato</label>
           <InputText id="alta-contrato" v-model="altaForm.contrato" class="jobtype-modal-input" />
+        </div>
+
+        <div class="jobtype-modal-field">
+          <label for="alta-origen">Origen</label>
+          <Select id="alta-origen" v-model="altaForm.origen" :options="origenOptions" optionLabel="label" optionValue="value" class="jobtype-modal-select" />
         </div>
 
         <Button label="AGREGAR" class="jobtype-modal-button jobtype-modal-button--add" :disabled="!canAgregarRelacion" @click="agregarRelacionPreview" />
@@ -321,11 +326,54 @@
         </div>
       </template>
     </Dialog>
+
+    <Dialog
+      v-model:visible="showAltaDuplicado"
+      class="jobtype-delete-confirm jobtype-duplicate-alert"
+      appendTo="body"
+      :modal="true"
+      :draggable="false"
+      :resizable="false"
+      :closable="false"
+      :style="{ width: '560px', maxWidth: 'calc(100vw - 32px)' }"
+    >
+      <template #header>
+        <div class="jobtype-delete-confirm__header">
+          <span class="jobtype-delete-confirm__title">Alerta</span>
+          <span
+            role="button"
+            tabindex="0"
+            class="jobtype-delete-confirm__close"
+            aria-label="Cerrar"
+            @click="cerrarAltaDuplicado"
+            @keydown.enter.prevent="cerrarAltaDuplicado"
+            @keydown.space.prevent="cerrarAltaDuplicado"
+          >
+            <i class="pi pi-times" aria-hidden="true"></i>
+          </span>
+        </div>
+      </template>
+
+      <div class="jobtype-delete-confirm__body">
+        <i class="pi pi-exclamation-triangle jobtype-delete-confirm__icon" aria-hidden="true"></i>
+        <span class="jobtype-delete-confirm__message">
+          {{ altaDuplicadoMensaje }}
+        </span>
+      </div>
+
+      <template #footer>
+        <div class="jobtype-delete-confirm__footer">
+          <button type="button" class="jobtype-delete-confirm__button jobtype-delete-confirm__button--accept" @click="cerrarAltaDuplicado">
+            CERRAR
+          </button>
+        </div>
+      </template>
+    </Dialog>
   </div>
 </template>
 
 <script setup>
-import { computed, reactive, ref } from 'vue'
+import { computed, reactive, ref, watch } from 'vue'
 import Button from 'primevue/button'
 import Dialog from 'primevue/dialog'
 import InputText from 'primevue/inputtext'
@@ -344,27 +392,40 @@ const { exportToExcel, parseDataFromTable } = useExcelExport()
 const showAlta = ref(false)
 const showEdicion = ref(false)
 const showEliminar = ref(false)
+const showAltaDuplicado = ref(false)
+const altaDuplicadoMensaje = ref('El Jobtype seleccionado ya está cargado.')
 const altaRows = ref([])
 const altaSelectedRow = ref(null)
 
 const altaColumns = ref([
-  { field: 'codigoTarea', header: 'CODIGO_TAREA', width: '20%', minWidth: '150px' },
-  { field: 'tarea', header: 'TAREA', width: '32%', minWidth: '220px' },
-  { field: 'nombreContrato', header: 'NOMBRE_CONTRATO', width: '32%', minWidth: '220px' },
-  { field: 'pais', header: 'PAIS', width: '16%', minWidth: '160px' }
+  { field: 'codigoTarea', header: 'CODIGO_TAREA', width: '20%', minWidth: '145px' },
+  { field: 'tarea', header: 'TAREA', width: '24%', minWidth: '180px' },
+  { field: 'origen', header: 'ORIGEN', width: '16%', minWidth: '130px' },
+  { field: 'nombreContrato', header: 'NOMBRE_CONTRATO', width: '24%', minWidth: '180px' },
+  { field: 'pais', header: 'PAIS', width: '16%', minWidth: '120px' }
 ])
 
 const paisOptions = [
   { label: '', value: '' },
   { label: 'ARG/UY', value: 'ARG/UY' },
-  { label: 'ARG', value: 'ARG' },
-  { label: 'UY', value: 'UY' }
+  { label: 'PY', value: 'PY' }
+]
+
+const origenAllOptions = [
+  { label: '', value: '' },
+  { label: 'FAN', value: 'FAN' },
+  { label: 'MXM', value: 'MXM' }
+]
+
+const origenPyOptions = [
+  { label: 'FAN', value: 'FAN' }
 ]
 
 const altaForm = reactive({
   pais: '',
   jobtype: '',
-  contrato: ''
+  contrato: '',
+  origen: ''
 })
 
 const editForm = reactive({
@@ -390,7 +451,33 @@ const selectedRow = computed({
   set: (value) => store.setSelectedRow(value)
 })
 
-const canAgregarRelacion = computed(() => Boolean(altaForm.jobtype.trim() && altaForm.contrato.trim() && altaForm.pais))
+const origenOptions = computed(() => (altaForm.pais === 'PY' ? origenPyOptions : origenAllOptions))
+
+const canAgregarRelacion = computed(() => Boolean(
+  altaForm.jobtype.trim() &&
+  altaForm.contrato.trim() &&
+  altaForm.pais &&
+  altaForm.origen
+))
+
+watch(
+  () => altaForm.pais,
+  (pais) => {
+    if (pais === 'PY') {
+      altaForm.origen = 'FAN'
+      return
+    }
+
+    if (!pais) {
+      altaForm.origen = ''
+      return
+    }
+
+    if (!['FAN', 'MXM'].includes(altaForm.origen)) {
+      altaForm.origen = ''
+    }
+  }
+)
 
 const buscar = async () => {
   activePanels.value = ['0', '1']
@@ -444,6 +531,7 @@ const abrirAlta = () => {
   altaForm.pais = ''
   altaForm.jobtype = ''
   altaForm.contrato = ''
+  altaForm.origen = ''
   altaRows.value = []
   altaSelectedRow.value = null
   Object.values(altaTableFilters.value).forEach((filter) => {
@@ -452,13 +540,36 @@ const abrirAlta = () => {
   showAlta.value = true
 }
 
+const normalizarJobtype = (value) => value.trim().toUpperCase()
+
+const existeJobtypeEnAlta = (jobtype) => {
+  const jobtypeNormalizado = normalizarJobtype(jobtype)
+  return altaRows.value.some((row) => normalizarJobtype(row.codigoTarea || row.tarea || '') === jobtypeNormalizado)
+}
+
+const mostrarAltaDuplicado = (mensaje = 'El Jobtype seleccionado ya está cargado.') => {
+  altaDuplicadoMensaje.value = mensaje
+  showAltaDuplicado.value = true
+}
+
+const cerrarAltaDuplicado = () => {
+  showAltaDuplicado.value = false
+}
+
 const agregarRelacionPreview = () => {
   if (!canAgregarRelacion.value) return
 
+  const jobtype = altaForm.jobtype.trim()
+  if (existeJobtypeEnAlta(jobtype)) {
+    mostrarAltaDuplicado('El Jobtype seleccionado ya está cargado.')
+    return
+  }
+
   const newRow = {
     id: Date.now(),
-    codigoTarea: altaForm.jobtype.trim().toUpperCase(),
-    tarea: altaForm.jobtype.trim(),
+    codigoTarea: normalizarJobtype(jobtype),
+    tarea: jobtype,
+    origen: altaForm.origen,
     nombreContrato: altaForm.contrato.trim(),
     pais: altaForm.pais
   }
@@ -467,6 +578,9 @@ const agregarRelacionPreview = () => {
   altaSelectedRow.value = newRow
   altaForm.jobtype = ''
   altaForm.contrato = ''
+  if (altaForm.pais === 'PY') {
+    altaForm.origen = 'FAN'
+  }
 }
 
 const eliminarAltaPreview = () => {
@@ -477,8 +591,15 @@ const eliminarAltaPreview = () => {
 }
 
 const relacionar = () => {
+  // ACA TIENE QUE CONECTAR EL BACKEND - VALIDAR JOBTYPE-CONTRATO CONTRA BASE
+  // Antes de guardar, enviar altaRows.value al servicio real para validar si algun
+  // jobtype/origen/pais ya existe en base. Si el backend devuelve duplicado,
+  // llamar a mostrarAltaDuplicado('El Jobtype seleccionado ya está cargado.')
+  // y NO cerrar el popup.
+
   // ACA TIENE QUE CONECTAR EL BACKEND - ALTA RELACION JOBTYPE-CONTRATO
-  // Enviar altaRows.value al servicio real y refrescar la grilla principal.
+  // Si la validacion contra base responde OK, enviar altaRows.value al servicio
+  // real de alta y refrescar la grilla principal con buscar().
   showAlta.value = false
 }
 
@@ -534,6 +655,10 @@ const confirmarEliminar = () => {
   align-items: center;
   justify-content: center;
   padding: 14px 16px;
+}
+
+.jobtype-modal-form--origen {
+  grid-template-columns: 125px minmax(0, 1fr) minmax(0, 1fr) 125px 112px !important;
 }
 
 .jobtype-contrato-grid :deep(.p-datatable-table),
