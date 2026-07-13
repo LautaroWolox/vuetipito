@@ -24,8 +24,6 @@
 import { ref, computed, watch, onMounted, onUnmounted, nextTick } from 'vue';
 import router from '@/router';
 
-const allowedOrigin = import.meta.env.VITE_ORIGIN;
-
 const props = defineProps({
   urlParam: {
     type: String,
@@ -79,7 +77,12 @@ function onIframeLoad() {
 }
 
 function handleRedirect(event) {
-  if (event.origin !== allowedOrigin && event.origin !== window.location.origin) {
+  const allowedOrigins = new Set([
+    import.meta.env.VITE_ORIGIN,
+    window.location.origin
+  ].filter(Boolean));
+
+  if (!allowedOrigins.has(event.origin)) {
     return;
   }
 
