@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import { useAuthStore } from '@/store/auth';
 
-const rutasLibres = ['login', '401', 'login2FA','pruebas'];
+const rutasLibres = ['login', '401', 'login2FA', 'pruebas'];
 
 const allowed = (to, from, next) => {
   const authStore = useAuthStore()
@@ -32,7 +32,7 @@ const routes = [
   {
     path: '/login2fa.html',
     name: 'login2fa',
-    alias: '/',
+    alias: ['/'],
     component: () => import('../views/Login2faView.vue')
   },
   {
