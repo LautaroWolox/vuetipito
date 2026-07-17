@@ -1,7 +1,7 @@
 /* ========================================================================
    FIELD MANAGER TYPING LOADER
    ------------------------------------------------------------------------
-   Loader global con el tipito tipeando.
+   Loader global con tipito codeando y girando en la silla.
 
    COMO USAR:
    - Pantalla completa:
@@ -36,7 +36,9 @@
   inset: 0;
   z-index: 12000;
   min-height: 100vh;
-  background: rgba(245, 247, 248, .78);
+  background:
+    radial-gradient(circle at 45% 38%, rgba(0, 169, 189, .10), transparent 25%),
+    rgba(245, 247, 248, .82);
   backdrop-filter: blur(1.5px);
 }
 
@@ -45,7 +47,7 @@
   inset: 0;
   z-index: 20;
   min-height: 100%;
-  background: rgba(255, 255, 255, .76);
+  background: rgba(255, 255, 255, .78);
   backdrop-filter: blur(1px);
 }
 
@@ -67,17 +69,17 @@
 }
 
 .fm-typing-loader__box {
-  min-width: 168px;
+  min-width: 210px;
   display: inline-flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 5px;
-  padding: 18px 22px 14px;
+  gap: 6px;
+  padding: 20px 26px 15px;
   border: 1px solid rgba(0, 169, 189, .18);
-  border-radius: 12px;
-  background: rgba(255, 255, 255, .94);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, .12);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, .95);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, .13);
 }
 
 .fm-typing-loader--inline .fm-typing-loader__box,
@@ -85,14 +87,220 @@
   box-shadow: 0 6px 20px rgba(0, 0, 0, .10);
 }
 
-.fm-typing-loader__image {
-  width: 104px;
-  max-width: 100%;
-  height: auto;
+.fm-coder-loader {
+  position: relative;
+  width: 156px;
+  height: 102px;
+  margin: 0 auto 4px;
+}
+
+.fm-coder-loader__desk {
+  position: absolute;
+  left: 12px;
+  bottom: 18px;
+  width: 78px;
+  height: 50px;
+}
+
+.fm-coder-loader__desk::after {
+  content: '';
+  position: absolute;
+  left: -2px;
+  bottom: -5px;
+  width: 92px;
+  height: 7px;
+  border-radius: 999px;
+  background: #d6e2e8;
+  box-shadow: 0 8px 16px rgba(28, 45, 58, .12);
+}
+
+.fm-coder-loader__monitor {
+  position: absolute;
+  left: 4px;
+  top: 0;
+  width: 58px;
+  height: 38px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  padding: 7px 8px;
+  border-radius: 6px;
+  background: linear-gradient(145deg, #1d3444, #0c1f2b);
+  border: 2px solid #395365;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .04);
+}
+
+.fm-coder-loader__monitor::after {
+  content: '';
+  position: absolute;
+  left: 24px;
+  bottom: -12px;
+  width: 12px;
+  height: 11px;
+  background: #7f96a5;
+}
+
+.fm-coder-loader__monitor span {
   display: block;
-  margin-bottom: 2px;
-  animation: fmTypingLoaderPulse .78s ease-in-out infinite alternate;
-  transform-origin: center bottom;
+  height: 3px;
+  border-radius: 999px;
+  background: #00e0e5;
+  opacity: .88;
+  animation: fmCoderCodeBlink 1.05s ease-in-out infinite;
+}
+
+.fm-coder-loader__monitor span:nth-child(1) {
+  width: 28px;
+}
+
+.fm-coder-loader__monitor span:nth-child(2) {
+  width: 40px;
+  animation-delay: .2s;
+}
+
+.fm-coder-loader__monitor span:nth-child(3) {
+  width: 22px;
+  animation-delay: .38s;
+}
+
+.fm-coder-loader__keyboard {
+  position: absolute;
+  left: 7px;
+  bottom: 0;
+  width: 68px;
+  height: 8px;
+  border-radius: 999px 999px 3px 3px;
+  background: #a9bbc7;
+}
+
+.fm-coder-loader__chair-wrap {
+  position: absolute;
+  right: 8px;
+  bottom: 10px;
+  width: 72px;
+  height: 78px;
+  perspective: 360px;
+}
+
+.fm-coder-loader__chair {
+  position: absolute;
+  left: 4px;
+  bottom: 0;
+  width: 64px;
+  height: 76px;
+  transform-origin: 50% 75%;
+  animation: fmCoderChairSpin 1.45s ease-in-out infinite;
+}
+
+.fm-coder-loader__head {
+  position: absolute;
+  left: 22px;
+  top: 0;
+  width: 21px;
+  height: 21px;
+  border-radius: 50%;
+  background: #ffcf9c;
+  border: 2px solid #263238;
+  box-shadow: inset -4px -2px 0 rgba(0, 0, 0, .08);
+}
+
+.fm-coder-loader__head::before {
+  content: '';
+  position: absolute;
+  left: 2px;
+  top: -4px;
+  width: 18px;
+  height: 9px;
+  border-radius: 12px 12px 4px 4px;
+  background: #263238;
+}
+
+.fm-coder-loader__body {
+  position: absolute;
+  left: 18px;
+  top: 23px;
+  width: 30px;
+  height: 30px;
+  border-radius: 11px 11px 8px 8px;
+  background: linear-gradient(145deg, #00a9bd, #007f91);
+  border: 2px solid #263238;
+}
+
+.fm-coder-loader__body::after {
+  content: '';
+  position: absolute;
+  left: 11px;
+  bottom: -15px;
+  width: 8px;
+  height: 17px;
+  border-radius: 999px;
+  background: #263238;
+}
+
+.fm-coder-loader__arm {
+  position: absolute;
+  top: 31px;
+  width: 27px;
+  height: 7px;
+  border-radius: 999px;
+  background: #ffcf9c;
+  border: 2px solid #263238;
+  transform-origin: right center;
+  animation: fmCoderArmType .32s ease-in-out infinite alternate;
+}
+
+.fm-coder-loader__arm--left {
+  left: 4px;
+  transform: rotate(17deg);
+}
+
+.fm-coder-loader__arm--right {
+  right: 2px;
+  transform: rotate(-15deg);
+  animation-delay: .12s;
+}
+
+.fm-coder-loader__seat {
+  position: absolute;
+  left: 12px;
+  bottom: 15px;
+  width: 42px;
+  height: 12px;
+  border-radius: 12px 12px 7px 7px;
+  background: #344f61;
+  border: 2px solid #263238;
+}
+
+.fm-coder-loader__seat::before {
+  content: '';
+  position: absolute;
+  left: 16px;
+  bottom: -17px;
+  width: 7px;
+  height: 17px;
+  background: #344f61;
+  border-left: 2px solid #263238;
+  border-right: 2px solid #263238;
+}
+
+.fm-coder-loader__wheel {
+  position: absolute;
+  bottom: -2px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #7f96a5;
+  border: 2px solid #263238;
+  animation: fmCoderWheel .38s linear infinite;
+}
+
+.fm-coder-loader__wheel--left {
+  left: 15px;
+}
+
+.fm-coder-loader__wheel--right {
+  right: 13px;
 }
 
 .fm-typing-loader__title {
@@ -167,14 +375,45 @@
   opacity: 0;
 }
 
-@keyframes fmTypingLoaderPulse {
-  from {
-    transform: translateY(0) scale(1);
-    filter: drop-shadow(0 3px 3px rgba(0, 0, 0, .12));
+@keyframes fmCoderChairSpin {
+  0%, 100% {
+    transform: rotateY(-16deg) translateX(0) rotate(-1deg);
   }
+
+  50% {
+    transform: rotateY(22deg) translateX(-4px) rotate(1.5deg);
+  }
+}
+
+@keyframes fmCoderArmType {
+  from {
+    transform: rotate(13deg) translateY(0);
+  }
+
   to {
-    transform: translateY(-3px) scale(1.025);
-    filter: drop-shadow(0 5px 5px rgba(0, 0, 0, .16));
+    transform: rotate(22deg) translateY(2px);
+  }
+}
+
+@keyframes fmCoderWheel {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fmCoderCodeBlink {
+  0%, 100% {
+    opacity: .38;
+    transform: scaleX(.8);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scaleX(1);
   }
 }
 
@@ -193,12 +432,13 @@
 
 @media (max-width: 520px) {
   .fm-typing-loader__box {
-    min-width: 144px;
-    padding: 12px 14px 10px;
+    min-width: 172px;
+    padding: 14px 15px 11px;
   }
 
-  .fm-typing-loader__image {
-    width: 92px;
+  .fm-coder-loader {
+    transform: scale(.86);
+    margin-bottom: -4px;
   }
 
   .fm-typing-loader__box::after {
